@@ -1,10 +1,21 @@
 package commands;
 
+import model.BasicImageEditorModel;
+
 /**
- * Commands represent a string of edits to an image that result in an overarching complete edit.
- * For example, in order to greyscale an image according to the red-level, ALL the pixels in
- * the image must be updated. This can be accomplished by allowing a single command to handle the
- * entire operation. This is both to make the code easier to read, and more user-friendly.
+ * Commands represent a string of edits to an image that result in an overarching complete edit. For
+ * example, in order to greyscale an image according to the red-level, ALL the pixels in the image
+ * must be updated. This can be accomplished by allowing a single command to handle the entire
+ * operation. This is both to make the code easier to read, and more user-friendly.
  */
 public interface ImageEditorCommand {
+  /**
+   * To execute {@code this} command on the given model. This method performs a series of edits on
+   * the given model.
+   *
+   * @param basicImageEditorModel is the model to perform the commands on
+   * @throws IllegalCallerException if the given model cannot handle a certain operation that
+   *                                {@code this} command performs
+   */
+  void execute(BasicImageEditorModel basicImageEditorModel) throws IllegalCallerException;
 }
