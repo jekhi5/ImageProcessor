@@ -22,8 +22,12 @@ public class ImageEditorTextViewImpl implements ImageEditorTextView {
   /**
    * Creates a new {@code ImageEditorTextViewImpl} with a given output stream.
    * @param out the output stream
+   * @throws IllegalArgumentException if {@code out} is {@code null}
    */
-  public ImageEditorTextViewImpl(Appendable out) {
+  public ImageEditorTextViewImpl(Appendable out) throws IllegalArgumentException {
+    if (out == null) {
+      throw new IllegalArgumentException("View can't have a null output.");
+    }
     this.out = out;
   }
 
