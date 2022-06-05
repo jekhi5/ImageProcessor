@@ -1,2 +1,30 @@
 This is our plan for laying out our program:
 
++: method
+>: has-a
+
+Model:
+    - Interfaces
+           - ImageEditorModel
+                + public void execute(ImageEditorCommand c)
+           - ImageModel extends Iterable
+                + Pixel getPixel(int row, int col)
+                + void  setPixel(int row, int col, Pixel p)
+                + Iterator<Pixel> iterator()
+           - ImageEditorCommand
+                + public void apply(ImageModel m)
+
+           - Pixel
+                + setters and getters for color and alpha
+                + void deepCopyValues(Pixel p)
+
+
+View:
+    - Interfaces
+        - ImageEditorTextView
+            + void renderMessage(String msg)
+
+Controller:
+    - Interfaces:
+        - ImageEditorTextController
+            + void launchEditor()
