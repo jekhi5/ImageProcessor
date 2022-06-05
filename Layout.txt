@@ -5,7 +5,7 @@ This is our plan for laying out our program:
 
 Model:
     - Interfaces
-           - ImageEditorModel
+           - model.ImageEditorModel
                 + public void execute(ImageEditorCommand c)
            - ImageModel extends Iterable
                 + Pixel getPixel(int row, int col)
@@ -32,7 +32,7 @@ Controller:
 
 Diagram:
       +----------------------------------------------+        +-----------------------------------------------+                                                +------------------------------------+
-      |interface ImageEditorModel                    |        |interface ImageModel extends Iterable<Pixel>   |                                                |interface ImageEditorCommand        |                                                                          +-----------------------------+
+      |interface model.ImageEditorModel                    |        |interface ImageModel extends Iterable<Pixel>   |                                                |interface ImageEditorCommand        |                                                                          +-----------------------------+
       ------------------------------------------------        -------------------------------------------------                                                --------------------------------------                                                                          |interface Pixel              |
       |public void execute(ImageEditorCommand cmd);  |        |Pixel getPixelAt(int, row, int, col);          |                                                |public void apply(ImageModel model);|                                                                          |-----------------------------|
       |                                              |        |void setPixelAt(int row, int col, Pixel pixel);|                                                |                                    |                                                                          |int getRed();                |
@@ -45,7 +45,7 @@ Diagram:
                               |                                                      |                                  |class LoadCommand implements ImageEditorCommand     |  |  |class SaveCommand implements ImageEditorCommand     |                                      |void setAlpha(int newAlpha); |
                               |                                                      |                                  ------------------------------------------------------  |  ------------------------------------------------------                                      +-----------------------------+
 +-----------------------------|-----------------------------+  +-------------------------------------------+            |                                                    |  |  |                                                    |                                                     ^
-|class BasicImageEditorModel implements ImageEditorModel    |  |class Image implements ImageModel          |            |                                                    |  |  |                                                    |                                                     |
+|class BasicImageEditorModel implements model.ImageEditorModel    |  |class Image implements ImageModel          |            |                                                    |  |  |                                                    |                                                     |
 -------------------------------------------------------------  ---------------------------------------------            |                                                    |  |  |                                                    |                                                     |
 |// This method only handles the basic commands             |  |private final List<List<Pixel>> pixelGrid; |            +----------------------------------------------------+  |  +----------------------------------------------------+                             +--------------------------------------------------+
 |public void execute(ImageEditorCommand cmd);               |  |public boolean hasNext();                  |                                                                    |                                                                                     |abstract class APixel                             |
