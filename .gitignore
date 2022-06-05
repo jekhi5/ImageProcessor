@@ -3,8 +3,8 @@
 .idea/
 *.zip
 out/
-!**/src/main/**/out/
-!**/src/test/**/out/
+!src/main/**/out/
+!src/test/**/out/
 /javadoc/
 
 ### Eclipse ###
@@ -16,8 +16,8 @@ out/
 .springBeans
 .sts4-cache
 bin/
-!**/src/main/**/bin/
-!**/src/test/**/bin/
+!src/main/**/bin/
+!src/test/**/bin/
 
 ### NetBeans ###
 /nbproject/private/
