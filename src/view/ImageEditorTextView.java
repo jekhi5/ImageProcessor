@@ -3,20 +3,36 @@ package view;
 import java.io.IOException;
 
 /**
- * A simple view for the image editor. The only functionality is writing text to an output stream.
+ * An implementation of {@link ImageEditorView}. It can write text to its output stream, which
+ * can be specified by the user, or is {@link System}{@code .out} by default.
  *
  * @author emery
  * @created 2022-06-05
  */
-public interface ImageEditorTextView {
+public class ImageEditorTextView implements ImageEditorView {
+  private Appendable out;
 
   /**
-   * Appends the given message to the output stream.
-   *
-   * @param msg the message
-   * @throws IOException if appending to the output stream fails
-   * @author emery
-   * @created 2022-06-05
+   * Creates a new {@code ImageEditorTextView} outputting to {@link System}{@code .out}.
    */
-  void renderMessage(String msg) throws IOException;
+  public ImageEditorTextView() {
+    this(System.out);
+  }
+
+  /**
+   * Creates a new {@code ImageEditorTextView} with a given output stream.
+   * @param out the output stream
+   * @throws IllegalArgumentException if {@code out} is {@code null}
+   */
+  public ImageEditorTextView(Appendable out) throws IllegalArgumentException {
+    if (out == null) {
+      throw new IllegalArgumentException("View can't have a null output.");
+    }
+    this.out = out;
+  }
+
+  @Override
+  public void renderMessage(String msg) throws IOException {
+    out.append(msg);
+  }
 }

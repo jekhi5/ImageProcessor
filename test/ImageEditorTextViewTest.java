@@ -4,18 +4,18 @@ import org.junit.Test;
 import java.io.IOException;
 import java.util.Random;
 
+import view.ImageEditorView;
 import view.ImageEditorTextView;
-import view.ImageEditorTextViewImpl;
 
 import static org.junit.Assert.assertEquals;
 
 /**
- * Tests for {@link view.ImageEditorTextViewImpl}.
+ * Tests for {@link view.ImageEditorTextView}.
  *
  * @author emery
  * @created 2022-06-05
  */
-public class ImageEditorTextViewImplTest {
+public class ImageEditorTextViewTest {
   Random rand;
   String alphabet;
 
@@ -27,7 +27,7 @@ public class ImageEditorTextViewImplTest {
 
   @Test(expected = IllegalArgumentException.class)
   public void nullAppendable() {
-    ImageEditorTextView v = new ImageEditorTextViewImpl(null);
+    ImageEditorView v = new ImageEditorTextView(null);
   }
 
   @Test
@@ -41,7 +41,7 @@ public class ImageEditorTextViewImplTest {
         str.append(arr[index]);
       }
       Appendable out = new StringBuilder();
-      ImageEditorTextView v = new ImageEditorTextViewImpl(out);
+      ImageEditorView v = new ImageEditorTextView(out);
       v.renderMessage(str.toString());
       assertEquals(str.toString(), out.toString());
     }
