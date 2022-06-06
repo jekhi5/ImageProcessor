@@ -3,8 +3,7 @@ package commands;
 import java.util.Map;
 import java.util.Scanner;
 
-import model.ImageEditorModel;
-import model.ImageModel;
+import image.ImageModel;
 
 /**
  * A test command. It takes in two arguments and has the view print them out.

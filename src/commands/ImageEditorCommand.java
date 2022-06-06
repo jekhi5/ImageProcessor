@@ -2,8 +2,7 @@ package commands;
 
 import java.util.Map;
 
-import model.ImageEditorModel;
-import model.ImageModel;
+import image.ImageModel;
 
 /**
  * Commands represent a string of edits to an image that result in an overarching complete edit. For

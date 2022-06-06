@@ -76,7 +76,7 @@ public class ImageEditorTextController implements ImageEditorController {
         Function<Scanner, ImageEditorCommand> cmdFunc = commands.get(cmdString);
         ImageEditorCommand cmd = cmdFunc.apply(in);
 
-        transmit(model.execute(cmd));
+        transmit(model.execute(cmd, model.getImage(/*TODO: What name are we giving it?*/)));
       }
     }
 
