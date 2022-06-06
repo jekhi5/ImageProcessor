@@ -60,9 +60,12 @@ public class ImageEditorTextController implements ImageEditorController {
 
     // main controller loop
     while (!hasQuit) {
-
       // get input
       String cmdString = getNextCommand();
+
+      // this return statement is only reached if input runs out of inputs.
+      // therefore, we just return a command to quit the editor.
+      //return quitAliases.get(0);
 
       // quit if necessary
       if (quitAliases.contains(cmdString)) {
@@ -89,15 +92,14 @@ public class ImageEditorTextController implements ImageEditorController {
 
   // gets the next valid command.
   private String getNextCommand() throws IllegalStateException {
+    transmit("> ", false);
     while (in.hasNext()) {
-      transmit("> ", false);
-
       String attempt = in.next().toLowerCase();
-
       if (commands.containsKey(attempt) || quitAliases.contains(attempt)) {
         return attempt;
       } else {
         transmit("Invalid command: \"" + attempt + "\". Please try again.");
+        transmit("> ", false);
       }
     }
     // this return statement is only reached if input runs out of inputs.
