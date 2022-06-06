@@ -1,14 +1,14 @@
 package commands;
 
-import model.image.ImageModel;
-
 import java.util.Map;
 import java.util.Scanner;
 
+import model.image.Image;
+
 /**
- * Converts an image from a PPM file (specified by path) into an {@link model.image.ImageModel}. It
- * is added to the provided {@code Map}, and is thus accessible by the model. The given name is used
- * to refer to it within the editor.
+ * Converts an image from a PPM file (specified by path) into an {@link Image}. It is added to the
+ * provided {@code Map}, and is thus accessible by the model. The given name is used to refer to it
+ * within the editor.
  *
  * </p>
  *
@@ -33,13 +33,13 @@ public class LoadImage extends AbstractCommand {
   }
 
   @Override
-  public String apply(Map<String, image.ImageModel> images) {
+  public String apply(Map<String, Image> images) {
     // TODO: Discuss this method!!!
     // this method is very sus: It requires images be an alias of the model in order to work.
     // Options:
     // 1) go with the aliasing
     // 2) have this be a unique command similar to "quit" which works at the ImageEditorModel level
-    // and not at the ImageModel level.
+    // and not at the Image level.
     return "broken command lol";
   }
 }

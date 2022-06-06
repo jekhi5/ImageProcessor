@@ -3,7 +3,7 @@ package commands;
 import java.util.Map;
 import java.util.Scanner;
 
-import model.image.ImageModel;
+import model.image.Image;
 
 /**
  * An abstract command.
@@ -39,5 +39,5 @@ public abstract class AbstractCommand implements ImageEditorCommand {
   }
 
   @Override
-  public abstract String apply(Map<String, ImageModel> images);
+  public abstract String apply(Map<String, Image> images);
 }

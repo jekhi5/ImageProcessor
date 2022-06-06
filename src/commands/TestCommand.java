@@ -3,7 +3,7 @@ package commands;
 import java.util.Map;
 import java.util.Scanner;
 
-import model.image.ImageModel;
+import model.image.Image;
 
 /**
  * A test command. It takes in two arguments and has the view print them out.
@@ -19,7 +19,7 @@ public class TestCommand extends AbstractCommand {
   }
 
   @Override
-  public String apply(Map<String, ImageModel> images) {
+  public String apply(Map<String, Image> images) {
     return "Test: " + args[0] + " " + args[1];
   }
 }

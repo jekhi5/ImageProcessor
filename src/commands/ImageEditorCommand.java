@@ -2,13 +2,16 @@ package commands;
 
 import java.util.Map;
 
-import model.image.ImageModel;
+import model.image.Image;
 
 /**
  * Commands represent a string of edits to an image that result in an overarching complete edit. For
  * example, in order to greyscale an image according to the red-level, ALL the pixels in the image
  * must be updated. This can be accomplished by allowing a single command to handle the entire
  * operation. This is both to make the code easier to read, and more user-friendly.
+ *
+ * @author Jacob Kline
+ * @created 06/06/2022
  */
 public interface ImageEditorCommand {
   /**
@@ -19,5 +22,5 @@ public interface ImageEditorCommand {
    * @throws IllegalCallerException if the given model cannot handle a certain operation that
    *                                {@code this} command performs
    */
-  String apply(Map<String, ImageModel> images)/* throws IllegalCallerException */;
+  String apply(Map<String, Image> images)/* throws IllegalCallerException */;
 }

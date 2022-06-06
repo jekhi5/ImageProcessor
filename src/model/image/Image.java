@@ -9,7 +9,7 @@ import model.pixel.Pixel;
  * @author Jacob Kline
  * @created 06/06/2022
  */
-public interface ImageModel extends Iterable<Pixel> {
+public interface Image extends Iterable<Pixel> {
 
   //TODO: Support only rectangular images
 

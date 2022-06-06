@@ -14,7 +14,7 @@ import utilities.ImageUtil;
  * @author Jacob Kline
  * @created 06/06/2022
  */
-public class PPMImage implements ImageModel {
+public class PPMImage implements Image {
 
   private final List<List<Pixel>> pixelArray;
 

@@ -1,7 +1,7 @@
 package model;
 
 import commands.ImageEditorCommand;
-import model.image.ImageModel;
+import model.image.Image;
 
 /**
  * A dummy model used for testing.
@@ -16,7 +16,7 @@ public class TesterModel implements ImageEditorModel {
   }
 
   @Override
-  public ImageModel getImage(String name) throws IllegalArgumentException {
+  public Image getImage(String name) throws IllegalArgumentException {
     return null;
   }
 }

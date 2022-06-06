@@ -48,6 +48,7 @@ public class ImageEditorTextController implements ImageEditorController {
     this.commands = new HashMap<>();
     this.quitAliases = Arrays.asList("q", "quit", "exit");
 
+    // Add all new commands here:
     commands.put("test", s -> new TestCommand(in));
   }
 
@@ -60,6 +61,11 @@ public class ImageEditorTextController implements ImageEditorController {
 
     // main controller loop
     while (!hasQuit) {
+      // if we run out of inputs without quitting, throw an exception.
+      // Otherwise, display a pleasant message.
+      if (!in.hasNext()) {
+        throw new IllegalStateException("Controller ran out of inputs!");
+      }
       // get input
       String cmdString = getNextCommand();
 
@@ -80,14 +86,8 @@ public class ImageEditorTextController implements ImageEditorController {
       }
     }
 
-    // if we run out of inputs without quitting, throw an exception.
-    // Otherwise, display a pleasant message.
-    if (!hasQuit) {
-      throw new IllegalStateException("Controller ran out of inputs!");
-    } else {
-      in.close();
-      this.transmit("Thanks for using ImageEditor!");
-    }
+    in.close();
+    this.transmit("Thanks for using ImageEditor!");
   }
 
   // gets the next valid command.
@@ -111,7 +111,7 @@ public class ImageEditorTextController implements ImageEditorController {
     this.transmit(msg, true);
   }
 
-  private void transmit(String msg, boolean newLineAfter) {
+  private void transmit(String msg, boolean newLineAfter) throws IllegalStateException {
     try {
       view.renderMessage(msg);
       if (newLineAfter) {

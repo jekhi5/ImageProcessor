@@ -1,7 +1,7 @@
 package model;
 
 import commands.ImageEditorCommand;
-import model.image.ImageModel;
+import model.image.Image;
 
 /**
  * This interface represents the actual model of editing the images. It houses the functionality to
@@ -23,11 +23,11 @@ public interface ImageEditorModel {
   String execute(ImageEditorCommand cmd) throws IllegalArgumentException;
 
   /**
-   * To get the {@code ImageModel} for the given name.
+   * To get the {@code Image} for the given name.
    *
    * @param name the name of the image
-   * @return the ImageModel with that name
+   * @return the Image with that name
    * @throws IllegalArgumentException if the name is invalid
    */
-  ImageModel getImage(String name) throws IllegalArgumentException;
+  Image getImage(String name) throws IllegalArgumentException;
 }

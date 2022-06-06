@@ -3,6 +3,7 @@
 .idea/
 *.zip
 out/
+production/
 !src/main/**/out/
 !src/test/**/out/
 /javadoc/
