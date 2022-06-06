@@ -3,7 +3,6 @@ package model;
 import java.util.HashMap;
 
 import commands.ImageEditorCommand;
-import model.image.Image;
 
 /**
  * A dummy model used for testing.
@@ -14,6 +13,6 @@ import model.image.Image;
 public class TesterModel implements ImageEditorModel {
   @Override
   public String execute(ImageEditorCommand cmd) throws IllegalArgumentException {
-    return cmd.apply(new HashMap<>());
+    return cmd.apply(this);
   }
 }

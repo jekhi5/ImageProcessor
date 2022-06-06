@@ -1,8 +1,6 @@
 package commands;
 
-import java.util.Map;
-
-import model.image.Image;
+import model.ImageEditorModel;
 
 /**
  * Commands represent a string of edits to an image that result in an overarching complete edit. For
@@ -18,9 +16,10 @@ public interface ImageEditorCommand {
    * To execute {@code this} command on the given model. This method performs a series of edits on
    * the given model.
    *
+   * @param model the model containing the image(s) which this command should be applied to.
    * @return a message indicating the completion of this command.
    * @throws IllegalCallerException if the given model cannot handle a certain operation that
    *                                {@code this} command performs
    */
-  String apply(Map<String, Image> images)/* throws IllegalCallerException */;
+  String apply(ImageEditorModel model)/* throws IllegalCallerException */;
 }
