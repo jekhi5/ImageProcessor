@@ -40,39 +40,4 @@ public interface Pixel {
    */
   int getAlpha();
 
-  /**
-   * To set the {@code red} component of {@code this} pixel to the given value.
-   *
-   * @param newRed is the new value of for the red component
-   * @throws IllegalArgumentException if the given value is negative or larger than 255
-   */
-  void setRed(int newRed) throws IllegalArgumentException;
-
-  /**
-   * To set the {@code green} component of {@code this} pixel to the given value.
-   *
-   * @param newGreen is the new value of for the green component
-   * @throws IllegalArgumentException if the given value is negative or larger than 255
-   */
-  void setGreen(int newGreen) throws IllegalArgumentException;
-
-  /**
-   * To set the {@code blue} component of {@code this} pixel to the given value.
-   *
-   * @param newBlue is the new value of for the blue component
-   * @throws IllegalArgumentException if the given value is negative or larger than 255
-   */
-  void setBlue(int newBlue) throws IllegalArgumentException;
-
-  /**
-   * To set the {@code alpha} component of this pixel to the given value only if the type of pixel
-   * supports this operation.
-   *
-   * @param newAlpha is the new value of for the alpha component
-   * @throws IllegalArgumentException if the given value is negative or larger than 255
-   * @throws IllegalCallerException   if an attempt is made to set the alpha component of a pixel
-   *                                  that does not support this feature
-   */
-  void setAlpha(int newAlpha) throws IllegalArgumentException, IllegalCallerException;
-
 }

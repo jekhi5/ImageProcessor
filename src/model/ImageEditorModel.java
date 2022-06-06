@@ -1,7 +1,6 @@
 package model;
 
 import commands.ImageEditorCommand;
-import model.image.Image;
 
 /**
  * This interface represents the actual model of editing the images. It houses the functionality to
