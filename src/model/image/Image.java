@@ -47,4 +47,11 @@ public interface Image extends Iterable<Pixel> {
    * @return the width of this image
    */
   int getHeight();
+
+  /**
+   * To get a copy of this image in the same format.
+   *
+   * @return the new image
+   */
+  Image getCopy() throws IllegalArgumentException;
 }

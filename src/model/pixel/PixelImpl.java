@@ -8,10 +8,10 @@ package model.pixel;
  * @created 06/06/2022
  */
 public class PixelImpl implements Pixel {
-  private int red;
-  private int green;
-  private int blue;
-  private int alpha;
+  private final int red;
+  private final int green;
+  private final int blue;
+  private final int alpha;
 
   /**
    * To construct a Pixel with the given values for each component.

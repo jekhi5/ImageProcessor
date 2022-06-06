@@ -3,7 +3,6 @@ package model;
 import java.util.HashMap;
 import java.util.Map;
 
-import commands.ImageEditorCommand;
 import model.image.Image;
 
 /**
@@ -17,16 +16,44 @@ public class BasicImageEditorModel implements ImageEditorModel {
 
   private final Map<String, Image> images;
 
+  /**
+   * To construct a basic image editor model with no images in the editor.
+   */
   public BasicImageEditorModel() {
     this.images = new HashMap<>();
   }
 
-  public BasicImageEditorModel(Map<String, Image> images) {
-    this.images = new HashMap<>(images);
+  /**
+   * To construct a basic image editor model with the given map of images and their names in the
+   * editor.
+   *
+   * @param images the map of names and images that this editor is working on
+   * @throws IllegalArgumentException if the images map is null
+   */
+  public BasicImageEditorModel(Map<String, Image> images) throws IllegalArgumentException {
+    if (images == null) {
+      throw new IllegalArgumentException("Error. The given Map cannot be null.");
+    } else {
+      this.images = new HashMap<>(images);
+    }
+  }
+
+
+  @Override
+  public Image getImageAt(String name) throws IllegalArgumentException {
+    if (this.images.containsKey(name)) {
+      return this.images.get(name).getCopy();
+    } else {
+      throw new IllegalArgumentException("Error. No image found with the name: \"" + name + "\"");
+    }
   }
 
   @Override
-  public String execute(ImageEditorCommand cmd) throws IllegalArgumentException {
-    return cmd.apply(this.images);
+  public void addImage(String name, Image image) throws IllegalArgumentException {
+    if (name == null || image == null) {
+      throw new IllegalArgumentException("Error. The given name nor image can be null.");
+    } else {
+      this.images.put(name, image);
+    }
   }
 }

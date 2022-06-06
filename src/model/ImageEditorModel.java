@@ -1,6 +1,6 @@
 package model;
 
-import commands.ImageEditorCommand;
+import model.image.Image;
 
 /**
  * This interface represents the actual model of editing the images. It houses the functionality to
@@ -11,13 +11,23 @@ import commands.ImageEditorCommand;
  * @created 06/06/2022
  */
 public interface ImageEditorModel {
+
   /**
-   * To execute the given Image Editor Command. Based on the given command, this method will
-   * determine its validity and execute the requested procedure on this models image.
+   * To get the image with the given name.
    *
-   * @param cmd the command to be executed
-   * @return a message indicating the status of the {@link ImageEditorCommand}'s execution
-   * @throws IllegalArgumentException if the given command isn't valid for this model
+   * @param name the name of the image
+   * @return the image with the given name
+   * @throws IllegalArgumentException if there is no image with the given name
    */
-  String execute(ImageEditorCommand cmd) throws IllegalArgumentException;
+  Image getImageAt(String name) throws IllegalArgumentException;
+
+  /**
+   * To add the given {@code Image} into the editor with the given name. Will overwrite any images
+   * that share the name.
+   *
+   * @param name  the name of the new image
+   * @param image the image to add
+   * @throws IllegalArgumentException if either argument is null
+   */
+  void addImage(String name, Image image) throws IllegalArgumentException;
 }

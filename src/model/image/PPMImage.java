@@ -30,6 +30,14 @@ public class PPMImage implements Image {
     this.pixelArray = new ArrayList<>(ImageUtil.readPPM(fileName));
   }
 
+  public PPMImage(List<List<Pixel>> pixelArray) {
+    if (pixelArray == null) {
+      throw new IllegalArgumentException("Error. The given Pixel array cannot be null.");
+    } else {
+      this.pixelArray = pixelArray;
+    }
+  }
+
   @Override
   public Iterator<Pixel> iterator() {
     return new PixelIterator(new ArrayList<>(this.pixelArray));
@@ -70,5 +78,21 @@ public class PPMImage implements Image {
     // In the parsing of the PPM file we check to see if the image has a width or height of 0, so
     // it's ok to use .get(0) here because we know there is at least 1 column.
     return this.pixelArray.get(0).size();
+  }
+
+  @Override
+  public Image getCopy() {
+    List<List<Pixel>> newPixelArray = new ArrayList<>();
+
+    for (List<Pixel> row : this.pixelArray) {
+      List<Pixel> curRow = new ArrayList<>();
+      for (Pixel pixel : row) {
+        Pixel newPixel = new PixelImpl(pixel);
+        curRow.add(newPixel);
+      }
+      newPixelArray.add(curRow);
+    }
+
+    return new PPMImage(newPixelArray);
   }
 }
