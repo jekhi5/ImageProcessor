@@ -5,6 +5,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import model.pixel.Pixel;
+import model.pixel.PixelImpl;
 import utilities.ImageUtil;
 
 /**
@@ -25,13 +26,13 @@ public class PPMImage implements Image {
    * @throws IllegalArgumentException if the given file name is either not a valid file path or the
    *                                  path does not lead to a PPM Image
    */
-  public PPMImage(String fileName) {
+  public PPMImage(String fileName) throws IllegalArgumentException {
     this.pixelArray = new ArrayList<>(ImageUtil.readPPM(fileName));
   }
 
   @Override
   public Iterator<Pixel> iterator() {
-    return new PixelIterator(this.pixelArray);
+    return new PixelIterator(new ArrayList<>(this.pixelArray));
   }
 
   @Override
@@ -41,7 +42,33 @@ public class PPMImage implements Image {
       throw new IllegalArgumentException("Error. The given coordinates: (" + row + ", " + col +
               "). is out of bounds.");
     } else {
-      return this.pixelArray.get(row).get(col);
+      return new PixelImpl(this.pixelArray.get(row).get(col));
     }
+  }
+
+  @Override
+  public Pixel setPixelAt(int row, int col, Pixel newPixel) throws IllegalArgumentException {
+    if (row < 0 || row > this.pixelArray.size() || col < 0 ||
+            col > this.pixelArray.get(row).size()) {
+      throw new IllegalArgumentException("Error. The given coordinates were out of bounds. Given:" +
+              " (" + row + ", " + col + ").");
+    }
+
+    Pixel priorPixel = this.pixelArray.get(row).get(col);
+
+    this.pixelArray.get(row).set(col, newPixel);
+    return new PixelImpl(priorPixel);
+  }
+
+  @Override
+  public int getWidth() {
+    return this.pixelArray.size();
+  }
+
+  @Override
+  public int getHeight() {
+    // In the parsing of the PPM file we check to see if the image has a width or height of 0, so
+    // it's ok to use .get(0) here because we know there is at least 1 column.
+    return this.pixelArray.get(0).size();
   }
 }

@@ -1,13 +1,13 @@
 package utilities;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import java.io.FileNotFoundException;
-import java.io.FileInputStream;
 
 import model.pixel.Pixel;
-import model.pixel.SimplePixel;
+import model.pixel.PixelImpl;
 
 
 /**
@@ -49,11 +49,13 @@ public class ImageUtil {
       throw new IllegalArgumentException("Invalid PPM file: plain RAW file should begin with P3");
     }
     int width = sc.nextInt();
-    //System.out.println("Width of image: " + width);
     int height = sc.nextInt();
-    //System.out.println("Height of image: " + height);
+
+    if (width < 1 || height < 1) {
+      throw new IllegalArgumentException("Error. The given image has a width or height of 0.");
+    }
+
     int maxValue = sc.nextInt();
-    //System.out.println("Maximum value of a color in this file (usually 255): " + maxValue);
 
     for (int i = 0; i < height; i++) {
       List<Pixel> curRow = new ArrayList<>();
@@ -61,7 +63,7 @@ public class ImageUtil {
         int r = sc.nextInt();
         int g = sc.nextInt();
         int b = sc.nextInt();
-        curRow.add(new SimplePixel(r, g, b));
+        curRow.add(new PixelImpl(r, g, b, 255));
       }
       resultingImage.add(curRow);
     }
