@@ -1,14 +1,14 @@
 package commands;
 
+import model.image.ImageModel;
+
 import java.util.Map;
 import java.util.Scanner;
 
-import model.ImageModel;
-
 /**
- * Converts an image from a PPM file (specified by path) into an {@link model.ImageModel}.
- * It is added to the provided {@code Map}, and is thus accessible by the model.
- * The given name is used to refer to it within the editor.
+ * Converts an image from a PPM file (specified by path) into an {@link model.image.ImageModel}. It
+ * is added to the provided {@code Map}, and is thus accessible by the model. The given name is used
+ * to refer to it within the editor.
  *
  * </p>
  *

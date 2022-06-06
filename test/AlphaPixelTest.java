@@ -1,6 +1,6 @@
 import org.junit.Test;
 
-import pixel.AlphaPixel;
+import model.pixel.AlphaPixel;
 
 import static org.junit.Assert.assertEquals;
 

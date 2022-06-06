@@ -1,9 +1,12 @@
-package pixel;
+package model.pixel;
 
 /**
  * This represents an abstract Pixel that is made up of Red, Green, Blue, and Alpha components. The
  * client can get all the components and set each of them (the ability to set the alpha component is
  * dependent on the type of pixel).
+ *
+ * @author Jacob Kline
+ * @created 06/06/2022
  */
 public abstract class APixel implements Pixel {
   protected int red;

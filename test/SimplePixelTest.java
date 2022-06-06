@@ -1,7 +1,6 @@
 import org.junit.Test;
 
-import pixel.APixel;
-import pixel.SimplePixel;
+import model.pixel.SimplePixel;
 
 public class SimplePixelTest extends APixelTest {
 

@@ -1,6 +1,6 @@
 import org.junit.Test;
 
-import pixel.APixel;
+import model.pixel.APixel;
 
 import static org.junit.Assert.*;
 

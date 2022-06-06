@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.function.Function;
@@ -56,7 +55,8 @@ public class ImageEditorTextController implements ImageEditorController {
   public void launch() throws IllegalStateException {
     boolean hasQuit = false;
 
-    transmit("Welcome to ImageEditor! Please enter a command:");
+    this.transmit("Welcome to ImageEditor! Please enter a command:");
+    //TODO: create a help menu and allow the user to display it with the "help" command
 
     // main controller loop
     while (!hasQuit) {
@@ -76,7 +76,7 @@ public class ImageEditorTextController implements ImageEditorController {
         Function<Scanner, ImageEditorCommand> cmdFunc = commands.get(cmdString);
         ImageEditorCommand cmd = cmdFunc.apply(in);
 
-        transmit(model.execute(cmd, model.getImage(/*TODO: What name are we giving it?*/)));
+        this.transmit(model.execute(cmd));
       }
     }
 
@@ -86,20 +86,20 @@ public class ImageEditorTextController implements ImageEditorController {
       throw new IllegalStateException("Controller ran out of inputs!");
     } else {
       in.close();
-      transmit("Thanks for using ImageEditor!");
+      this.transmit("Thanks for using ImageEditor!");
     }
   }
 
   // gets the next valid command.
   private String getNextCommand() throws IllegalStateException {
-    transmit("> ", false);
+    this.transmit("> ", false);
     while (in.hasNext()) {
       String attempt = in.next().toLowerCase();
       if (commands.containsKey(attempt) || quitAliases.contains(attempt)) {
         return attempt;
       } else {
-        transmit("Invalid command: \"" + attempt + "\". Please try again.");
-        transmit("> ", false);
+        this.transmit("Invalid command: \"" + attempt + "\". Please try again.");
+        this.transmit("> ", false);
       }
     }
     // this return statement is only reached if input runs out of inputs.
@@ -108,7 +108,7 @@ public class ImageEditorTextController implements ImageEditorController {
   }
 
   private void transmit(String msg) throws IllegalStateException {
-    transmit(msg, true);
+    this.transmit(msg, true);
   }
 
   private void transmit(String msg, boolean newLineAfter) {

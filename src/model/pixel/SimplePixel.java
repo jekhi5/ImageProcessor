@@ -1,8 +1,11 @@
-package pixel;
+package model.pixel;
 
 /**
  * This represents a simple pixel. It is made up of the red, green, and blue components. Its opacity
  * is always 100, and it is not possible to modify the alpha component as it is always 100.
+ *
+ * @author Jacob Kline
+ * @created 06/06/2022
  */
 public class SimplePixel extends APixel {
   /**

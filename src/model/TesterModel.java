@@ -1,9 +1,7 @@
 package model;
 
-import java.util.HashMap;
-
 import commands.ImageEditorCommand;
-import image.ImageModel;
+import model.image.ImageModel;
 
 /**
  * A dummy model used for testing.
@@ -13,7 +11,7 @@ import image.ImageModel;
  */
 public class TesterModel implements ImageEditorModel {
   @Override
-  public String execute(ImageEditorCommand cmd, ImageModel image) throws IllegalArgumentException {
+  public String execute(ImageEditorCommand cmd) throws IllegalArgumentException {
     return null;
   }
 

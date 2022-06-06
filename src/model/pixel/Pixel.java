@@ -1,4 +1,4 @@
-package pixel;
+package model.pixel;
 
 /**
  * A {@code Pixel} represents the color values of a given pixel. Certain pixels simply have
@@ -6,6 +6,9 @@ package pixel;
  * additional increments such as {@code alpha} to determine opacity. All images are made of
  * {@code Pixel}s. All components are on a scale from 0-255. 0 being the lowest contribution to the
  * pixel, 255 being the highest contribution to the pixel.
+ *
+ * @author Jacob Kline
+ * @created 06/06/2022
  */
 public interface Pixel {
 

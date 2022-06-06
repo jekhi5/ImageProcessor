@@ -3,7 +3,7 @@ package commands;
 import java.util.Map;
 import java.util.Scanner;
 
-import image.ImageModel;
+import model.image.ImageModel;
 
 /**
  * An abstract command.

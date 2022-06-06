@@ -1,9 +1,12 @@
-package pixel;
+package model.pixel;
 
 /**
  * This represents an alpha pixel. It is made up of the red, green, and blue components. Its opacity
  * is determined by the user and can be modified at any time by setting the {@code alpha}
  * component.
+ *
+ * @author Jacob Kline
+ * @created 06/06/2022
  */
 public class AlphaPixel extends APixel {
   /**
