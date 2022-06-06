@@ -3,6 +3,7 @@ import java.io.InputStreamReader;
 import controller.ImageEditorController;
 import controller.ImageEditorTextController;
 import model.ImageEditorModel;
+import model.TesterModel;
 import view.ImageEditorTextView;
 
 /**
