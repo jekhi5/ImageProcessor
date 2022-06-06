@@ -1,8 +1,8 @@
 package commands;
 
-import java.util.Map;
 import java.util.Scanner;
 
+import model.ImageEditorModel;
 import model.image.Image;
 
 /**
@@ -33,7 +33,7 @@ public class LoadImage extends AbstractCommand {
   }
 
   @Override
-  public String apply(Map<String, Image> images) {
+  public String apply(ImageEditorModel model) {
     // TODO: Discuss this method!!!
     // this method is very sus: It requires images be an alias of the model in order to work.
     // Options:

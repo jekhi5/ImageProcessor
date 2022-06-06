@@ -82,7 +82,7 @@ public class ImageEditorTextController implements ImageEditorController {
         Function<Scanner, ImageEditorCommand> cmdFunc = commands.get(cmdString);
         ImageEditorCommand cmd = cmdFunc.apply(in);
 
-        this.transmit(model.execute(cmd));
+        this.transmit(cmd.apply(model));
         this.transmit(userInputSymbol, false);
       }
 
