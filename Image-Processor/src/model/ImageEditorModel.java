@@ -12,8 +12,9 @@ public interface ImageEditorModel {
    * To execute the given Image Editor Command. Based on the given command, this method will
    * determine its validity and execute the requested procedure on this models image.
    *
-   * @param cmd the command to be executed
+   * @param cmd       the command to be executed
+   * @param imageName is the name of the image that the edits will be performed on
    * @throws IllegalArgumentException if the given command isn't valid for this model
    */
-  void execute(ImageEditorCommand cmd) throws IllegalArgumentException;
+  void execute(ImageEditorCommand cmd, String imageName) throws IllegalArgumentException;
 }
