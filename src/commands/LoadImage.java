@@ -3,10 +3,8 @@ package commands;
 import java.util.Map;
 import java.util.Scanner;
 
-import model.ImageModel;
-
 /**
- * Converts an image from a PPM file (specified by path) into an {@link model.ImageModel}.
+ * Converts an image from a PPM file (specified by path) into an {@link image.ImageModel}.
  * It is added to the provided {@code Map}, and is thus accessible by the model.
  * The given name is used to refer to it within the editor.
  *
@@ -33,7 +31,7 @@ public class LoadImage extends AbstractCommand {
   }
 
   @Override
-  public String apply(Map<String, ImageModel> images) {
+  public String apply(Map<String, image.ImageModel> images) {
     // TODO: Discuss this method!!!
     // this method is very sus: It requires images be an alias of the model in order to work.
     // Options:
