@@ -13,7 +13,8 @@ public interface ImageEditorModel {
    * determine its validity and execute the requested procedure on this models image.
    *
    * @param cmd the command to be executed
+   * @return a message indicating the status of the {@link ImageEditorCommand}'s execution
    * @throws IllegalArgumentException if the given command isn't valid for this model
    */
-  void execute(ImageEditorCommand cmd) throws IllegalArgumentException;
+  String execute(ImageEditorCommand cmd) throws IllegalArgumentException;
 }

@@ -13,8 +13,9 @@ public interface ImageEditorController {
   /**
    * Launches the image editor controller.
    *
+   * @throws IllegalStateException if the view has an issue transmitting data
    * @author emery
    * @created 2022-06-05
    */
-  void launch();
+  void launch() throws IllegalStateException;
 }
