@@ -33,7 +33,7 @@ public class LoadImage extends AbstractCommand {
   }
 
   @Override
-  public String apply(Map<String, ImageModel> images) {
+  public String apply(Map<String, image.ImageModel> images) {
     // TODO: Discuss this method!!!
     // this method is very sus: It requires images be an alias of the model in order to work.
     // Options:
