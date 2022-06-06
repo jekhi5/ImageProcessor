@@ -26,6 +26,7 @@ public class ImageEditorTextController implements ImageEditorController {
   private final Scanner in;
   private final Map<String, Function<Scanner, ImageEditorCommand>> commands;
   private final List<String> quitAliases;
+  private final String userInputSymbol;
 
   /**
    * Creates a new {@code ImageEditorTextController} with given model, view, and input stream.
@@ -45,11 +46,12 @@ public class ImageEditorTextController implements ImageEditorController {
     this.view = view;
     this.input = input;
     this.in = new Scanner(input);
+    this.userInputSymbol = "> ";
     this.commands = new HashMap<>();
     this.quitAliases = Arrays.asList("q", "quit", "exit");
 
     // Add all new commands here:
-    commands.put("test", s -> new TestCommand(in));
+    commands.put("test", s -> new TestCommand(s));
   }
 
   @Override
@@ -63,9 +65,7 @@ public class ImageEditorTextController implements ImageEditorController {
     while (!hasQuit) {
       // if we run out of inputs without quitting, throw an exception.
       // Otherwise, display a pleasant message.
-      if (!in.hasNext()) {
-        throw new IllegalStateException("Controller ran out of inputs!");
-      }
+
       // get input
       String cmdString = getNextCommand();
 
@@ -83,6 +83,11 @@ public class ImageEditorTextController implements ImageEditorController {
         ImageEditorCommand cmd = cmdFunc.apply(in);
 
         this.transmit(model.execute(cmd));
+        this.transmit(userInputSymbol, false);
+      }
+
+      if (!in.hasNext()) {
+        throw new IllegalStateException("Controller ran out of inputs!");
       }
     }
 
@@ -99,7 +104,7 @@ public class ImageEditorTextController implements ImageEditorController {
         return attempt;
       } else {
         this.transmit("Invalid command: \"" + attempt + "\". Please try again.");
-        this.transmit("> ", false);
+        this.transmit(userInputSymbol, false);
       }
     }
     // this return statement is only reached if input runs out of inputs.

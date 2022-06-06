@@ -1,5 +1,7 @@
 package model;
 
+import java.util.HashMap;
+
 import commands.ImageEditorCommand;
 import model.image.Image;
 
@@ -12,11 +14,11 @@ import model.image.Image;
 public class TesterModel implements ImageEditorModel {
   @Override
   public String execute(ImageEditorCommand cmd) throws IllegalArgumentException {
-    return null;
+    return cmd.apply(new HashMap<>());
   }
 
-  @Override
-  public Image getImage(String name) throws IllegalArgumentException {
-    return null;
-  }
+//  @Override
+//  public Image getImage(String name) throws IllegalArgumentException {
+//    return null;
+//  }
 }

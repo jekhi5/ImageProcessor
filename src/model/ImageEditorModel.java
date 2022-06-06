@@ -21,13 +21,4 @@ public interface ImageEditorModel {
    * @throws IllegalArgumentException if the given command isn't valid for this model
    */
   String execute(ImageEditorCommand cmd) throws IllegalArgumentException;
-
-  /**
-   * To get the {@code Image} for the given name.
-   *
-   * @param name the name of the image
-   * @return the Image with that name
-   * @throws IllegalArgumentException if the name is invalid
-   */
-  Image getImage(String name) throws IllegalArgumentException;
 }
