@@ -2,6 +2,8 @@ package commands;
 
 import java.util.Map;
 
+import image.ImageModel;
+
 /**
  * Commands represent a string of edits to an image that result in an overarching complete edit. For
  * example, in order to greyscale an image according to the red-level, ALL the pixels in the image
