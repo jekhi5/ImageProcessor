@@ -8,7 +8,7 @@ import java.io.IOException;
  * @author emery
  * @created 2022-06-05
  */
-public interface ImageEditorTextView {
+public interface ImageEditorView {
 
   /**
    * Appends the given message to the output stream.
