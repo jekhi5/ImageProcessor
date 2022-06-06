@@ -16,9 +16,4 @@ public class TesterModel implements ImageEditorModel {
   public String execute(ImageEditorCommand cmd) throws IllegalArgumentException {
     return cmd.apply(new HashMap<>());
   }
-
-//  @Override
-//  public Image getImage(String name) throws IllegalArgumentException {
-//    return null;
-//  }
 }

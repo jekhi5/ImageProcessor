@@ -29,13 +29,4 @@ public class BasicImageEditorModel implements ImageEditorModel {
   public String execute(ImageEditorCommand cmd) throws IllegalArgumentException {
     return cmd.apply(this.images);
   }
-
-//  @Override
-//  public Image getImage(String name) throws IllegalArgumentException {
-//    if (this.images.containsKey(name)) {
-//      return this.images.get(name);
-//    } else {
-//      throw new IllegalArgumentException("Error. The given name could not be found. Give: " + name);
-//    }
-//  }
 }
