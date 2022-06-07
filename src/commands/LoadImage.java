@@ -42,6 +42,6 @@ public class LoadImage extends AbstractCommand {
     }
 
     model.addImage(args[1], img);
-    return "Successfully loaded image \"" + args[1] + "\" from " + args[0] + "!"
+    return "Successfully loaded image \"" + args[1] + "\" from " + args[0] + "!";
   }
 }

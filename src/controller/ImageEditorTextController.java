@@ -8,7 +8,10 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.function.Function;
 
+import commands.Flip;
+import commands.Grayscale;
 import commands.ImageEditorCommand;
+import commands.LoadImage;
 import commands.TestCommand;
 import model.ImageEditorModel;
 import view.ImageEditorView;
@@ -52,6 +55,18 @@ public class ImageEditorTextController implements ImageEditorController {
 
     // Add all new commands here:
     commands.put("test", s -> new TestCommand(s));
+
+    // different misspellings of "grayscale"
+    commands.put("grayscale", s -> new Grayscale(s));
+    commands.put("greyscale", s -> new Grayscale(s));
+    commands.put("gray", s -> new Grayscale(s));
+    commands.put("grey", s -> new Grayscale(s));
+
+    commands.put("load", s -> new LoadImage(s));
+
+    commands.put("save", s -> new Grayscale(s));
+
+    commands.put("flip", s -> new Flip(s));
   }
 
   @Override

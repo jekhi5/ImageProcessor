@@ -66,4 +66,18 @@ public class PixelImpl implements Pixel {
   public int getAlpha() {
     return this.alpha;
   }
+
+  /**
+   * A builder for {@link PixelImpl}.
+   *
+   * @author emery
+   * @created 2022-06-06
+   */
+  public static class PixelImplBuilder extends PixelBuilder {
+
+    @Override
+    public Pixel build() {
+      return new PixelImpl(red, green, blue, alpha);
+    }
+  }
 }
