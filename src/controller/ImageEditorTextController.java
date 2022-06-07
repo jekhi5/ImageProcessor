@@ -19,6 +19,8 @@ import commands.TestCommand;
 import model.ImageEditorModel;
 import view.ImageEditorView;
 
+// TODO: Make fun name, "help" command, file-by-file cleanup, run coverage on all tests
+
 /**
  * An {@link ImageEditorController} that reads input in the form of text.
  *
@@ -28,11 +30,10 @@ import view.ImageEditorView;
 public class ImageEditorTextController implements ImageEditorController {
   private final ImageEditorModel model;
   private final ImageEditorView view;
-  private final Readable input;
   private final Scanner in;
   private final Map<String, Function<Scanner, ImageEditorCommand>> commands;
-  private final List<String> quitAliases;
-  private final String userInputSymbol;
+  private static final List<String> QUIT_ALIASES = Arrays.asList("q", "quit", "exit");
+  private static final String USER_INPUT_SYMBOL = "> ";
 
   /**
    * Creates a new {@code ImageEditorTextController} with given model, view, and input stream.
@@ -50,11 +51,8 @@ public class ImageEditorTextController implements ImageEditorController {
 
     this.model = model;
     this.view = view;
-    this.input = input;
     this.in = new Scanner(input);
-    this.userInputSymbol = "> ";
     this.commands = new HashMap<>();
-    this.quitAliases = Arrays.asList("q", "quit", "exit");
 
     // Add all new commands here:
     commands.put("debug", s -> new TestCommand(s));
@@ -85,7 +83,7 @@ public class ImageEditorTextController implements ImageEditorController {
 
     // main controller loop
     while (!hasQuit) {
-      // if we run out of inputs without quitting, throw an exception.
+      // if we run out of inputs without quitting, quit..
       // Otherwise, display a pleasant message.
 
       // get input
@@ -93,10 +91,10 @@ public class ImageEditorTextController implements ImageEditorController {
 
       // this return statement is only reached if input runs out of inputs.
       // therefore, we just return a command to quit the editor.
-      //return quitAliases.get(0);
+      //return QUIT_ALIASES.get(0);
 
       // quit if necessary
-      if (quitAliases.contains(cmdString)) {
+      if (QUIT_ALIASES.contains(cmdString)) {
         hasQuit = true;
       } else {
         // we don't have to worry about a null value
@@ -106,10 +104,6 @@ public class ImageEditorTextController implements ImageEditorController {
 
         this.transmit(cmd.apply(model));
       }
-
-//      if (!in.hasNext()) {
-//        throw new IllegalStateException("Controller ran out of inputs!");
-//      }
     }
 
     in.close();
@@ -118,19 +112,19 @@ public class ImageEditorTextController implements ImageEditorController {
 
   // gets the next valid command.
   private String getNextCommand() throws IllegalStateException {
-    this.transmit(userInputSymbol, false);
+    this.transmit(USER_INPUT_SYMBOL, false);
     while (in.hasNext()) {
       String attempt = in.next().toLowerCase();
-      if (commands.containsKey(attempt) || quitAliases.contains(attempt)) {
+      if (commands.containsKey(attempt) || QUIT_ALIASES.contains(attempt)) {
         return attempt;
       } else {
         this.transmit("Invalid command: \"" + attempt + "\". Please try again.");
-        this.transmit(userInputSymbol, false);
+        this.transmit(USER_INPUT_SYMBOL, false);
       }
     }
     // this return statement is only reached if input runs out of inputs.
     // therefore, we just return a command to quit the editor.
-    return quitAliases.get(0);
+    return QUIT_ALIASES.get(0);
   }
 
   private void transmit(String msg) throws IllegalStateException {

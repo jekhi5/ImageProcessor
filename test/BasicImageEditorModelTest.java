@@ -38,7 +38,9 @@ public class BasicImageEditorModelTest {
   // Testing constructing with valid map
   @Test
   public void testingConstructor_ValidMap() {
-    new BasicImageEditorModel(new HashMap<>());
+    new BasicImageEditorModel(new HashMap<String, Image>());
   }
+
+
 
 }
