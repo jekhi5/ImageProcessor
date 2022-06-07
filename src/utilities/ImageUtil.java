@@ -156,7 +156,7 @@ public class ImageUtil {
 
     File file = new File(path);
 
-    if (shouldOverwrite) {
+    if (shouldOverwrite && file.exists()) {
       boolean wasSuccessfullyDeleted = file.delete();
 
       if (!wasSuccessfullyDeleted) {
