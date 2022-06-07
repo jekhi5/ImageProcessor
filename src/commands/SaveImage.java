@@ -3,6 +3,8 @@ package commands;
 import java.util.Scanner;
 
 import model.ImageEditorModel;
+import model.image.Image;
+import utilities.ImageUtil;
 
 /**
  * Saves an image currently open in the editor under the given name to the given file path. DOES NOT
@@ -35,6 +37,29 @@ public class SaveImage extends AbstractCommand {
 
   @Override
   public String apply(ImageEditorModel model) {
-    return null;
+    Image img;
+    try {
+      img = model.getImageAt(args[1]);
+    } catch (IllegalArgumentException e) {
+      return e.getMessage();
+    }
+
+    boolean overwrite;
+    if (args[2].equalsIgnoreCase("yes") || args[2].equalsIgnoreCase("y") ||
+            args[2].equalsIgnoreCase("true") || args[2].equalsIgnoreCase("t")) {
+      overwrite = true;
+    } else {
+      overwrite = false;
+    }
+
+    // actually attempt to save the image
+    try {
+      ImageUtil.saveImage(img, args[0], overwrite);
+    } catch (IllegalArgumentException e) {
+      return "Save failed: " + e.getMessage();
+    }
+
+    // success!
+    return "Image successfully saved to " + args[0];
   }
 }

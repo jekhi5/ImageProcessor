@@ -14,6 +14,7 @@ import commands.Flip;
 import commands.Grayscale;
 import commands.ImageEditorCommand;
 import commands.LoadImage;
+import commands.SaveImage;
 import commands.TestCommand;
 import model.ImageEditorModel;
 import view.ImageEditorView;
@@ -66,7 +67,7 @@ public class ImageEditorTextController implements ImageEditorController {
 
     commands.put("load", s -> new LoadImage(s));
 
-    commands.put("save", s -> new Grayscale(s));
+    commands.put("save", s -> new SaveImage(s));
 
     commands.put("flip", s -> new Flip(s));
 
