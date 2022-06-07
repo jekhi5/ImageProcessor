@@ -8,6 +8,8 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.function.Function;
 
+import commands.Brighten;
+import commands.Darken;
 import commands.Flip;
 import commands.Grayscale;
 import commands.ImageEditorCommand;
@@ -67,6 +69,10 @@ public class ImageEditorTextController implements ImageEditorController {
     commands.put("save", s -> new Grayscale(s));
 
     commands.put("flip", s -> new Flip(s));
+
+    commands.put("brighten", s -> new Brighten(s));
+
+    commands.put("darken", s -> new Darken(s));
   }
 
   @Override

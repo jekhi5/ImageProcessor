@@ -3,7 +3,6 @@ package commands;
 import java.util.Scanner;
 
 import model.ImageEditorModel;
-import model.image.Image;
 
 /**
  * Saves an image currently open in the editor under the given name to the given file path. DOES NOT
@@ -24,7 +23,7 @@ public class SaveImage extends AbstractCommand {
   /**
    * Creates a new {@code SaveImage} with the given number of arguments.
    *
-   * @param in      the {@link Scanner}
+   * @param in the {@link Scanner}
    * @throws IllegalArgumentException if {@code numArgs} is negative
    * @throws IllegalStateException    if {@code in} runs out of inputs before collecting
    *                                  {@code numArgs} inputs.

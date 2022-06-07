@@ -122,18 +122,18 @@ public class ImageUtil {
    * is on the user.
    *
    * <p>
-   *
+   * <p>
    * If {@code shouldOverwrite} is {@code true}:
    * <ol>
    *   <li>this method will attempt to delete the file currently stored at the given path</li>
    *   <li>and then attempt to place the given image at the given path</li>
    * </ol>
-   *
+   * <p>
    * If {code shouldOverwrite} is {@code false}:
    * <ol>
    *   <li>this method will attempt to place the given image at the given path</li>
    * </ol>
-   *
+   * <p>
    * If any of these operations fail, the method will throw an IllegalArgumentException.
    *
    * </p>

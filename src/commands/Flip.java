@@ -29,6 +29,10 @@ public class Flip extends AbstractCommand {
     super(in, 3);
   }
 
+  private static void swapPixels(Image img, int r1, int c1, int r2, int c2) {
+    img.setPixelAt(r1, c1, img.setPixelAt(r2, c2, img.getPixelAt(r1, c1)));
+  }
+
   @Override
   public String apply(ImageEditorModel model) {
     // get the image
@@ -64,9 +68,5 @@ public class Flip extends AbstractCommand {
 
     // success!
     return "Flip successful!";
-  }
-
-  private static void swapPixels(Image img, int r1, int c1, int r2, int c2) {
-    img.setPixelAt(r1, c1, img.setPixelAt(r2, c2, img.getPixelAt(r1, c1)));
   }
 }

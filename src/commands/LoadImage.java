@@ -4,7 +4,6 @@ import java.util.Scanner;
 
 import model.ImageEditorModel;
 import model.image.Image;
-import model.image.PPMImage;
 import utilities.ImageUtil;
 
 /**
@@ -12,7 +11,7 @@ import utilities.ImageUtil;
  * run on it. The given name is used to refer to it within the editor. All args are case-sensitive.
  *
  * </p>
- *
+ * <p>
  * Command syntax: {@code load <image-path> <image-name>}
  *
  * @author emery
@@ -22,7 +21,7 @@ public class LoadImage extends AbstractCommand {
   /**
    * Creates a new {@code LoadImage} with the given number of arguments.
    *
-   * @param in      the {@link Scanner}
+   * @param in the {@link Scanner}
    * @throws IllegalArgumentException if {@code numArgs} is negative
    * @throws IllegalStateException    if {@code in} runs out of inputs before collecting
    *                                  {@code numArgs} inputs.

@@ -1,6 +1,5 @@
 package commands;
 
-import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -28,7 +27,7 @@ public class Grayscale extends AbstractCommand {
   /**
    * Creates a new {@code Grayscale} with the given number of arguments.
    *
-   * @param in      the {@link Scanner}
+   * @param in the {@link Scanner}
    * @throws IllegalArgumentException if {@code numArgs} is negative
    * @throws IllegalStateException    if {@code in} runs out of inputs before collecting
    *                                  {@code numArgs} inputs.
