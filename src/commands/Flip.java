@@ -36,7 +36,7 @@ public class Flip extends AbstractCommand {
   @Override
   public String apply(ImageEditorModel model) {
     // get the image
-    Image orig = null;
+    Image orig;
     try {
       orig = model.getImageAt(args[1]);
     } catch (IllegalArgumentException e) {
@@ -46,7 +46,7 @@ public class Flip extends AbstractCommand {
     int horizBound = orig.getWidth();
     int vertBound = orig.getHeight();
 
-    // set the bounds, so that we don't undo our flipping by flipping the other half back to normal
+    // set the bounds, so that we don't undo our flipping by flipping the other halfback to normal
     if (args[0].equalsIgnoreCase("horizontal")) {
       horizBound = (orig.getWidth() - 1) / 2;
     } else if (args[0].equalsIgnoreCase("vertical")) {

@@ -13,7 +13,7 @@ import model.ImageEditorModel;
  *
  * </p>
  * <p>
- * Command syntax: {@code save <image-path> <image-name> <force>}
+ * Command syntax: {@code save <image-path> <image-name> <shouldOverwrite>}
  *
  * @author emery
  * @created 2022-06-06

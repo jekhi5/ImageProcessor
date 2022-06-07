@@ -54,4 +54,11 @@ public interface Image extends Iterable<Pixel> {
    * @return the new image
    */
   Image getCopy() throws IllegalArgumentException;
+
+  /**
+   * To get a string representation of this image in a PPM format.
+   *
+   * @return the PPM string
+   */
+  String toString();
 }

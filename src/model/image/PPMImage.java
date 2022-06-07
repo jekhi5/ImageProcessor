@@ -1,5 +1,7 @@
 package model.image;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -88,5 +90,40 @@ public class PPMImage implements Image {
     }
 
     return new PPMImage(newPixelArray);
+  }
+
+  @Override
+  public String toString() {
+    List<String> result = new ArrayList<>();
+    result.add("P3");
+
+    DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MM/dd/yyyy HH:mm:ss");
+    LocalDateTime now = LocalDateTime.now();
+
+    result.add("# This image was created by the the Jacob Kline and Emery Jacobowitz's Image " +
+            "Editor on: " + dtf.format(now));
+
+    result.add(this.pixelArray.get(0).size() + " " + this.pixelArray.size());
+
+    // The maxValue will go here
+
+    int highestValue = -1;
+    for (List<Pixel> row : this.pixelArray) {
+      for (Pixel pix : row) {
+        int pixRed = pix.getRed();
+        int pixGreen = pix.getGreen();
+        int pixBlue = pix.getBlue();
+
+        highestValue = Math.max(highestValue, (Math.max(Math.max(pixRed, pixGreen), pixBlue)));
+
+        result.add(pixRed + "");
+        result.add(pixGreen + "");
+        result.add(pixBlue + "");
+      }
+    }
+
+    result.add(3, highestValue + "");
+
+    return String.join("\n", result) + "\n";
   }
 }

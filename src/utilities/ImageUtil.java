@@ -1,8 +1,11 @@
 package utilities;
 
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -144,18 +147,45 @@ public class ImageUtil {
    *                        stored at this location
    * @throws IllegalArgumentException if the path is bad or any of the storing/deleting
    */
-  public void saveImage(Image image, String path, boolean shouldOverwrite)
+  public static void saveImage(Image image, String path, boolean shouldOverwrite)
           throws IllegalArgumentException {
+
+    if (image == null || path == null) {
+      throw new IllegalArgumentException("Error. The given image or path was null.");
+    }
+
+    File file = new File(path);
+
     if (shouldOverwrite) {
-      File formerFile = new File(path);
-      boolean wasSuccessfullyDeleted = formerFile.delete();
+      boolean wasSuccessfullyDeleted = file.delete();
 
       if (!wasSuccessfullyDeleted) {
-        throw new IllegalArgumentException("Error. Cannot delete at given path.");
+        throw new IllegalArgumentException("Error. Cannot delete file at path: " + path);
       }
     }
 
-    // TODO: Implement save
+    try {
+      boolean created = file.createNewFile();
+      if (!created) {
+        throw new IllegalStateException("Error. Could not create file from path: " + path +
+                ". There was already a file at this location. To overwrite, add \"true\" to command.");
+      }
+    } catch (IOException e) {
+      throw new IllegalArgumentException("Error. Bad path: " + path);
+    } catch (SecurityException e) {
+      throw new IllegalArgumentException(
+              "Error. Cannot create file at given path: " + path + "\n" + e.getMessage());
+    }
+
+    BufferedWriter ppmWriter;
+    try {
+      ppmWriter = new BufferedWriter(new FileWriter(path));
+      ppmWriter.write(image.toString());
+      ppmWriter.close();
+    } catch (IOException e) {
+      throw new IllegalArgumentException(
+              "Error. Cannot write to a file at the given path: " + path);
+    }
   }
 }
 

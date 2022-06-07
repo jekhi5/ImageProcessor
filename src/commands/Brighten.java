@@ -34,7 +34,7 @@ public class Brighten extends AbstractCommand {
   @Override
   public String apply(ImageEditorModel model) {
     // get the image
-    Image orig = null;
+    Image orig;
     try {
       orig = model.getImageAt(args[1]);
     } catch (IllegalArgumentException e) {

@@ -13,7 +13,7 @@ import model.pixel.PixelImpl;
 
 /**
  * A command which produces a new image by applying a grayscale to an existing image. There are
- * several different components that can be considered for this grayscale. These are: {@code red},
+ * several components that can be considered for this grayscale. These are: {@code red},
  * {@code green}, {@code blue}, {@code value}, {@code intensity}, and {@code luma}. These components
  * are case-insensitive.
  * <p>
@@ -40,7 +40,7 @@ public class Grayscale extends AbstractCommand {
   @Override
   public String apply(ImageEditorModel model) {
     // get the image
-    Image orig = null;
+    Image orig;
     try {
       orig = model.getImageAt(args[1]);
     } catch (IllegalArgumentException e) {
@@ -54,19 +54,31 @@ public class Grayscale extends AbstractCommand {
     }
 
     // get the function to apply to the pixels in the image
-    Function<Pixel, Pixel> op = null;
+    Function<Pixel, Pixel> op;
     PixelBuilder b = new PixelImpl.PixelImplBuilder();
     op = p -> {
       int val;
       switch (args[0].toLowerCase()) {
-        case "red" -> val = p.getRed();
-        case "green" -> val = p.getGreen();
-        case "blue" -> val = p.getBlue();
-        case "value" -> val = Math.max(p.getRed(), Math.max(p.getGreen(), p.getBlue()));
-        case "intensity" -> val = (int) ((p.getRed() + p.getGreen() + p.getBlue()) / 3.0);
-        case "luma" ->
-                val = (int) (0.2126 * p.getRed() + 0.7152 * p.getGreen() + 0.0722 * p.getBlue());
-        default -> val = -1;
+        case "red":
+          val = p.getRed();
+          break;
+        case "green":
+          val = p.getGreen();
+          break;
+        case "blue":
+          val = p.getBlue();
+          break;
+        case "value":
+          val = Math.max(p.getRed(), Math.max(p.getGreen(), p.getBlue()));
+          break;
+        case "intensity":
+          val = (int) ((p.getRed() + p.getGreen() + p.getBlue()) / 3.0);
+          break;
+        case "luma":
+          val = (int) (0.2126 * p.getRed() + 0.7152 * p.getGreen() + 0.0722 * p.getBlue());
+          break;
+        default:
+          val = -1;
       }
       b.red(val);
       b.green(val);
