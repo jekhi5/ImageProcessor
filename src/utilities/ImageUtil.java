@@ -1,11 +1,17 @@
 package utilities;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
+import java.util.function.Function;
 
+import model.image.Image;
+import model.image.PPMImage;
 import model.pixel.Pixel;
 import model.pixel.PixelImpl;
 
@@ -17,12 +23,51 @@ import model.pixel.PixelImpl;
 public class ImageUtil {
 
   /**
+   * To create an {@link Image} object of the proper type based on the given path to the image.
+   *
+   * @param path is the path to the image
+   * @return the newly created image
+   * @throws IllegalArgumentException if the path is bad or the filetype is not supported
+   */
+  public static Image createImageFromPath(String path) throws IllegalArgumentException {
+    // As more filetypes become accepted, we will extend this map
+    Map<String, Function<String, Image>> supportedFileTypes = new HashMap<>();
+    supportedFileTypes.put(".ppm", ImageUtil::readPPM);
+
+    String suffix = ImageUtil.getSuffix(path);
+    if (supportedFileTypes.containsKey(suffix)) {
+      return supportedFileTypes.get(suffix).apply(path);
+    } else {
+      throw new IllegalArgumentException("Error. Filetype: \"" + suffix + "\" is not supported.");
+    }
+  }
+
+  /**
+   * To get the suffix of a path.
+   *
+   * @param path is the path to the file
+   * @return the string version of the filetype including the period
+   * @throws IllegalArgumentException if the path is bad
+   */
+  private static String getSuffix(String path) throws IllegalArgumentException {
+    int indexOfSuffix = path.lastIndexOf(".");
+    if (indexOfSuffix < 0) {
+      throw new IllegalArgumentException("Error. Invalid path.");
+    } else {
+      return path.substring(indexOfSuffix);
+    }
+  }
+
+  /**
    * Read an image file in the PPM format and print the colors.
    *
    * @param filename the path of the file.
+   * @return a completed PPMImage
+   * @throws IllegalArgumentException if there is a bad path, or the width or height of the image is
+   *                                  less than 1
    */
-  public static List<List<Pixel>> readPPM(String filename) throws IllegalArgumentException {
-    List<List<Pixel>> resultingImage = new ArrayList<>();
+  public static PPMImage readPPM(String filename) throws IllegalArgumentException {
+    List<List<Pixel>> resultingPixelGrid = new ArrayList<>();
     Scanner sc;
 
     try {
@@ -65,23 +110,52 @@ public class ImageUtil {
         int b = sc.nextInt();
         curRow.add(new PixelImpl(r, g, b, 255));
       }
-      resultingImage.add(curRow);
+      resultingPixelGrid.add(curRow);
     }
 
-    return resultingImage;
+    return new PPMImage(resultingPixelGrid);
   }
 
-  //demo main
-  public static void main(String[] args) {
-    String filename;
+  /**
+   * To save the given image to the given path. If the user provides an extension which does not
+   * match the filetype that the image was originally loaded from, it may corrupt the file, and this
+   * is on the user.
+   *
+   * <p>
+   *
+   * If {@code shouldOverwrite} is {@code true}:
+   * <ol>
+   *   <li>this method will attempt to delete the file currently stored at the given path</li>
+   *   <li>and then attempt to place the given image at the given path</li>
+   * </ol>
+   *
+   * If {code shouldOverwrite} is {@code false}:
+   * <ol>
+   *   <li>this method will attempt to place the given image at the given path</li>
+   * </ol>
+   *
+   * If any of these operations fail, the method will throw an IllegalArgumentException.
+   *
+   * </p>
+   *
+   * @param image           is the image to store
+   * @param path            is the path to store the image
+   * @param shouldOverwrite is a flag for whether this method should overwrite the file currently
+   *                        stored at this location
+   * @throws IllegalArgumentException if the path is bad or any of the storing/deleting
+   */
+  public void saveImage(Image image, String path, boolean shouldOverwrite)
+          throws IllegalArgumentException {
+    if (shouldOverwrite) {
+      File formerFile = new File(path);
+      boolean wasSuccessfullyDeleted = formerFile.delete();
 
-    if (args.length > 0) {
-      filename = args[0];
-    } else {
-      filename = "sample.ppm";
+      if (!wasSuccessfullyDeleted) {
+        throw new IllegalArgumentException("Error. Cannot delete at given path.");
+      }
     }
 
-    ImageUtil.readPPM(filename);
+    // TODO: Implement save
   }
 }
 

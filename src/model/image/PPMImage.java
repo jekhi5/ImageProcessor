@@ -6,7 +6,6 @@ import java.util.List;
 
 import model.pixel.Pixel;
 import model.pixel.PixelImpl;
-import utilities.ImageUtil;
 
 /**
  * Represents a PPM Image. The text of the image is converted to an array of pixels that can be
@@ -20,17 +19,12 @@ public class PPMImage implements Image {
   private final List<List<Pixel>> pixelArray;
 
   /**
-   * To construct a PPM image based on the text of the image.
+   * To construct a PPMImage with the given array of pixels.
    *
-   * @param fileName the path to the file of the PPM Image as a string
-   * @throws IllegalArgumentException if the given file name is either not a valid file path or the
-   *                                  path does not lead to a PPM Image
+   * @param pixelArray is the array of pixels of the image
+   * @throws IllegalArgumentException if the pixel array is null
    */
-  public PPMImage(String fileName) throws IllegalArgumentException {
-    this.pixelArray = new ArrayList<>(ImageUtil.readPPM(fileName));
-  }
-
-  public PPMImage(List<List<Pixel>> pixelArray) {
+  public PPMImage(List<List<Pixel>> pixelArray) throws IllegalArgumentException {
     if (pixelArray == null) {
       throw new IllegalArgumentException("Error. The given Pixel array cannot be null.");
     } else {

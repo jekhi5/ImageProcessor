@@ -2,8 +2,8 @@ import java.io.InputStreamReader;
 
 import controller.ImageEditorController;
 import controller.ImageEditorTextController;
+import model.BasicImageEditorModel;
 import model.ImageEditorModel;
-import model.TesterModel;
 import view.ImageEditorTextView;
 
 /**
@@ -14,7 +14,7 @@ import view.ImageEditorTextView;
  */
 public class TempRunner {
   public static void main(String[] args) {
-    ImageEditorModel m = new TesterModel();
+    ImageEditorModel m = new BasicImageEditorModel();
     ImageEditorTextView v = new ImageEditorTextView();
     ImageEditorController c = new ImageEditorTextController(m, v, new InputStreamReader(System.in));
     c.launch();
