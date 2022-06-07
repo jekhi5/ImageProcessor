@@ -40,7 +40,7 @@ public class BasicImageEditorModel implements ImageEditorModel {
 
 
   @Override
-  public Image getImageAt(String name) throws IllegalArgumentException {
+  public Image getImage(String name) throws IllegalArgumentException {
     if (this.images.containsKey(name)) {
       return this.images.get(name).getCopy();
     } else {

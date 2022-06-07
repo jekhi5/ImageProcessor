@@ -39,7 +39,7 @@ public class SaveImage extends AbstractCommand {
   public String apply(ImageEditorModel model) {
     Image img;
     try {
-      img = model.getImageAt(args[1]);
+      img = model.getImage(args[1]);
     } catch (IllegalArgumentException e) {
       return e.getMessage();
     }

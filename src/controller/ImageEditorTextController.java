@@ -105,7 +105,6 @@ public class ImageEditorTextController implements ImageEditorController {
         ImageEditorCommand cmd = cmdFunc.apply(in);
 
         this.transmit(cmd.apply(model));
-        this.transmit(userInputSymbol, false);
       }
 
 //      if (!in.hasNext()) {
@@ -119,7 +118,7 @@ public class ImageEditorTextController implements ImageEditorController {
 
   // gets the next valid command.
   private String getNextCommand() throws IllegalStateException {
-    this.transmit("> ", false);
+    this.transmit(userInputSymbol, false);
     while (in.hasNext()) {
       String attempt = in.next().toLowerCase();
       if (commands.containsKey(attempt) || quitAliases.contains(attempt)) {

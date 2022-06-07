@@ -23,7 +23,7 @@ public class TestCommand extends AbstractCommand {
     // get the image
     Image orig;
     try {
-      orig = model.getImageAt(args[0]);
+      orig = model.getImage(args[0]);
     } catch (IllegalArgumentException e) {
       return "Debug failed: invalid image \"" + args[0] + "\".";
     }

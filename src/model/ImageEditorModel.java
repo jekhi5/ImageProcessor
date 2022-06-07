@@ -19,7 +19,7 @@ public interface ImageEditorModel {
    * @return the image with the given name
    * @throws IllegalArgumentException if there is no image with the given name
    */
-  Image getImageAt(String name) throws IllegalArgumentException;
+  Image getImage(String name) throws IllegalArgumentException;
 
   /**
    * To add the given {@code Image} into the editor with the given name. Will overwrite any images

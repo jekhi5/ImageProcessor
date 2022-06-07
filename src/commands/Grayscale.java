@@ -42,7 +42,7 @@ public class Grayscale extends AbstractCommand {
     // get the image
     Image orig;
     try {
-      orig = model.getImageAt(args[1]);
+      orig = model.getImage(args[1]);
     } catch (IllegalArgumentException e) {
       return "Grayscale failed: invalid image \"" + args[1] + "\".";
     }

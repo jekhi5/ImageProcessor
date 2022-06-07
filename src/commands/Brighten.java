@@ -36,7 +36,7 @@ public class Brighten extends AbstractCommand {
     // get the image
     Image orig;
     try {
-      orig = model.getImageAt(args[1]);
+      orig = model.getImage(args[1]);
     } catch (IllegalArgumentException e) {
       return "Brighten failed: invalid image \"" + args[1] + "\".";
     }
