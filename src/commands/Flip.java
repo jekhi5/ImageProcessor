@@ -62,11 +62,16 @@ public class Flip extends AbstractCommand {
 
         if (args[0].equalsIgnoreCase("horizontal")) {
           swapPixels(orig, r, c, r, orig.getWidth() - 1 - c);
+          //System.out.println(String.format("r1: %d, c1: %d, r2: %d, c2: %d", r, c, r, orig.getWidth() - 1 - c));
         } else {
           swapPixels(orig, r, c, orig.getHeight() - 1 - r, c);
         }
       }
     }
+
+    // put orig back into the ImageEditor as a new image.
+    // This breaks if ImageEditor.getImageAt() returns an alias instead of a deep copy.
+    model.addImage(args[2], orig);
 
     // success!
     return "Flip successful!";

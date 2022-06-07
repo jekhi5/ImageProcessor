@@ -59,6 +59,10 @@ public class Darken extends AbstractCommand {
       return builder.build();
     });
 
+    // put orig back into the ImageEditor as a new image.
+    // This breaks if ImageEditor.getImageAt() returns an alias instead of a deep copy.
+    model.addImage(args[2], orig);
+
     // Success!
     return "Darken successful!";
   }
