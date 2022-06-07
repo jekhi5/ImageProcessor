@@ -39,8 +39,8 @@ public class PPMImage implements Image {
 
   @Override
   public Pixel getPixelAt(int row, int col) throws IllegalArgumentException {
-    if (row < 0 || row > this.pixelArray.size() || col < 0 ||
-            col > this.pixelArray.get(row).size()) {
+    if (row < 0 || row >= this.pixelArray.size() || col < 0 ||
+            col >= this.pixelArray.get(row).size()) {
       throw new IllegalArgumentException("Error. The given coordinates: (" + row + ", " + col +
               "). is out of bounds.");
     } else {
@@ -50,8 +50,8 @@ public class PPMImage implements Image {
 
   @Override
   public Pixel setPixelAt(int row, int col, Pixel newPixel) throws IllegalArgumentException {
-    if (row < 0 || row > this.pixelArray.size() || col < 0 ||
-            col > this.pixelArray.get(row).size()) {
+    if (row < 0 || row >= this.pixelArray.size() || col < 0 ||
+            col >= this.pixelArray.get(row).size()) {
       throw new IllegalArgumentException("Error. The given coordinates were out of bounds. Given:" +
               " (" + row + ", " + col + ").");
     }
@@ -64,14 +64,14 @@ public class PPMImage implements Image {
 
   @Override
   public int getWidth() {
-    return this.pixelArray.size();
+    return this.pixelArray.get(0).size();
   }
 
   @Override
   public int getHeight() {
     // In the parsing of the PPM file we check to see if the image has a width or height of 0, so
     // it's ok to use .get(0) here because we know there is at least 1 column.
-    return this.pixelArray.get(0).size();
+    return this.pixelArray.size();
   }
 
   @Override

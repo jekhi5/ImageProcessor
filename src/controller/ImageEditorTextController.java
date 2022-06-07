@@ -56,7 +56,7 @@ public class ImageEditorTextController implements ImageEditorController {
     this.quitAliases = Arrays.asList("q", "quit", "exit");
 
     // Add all new commands here:
-    commands.put("test", s -> new TestCommand(s));
+    commands.put("debug", s -> new TestCommand(s));
 
     // different misspellings of "grayscale"
     commands.put("grayscale", s -> new Grayscale(s));
@@ -107,9 +107,9 @@ public class ImageEditorTextController implements ImageEditorController {
         this.transmit(userInputSymbol, false);
       }
 
-      if (!in.hasNext()) {
-        throw new IllegalStateException("Controller ran out of inputs!");
-      }
+//      if (!in.hasNext()) {
+//        throw new IllegalStateException("Controller ran out of inputs!");
+//      }
     }
 
     in.close();

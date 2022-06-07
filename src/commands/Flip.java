@@ -48,16 +48,18 @@ public class Flip extends AbstractCommand {
 
     // set the bounds, so that we don't undo our flipping by flipping the other half back to normal
     if (args[0].equalsIgnoreCase("horizontal")) {
-      horizBound = (orig.getWidth() - 1) / 2;
+      horizBound = orig.getWidth() / 2;
     } else if (args[0].equalsIgnoreCase("vertical")) {
-      vertBound = (orig.getHeight() - 1) / 2;
+      vertBound = orig.getHeight() / 2;
     } else {
       return "Flip failed: invalid mode \"" + args[0] + "\".";
     }
 
     // loop through every pixel and swap them!
-    for (int r = 0; r < horizBound; r += 1) {
-      for (int c = 0; c < vertBound; c += 1) {
+    for (int r = 0; r < vertBound; r += 1) {
+      for (int c = 0; c < horizBound; c += 1) {
+        //System.out.println("r: " + r + ", c: " + c);
+
         if (args[0].equalsIgnoreCase("horizontal")) {
           swapPixels(orig, r, c, r, orig.getWidth() - 1 - c);
         } else {
