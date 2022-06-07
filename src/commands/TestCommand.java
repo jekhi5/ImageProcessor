@@ -3,6 +3,7 @@ package commands;
 import java.util.Scanner;
 
 import model.ImageEditorModel;
+import model.image.Image;
 
 /**
  * A test command. It takes in two arguments and has the view print them out.
@@ -13,12 +14,20 @@ import model.ImageEditorModel;
 public class TestCommand extends AbstractCommand {
 
   public TestCommand(Scanner in) {
-    super(in, 2);
+    super(in, 1);
 
   }
 
   @Override
   public String apply(ImageEditorModel model) {
-    return "Test: " + args[0] + " " + args[1];
+    // get the image
+    Image orig;
+    try {
+      orig = model.getImageAt(args[0]);
+    } catch (IllegalArgumentException e) {
+      return "Debug failed: invalid image \"" + args[0] + "\".";
+    }
+
+    return args[0] + ": width" + orig.getWidth() + ", height " + orig.getHeight();
   }
 }
