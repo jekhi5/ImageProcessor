@@ -3,8 +3,8 @@ package view;
 import java.io.IOException;
 
 /**
- * An implementation of {@link ImageEditorView}. It can write text to its output stream, which
- * can be specified by the user, or is {@link System}{@code .out} by default.
+ * An implementation of {@link ImageEditorView}. It can write text to its output stream, which can
+ * be specified by the user, or is {@link System}{@code .out} by default.
  *
  * @author emery
  * @created 2022-06-05
@@ -21,6 +21,7 @@ public class ImageEditorTextView implements ImageEditorView {
 
   /**
    * Creates a new {@code ImageEditorTextView} with a given output stream.
+   *
    * @param out the output stream
    * @throws IllegalArgumentException if {@code out} is {@code null}
    */
