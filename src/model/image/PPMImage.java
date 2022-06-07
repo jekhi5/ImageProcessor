@@ -83,8 +83,7 @@ public class PPMImage implements Image {
     for (List<Pixel> row : this.pixelArray) {
       List<Pixel> curRow = new ArrayList<>();
       for (Pixel pixel : row) {
-        Pixel newPixel = new PixelImpl(pixel);
-        curRow.add(newPixel);
+        curRow.add(new PixelImpl(pixel));
       }
       newPixelArray.add(curRow);
     }

@@ -64,13 +64,9 @@ public class ImageEditorTextController implements ImageEditorController {
     commands.put("grey", s -> new Grayscale(s));
 
     commands.put("load", s -> new LoadImage(s));
-
     commands.put("save", s -> new SaveImage(s));
-
     commands.put("flip", s -> new Flip(s));
-
     commands.put("brighten", s -> new Brighten(s));
-
     commands.put("darken", s -> new Darken(s));
   }
 

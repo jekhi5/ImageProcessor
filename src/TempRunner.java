@@ -20,12 +20,12 @@ public class TempRunner {
     ImageEditorTextView v = new ImageEditorTextView();
     Readable input = null;
     try {
-      input = new FileReader("res/omniscript.txt");
+      input = new FileReader("res/omniscript_linux.txt");
     } catch (FileNotFoundException e) {
       throw new RuntimeException(e);
     }
     Readable input2 = new InputStreamReader(System.in);
-    ImageEditorController c = new ImageEditorTextController(m, v, input);
+    ImageEditorController c = new ImageEditorTextController(m, v, input2);
     c.launch();
   }
 }

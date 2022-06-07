@@ -35,6 +35,7 @@ public class BasicImageEditorModel implements ImageEditorModel {
       throw new IllegalArgumentException("Error. The given Map cannot be null.");
     } else {
       this.images = new HashMap<>(images);
+      this.images.replaceAll((name, value/*unused*/) -> this.images.get(name).getCopy());
     }
   }
 
@@ -53,7 +54,7 @@ public class BasicImageEditorModel implements ImageEditorModel {
     if (name == null || image == null) {
       throw new IllegalArgumentException("Error. The given name nor image can be null.");
     } else {
-      this.images.put(name, image);
+      this.images.put(name, image.getCopy());
     }
   }
 }
