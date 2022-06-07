@@ -1,4 +1,7 @@
 import org.junit.Before;
+import org.junit.Test;
+
+import java.util.HashMap;
 
 import model.BasicImageEditorModel;
 import model.ImageEditorModel;
@@ -26,5 +29,16 @@ public class BasicImageEditorModelTest {
     model = new BasicImageEditorModel();
   }
 
+  // Testing giving a null argument to constructor
+  @Test(expected = IllegalArgumentException.class)
+  public void testingConstructor_NullMap() {
+    new BasicImageEditorModel(null);
+  }
+
+  // Testing constructing with valid map
+  @Test
+  public void testingConstructor_ValidMap() {
+    new BasicImageEditorModel(new HashMap<>());
+  }
 
 }

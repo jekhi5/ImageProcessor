@@ -39,5 +39,4 @@ public interface Pixel {
    * @return the {@code alpha} value of this pixel
    */
   int getAlpha();
-
 }
