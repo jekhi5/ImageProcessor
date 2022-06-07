@@ -80,4 +80,42 @@ public class PixelImpl implements Pixel {
       return new PixelImpl(red, green, blue, alpha);
     }
   }
+
+  @Override
+  public int hashCode() {
+    int result = 17;
+
+    result = 31 * result + this.red;
+    result = 31 * result + this.green;
+    result = 31 * result + this.blue;
+    result = 31 * result + this.alpha;
+
+    return result;
+  }
+
+  /**
+   * Two {@code PixelImpl}s are .equal() IFF:
+   *
+   * <ol>
+   *   <li> they are both of type {@code PixelImpl}</li>
+   *   AND
+   *   <li> each field of pixel {@code A} has an equal value to the same field of pixel {@code B}
+   *   </li>
+   * </ol>
+   *
+   * @param other is the other object to compare
+   * @return if this object is equal to the other object
+   */
+  @Override
+  public boolean equals(Object other) {
+    if (other instanceof PixelImpl) {
+      return this.red == ((PixelImpl) other).red
+              && this.green == ((PixelImpl) other).green
+              && this.blue == ((PixelImpl) other).blue
+              && this.alpha == ((PixelImpl) other).alpha;
+    } else {
+      return false;
+    }
+  }
+
 }

@@ -126,4 +126,47 @@ public class PPMImage implements Image {
 
     return String.join("\n", result) + "\n";
   }
+
+  @Override
+  public int hashCode() {
+    return this.pixelArray.hashCode();
+  }
+
+  /**
+   * Two {@code PPMImage}s are equal IFF:
+   *
+   * <ol>
+   *   <li> the width and height of image {@code A} are the same as the width and height of image
+   *   {@code B}</li>
+   *   AND
+   *   <li> each {@link Pixel} of image {@code A} are .equals() to the corresponding
+   *   {@link Pixel} in image {@code B}
+   *   </li>
+   * </ol>
+   *
+   * @param other is the other object to compare
+   * @return if this object is equal to the other object
+   */
+  @Override
+  public boolean equals(Object other) {
+    if (other instanceof PPMImage) {
+      if (this.getWidth() != ((PPMImage) other).getWidth() ||
+              this.getHeight() != ((PPMImage) other).getHeight()) {
+        return false;
+      } else {
+
+        for (int row = 0; row < this.getHeight(); row += 1) {
+          for (int col = 0; col < this.getWidth(); col += 1) {
+            if (!this.getPixelAt(row, col).equals(((PPMImage) other).getPixelAt(row, col))) {
+              return false;
+            }
+          }
+        }
+
+        return true;
+      }
+    } else {
+      return false;
+    }
+  }
 }
