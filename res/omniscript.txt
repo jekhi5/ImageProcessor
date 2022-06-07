@@ -19,4 +19,3 @@ save testOut/i7.ppm i7 y
 save testOut/i8.ppm i8 y
 save testOut/i9.ppm i9 y
 save testOut/iA.ppm iA y
-quit

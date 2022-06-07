@@ -1,3 +1,5 @@
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.InputStreamReader;
 
 import controller.ImageEditorController;
@@ -16,7 +18,14 @@ public class TempRunner {
   public static void main(String[] args) {
     ImageEditorModel m = new BasicImageEditorModel();
     ImageEditorTextView v = new ImageEditorTextView();
-    ImageEditorController c = new ImageEditorTextController(m, v, new InputStreamReader(System.in));
+    Readable input = null;
+    try {
+      input = new FileReader("res/omniscript.txt");
+    } catch (FileNotFoundException e) {
+      throw new RuntimeException(e);
+    }
+    Readable input2 = new InputStreamReader(System.in);
+    ImageEditorController c = new ImageEditorTextController(m, v, input);
     c.launch();
   }
 }
