@@ -1,8 +1,12 @@
 package commands;
 
 import java.util.Scanner;
+import java.util.function.BiFunction;
+import java.util.function.Function;
 
 import model.ImageEditorModel;
+import model.image.Image;
+import model.pixel.Pixel;
 
 /**
  * An abstract command.
@@ -39,4 +43,13 @@ public abstract class AbstractCommand implements ImageEditorCommand {
 
   @Override
   public abstract String apply(ImageEditorModel model);
+
+  protected void applyToEachPixel(Image img, Function<Pixel, Pixel> func) {
+    for (int r = 0; r < img.getWidth(); r += 1) {
+      for (int c = 0; c < img.getHeight(); c += 1) {
+        Pixel p =  img.getPixelAt(r, c);
+        img.setPixelAt(r, c, func.apply(p));
+      }
+    }
+  }
 }

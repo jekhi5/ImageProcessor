@@ -4,11 +4,12 @@ import java.util.Scanner;
 
 import model.ImageEditorModel;
 import model.image.Image;
+import model.image.PPMImage;
+import utilities.ImageUtil;
 
 /**
- * Converts an image from a PPM file (specified by path) into an {@link Image}. It is added to the
- * provided {@code Map}, and is thus accessible by the model. The given name is used to refer to it
- * within the editor.
+ * Opens an image from a PPM file (specified by path) into the editor, where further commands can be
+ * run on it. The given name is used to refer to it within the editor. All args are case-sensitive.
  *
  * </p>
  *
@@ -22,24 +23,25 @@ public class LoadImage extends AbstractCommand {
    * Creates a new {@code LoadImage} with the given number of arguments.
    *
    * @param in      the {@link Scanner}
-   * @param numArgs the number of arguments
    * @throws IllegalArgumentException if {@code numArgs} is negative
    * @throws IllegalStateException    if {@code in} runs out of inputs before collecting
    *                                  {@code numArgs} inputs.
    */
-  public LoadImage(Scanner in, int numArgs)
+  public LoadImage(Scanner in)
           throws IllegalStateException, IllegalArgumentException {
-    super(in, numArgs);
+    super(in, 2);
   }
 
   @Override
   public String apply(ImageEditorModel model) {
-    // TODO: Discuss this method!!!
-    // this method is very sus: It requires images be an alias of the model in order to work.
-    // Options:
-    // 1) go with the aliasing
-    // 2) have this be a unique command similar to "quit" which works at the ImageEditorModel level
-    // and not at the Image level.
-    return "broken command lol";
+    Image img;
+    try {
+      img = ImageUtil.createImageFromPath(args[0]);
+    } catch (IllegalArgumentException e) {
+      return e.getMessage();
+    }
+
+    model.addImage(args[1], img);
+    return "Successfully loaded image \"" + args[1] + "\" from " + args[0] + "!"
   }
 }
