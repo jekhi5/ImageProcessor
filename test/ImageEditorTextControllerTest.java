@@ -33,6 +33,12 @@ public class ImageEditorTextControllerTest {
           "Welcome to ImageEditor! Please enter a command:\n> ";
   String finalMessage = "> Thanks for using ImageEditor!\n";
 
+  String loadingLemonChiffonMsg =
+          initialMessage + "addImage(lemon-image,\n" + ImageUtil.createImageFromPath("res" +
+                  "/LemonChiffon_1x1.ppm").toString() +
+                  ")\nSuccessfully loaded image \"lemon-image\" from res/LemonChiffon_1x1.ppm!\n";
+  String loadChiffon = "load res/LemonChiffon_1x1.ppm lemon ";
+
   @Before
   public void init() {
     log = new StringBuilder();
@@ -73,19 +79,54 @@ public class ImageEditorTextControllerTest {
   // Testing loading an image and not overwriting the name of another image already in the model
   @Test
   public void loadingImageNoOverwrite() {
-    Reader reader = new StringReader("load res/LemonChiffon_1x1.ppm lemon-image q");
+    Reader reader = new StringReader(loadChiffon + "q");
     controller = new ImageEditorTextController(model, view, reader);
 
     assertEquals("", this.log.toString());
     controller.launch();
-    assertEquals(initialMessage + "addImage(lemon-image,\n" +
-                    ImageUtil.readPPM("res/LemonChiffon_1x1.ppm").toString() + ")\n" +
-                    "Successfully loaded image \"lemon-image\" from res/LemonChiffon_1x1.ppm!\n" +
-                    finalMessage,
-            this.log.toString());
+    assertEquals(loadingLemonChiffonMsg + finalMessage, this.log.toString());
   }
 
   // Testing loading an image and overwriting the name of another image
+  @Test
+  public void loadingImageWithOverwrite() {
+    Reader reader = new StringReader(loadChiffon + "load res/CheckeredBlackBottom_3x4.ppm image Q");
+    controller = new ImageEditorTextController(model, view, reader);
+    Image image2 = ImageUtil.createImageFromPath("res/CheckeredBlackBottom_3x4.ppm");
+
+    assertEquals("", this.log.toString());
+    controller.launch();
+    assertEquals(loadingLemonChiffonMsg + "> addImage(image,\n" + image2.toString() +
+            ")\nSuccessfully loaded image \"image\" from res/CheckeredBlackBottom_3x4.ppm!\n" +
+            finalMessage, this.log.toString());
+  }
+
+  // Testing Greyscale using "greyscale red"
+  @Test
+  public void greyScale() {
+    String[] spellings = {"Grayscale", "GrAyScAle", "greyscale", "gREYSCALE", "grey", "GREY",
+            "gray", "GrAY"};
+    String[] typesOfGreyscale = {"red", "ReD", "green", "GReeN", "blue", "BlUE", "value", "VaLuE"
+            , "intensity", "INtENsITy", "luma", "Luma"};
+
+    for (int spelling = 0; spelling < spellings.length; spelling += 1) {
+      for (int type = 0; type < typesOfGreyscale.length; type += 1) {
+        this.init();
+        assertEquals("", this.log.toString());
+        runGreyscale(spellings[spelling], typesOfGreyscale[type]);
+        assertEquals(loadingLemonChiffonMsg, this.log.toString());
+      }
+    }
+  }
+
+
+  public void runGreyscale(String spelling, String typeOfGreyscale) {
+    Reader reader = new StringReader(loadChiffon + spelling + " " + typeOfGreyscale + " image q");
+    controller = new ImageEditorTextController(model, view, reader);
+
+    controller.launch();
+  }
+
   // Testing greyscale using the 4 different ways of writing it and also all different ways of
   //    greyscaling
   //    red, green, blue, value, intensity, luma
