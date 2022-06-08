@@ -134,6 +134,19 @@ public class ImageEditorTextControllerTest {
     controller.launch();
   }
 
+  // Testing giving bad command
+  @Test
+  public void badCommand() {
+    Reader reader = new StringReader("hello world exit");
+    controller = new ImageEditorTextController(model, view, reader);
+
+    assertEquals("", this.log.toString());
+    controller.launch();
+    assertEquals(initialMessage + "Invalid command: \"hello\". Please try again.\n" +
+                    "> Invalid command: \"world\". Please try again.\n" + finalMessage,
+            this.log.toString());
+  }
+
 
   // For every command show one argument being wrong in each location (can be same method)
   // Testing hanging input
