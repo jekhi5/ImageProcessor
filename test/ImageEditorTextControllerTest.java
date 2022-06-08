@@ -103,7 +103,7 @@ public class ImageEditorTextControllerTest {
             finalMessage, this.log.toString());
   }
 
-  // Testing Greyscale using "greyscale red"
+  // Testing Greyscale using all spellings and all types
   //TODO: Fix this method. See notes in string (all caps)
   @Test
   public void greyScale() {
@@ -133,6 +133,8 @@ public class ImageEditorTextControllerTest {
 
     controller.launch();
   }
+
+
 
   // Testing giving bad command
   @Test
