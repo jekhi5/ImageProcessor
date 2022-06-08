@@ -1,10 +1,17 @@
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.Reader;
 import java.io.StringReader;
+import java.util.Scanner;
 
+import commands.Brighten;
+import commands.Darken;
+import commands.Flip;
+import commands.Grayscale;
+import commands.ImageEditorCommand;
 import controller.ImageEditorController;
 import controller.ImageEditorTextController;
 import model.BasicImageEditorModel;
@@ -15,6 +22,7 @@ import view.ImageEditorTextView;
 import view.ImageEditorView;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 /**
  * Tests for {@link controller.ImageEditorTextController}
@@ -33,11 +41,11 @@ public class ImageEditorTextControllerTest {
           "Welcome to ImageEditor! Please enter a command:\n> ";
   String finalMessage = "> Thanks for using ImageEditor!\n";
 
-  String loadingLemonChiffonMsg =
-          initialMessage + "addImage(lemon,\n" + ImageUtil.createImageFromPath("res" +
-                  "/LemonChiffon_1x1.ppm").toString() +
-                  ")\nSuccessfully loaded image \"lemon\" from res/LemonChiffon_1x1.ppm!\n";
-  String loadChiffon = "load res/LemonChiffon_1x1.ppm lemon ";
+  String loadingCheckeredImage =
+          initialMessage + "addImage(checkered,\n" + ImageUtil.createImageFromPath("res" +
+                  "/CheckeredBlackBottom_3x4.ppm").toString() +
+                  ")\nSuccessfully loaded image \"checkered\" from res/CheckeredBlackBottom_3x4.ppm!\n";
+  String loadCheckeredBottom = "load res/CheckeredBlackBottom_3x4.ppm checkered ";
 
   Image lemon = ImageUtil.createImageFromPath("res/LemonChiffon_1x1.ppm");
 
@@ -81,59 +89,149 @@ public class ImageEditorTextControllerTest {
   // Testing loading an image and not overwriting the name of another image already in the model
   @Test
   public void loadingImageNoOverwrite() {
-    Reader reader = new StringReader(loadChiffon + "q");
+    Reader reader = new StringReader(loadCheckeredBottom + "q");
     controller = new ImageEditorTextController(model, view, reader);
 
     assertEquals("", this.log.toString());
     controller.launch();
-    assertEquals(loadingLemonChiffonMsg + finalMessage, this.log.toString());
+    assertEquals(loadingCheckeredImage + finalMessage, this.log.toString());
   }
 
   // Testing loading an image and overwriting the name of another image
   @Test
   public void loadingImageWithOverwrite() {
-    Reader reader = new StringReader(loadChiffon + "load res/CheckeredBlackBottom_3x4.ppm image Q");
+    Reader reader = new StringReader(
+            loadCheckeredBottom + "load res/LemonChiffon_1x1.ppm image Q");
     controller = new ImageEditorTextController(model, view, reader);
-    Image image2 = ImageUtil.createImageFromPath("res/CheckeredBlackBottom_3x4.ppm");
+    Image image2 = ImageUtil.createImageFromPath("res/LemonChiffon_1x1.ppm");
 
     assertEquals("", this.log.toString());
     controller.launch();
-    assertEquals(loadingLemonChiffonMsg + "> addImage(image,\n" + image2.toString() +
-            ")\nSuccessfully loaded image \"image\" from res/CheckeredBlackBottom_3x4.ppm!\n" +
+    assertEquals(loadingCheckeredImage + "> addImage(image,\n" + image2.toString() +
+            ")\nSuccessfully loaded image \"image\" from res/LemonChiffon_1x1.ppm!\n" +
             finalMessage, this.log.toString());
   }
 
+  // Testing saving an image without overwriting using "y"
+  @Test
+  public void saving() {
+    Reader reader = new StringReader(loadCheckeredBottom + " save testOut/checkered_saved.ppm " +
+            "checkered false exit");
+    controller = new ImageEditorTextController(model, view, reader);
+
+    assertEquals("", this.log.toString());
+    controller.launch();
+    assertEquals(loadingCheckeredImage + "> getImage(checkered)\nImage successfully saved to " +
+            "testOut/checkered_saved.ppm\n" + finalMessage, this.log.toString());
+
+
+    // CLEANUP
+    if (!new File("testOut/checkered_saved.ppm").delete()) {
+      fail("File was not deleted! Please try again!");
+    }
+  }
+
+  private void commandTesting(String[] spellings, String[] types, String resultingMessageHalf2) {
+
+    ImageEditorModel tempModel = new BasicImageEditorModel();
+    tempModel.addImage("pre-op", ImageUtil.createImageFromPath("res/CheckeredBlackBottom_3x4.ppm"));
+
+    for (String typeOfCommand : spellings) {
+      for (String formOfCommand : types) {
+        this.init();
+        ImageEditorCommand command = getCommand(typeOfCommand, formOfCommand);
+        command.apply(tempModel);
+
+        assertEquals("", this.log.toString());
+        runCommand(typeOfCommand, formOfCommand);
+        assertEquals(loadingCheckeredImage + "> getImage(checkered)\naddImage" +
+                "(checkered,\n" + tempModel.getImage("post-op").toString() + ")\n" +
+                resultingMessageHalf2 + "\n> Thanks for using ImageEditor!\n", this.log.toString());
+      }
+    }
+  }
+
+  private void runCommand(String spelling, String typeOfCommand) {
+    Reader reader = new StringReader(
+            loadCheckeredBottom + spelling + " " + typeOfCommand + " checkered checkered q");
+    controller = new ImageEditorTextController(model, view, reader);
+
+    controller.launch();
+  }
+
+  private ImageEditorCommand getCommand(String typeOfCommand, String formOfCommand) {
+    String naming = " pre-op " + " post-op";
+    switch (typeOfCommand.toLowerCase()) {
+      case "greyscale":
+      case "grayscale":
+      case "grey":
+      case "gray":
+        return new Grayscale(new Scanner(new StringReader(formOfCommand + naming)));
+      case "flip":
+        return new Flip(new Scanner(new StringReader(formOfCommand + naming)));
+      case "brighten":
+        return new Brighten(new Scanner(new StringReader(formOfCommand + naming)));
+      case "darken":
+        return new Darken(new Scanner(new StringReader(formOfCommand + naming)));
+      default:
+        throw new IllegalStateException("Error. No found command with this name.");
+    }
+  }
+
+  // Testing flip
+  @Test
+  public void flip() {
+    String[] spellings = {"flip", "fLiP"};
+    String[] types = {"vertical", "horizontal"};
+    String resultingMessageHalf2 = "Flip successful!";
+
+    commandTesting(spellings, types, resultingMessageHalf2);
+  }
+
   // Testing Greyscale using all spellings and all types
-  //TODO: Fix this method. See notes in string (all caps)
   @Test
   public void greyScale() {
     String[] spellings = {"Grayscale", "GrAyScAle", "greyscale", "gREYSCALE", "grey", "GREY",
             "gray", "GrAY"};
     String[] typesOfGreyscale = {"red", "ReD", "green", "GReeN", "blue", "BlUE", "value", "VaLuE"
             , "intensity", "INtENsITy", "luma", "Luma"};
+    String resultingMessageHalf2 = "Grayscale successful!";
 
-    for (String spelling : spellings) {
-      for (String type : typesOfGreyscale) {
-        this.init();
-        assertEquals("", this.log.toString());
-        runGreyscale(spelling, type);
-        assertEquals(loadingLemonChiffonMsg + "> getImage(lemon)\n" +
-                "addImage(lemon,\n" + "THIS NEEDS TO BE THE GREYSCALED IMAGE. CONSIDER MAKING " +
-                "GREYSCALE TAKE IN READER RATHER THAN SCANNER SO WE CAN MAKE A GREYSCALE OBJECT, " +
-                "GREYSCALE THE IMAGE, AND PRINT ITS TO-STRING" +
-                ")\nGrayscale successful!\n> Thanks for using ImageEditor!\n", this.log.toString());
-      }
+    commandTesting(spellings, typesOfGreyscale, resultingMessageHalf2);
+  }
+
+  private void testingBrightenDarken(boolean testingBrighten) {
+    String[] spellings;
+    String[] typeOfModification =
+            new String[260]; // shows that brighten values can be given above 255
+    String resultingMessageHalf2;
+
+    if (testingBrighten) {
+      spellings = new String[]{"brighten", "BrIGhtEN"};
+      resultingMessageHalf2 = "Brighten successful!";
+    } else {
+      spellings = new String[]{"darken", "DarKEn"};
+      resultingMessageHalf2 = "Darken successful!";
     }
+
+    for (int i = 0; i < typeOfModification.length; i += 1) {
+      typeOfModification[i] = i + "";
+    }
+
+    commandTesting(spellings, typeOfModification, resultingMessageHalf2);
   }
 
-  private void runGreyscale(String spelling, String typeOfGreyscale) {
-    Reader reader = new StringReader(
-            loadChiffon + spelling + " " + typeOfGreyscale + " lemon lemon q");
-    controller = new ImageEditorTextController(model, view, reader);
-
-    controller.launch();
+  // Testing brighten
+  @Test
+  public void brighten() {
+    this.testingBrightenDarken(true);
   }
 
+  // Testing darken
+  @Test
+  public void darken() {
+    this.testingBrightenDarken(false);
+  }
 
 
   // Testing giving bad command

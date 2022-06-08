@@ -165,9 +165,8 @@ public class ImageUtil {
     }
 
     try {
-      boolean created = file.createNewFile();
-      if (!created) {
-        throw new IllegalStateException("Error. Could not create file from path: " + path +
+      if (!file.createNewFile()) {
+        throw new IllegalArgumentException("Error. Could not create file from path: " + path +
                 ". There was already a file at this location. To overwrite, add \"true\" to command.");
       }
     } catch (IOException e) {

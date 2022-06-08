@@ -44,13 +44,8 @@ public class SaveImage extends AbstractCommand {
       return e.getMessage();
     }
 
-    boolean overwrite;
-    if (args[2].equalsIgnoreCase("yes") || args[2].equalsIgnoreCase("y") ||
-            args[2].equalsIgnoreCase("true") || args[2].equalsIgnoreCase("t")) {
-      overwrite = true;
-    } else {
-      overwrite = false;
-    }
+    boolean overwrite = args[2].equalsIgnoreCase("yes") || args[2].equalsIgnoreCase("y") ||
+            args[2].equalsIgnoreCase("true") || args[2].equalsIgnoreCase("t");
 
     // actually attempt to save the image
     try {
