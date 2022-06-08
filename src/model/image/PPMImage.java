@@ -24,13 +24,18 @@ public class PPMImage implements Image {
    * To construct a PPMImage with the given array of pixels.
    *
    * @param pixelArray is the array of pixels of the image
-   * @throws IllegalArgumentException if the pixel array is null
+   * @throws IllegalArgumentException if the pixel array is null, empty, or non-rectangular.
    */
   public PPMImage(List<List<Pixel>> pixelArray) throws IllegalArgumentException {
     if (pixelArray == null) {
       throw new IllegalArgumentException("Error. The given Pixel array cannot be null.");
+    } else if (pixelArray.size() == 0) {
+      throw new IllegalArgumentException("Error. The given Pixel array cannot be empty.");
     } else {
       this.pixelArray = pixelArray;
+      if (!this.isRectangular()) {
+        throw new IllegalArgumentException("Error. PPM images must be rectangular.");
+      }
     }
   }
 
@@ -56,6 +61,10 @@ public class PPMImage implements Image {
             col >= this.pixelArray.get(row).size()) {
       throw new IllegalArgumentException("Error. The given coordinates were out of bounds. Given:" +
               " (" + row + ", " + col + ").");
+    }
+
+    if (newPixel == null) {
+      throw new IllegalArgumentException("Error. Cannot set a null pixel.");
     }
 
     Pixel priorPixel = this.pixelArray.get(row).get(col);
@@ -167,5 +176,14 @@ public class PPMImage implements Image {
     } else {
       return false;
     }
+  }
+
+  private boolean isRectangular() {
+    for(List<Pixel> row : this.pixelArray) {
+      if (row.size() != this.pixelArray.get(0).size()) {
+        return false;
+      }
+    }
+    return true;
   }
 }
