@@ -43,11 +43,12 @@ public class ImageEditorTextControllerTest {
 
   String loadingCheckeredImage =
           initialMessage + "addImage(checkered,\n" + ImageUtil.createImageFromPath("res" +
-                  "/CheckeredBlackBottom_3x4.ppm").toString() +
-                  ")\nSuccessfully loaded image \"checkered\" from res/CheckeredBlackBottom_3x4.ppm!\n";
-  String loadCheckeredBottom = "load res/CheckeredBlackBottom_3x4.ppm checkered ";
+                  "" + slash + "CheckeredBlackBottom_3x4.ppm").toString() +
+                  ")\nSuccessfully loaded image \"checkered\" from res" +
+                  slash + "CheckeredBlackBottom_3x4.ppm!\n";
+  String loadCheckeredBottom = "load res" + slash + "CheckeredBlackBottom_3x4.ppm checkered ";
 
-  Image lemon = ImageUtil.createImageFromPath("res/LemonChiffon_1x1.ppm");
+  private static final String slash = System.getProperty("file.separator");
 
   @Before
   public void init() {
@@ -75,17 +76,6 @@ public class ImageEditorTextControllerTest {
             null);
   }
 
-  // Testing immediately quitting
-  @Test
-  public void quittingBeforeAnything() {
-    Reader reader = new StringReader("q");
-    controller = new ImageEditorTextController(model, view, reader);
-
-    assertEquals("", this.log.toString());
-    controller.launch();
-    assertEquals(initialMessage + finalMessage, this.log.toString());
-  }
-
   // Testing loading an image and not overwriting the name of another image already in the model
   @Test
   public void loadingImageNoOverwrite() {
@@ -94,39 +84,84 @@ public class ImageEditorTextControllerTest {
 
     assertEquals("", this.log.toString());
     controller.launch();
-    assertEquals(loadingCheckeredImage + finalMessage, this.log.toString());
+    assertEquals(initialMessage + "addImage(checkered,\n" + ImageUtil.createImageFromPath("res" +
+                    "" + slash + "CheckeredBlackBottom_3x4.ppm").toString() + ")" +
+                    "\nSuccessfully loaded image " +
+                    "\"checkered\" from res" + slash + "CheckeredBlackBottom_3x4.ppm!\n" + finalMessage,
+            this.log.toString());
   }
 
   // Testing loading an image and overwriting the name of another image
   @Test
   public void loadingImageWithOverwrite() {
     Reader reader = new StringReader(
-            loadCheckeredBottom + "load res/LemonChiffon_1x1.ppm image Q");
+            loadCheckeredBottom + "load res" + slash + "LemonChiffon_1x1.ppm image quit");
     controller = new ImageEditorTextController(model, view, reader);
-    Image image2 = ImageUtil.createImageFromPath("res/LemonChiffon_1x1.ppm");
+    Image image2 = ImageUtil.createImageFromPath("res" + slash + "LemonChiffon_1x1.ppm");
 
     assertEquals("", this.log.toString());
     controller.launch();
     assertEquals(loadingCheckeredImage + "> addImage(image,\n" + image2.toString() +
-            ")\nSuccessfully loaded image \"image\" from res/LemonChiffon_1x1.ppm!\n" +
+            ")\nSuccessfully loaded image \"image\" from res" + slash + "LemonChiffon_1x1" +
+            ".ppm!\n" +
             finalMessage, this.log.toString());
   }
 
-  // Testing saving an image without overwriting using "y"
+  // Testing saving an image without overwriting
   @Test
-  public void saving() {
-    Reader reader = new StringReader(loadCheckeredBottom + " save testOut/checkered_saved.ppm " +
-            "checkered false exit");
+  public void saving_NotOverwriting() {
+    Reader reader =
+            new StringReader(
+                    loadCheckeredBottom + " save testOut" + slash +
+                            "checkered_saved.ppm checkered false exit");
     controller = new ImageEditorTextController(model, view, reader);
 
     assertEquals("", this.log.toString());
     controller.launch();
     assertEquals(loadingCheckeredImage + "> getImage(checkered)\nImage successfully saved to " +
-            "testOut/checkered_saved.ppm\n" + finalMessage, this.log.toString());
+            "testOut" + slash + "checkered_saved.ppm\n" + finalMessage, this.log.toString());
 
 
     // CLEANUP
-    if (!new File("testOut/checkered_saved.ppm").delete()) {
+    if (!new File("testOut" + slash + "checkered_saved.ppm").delete()) {
+      fail("File was not deleted! Please try again!");
+    }
+  }
+
+  // Testing saving an image with overwriting
+  @Test
+  public void saving_Overwriting() {
+    String[] overwriteTypes = {"y", "Y", "yes", "YeS", "t", "T", "true", "TRue"};
+    for (String overwriteType : overwriteTypes) {
+      this.init();
+      savingHandling(overwriteType);
+    }
+  }
+
+  private void savingHandling(String overwriteCommand) {
+    File tempFile = new File("testOut" + slash + "tempFile.ppm");
+    try {
+      if (!tempFile.createNewFile()) {
+        fail("Temp file wasn't created!");
+      }
+    } catch (IOException e) {
+      fail("Temp file wasn't created!");
+    }
+
+
+    Reader reader =
+            new StringReader(loadCheckeredBottom + " save testOut" + slash + "tempFile.ppm " +
+                    "checkered " + overwriteCommand + " exit");
+    controller = new ImageEditorTextController(model, view, reader);
+
+    assertEquals("", this.log.toString());
+    controller.launch();
+    assertEquals(loadingCheckeredImage + "> getImage(checkered)\nImage successfully saved to " +
+            "testOut" + slash + "tempFile.ppm\n" + finalMessage, this.log.toString());
+
+
+    // CLEANUP
+    if (!new File("testOut" + slash + "tempFile.ppm").delete()) {
       fail("File was not deleted! Please try again!");
     }
   }
@@ -134,7 +169,8 @@ public class ImageEditorTextControllerTest {
   private void commandTesting(String[] spellings, String[] types, String resultingMessageHalf2) {
 
     ImageEditorModel tempModel = new BasicImageEditorModel();
-    tempModel.addImage("pre-op", ImageUtil.createImageFromPath("res/CheckeredBlackBottom_3x4.ppm"));
+    tempModel.addImage("pre-op", ImageUtil.createImageFromPath("res"
+            + slash + "CheckeredBlackBottom_3x4.ppm"));
 
     for (String typeOfCommand : spellings) {
       for (String formOfCommand : types) {
@@ -247,14 +283,49 @@ public class ImageEditorTextControllerTest {
             this.log.toString());
   }
 
+  // Testing quitting (all types) and hanging input
+  @Test
+  public void quitting() {
+    String[] quittingOption = {"q", "Q", "quit", "QuIt", "exit", "ExiT", ""/*this is a hanging
+    input but it should still quit*/};
 
-  // For every command show one argument being wrong in each location (can be same method)
-  // Testing hanging input
-  // Testing quitting (all types)
-  // Testing get next command
-  // Testing transmit (both overloads)
+    for (String option : quittingOption) {
+      this.init();
+      runQuitting(option);
+    }
+  }
+
+  private void runQuitting(String quitOption) {
+    Reader reader = new StringReader(quitOption);
+    controller = new ImageEditorTextController(model, view, reader);
+
+    assertEquals("", this.log.toString());
+    controller.launch();
+    assertEquals(initialMessage.substring(0, initialMessage.length() - 2) + finalMessage,
+            this.log.toString());
+  }
+
+  @Test
+  public void testHangingInCommand() {
+
+    String[] commandString = {"load", "LoAd", "save", "SaVE", "flip", "fLIp", "gray", "GrAY",
+            "grey", "GREY", "grayscale", "GRaYscALe", "greyscale", "GReYSCAle", "brighten",
+            "BRIghTEn", "darken", "DARKEn"};
+
+    for (String command : commandString) {
+      try {
+        Reader reader = new StringReader(command);
+        controller = new ImageEditorTextController(model, view, reader);
+
+        controller.launch();
+      } catch (IllegalStateException e) {
+        assertEquals("Scanner ran out of inputs.", e.getMessage());
+      }
+    }
+  }
 
   // TODO: Integration tests
+  // TODO: For every command show one argument being wrong in each location (can be same method)
 
 
   private static class MockModel implements ImageEditorModel {
