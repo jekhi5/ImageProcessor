@@ -34,10 +34,12 @@ public class ImageEditorTextControllerTest {
   String finalMessage = "> Thanks for using ImageEditor!\n";
 
   String loadingLemonChiffonMsg =
-          initialMessage + "addImage(lemon-image,\n" + ImageUtil.createImageFromPath("res" +
+          initialMessage + "addImage(lemon,\n" + ImageUtil.createImageFromPath("res" +
                   "/LemonChiffon_1x1.ppm").toString() +
-                  ")\nSuccessfully loaded image \"lemon-image\" from res/LemonChiffon_1x1.ppm!\n";
+                  ")\nSuccessfully loaded image \"lemon\" from res/LemonChiffon_1x1.ppm!\n";
   String loadChiffon = "load res/LemonChiffon_1x1.ppm lemon ";
+
+  Image lemon = ImageUtil.createImageFromPath("res/LemonChiffon_1x1.ppm");
 
   @Before
   public void init() {
@@ -102,6 +104,7 @@ public class ImageEditorTextControllerTest {
   }
 
   // Testing Greyscale using "greyscale red"
+  //TODO: Fix this method. See notes in string (all caps)
   @Test
   public void greyScale() {
     String[] spellings = {"Grayscale", "GrAyScAle", "greyscale", "gREYSCALE", "grey", "GREY",
@@ -109,27 +112,29 @@ public class ImageEditorTextControllerTest {
     String[] typesOfGreyscale = {"red", "ReD", "green", "GReeN", "blue", "BlUE", "value", "VaLuE"
             , "intensity", "INtENsITy", "luma", "Luma"};
 
-    for (int spelling = 0; spelling < spellings.length; spelling += 1) {
-      for (int type = 0; type < typesOfGreyscale.length; type += 1) {
+    for (String spelling : spellings) {
+      for (String type : typesOfGreyscale) {
         this.init();
         assertEquals("", this.log.toString());
-        runGreyscale(spellings[spelling], typesOfGreyscale[type]);
-        assertEquals(loadingLemonChiffonMsg, this.log.toString());
+        runGreyscale(spelling, type);
+        assertEquals(loadingLemonChiffonMsg + "> getImage(lemon)\n" +
+                "addImage(lemon,\n" + "THIS NEEDS TO BE THE GREYSCALED IMAGE. CONSIDER MAKING " +
+                "GREYSCALE TAKE IN READER RATHER THAN SCANNER SO WE CAN MAKE A GREYSCALE OBJECT, " +
+                "GREYSCALE THE IMAGE, AND PRINT ITS TO-STRING" +
+                ")\nGrayscale successful!\n> Thanks for using ImageEditor!\n", this.log.toString());
       }
     }
   }
 
-
-  public void runGreyscale(String spelling, String typeOfGreyscale) {
-    Reader reader = new StringReader(loadChiffon + spelling + " " + typeOfGreyscale + " image q");
+  private void runGreyscale(String spelling, String typeOfGreyscale) {
+    Reader reader = new StringReader(
+            loadChiffon + spelling + " " + typeOfGreyscale + " lemon lemon q");
     controller = new ImageEditorTextController(model, view, reader);
 
     controller.launch();
   }
 
-  // Testing greyscale using the 4 different ways of writing it and also all different ways of
-  //    greyscaling
-  //    red, green, blue, value, intensity, luma
+
   // For every command show one argument being wrong in each location (can be same method)
   // Testing hanging input
   // Testing quitting (all types)
@@ -142,9 +147,11 @@ public class ImageEditorTextControllerTest {
   private static class MockModel implements ImageEditorModel {
 
     Appendable log;
+    ImageEditorModel model;
 
     public MockModel(Appendable log) {
       this.log = log;
+      model = new BasicImageEditorModel();
     }
 
 
@@ -155,7 +162,7 @@ public class ImageEditorTextControllerTest {
       } catch (IOException e) {
         this.log = new StringBuilder("ERROR APPENDING IN getImage()!!");
       }
-      return null;
+      return this.model.getImage(name);
     }
 
     @Override
@@ -166,6 +173,8 @@ public class ImageEditorTextControllerTest {
       } catch (IOException e) {
         this.log = new StringBuilder("ERROR APPENDING IN addImage()!!");
       }
+
+      this.model.addImage(name, image);
     }
   }
 }
