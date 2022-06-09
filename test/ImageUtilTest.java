@@ -3,13 +3,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -20,14 +13,14 @@ import model.pixel.Pixel;
 import model.pixel.PixelImpl;
 import utilities.ImageUtil;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 /**
  * Tests for ImageUtil.
  */
 public class ImageUtilTest {
 
-  private static final String sep = System.getProperty("file.separator");
+  private static final String SLASH = System.getProperty("file.separator");
   private Image blue;
   private Image red;
 
@@ -49,9 +42,14 @@ public class ImageUtilTest {
 
   @After
   public void purgeTestOut() {
-    File testOut = new File("testOut");
+    File testOut = new File("test" + SLASH + "testOut");
     for (File f : Objects.requireNonNull(testOut.listFiles())) {
-      f.delete();
+      if (!f.delete()) {
+        throw new IllegalStateException("Error. File:" + f.getName() + " was not deleted! " +
+                "Clear test" + SLASH + "testOut directory before continuing with testing or false" +
+                " tests may " +
+                "occur!");
+      }
     }
   }
 
@@ -72,29 +70,29 @@ public class ImageUtilTest {
   @Test(expected = IllegalArgumentException.class)
   public void loadImage_BadName() {
     // this test fails if you create a file called "bungus.ppm"
-    ImageUtil.createImageFromPath("testRes" + sep + "bungus.ppm");
+    ImageUtil.createImageFromPath("testRes" + SLASH + "bungus.ppm");
   }
 
   @Test(expected = IllegalArgumentException.class)
   public void loadImage_BadExtension() {
-    ImageUtil.createImageFromPath("testRes" + sep + "dummy.txt");
+    ImageUtil.createImageFromPath("testRes" + SLASH + "dummy.txt");
   }
 
   @Test(expected = IllegalArgumentException.class)
   public void loadImage_BadPath() {
     // this test fails if you create a directory called "bungus" for some reason
-    ImageUtil.createImageFromPath("bungus" + sep + "FullyBlue_3x3.ppm");
+    ImageUtil.createImageFromPath("bungus" + SLASH + "FullyBlue_3x3.ppm");
   }
 
   @Test
   public void createImageFromPathReadingPPM() {
-    Image imgLoaded = ImageUtil.createImageFromPath("testRes" + sep + "FullyBlue_3x3.ppm");
+    Image imgLoaded = ImageUtil.createImageFromPath("testRes" + SLASH + "FullyBlue_3x3.ppm");
     assertEquals(blue, imgLoaded);
   }
 
   @Test(expected = IllegalArgumentException.class)
   public void saveImage_NullImage() {
-    ImageUtil.saveImage(null, "testRes" + sep + "out.ppm", true);
+    ImageUtil.saveImage(null, "testRes" + SLASH + "out.ppm", true);
   }
 
   @Test(expected = IllegalArgumentException.class)
@@ -104,25 +102,27 @@ public class ImageUtilTest {
 
   @Test
   public void saveImage() {
-    ImageUtil.saveImage(red, "testOut" + sep + "red.ppm", true);
-    Image readImage = ImageUtil.createImageFromPath("testOut" + sep + "red.ppm");
+    ImageUtil.saveImage(red, "test" + SLASH + "testOut" + SLASH + "red.ppm", true);
+    Image readImage = ImageUtil.createImageFromPath("test" + SLASH + "testOut" + SLASH + "red.ppm");
     assertEquals(red, readImage);
   }
 
   @Test
   public void saveImage_OverwriteTrue() {
-    ImageUtil.saveImage(red, "testOut" + sep + "img.ppm", true);
-    ImageUtil.saveImage(blue, "testOut" + sep + "img.ppm", true);
-    assertEquals(blue, ImageUtil.createImageFromPath("testOut" + sep + "img.ppm"));
+    ImageUtil.saveImage(red, "test" + SLASH + "testOut" + SLASH + "img.ppm", true);
+    ImageUtil.saveImage(blue, "test" + SLASH + "testOut" + SLASH + "img.ppm", true);
+    assertEquals(blue,
+            ImageUtil.createImageFromPath("test" + SLASH + "testOut" + SLASH + "img.ppm"));
   }
 
   @Test
   public void saveImage_OverwriteFalse() {
-    ImageUtil.saveImage(red, "testOut" + sep + "img.ppm", true);
+    ImageUtil.saveImage(red, "test" + SLASH + "testOut" + SLASH + "img.ppm", true);
     try {
-      ImageUtil.saveImage(blue, "testOut" + sep + "img.ppm", false);
+      ImageUtil.saveImage(blue, "test" + SLASH + "testOut" + SLASH + "img.ppm", false);
     } catch (IllegalArgumentException e) {
-      assertEquals(red, ImageUtil.createImageFromPath("testOut" + sep + "img" + ".ppm"));
+      assertEquals(red,
+              ImageUtil.createImageFromPath("test" + SLASH + "testOut" + SLASH + "img.ppm"));
     }
   }
 }

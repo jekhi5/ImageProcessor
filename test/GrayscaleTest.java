@@ -1,5 +1,3 @@
-import org.junit.Test;
-
 import java.io.StringReader;
 import java.util.Arrays;
 import java.util.List;
@@ -7,8 +5,6 @@ import java.util.Scanner;
 
 import commands.Grayscale;
 import commands.ImageEditorCommand;
-
-import static org.junit.Assert.assertEquals;
 
 public class GrayscaleTest extends AbstractCommandTest {
 

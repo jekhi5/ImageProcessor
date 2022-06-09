@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Scanner;
 
 import commands.Flip;
-import commands.Grayscale;
 import commands.ImageEditorCommand;
 
 public class FlipTest extends AbstractCommandTest {

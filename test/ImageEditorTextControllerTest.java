@@ -37,16 +37,13 @@ import static org.junit.Assert.fail;
  */
 public class ImageEditorTextControllerTest {
 
+  static final String NEW_LINE = System.lineSeparator();
+  private static final String SLASH = System.getProperty("file.separator");
   ImageEditorModel model;
   ImageEditorView view;
   ImageEditorController controller;
   Appendable log;
-
   Map<Class<? extends AbstractCommand>, String> commandNames;
-
-  static final String NEW_LINE = System.lineSeparator();
-  private static final String SLASH = System.getProperty("file.separator");
-
   String initialMessage =
           "Welcome to ImageEditor! Please enter a command:" + NEW_LINE + "> ";
   String finalMessage = "> Thanks for using ImageEditor!" + NEW_LINE;

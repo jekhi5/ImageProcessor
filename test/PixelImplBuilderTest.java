@@ -1,5 +1,3 @@
-import model.pixel.Pixel;
-import model.pixel.PixelBuilder;
 import model.pixel.PixelImpl;
 
 import static org.junit.Assert.assertEquals;

@@ -70,20 +70,6 @@ public class PixelImpl implements Pixel {
     return this.alpha;
   }
 
-  /**
-   * A builder for {@link PixelImpl}.
-   *
-   * @author emery
-   * @created 2022-06-06
-   */
-  public static class PixelImplBuilder extends PixelBuilder {
-
-    @Override
-    public Pixel build() {
-      return new PixelImpl(red, green, blue, alpha);
-    }
-  }
-
   @Override
   public int hashCode() {
     int result = 17;
@@ -118,6 +104,20 @@ public class PixelImpl implements Pixel {
               && this.getAlpha() == ((Pixel) other).getAlpha();
     } else {
       return false;
+    }
+  }
+
+  /**
+   * A builder for {@link PixelImpl}.
+   *
+   * @author emery
+   * @created 2022-06-06
+   */
+  public static class PixelImplBuilder extends PixelBuilder {
+
+    @Override
+    public Pixel build() {
+      return new PixelImpl(red, green, blue, alpha);
     }
   }
 

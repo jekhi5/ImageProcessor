@@ -10,12 +10,12 @@ import java.util.function.Function;
 
 import commands.Brighten;
 import commands.Darken;
+import commands.DebugCommand;
 import commands.Flip;
 import commands.Grayscale;
 import commands.ImageEditorCommand;
 import commands.LoadImage;
 import commands.SaveImage;
-import commands.DebugCommand;
 import model.ImageEditorModel;
 import view.ImageEditorView;
 
@@ -33,12 +33,12 @@ import view.ImageEditorView;
  * @created 2022-06-05
  */
 public class ImageEditorTextController implements ImageEditorController {
+  private static final List<String> QUIT_ALIASES = Arrays.asList("q", "quit", "exit");
+  private static final String USER_INPUT_SYMBOL = "> ";
   private final ImageEditorModel model;
   private final ImageEditorView view;
   private final Scanner in;
   private final Map<String, Function<Scanner, ImageEditorCommand>> commands;
-  private static final List<String> QUIT_ALIASES = Arrays.asList("q", "quit", "exit");
-  private static final String USER_INPUT_SYMBOL = "> ";
 
   /**
    * Creates a new {@code ImageEditorTextController} with given model, view, and input stream.
@@ -105,7 +105,7 @@ public class ImageEditorTextController implements ImageEditorController {
           // and not bridges between the two in and of themselves.
           this.transmit(model.execute(cmd));
 
-        } catch (IllegalStateException e){
+        } catch (IllegalStateException e) {
           // if we run out of arguments WITHIN A COMMAND, we want to note that before quitting.
           this.transmit("Error: Insufficient command input. Quitting...");
           hasQuit = true;
