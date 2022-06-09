@@ -122,6 +122,19 @@ public class SaveImageTest {
             saveCommand.apply(model));
   }
 
+  @Test
+  public void apply_BadPath() {
+    ImageEditorCommand saveCommand = new SaveImage(new Scanner(new StringReader(
+            "test" + SLASH + "testRes" + SLASH + "checkered.ppm checkered no q")));
+    assertEquals(
+            "Save failed: Error. Could not create file from path: " +
+                    "test" + SLASH + "testRes" + SLASH +
+                    "checkered.ppm. There was already a file at this " +
+                    "location. To " +
+                    "overwrite, add \"true\" to command.",
+            saveCommand.apply(model));
+  }
+
   // Testing giving a bad image name
   @Test
   public void apply_BadImageName() {
