@@ -10,7 +10,7 @@ import java.util.function.Function;
 
 import commands.Brighten;
 import commands.Darken;
-import commands.DebugCommand;
+import commands.SameImageCommand;
 import commands.Flip;
 import commands.Grayscale;
 import commands.ImageEditorCommand;
@@ -60,7 +60,7 @@ public class ImageEditorTextController implements ImageEditorController {
     this.commands = new HashMap<>();
 
     // Add all new commands here:
-    commands.put("debug", s -> new DebugCommand(s));
+    commands.put("debug", s -> new SameImageCommand(s));
 
     // different misspellings of "grayscale"
     commands.put("grayscale", s -> new Grayscale(s));

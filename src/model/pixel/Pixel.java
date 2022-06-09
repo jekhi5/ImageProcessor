@@ -5,7 +5,8 @@ package model.pixel;
  * {@code red}, {@code green}, and {@code blue} to determine the color. Others, however, have
  * additional increments such as {@code alpha} to determine opacity. All images are made of
  * {@code Pixel}s. All components are on a scale from 0-255. 0 being the lowest contribution to the
- * pixel, 255 being the highest contribution to the pixel.
+ * pixel, 255 being the highest contribution to the pixel. If an image stores more than 8-bit color,
+ * it will have to scale its output.
  *
  * @author Jacob Kline
  * @created 06/06/2022
