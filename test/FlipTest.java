@@ -29,24 +29,8 @@ public class FlipTest extends AbstractCommandTest {
 
   private static final String SUCCESSFUL_MESSAGE = "Flip successful!";
 
-  @Override
-  protected String getSuccessfulMessage() {
-    return SUCCESSFUL_MESSAGE;
-  }
-
-  @Override
-  protected List<ImageEditorCommand> getIllegalForms() {
-    return ILLEGAL_FORMS;
-  }
-
-  @Override
-  protected List<String> getOrderOfTypes() {
-    return ORDER_OF_TYPES;
-  }
-
-  @Override
-  protected List<ImageEditorCommand> getCommandForms() {
-    return COMMAND_FORMS;
+  public FlipTest() {
+    super(COMMAND_FORMS, ORDER_OF_TYPES, ILLEGAL_FORMS, SUCCESSFUL_MESSAGE);
   }
 
   @Override

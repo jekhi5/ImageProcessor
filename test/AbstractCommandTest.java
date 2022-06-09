@@ -61,11 +61,12 @@ public abstract class AbstractCommandTest {
   // The images in the test resources folder
   private final Map<String, Image> testResourceImages;
 
-  public AbstractCommandTest() {
-    this.commandForms = this.getCommandForms();
-    this.orderOfTypes = this.getOrderOfTypes();
-    this.illegalForms = this.getIllegalForms();
-    this.successfulMessage = this.getSuccessfulMessage();
+  public AbstractCommandTest(List<ImageEditorCommand> commandForms, List<String> orderOfTypes,
+                             List<ImageEditorCommand> illegalForms, String successfulMessage) {
+    this.commandForms = commandForms;
+    this.orderOfTypes = orderOfTypes;
+    this.illegalForms = illegalForms;
+    this.successfulMessage = successfulMessage;
 
     testResourceImages = new HashMap<>();
     this.testResourceImages.put("checkered", CHECKERED);
@@ -80,14 +81,6 @@ public abstract class AbstractCommandTest {
     this.testResourceImages.put("horizontal", HORIZONTAL_CHECKERED);
     this.testResourceImages.put("vertical", VERTICAL_CHECKERED);
   }
-
-  protected abstract String getSuccessfulMessage();
-
-  protected abstract List<ImageEditorCommand> getIllegalForms();
-
-  protected abstract List<String> getOrderOfTypes();
-
-  protected abstract List<ImageEditorCommand> getCommandForms();
 
   @Before
   public void init() {
