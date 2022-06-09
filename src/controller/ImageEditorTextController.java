@@ -15,7 +15,7 @@ import commands.Grayscale;
 import commands.ImageEditorCommand;
 import commands.LoadImage;
 import commands.SaveImage;
-import commands.TestCommand;
+import commands.DebugCommand;
 import model.ImageEditorModel;
 import view.ImageEditorView;
 
@@ -60,7 +60,7 @@ public class ImageEditorTextController implements ImageEditorController {
     this.commands = new HashMap<>();
 
     // Add all new commands here:
-    commands.put("debug", s -> new TestCommand(s));
+    commands.put("debug", s -> new DebugCommand(s));
 
     // different misspellings of "grayscale"
     commands.put("grayscale", s -> new Grayscale(s));
