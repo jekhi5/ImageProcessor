@@ -1,3 +1,5 @@
+import org.junit.Test;
+
 import java.io.StringReader;
 import java.util.Arrays;
 import java.util.List;
@@ -6,7 +8,10 @@ import java.util.Scanner;
 import commands.Grayscale;
 import commands.ImageEditorCommand;
 
-public class GreyscaleTest extends AbstractCommandTest {
+import static org.junit.Assert.assertEquals;
+
+public class GrayscaleTest extends AbstractCommandTest {
+
   private static final List<ImageEditorCommand> COMMAND_FORMS =
           Arrays.asList(
                   new Grayscale(new Scanner(new StringReader("red checkered red_checkered"))),
@@ -30,13 +35,34 @@ public class GreyscaleTest extends AbstractCommandTest {
   private static final List<ImageEditorCommand> ILLEGAL_FORMS =
           Arrays.asList(new Grayscale(new Scanner(new StringReader("ReD NOT_AN_IMAGE " +
                           "wont-reach-this-argument"))),
-                  new Grayscale(new Scanner(new StringReader("purple NOT_AN_IMAGE " +
+                  new Grayscale(new Scanner(new StringReader("purple checkered " +
                           "wont-reach-this-argument"))));
 
   private static final String SUCCESSFUL_MESSAGE = "Grayscale successful!";
 
-  public GreyscaleTest() {
-    super(COMMAND_FORMS, ORDER_OF_TYPES, ILLEGAL_FORMS, SUCCESSFUL_MESSAGE);
+  @Test
+  public void test() {
+    assertEquals(1, 2);
+  }
+
+  @Override
+  protected String getSuccessfulMessage() {
+    return SUCCESSFUL_MESSAGE;
+  }
+
+  @Override
+  protected List<ImageEditorCommand> getIllegalForms() {
+    return ILLEGAL_FORMS;
+  }
+
+  @Override
+  protected List<String> getOrderOfTypes() {
+    return ORDER_OF_TYPES;
+  }
+
+  @Override
+  protected List<ImageEditorCommand> getCommandForms() {
+    return COMMAND_FORMS;
   }
 
   @Override
