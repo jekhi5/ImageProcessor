@@ -39,11 +39,13 @@ public class SaveImageTest {
 
   @After
   public void emptyTestOut() {
-    File directory = new File("testOut");
+    File directory = new File("test" + SLASH + "testOut");
     for (File file : Objects.requireNonNull(directory.listFiles())) {
       if (!file.delete()) {
         throw new IllegalStateException("Error. File:" + file.getName() + " was not deleted! " +
-                "Clear testOut directory before continuing with testing or false tests may occur!");
+                "Clear test" + SLASH + "testOut directory before continuing with testing or false" +
+                " tests may " +
+                "occur!");
       }
     }
   }
@@ -55,11 +57,13 @@ public class SaveImageTest {
     String negativeOverwrite = new Random().nextFloat() + "";
 
     Reader reader = new StringReader(
-            "save testOut" + SLASH + "savedCheckered.ppm checkered " + negativeOverwrite + " q");
+            "save test" + SLASH + "testOut" + SLASH + "savedCheckered.ppm checkered " +
+                    negativeOverwrite + "q");
     ImageEditorController controller = new ImageEditorTextController(this.model, this.view, reader);
     controller.launch();
 
-    assertEquals(ImageUtil.createImageFromPath("testOut" + SLASH + "savedCheckered.ppm"),
+    assertEquals(ImageUtil.createImageFromPath("test" + SLASH + "testOut" + SLASH +
+                    "savedCheckered.ppm"),
             this.model.getImage("checkered"));
 
   }
@@ -73,11 +77,10 @@ public class SaveImageTest {
 
   private void apply_WithOverwrite(boolean shouldOverwriteFile) {
     String[] affirmativeOverwrite = {"y", "Y", "yes", "YeS", "t", "trUE"};
-    File fileToOverwrite = null;
+    File fileToOverwrite = new File("test" + SLASH + "testOut" + SLASH + "savedCheckered.ppm");
     for (String opt : affirmativeOverwrite) {
       if (shouldOverwriteFile) {
         try {
-          fileToOverwrite = new File("testOut" + SLASH + "savedCheckered.ppm");
           if (!fileToOverwrite.createNewFile()) {
             fail("File not created. Oops!");
           }
@@ -88,12 +91,14 @@ public class SaveImageTest {
 
 
       Reader reader = new StringReader(
-              "save testOut" + SLASH + "savedCheckered.ppm checkered " + opt + " q");
+              "save test" + SLASH + "testOut" + SLASH + "savedCheckered.ppm checkered " + opt +
+                      " q");
       ImageEditorController controller =
               new ImageEditorTextController(this.model, this.view, reader);
       controller.launch();
 
-      assertEquals(ImageUtil.createImageFromPath("testOut" + SLASH + "savedCheckered.ppm"),
+      assertEquals(ImageUtil.createImageFromPath("test" + SLASH + "testOut" + SLASH +
+                      "savedCheckered.ppm"),
               this.model.getImage("checkered"));
 
 
