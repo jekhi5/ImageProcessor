@@ -21,20 +21,7 @@ import static org.junit.Assert.fail;
  */
 public abstract class AbstractCommandTest {
 
-  // This is all different forms of a given command (IE a red grayscale, a blue grayscale, etc)
-  protected List<ImageEditorCommand> commandForms;
-
-  // The types of operation performed in the same order as the given command forms
-  protected List<String> orderOfTypes;
-
-  // These commands were constructed to throw errors when attempting to apply to the model (bad
-  // image, bad mode, etc)
-  protected List<ImageEditorCommand> illegalForms;
-  protected String successfulMessage;
-  protected ImageEditorModel model;
-
   protected static final String slash = System.getProperty("file.separator");
-
   protected static final Image CHECKERED =
           ImageUtil.createImageFromPath("testRes" + slash + "checkered.ppm");
   protected static final Image RED_CHECKERED =
@@ -57,9 +44,17 @@ public abstract class AbstractCommandTest {
           ImageUtil.createImageFromPath("testRes" + slash + "checkered_horizontal_flip.ppm");
   protected static final Image VERTICAL_CHECKERED =
           ImageUtil.createImageFromPath("testRes" + slash + "checkered_vertical_flip.ppm");
-
   // The images in the test resources folder
   protected final Map<String, Image> testResourceImages;
+  // This is all different forms of a given command (IE a red grayscale, a blue grayscale, etc)
+  protected List<ImageEditorCommand> commandForms;
+  // The types of operation performed in the same order as the given command forms
+  protected List<String> orderOfTypes;
+  // These commands were constructed to throw errors when attempting to apply to the model (bad
+  // image, bad mode, etc)
+  protected List<ImageEditorCommand> illegalForms;
+  protected String successfulMessage;
+  protected ImageEditorModel model;
 
   public AbstractCommandTest(List<ImageEditorCommand> commandForms, List<String> orderOfTypes,
                              List<ImageEditorCommand> illegalForms, String successfulMessage) {

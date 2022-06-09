@@ -7,7 +7,6 @@ import java.util.Map;
 import model.BasicImageEditorModel;
 import model.ImageEditorModel;
 import model.image.Image;
-import model.image.PPMImage;
 import utilities.ImageUtil;
 
 import static org.junit.Assert.assertEquals;
@@ -88,30 +87,30 @@ public class BasicImageEditorModelTest {
    */
 
   @Test(expected = IllegalArgumentException.class)
-  public void getImage_NoImages (){
+  public void getImage_NoImages() {
     model.getImage("UwU what's this?");
   }
 
   @Test(expected = IllegalArgumentException.class)
-  public void getImage_InvalidName (){
+  public void getImage_InvalidName() {
     populateModel();
     model.getImage("a");
   }
 
   @Test(expected = IllegalArgumentException.class)
-  public void getImage_InvalidNameCaseSensitive (){
+  public void getImage_InvalidNameCaseSensitive() {
     populateModel();
     model.getImage("R");
   }
 
   @Test(expected = IllegalArgumentException.class)
-  public void getImage_NullName (){
+  public void getImage_NullName() {
     populateModel();
     model.getImage(null);
   }
 
   @Test
-  public void getImage_ReturnsCopy () {
+  public void getImage_ReturnsCopy() {
     Map<String, Image> map = new HashMap<>();
     map.put("r", fullyRedPPM);
     model = new BasicImageEditorModel(map);

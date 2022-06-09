@@ -1,13 +1,10 @@
 import org.junit.Before;
 import org.junit.Test;
 
-import java.io.IOException;
 import java.util.Random;
 
-import view.ImageEditorView;
 import view.ImageEditorTextView;
-
-import static org.junit.Assert.assertEquals;
+import view.ImageEditorView;
 
 /**
  * Tests for {@link view.ImageEditorTextView}.

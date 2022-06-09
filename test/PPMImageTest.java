@@ -206,7 +206,6 @@ public class PPMImageTest {
     String timestamp = output.substring(91, 110);
 
 
-
     assertEquals(output.substring(0, 91), new PPMImage(grid).toPPMText().substring(0, 91));
     assertEquals(output.substring(110),
             new PPMImage(grid).toPPMText().substring(110));

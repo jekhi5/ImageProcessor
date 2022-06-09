@@ -25,7 +25,8 @@ them (even after pressing enter).
 
 Commands can be loaded from a text file, exactly as they would be typed, provided each command is
 separated by whitespace.
-It is not strictly necessary to end your script with a `quit` command. This is nonetheless recommended for clarity.
+It is not strictly necessary to end your script with a `quit` command. This is nonetheless
+recommended for clarity.
 
 ### Command List
 

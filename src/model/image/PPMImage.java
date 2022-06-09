@@ -179,7 +179,7 @@ public class PPMImage implements Image {
   }
 
   private boolean isRectangular() {
-    for(List<Pixel> row : this.pixelArray) {
+    for (List<Pixel> row : this.pixelArray) {
       if (row.size() != this.pixelArray.get(0).size()) {
         return false;
       }

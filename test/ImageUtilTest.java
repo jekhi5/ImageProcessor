@@ -3,13 +3,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -20,7 +13,7 @@ import model.pixel.Pixel;
 import model.pixel.PixelImpl;
 import utilities.ImageUtil;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 /**
  * Tests for ImageUtil.
@@ -51,7 +44,10 @@ public class ImageUtilTest {
   public void purgeTestOut() {
     File testOut = new File("testOut");
     for (File f : Objects.requireNonNull(testOut.listFiles())) {
-      f.delete();
+      if (!f.delete()) {
+        throw new IllegalStateException("Error. File:" + f.getName() + " was not deleted! " +
+                "Clear testOut directory before continuing with testing or false tests may occur!");
+      }
     }
   }
 
