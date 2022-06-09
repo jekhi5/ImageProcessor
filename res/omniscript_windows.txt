@@ -8,7 +8,7 @@ gray value checkered checkered_value
 gray intensity checkered checkered_intensity
 gray luma checkered checkered_luma
 brighten 100 checkered checkered_brighten_100
-darken 100 checkered checkered_darken_100
+darken 150 checkered checkered_darken_150
 save testOut\checkered_vertical_flip.ppm checkered_vertical_flip y
 save testOut\checkered_horizontal_flip.ppm checkered_horizontal_flip y
 save testOut\checkered_red.ppm checkered_red y
@@ -18,4 +18,4 @@ save testOut\checkered_value.ppm checkered_value y
 save testOut\checkered_intensity.ppm checkered_intensity y
 save testOut\checkered_luma.ppm checkered_luma y
 save testOut\checkered_brighten_100.ppm checkered_brighten_100 y
-save testOut\checkered_darken_100.ppm checkered_darken_100 y
+save testOut\checkered_darken_150.ppm checkered_darken_150 y
