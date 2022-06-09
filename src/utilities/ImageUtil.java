@@ -114,7 +114,7 @@ public class ImageUtil {
       throw new IllegalArgumentException("Error. The given image has a width or height of 0.");
     }
 
-    int maxValue = sc.nextInt(); // max value
+    double maxValue = sc.nextInt(); // max value
 
     for (int i = 0; i < height; i++) {
       List<Pixel> curRow = new ArrayList<>();
@@ -128,10 +128,9 @@ public class ImageUtil {
         }
 
         // scale values into 255
-        // overflow is intended for the math to work
-        r = (int) (255 * Math.log(r + 1) / Math.log(Integer.MAX_VALUE + 1));
-        g = (int) (255 * Math.log(g + 1) / Math.log(Integer.MAX_VALUE + 1));
-        b = (int) (255 * Math.log(b + 1) / Math.log(Integer.MAX_VALUE + 1));
+        r = Math.min(255, r);
+        g = Math.min(255, g);
+        b = Math.min(255, b);
 
         PixelBuilder build = new PixelImpl.PixelImplBuilder();
         build.red(r);
