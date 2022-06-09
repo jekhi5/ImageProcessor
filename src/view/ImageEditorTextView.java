@@ -10,7 +10,7 @@ import java.io.IOException;
  * @created 2022-06-05
  */
 public class ImageEditorTextView implements ImageEditorView {
-  private Appendable out;
+  private final Appendable out;
 
   /**
    * Creates a new {@code ImageEditorTextView} outputting to {@link System}{@code .out}.
