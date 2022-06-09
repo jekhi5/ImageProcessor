@@ -50,7 +50,7 @@ public class Darken extends AbstractCommand {
         return "Darken failed: amount must be positive, was: " + amount;
       }
     } catch (NumberFormatException e) {
-      return e.getMessage();
+      return "Darken failed: amount must be a positive integer!";
     }
 
     applyToEachPixel(orig, p -> {

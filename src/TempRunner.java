@@ -18,7 +18,7 @@ public class TempRunner {
   public static void main(String[] args) {
     ImageEditorModel m = new BasicImageEditorModel();
     ImageEditorTextView v = new ImageEditorTextView();
-    Readable input = null;
+    Readable input;
     try {
       input = new FileReader("res/omniscript_windows.txt");
     } catch (FileNotFoundException e) {
