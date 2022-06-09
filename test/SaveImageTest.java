@@ -5,6 +5,8 @@ import org.junit.Test;
 import java.io.File;
 import java.io.IOException;
 import java.io.StringReader;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Random;
 import java.util.Scanner;
@@ -13,6 +15,7 @@ import commands.ImageEditorCommand;
 import commands.SaveImage;
 import model.BasicImageEditorModel;
 import model.ImageEditorModel;
+import model.image.Image;
 import utilities.ImageUtil;
 
 import static org.junit.Assert.assertEquals;
@@ -26,7 +29,10 @@ public class SaveImageTest {
 
   @Before
   public void init() {
-    this.model = new BasicImageEditorModel();
+    Map<String, Image> preLoadedImage = new HashMap<>();
+    preLoadedImage.put("checkered",
+            ImageUtil.createImageFromPath("test" + SLASH + "testRes" + SLASH + "checkered.ppm"));
+    this.model = new BasicImageEditorModel(preLoadedImage);
   }
 
 
@@ -36,8 +42,7 @@ public class SaveImageTest {
       if (!file.delete()) {
         throw new IllegalStateException("Error. File:" + file.getName() + " was not deleted! " +
                 "Clear test" + SLASH + "testOut directory before continuing with testing or false" +
-                " tests may " +
-                "occur!");
+                " tests may occur!");
       }
     }
   }
@@ -72,9 +77,7 @@ public class SaveImageTest {
       this.init();
       if (shouldOverwriteFile) {
         try {
-          if (!fileToOverwrite.createNewFile()) {
-            fail("File not created. Oops!");
-          }
+          fileToOverwrite.createNewFile();
         } catch (IOException e) {
           fail(e.getMessage());
         }
@@ -86,13 +89,25 @@ public class SaveImageTest {
       saveCommand.apply(this.model);
 
       assertEquals(ImageUtil.createImageFromPath("test" + SLASH + "testOut" + SLASH +
-              "savedCheckered.ppm"),
+                      "savedCheckered.ppm"),
               this.model.getImage("checkered"));
 
 //      if (shouldOverwriteFile && !fileToOverwrite.delete()) {
 //        fail("File not deleted! Oops!");
 //      }
     }
+  }
+
+  // Testing attempting to save but no overwrite
+  @Test
+  public void apply_BadPath() {
+    ImageEditorCommand saveCommand = new SaveImage(new Scanner(new StringReader(
+            "test" + SLASH + "testRes" + SLASH + "checkered.ppm checkered no q")));
+    assertEquals(
+            "Save failed: Error. Could not create file from path: " +
+                    "test/testRes/checkered.ppm. There was already a file at this location. To " +
+                    "overwrite, add \"true\" to command.",
+            saveCommand.apply(model));
   }
 
 
