@@ -1,22 +1,15 @@
 import org.junit.Before;
 import org.junit.Test;
 
-import java.io.Reader;
-import java.io.StringReader;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Scanner;
 
 import commands.ImageEditorCommand;
-import controller.ImageEditorController;
-import controller.ImageEditorTextController;
 import model.BasicImageEditorModel;
 import model.ImageEditorModel;
 import model.image.Image;
 import utilities.ImageUtil;
-import view.ImageEditorTextView;
-import view.ImageEditorView;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
@@ -42,7 +35,8 @@ public abstract class AbstractCommandTest {
 
   protected static final String slash = System.getProperty("file.separator");
 
-  protected static final Image CHECKERED = ImageUtil.createImageFromPath("testRes" + slash + "checkered.ppm");
+  protected static final Image CHECKERED =
+          ImageUtil.createImageFromPath("testRes" + slash + "checkered.ppm");
   protected static final Image RED_CHECKERED =
           ImageUtil.createImageFromPath("testRes" + slash + "checkered_red.ppm");
   protected static final Image GREEN_CHECKERED =
