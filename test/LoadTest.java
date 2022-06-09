@@ -38,7 +38,7 @@ public class LoadTest {
 
 
     assertEquals("Successfully loaded image \"c\" from test" + SLASH +
-                    "testRes\\checkered.ppm!",
+                    "testRes" + SLASH + "checkered.ppm!",
             l.apply(model));
     assertEquals(ImageUtil.createImageFromPath("test" + SLASH + "testRes" + SLASH + "checkered" +
                     ".ppm"),

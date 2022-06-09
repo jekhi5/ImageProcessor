@@ -21,29 +21,29 @@ import static org.junit.Assert.fail;
  */
 public abstract class AbstractCommandTest {
 
-  protected static final String slash = System.getProperty("file.separator");
+  protected static final String SLASH = System.getProperty("file.separator");
   protected static final Image CHECKERED =
-          ImageUtil.createImageFromPath("test" + slash + "testRes" + slash + "checkered.ppm");
+          ImageUtil.createImageFromPath("test" + SLASH + "testRes" + SLASH + "checkered.ppm");
   protected static final Image RED_CHECKERED =
-          ImageUtil.createImageFromPath("test" + slash + "testRes" + slash + "checkered_red.ppm");
+          ImageUtil.createImageFromPath("test" + SLASH + "testRes" + SLASH + "checkered_red.ppm");
   protected static final Image GREEN_CHECKERED =
-          ImageUtil.createImageFromPath("test" + slash + "testRes" + slash + "checkered_green.ppm");
+          ImageUtil.createImageFromPath("test" + SLASH + "testRes" + SLASH + "checkered_green.ppm");
   protected static final Image BLUE_CHECKERED =
-          ImageUtil.createImageFromPath("test" + slash + "testRes" + slash + "checkered_blue.ppm");
+          ImageUtil.createImageFromPath("test" + SLASH + "testRes" + SLASH + "checkered_blue.ppm");
   protected static final Image VALUE_CHECKERED =
-          ImageUtil.createImageFromPath("test" + slash + "testRes" + slash + "checkered_value.ppm");
+          ImageUtil.createImageFromPath("test" + SLASH + "testRes" + SLASH + "checkered_value.ppm");
   protected static final Image INTENSITY_CHECKERED =
-          ImageUtil.createImageFromPath("test" + slash + "testRes" + slash + "checkered_intensity.ppm");
+          ImageUtil.createImageFromPath("test" + SLASH + "testRes" + SLASH + "checkered_intensity.ppm");
   protected static final Image LUMA_CHECKERED =
-          ImageUtil.createImageFromPath("test" + slash + "testRes" + slash + "checkered_luma.ppm");
+          ImageUtil.createImageFromPath("test" + SLASH + "testRes" + SLASH + "checkered_luma.ppm");
   protected static final Image BRIGHTEN_CHECKERED =
-          ImageUtil.createImageFromPath("test" + slash + "testRes" + slash + "checkered_brighten_100.ppm");
+          ImageUtil.createImageFromPath("test" + SLASH + "testRes" + SLASH + "checkered_brighten_100.ppm");
   protected static final Image DARKEN_CHECKERED =
-          ImageUtil.createImageFromPath("test" + slash + "testRes" + slash + "checkered_darken_150.ppm");
+          ImageUtil.createImageFromPath("test" + SLASH + "testRes" + SLASH + "checkered_darken_150.ppm");
   protected static final Image HORIZONTAL_CHECKERED =
-          ImageUtil.createImageFromPath("test" + slash + "testRes" + slash + "checkered_horizontal_flip.ppm");
+          ImageUtil.createImageFromPath("test" + SLASH + "testRes" + SLASH + "checkered_horizontal_flip.ppm");
   protected static final Image VERTICAL_CHECKERED =
-          ImageUtil.createImageFromPath("test" + slash + "testRes" + slash + "checkered_vertical_flip.ppm");
+          ImageUtil.createImageFromPath("test" + SLASH + "testRes" + SLASH + "checkered_vertical_flip.ppm");
   // The images in the test resources folder
   protected final Map<String, Image> testResourceImages;
   // This is all different forms of a given command (IE a red grayscale, a blue grayscale, etc)
@@ -80,7 +80,7 @@ public abstract class AbstractCommandTest {
   @Before
   public void init() {
     Map<String, Image> editorImages = new HashMap<>();
-    editorImages.put("checkered", ImageUtil.createImageFromPath("test" + slash + "testRes" + slash + "checkered" +
+    editorImages.put("checkered", ImageUtil.createImageFromPath("test" + SLASH + "testRes" + SLASH + "checkered" +
             ".ppm"));
 
     model = new BasicImageEditorModel(editorImages);

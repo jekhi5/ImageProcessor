@@ -146,7 +146,8 @@ public class ImageEditorTextControllerTest {
     assertEquals(
             loadingCheckeredImage + "> Executed command: SaveImage" + NEW_LINE + "Image " +
                     "successfully " +
-                    "saved to test" + SLASH + "testOut" + SLASH + "checkered_saved.ppm" + NEW_LINE + finalMessage,
+                    "saved to test" + SLASH + "testOut" + SLASH + "checkered_saved.ppm" + NEW_LINE +
+                    finalMessage,
             this.log.toString());
 
 
@@ -187,7 +188,8 @@ public class ImageEditorTextControllerTest {
     assertEquals("", this.log.toString());
     controller.launch();
     assertEquals(loadingCheckeredImage + "> Executed command: SaveImage" + NEW_LINE +
-            "Image successfully saved to test" + SLASH + "testOut" + SLASH + "tempFile.ppm" + NEW_LINE +
+            "Image successfully saved to test" + SLASH + "testOut" + SLASH + "tempFile.ppm" +
+            NEW_LINE +
             finalMessage, this.log.toString());
 
 
@@ -410,5 +412,31 @@ public class ImageEditorTextControllerTest {
       }
       return model.execute(cmd);
     }
+  }
+
+  // Testing an IO Exception
+  @Test(expected = IllegalStateException.class)
+  public void testingIOException() {
+    ImageEditorView view = new ImageEditorTextView(new Appendable() {
+      @Override
+      public Appendable append(CharSequence csq) throws IOException {
+        throw new IOException("lol");
+      }
+
+      @Override
+      public Appendable append(CharSequence csq, int start, int end) throws IOException {
+        throw new IOException("lol");
+      }
+
+      @Override
+      public Appendable append(char c) throws IOException {
+        throw new IOException("lol");
+      }
+    });
+
+    Reader reader = new StringReader("load test" + SLASH + "testRes" + SLASH + "checkered.ppm " +
+            "checkered");
+    ImageEditorController controller = new ImageEditorTextController(this.model, view, reader);
+    controller.launch();
   }
 }

@@ -35,8 +35,8 @@ public class SaveImageTest {
     this.model = new BasicImageEditorModel(preLoadedImage);
   }
 
-
-  private void emptyTestOut() {
+  @After
+  public void emptyTestOut() {
     File directory = new File("test" + SLASH + "testOut");
     for (File file : Objects.requireNonNull(directory.listFiles())) {
       if (!file.delete()) {
@@ -55,7 +55,7 @@ public class SaveImageTest {
 
     ImageEditorCommand saveCommand =
             new SaveImage(new Scanner(new StringReader("test" + SLASH + "testOut" + SLASH +
-                    "savedChecker.ppm " + negativeOverwrite + " q")));
+                    "savedCheckered.ppm checkered " + negativeOverwrite + " q")));
     saveCommand.apply(this.model);
 
     assertEquals(ImageUtil.createImageFromPath("test" + SLASH + "testOut" + SLASH +
@@ -92,15 +92,18 @@ public class SaveImageTest {
                       "savedCheckered.ppm"),
               this.model.getImage("checkered"));
 
-//      if (shouldOverwriteFile && !fileToOverwrite.delete()) {
-//        fail("File not deleted! Oops!");
-//      }
+      if (shouldOverwriteFile && !fileToOverwrite.delete()) {
+        fail("File not deleted! Oops!");
+      }
     }
   }
 
   // Testing attempting to save but no overwrite
+  // It is impossible to test giving a bad path WITH overwrite permission because you can only
+  // type in unicode characters in IntelliJ and the only way to give a bad file name in our
+  // system is to type outside that character set.
   @Test
-  public void apply_BadPath() {
+  public void apply_NoOverwritePermissions() {
     ImageEditorCommand saveCommand = new SaveImage(new Scanner(new StringReader(
             "test" + SLASH + "testRes" + SLASH + "checkered.ppm checkered no q")));
     assertEquals(
@@ -110,6 +113,17 @@ public class SaveImageTest {
             saveCommand.apply(model));
   }
 
+  // Testing giving a bad image name
+  @Test
+  public void apply_BadImageName() {
+    ImageEditorCommand saveCommand = new SaveImage(new Scanner(new StringReader(
+            "test" + SLASH + "testRes" + SLASH + "checkered.ppm checkered no q")));
+    assertEquals(
+            "Save failed: Error. Could not create file from path: " +
+                    "test/testRes/checkered.ppm. There was already a file at this location. To " +
+                    "overwrite, add \"true\" to command.",
+            saveCommand.apply(model));
+  }
 
   // To test giving the constructor a null scanner
   @Test(expected = IllegalArgumentException.class)

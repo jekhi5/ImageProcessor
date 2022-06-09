@@ -4,6 +4,7 @@ import model.pixel.Pixel;
 import model.pixel.PixelImpl;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotSame;
 
@@ -107,6 +108,7 @@ public class PixelImplTest {
 
     assertEquals(fullyVisibleWhite.hashCode(), anotherWhite.hashCode());
     assertNotEquals(fullyVisibleWhite.hashCode(), fullyVisibleBlack.getAlpha());
+    assertFalse(fullyVisibleBlack.equals("banana"));
   }
 
   @Test

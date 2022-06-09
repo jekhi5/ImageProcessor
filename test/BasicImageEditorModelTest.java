@@ -42,6 +42,13 @@ public class BasicImageEditorModelTest {
     model = new BasicImageEditorModel(map);
   }
 
+  // Testing giving a null command to execute
+  @Test(expected = IllegalArgumentException.class)
+  public void execute_NullCommand() {
+    new BasicImageEditorModel().execute(null);
+  }
+
+
   // Testing giving a null argument to constructor
   @Test(expected = IllegalArgumentException.class)
   public void testingConstructor_NullMap() {

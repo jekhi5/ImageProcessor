@@ -13,6 +13,7 @@ import model.image.PPMImage;
 import model.image.PixelIterator;
 import model.pixel.Pixel;
 import model.pixel.PixelImpl;
+import utilities.ImageUtil;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -36,6 +37,8 @@ public class PPMImageTest {
   private Pixel bm;
   private Pixel br;
   private List<List<Pixel>> grid;
+
+  private static final String SLASH = System.getProperty("file.separator");
 
   @Before
   public void init() {
@@ -251,5 +254,8 @@ public class PPMImageTest {
 
     assertNotEquals(i3, i1);
     assertNotEquals(i3.hashCode(), i1.hashCode());
+
+    assertFalse(ImageUtil.createImageFromPath("test" + SLASH + "testRes" + SLASH +
+            "checkered_blue.ppm").equals("butts"));
   }
 }

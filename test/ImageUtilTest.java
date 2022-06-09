@@ -3,7 +3,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -14,6 +16,7 @@ import model.pixel.PixelImpl;
 import utilities.ImageUtil;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 /**
  * Tests for ImageUtil.
@@ -125,5 +128,53 @@ public class ImageUtilTest {
       assertEquals(red,
               ImageUtil.createImageFromPath("test" + SLASH + "testOut" + SLASH + "img.ppm"));
     }
+  }
+
+  // Testing trying to read a file with no suffix
+  @Test(expected = IllegalArgumentException.class)
+  public void readNoSuffix() {
+    ImageUtil.createImageFromPath("test" + SLASH + "LoadTest");
+  }
+
+  // Testing trying to read a fake .ppm file with wrong format
+  @Test(expected = IllegalArgumentException.class)
+  public void readFakePPM() {
+    ImageUtil.createImageFromPath("res" + SLASH + "fakePPM.ppm");
+  }
+
+  // Testing trying to read a .ppm with a negative height and width
+  @Test(expected = IllegalArgumentException.class)
+  public void readNegativePPM() {
+    ImageUtil.createImageFromPath("res" + SLASH + "negativePPM.ppm");
+  }
+
+  // Testing trying to save an image with a nonsense path
+  @Test(expected = IllegalArgumentException.class)
+  public void saveBadPath() {
+    ImageUtil.saveImage(((Image) new PPMImage(Arrays.asList(List.of(new PixelImpl(0, 0, 0,
+            0)), List.of(new PixelImpl(0, 0, 0, 0))))), "", true);
+  }
+
+  // Testing trying to save an image without overwrite when there's already a file there
+  @Test
+  public void saveNoOverwritePerms() throws IOException {
+    File toOverwrite = new File("res" + SLASH + "fileToOverwrite.ppm");
+    if (!toOverwrite.createNewFile()) {
+      fail("File was not created");
+    }
+
+
+    try {
+      ImageUtil.saveImage(((Image) new PPMImage(Arrays.asList(List.of(new PixelImpl(0, 0, 0,
+                      0)), List.of(new PixelImpl(0, 0, 0, 0))))), "res" + SLASH + "fileToOverwrite.ppm",
+              false);
+      fail("Expected IllegalArgumentException but didn't get it!");
+    } catch (IllegalArgumentException e) {
+      if (!toOverwrite.delete()) {
+        fail("File was not deleted");
+      }
+    }
+
+
   }
 }
