@@ -67,3 +67,9 @@ There are six modes:
 
 ---
 *ImageEditor belongs to Jacob Kline and Emery Jacobowitz and may not be used without permission.*
+
+<br>
+<br>
+The Ben Lerner example image is copyright of Northeastern University, 2022,
+and Professor Lerner probably retains rights to his likeness as well. 
+Our use falls under fair use, as we are not publishing this project publicly.
