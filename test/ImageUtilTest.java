@@ -151,8 +151,8 @@ public class ImageUtilTest {
   // Testing trying to save an image with a nonsense path
   @Test(expected = IllegalArgumentException.class)
   public void saveBadPath() {
-    ImageUtil.saveImage(((Image) new PPMImage(Arrays.asList(List.of(new PixelImpl(0, 0, 0,
-            0)), List.of(new PixelImpl(0, 0, 0, 0))))), "", true);
+    ImageUtil.saveImage(new PPMImage(Arrays.asList(List.of(new PixelImpl(0, 0, 0,
+            0)), List.of(new PixelImpl(0, 0, 0, 0)))), "", true);
   }
 
   // Testing trying to save an image without overwrite when there's already a file there
@@ -165,11 +165,10 @@ public class ImageUtilTest {
 
 
     try {
-      ImageUtil.saveImage((
-                      (Image) new PPMImage(Arrays.asList(List.of(
-                                      new PixelImpl(0, 0, 0, 0)),
-                              List.of(
-                                      new PixelImpl(0, 0, 0, 0))))),
+      ImageUtil.saveImage(new PPMImage(Arrays.asList(List.of(
+                      new PixelImpl(0, 0, 0, 0)),
+              List.of(
+                      new PixelImpl(0, 0, 0, 0)))),
               "res" + SLASH + "fileToOverwrite.ppm", false);
       fail("Expected IllegalArgumentException but didn't get it!");
     } catch (IllegalArgumentException e) {

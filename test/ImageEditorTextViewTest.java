@@ -27,7 +27,7 @@ public class ImageEditorTextViewTest {
 
   @Test(expected = IllegalArgumentException.class)
   public void nullAppendable() {
-    ImageEditorView v = new ImageEditorTextView(null);
+    new ImageEditorTextView(null);
   }
 
   @Test

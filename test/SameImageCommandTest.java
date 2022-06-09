@@ -50,7 +50,7 @@ public class SameImageCommandTest {
 
   @Test(expected = IllegalArgumentException.class)
   public void nullScanner() {
-    ImageEditorCommand s1 = new SameImageCommand(null);
+    new SameImageCommand(null);
   }
 
   @Test

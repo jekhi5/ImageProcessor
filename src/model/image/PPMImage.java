@@ -141,7 +141,7 @@ public class PPMImage implements Image {
   }
 
   /**
-   * Two {@code PPMImage}s are equal IFF:
+   * Two {@code PPMImage}s are equal IFF.
    *
    * <ol>
    *   <li> the width and height of image {@code A} are the same as the width and height of image

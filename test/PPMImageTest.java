@@ -1,8 +1,6 @@
 import org.junit.Before;
 import org.junit.Test;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -198,10 +196,6 @@ public class PPMImageTest {
     String output = "P3\n# This image was created by the the Jacob Kline and Emery Jacobowitz's" +
             " Image Editor on: 06/08/2022 13:08:10\n" +
             "3 2\n2\n0\n0\n0\n0\n1\n0\n0\n2\n0\n1\n0\n0\n1\n1\n0\n1\n2\n0\n";
-    DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MM/dd/yyyy HH:mm:ss");
-    LocalDateTime now = LocalDateTime.now();
-
-    String timestamp = output.substring(91, 110);
 
 
     assertEquals(output.substring(0, 91), new PPMImage(grid).toSavableText().substring(0, 91));

@@ -28,10 +28,10 @@ public class ImageUtil {
 
   /**
    * To create an {@link Image} object of the proper type based on the given path to the image. In
-   * order to create uniformity between many different file types, our program normalizes all colors
-   * to have minimum component values of 0, and maximum component values of 255. This has the
-   * following benefits: - uniformity - easy conversion to hexadecimal color codes - easier to work
-   * and do math with and the following cons: - loss of information in some file formats (uncommon)
+   * order to create uniformity between many file types, our program normalizes all colors to have
+   * minimum component values of 0, and maximum component values of 255. This has the following
+   * benefits: - uniformity - easy conversion to hexadecimal color codes - easier to work and do
+   * math with and the following cons: - loss of information in some file formats (uncommon)
    *
    * @param path is the path to the image
    * @return the newly created image

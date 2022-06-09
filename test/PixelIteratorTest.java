@@ -18,7 +18,7 @@ public class PixelIteratorTest {
 
   @Test
   public void hasNext_EmptyList() {
-    // Pixel iterator with no Pixels inside of it.
+    // Pixel iterator with no Pixels inside it.
     // Therefore, hasNext() should always return false.
     PixelIterator p = new PixelIterator(new ArrayList<>());
     assertFalse(p.hasNext());
@@ -26,7 +26,7 @@ public class PixelIteratorTest {
 
   @Test
   public void hasNext() {
-    // Pixel iterator with 3 Pixels inside of it.
+    // Pixel iterator with 3 Pixels inside it.
     // we can call next() thrice before hasNext() returns false.
     List<List<Pixel>> lst = new ArrayList<>();
     for (int i = 0; i < 3; i += 1) {
