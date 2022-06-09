@@ -50,7 +50,7 @@ public class Brighten extends AbstractCommand {
         return "Brighten failed: amount must be positive, was: " + amount;
       }
     } catch (NumberFormatException e) {
-      return e.getMessage();
+      return "Brighten failed: amount must be a positive integer!";
     }
 
     applyToEachPixel(orig, p -> {

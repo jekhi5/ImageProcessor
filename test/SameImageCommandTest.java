@@ -63,6 +63,12 @@ public class SameImageCommandTest {
   @Test
   public void invalidImage1() {
     ImageEditorCommand s1 = new SameImageCommand(new Scanner(new StringReader("q c")));
-    assertEquals("", s1.apply(m));
+    assertEquals("Same failed: invalid image \"q\".", s1.apply(m));
+  }
+
+  @Test
+  public void invalidImage2() {
+    ImageEditorCommand s1 = new SameImageCommand(new Scanner(new StringReader("a x")));
+    assertEquals("Same failed: invalid image \"x\".", s1.apply(m));
   }
 }
