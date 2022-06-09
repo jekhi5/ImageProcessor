@@ -35,8 +35,8 @@ public class SaveImageTest {
     this.model = new BasicImageEditorModel(preLoadedImage);
   }
 
-  @After
-  public void emptyTestOut() {
+
+  private void emptyTestOut() {
     File directory = new File("test" + SLASH + "testOut");
     for (File file : Objects.requireNonNull(directory.listFiles())) {
       if (!file.delete()) {
@@ -92,9 +92,9 @@ public class SaveImageTest {
                       "savedCheckered.ppm"),
               this.model.getImage("checkered"));
 
-      if (shouldOverwriteFile && !fileToOverwrite.delete()) {
-        fail("File not deleted! Oops!");
-      }
+//      if (shouldOverwriteFile && !fileToOverwrite.delete()) {
+//        fail("File not deleted! Oops!");
+//      }
     }
   }
 

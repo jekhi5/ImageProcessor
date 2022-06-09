@@ -38,7 +38,7 @@ recommended for clarity.
 | `darken`    | `darken <amount> <image-name> <new-name>`              | Decreases the brightness of the image by the given amount in the range [0-255]                                              |
 | `flip`      | `flip {vertical ǀ horizontal} <image-name> <new-name>` | Mirrors the image in the given dimension                                                                                    |
 | `grayscale` | `grayscale <mode> <image-name> <new-name>`             | Grayscale the image based on the given mode. See [Grayscale](#Grayscale) for more information                               |
-| `debug`     | `debug <image-name> <image-name>`                      | Tells you if the two images are the same or different.                                                                      |
+| `same`      | `same <image-name> <image-name>`                       | Tells you if the two images are the same or different.                                                                      |
 | `quit`      | `quit` or `q` or `exit`                                | Exits the ImageEditor. All unsaved data will be lost.                                                                       |
 
 No commands *modify* the existing image in the editor. Instead, they open a new image in the editor

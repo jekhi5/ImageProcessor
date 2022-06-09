@@ -72,7 +72,10 @@ public class ImageEditorTextControllerTest {
 
   @After
   public void deleteFiles() {
-    File testOut = new File("testOut");
+    File testOut = new File("test" + SLASH + "testOut");
+    if (testOut == null || testOut.listFiles() == null || testOut.listFiles().length == 0) {
+      return;
+    }
     for (File f : Objects.requireNonNull(testOut.listFiles())) {
       if (!f.delete()) {
         throw new IllegalStateException("Error deleting files. Please clear testOut directory.");
@@ -134,7 +137,7 @@ public class ImageEditorTextControllerTest {
   public void saving_NotOverwriting() {
     Reader reader =
             new StringReader(
-                    loadCheckeredBottom + " save testOut" + SLASH +
+                    loadCheckeredBottom + " save test" + SLASH + "testOut" + SLASH +
                             "checkered_saved.ppm checkered false exit");
     controller = new ImageEditorTextController(model, view, reader);
 
@@ -143,12 +146,12 @@ public class ImageEditorTextControllerTest {
     assertEquals(
             loadingCheckeredImage + "> Executed command: SaveImage" + NEW_LINE + "Image " +
                     "successfully " +
-                    "saved to testOut" + SLASH + "checkered_saved.ppm" + NEW_LINE + finalMessage,
+                    "saved to test" + SLASH + "testOut" + SLASH + "checkered_saved.ppm" + NEW_LINE + finalMessage,
             this.log.toString());
 
 
     // CLEANUP
-    if (!new File("testOut" + SLASH + "checkered_saved.ppm").delete()) {
+    if (!new File("test" + SLASH + "testOut" + SLASH + "checkered_saved.ppm").delete()) {
       fail("File was not deleted! Please try again!");
     }
   }
@@ -164,7 +167,7 @@ public class ImageEditorTextControllerTest {
   }
 
   private void savingHandling(String overwriteCommand) {
-    File tempFile = new File("testOut" + SLASH + "tempFile.ppm");
+    File tempFile = new File("test" + SLASH + "testOut" + SLASH + "tempFile.ppm");
     try {
       if (!tempFile.createNewFile()) {
         fail("Temp file wasn't created!");
@@ -175,19 +178,21 @@ public class ImageEditorTextControllerTest {
 
 
     Reader reader =
-            new StringReader(loadCheckeredBottom + " save testOut" + SLASH + "tempFile.ppm " +
+            new StringReader(loadCheckeredBottom + " save test" + SLASH + "testOut" + SLASH +
+                    "tempFile" +
+                    ".ppm " +
                     "checkered " + overwriteCommand + " exit");
     controller = new ImageEditorTextController(model, view, reader);
 
     assertEquals("", this.log.toString());
     controller.launch();
     assertEquals(loadingCheckeredImage + "> Executed command: SaveImage" + NEW_LINE +
-            "Image successfully saved to testOut" + SLASH + "tempFile.ppm" + NEW_LINE +
+            "Image successfully saved to test" + SLASH + "testOut" + SLASH + "tempFile.ppm" + NEW_LINE +
             finalMessage, this.log.toString());
 
 
     // CLEANUP
-    if (!new File("testOut" + SLASH + "tempFile.ppm").delete()) {
+    if (!new File("test" + SLASH + "testOut" + SLASH + "tempFile.ppm").delete()) {
       fail("File was not deleted! Please try again!");
     }
   }

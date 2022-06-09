@@ -10,12 +10,12 @@ import model.image.Image;
  * made a change to an image or not. This command allows the user to "debug," by comparing two
  * images.
  * <p>
- * Command syntax: {@code debug <image-name> <image-name>}
+ * Command syntax: {@code same <image-name> <image-name>}
  *
  * @author emery
  * @created 2022-06-05
  */
-public class DebugCommand extends AbstractCommand {
+public class SameImageCommand extends AbstractCommand {
 
   /**
    * Creates a new {@code DebugCommand}.
@@ -23,7 +23,7 @@ public class DebugCommand extends AbstractCommand {
    * @param in the scanner
    * @throws IllegalArgumentException if {@code in} is null
    */
-  public DebugCommand(Scanner in) throws IllegalArgumentException {
+  public SameImageCommand(Scanner in) throws IllegalArgumentException {
     super(in, 2);
   }
 
@@ -36,13 +36,13 @@ public class DebugCommand extends AbstractCommand {
     try {
       img1 = model.getImage(args[0]);
     } catch (IllegalArgumentException e) {
-      return "Debug failed: invalid image \"" + args[0] + "\".";
+      return "Same failed: invalid image \"" + args[0] + "\".";
     }
     Image img2;
     try {
       img2 = model.getImage(args[1]);
     } catch (IllegalArgumentException e) {
-      return "Debug failed: invalid image \"" + args[1] + "\".";
+      return "Same failed: invalid image \"" + args[1] + "\".";
     }
 
     // generate the result string
