@@ -3,6 +3,7 @@ package model;
 import java.util.HashMap;
 import java.util.Map;
 
+import commands.ImageEditorCommand;
 import model.image.Image;
 
 /**
@@ -56,5 +57,13 @@ public class BasicImageEditorModel implements ImageEditorModel {
     } else {
       this.images.put(name, image.getCopy());
     }
+  }
+
+  @Override
+  public String execute(ImageEditorCommand cmd) {
+    if (cmd == null) {
+      throw new IllegalArgumentException("Command can't be null.");
+    }
+    return cmd.apply(this);
   }
 }

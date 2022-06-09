@@ -18,8 +18,7 @@ public interface ImageEditorCommand {
    *
    * @param model the model containing the image(s) which this command should be applied to.
    * @return a message indicating the completion of this command.
-   * @throws IllegalCallerException if the given model cannot handle a certain operation that
-   *                                {@code this} command performs
+   * @throws IllegalArgumentException if the given model is null
    */
-  String apply(ImageEditorModel model)/* throws IllegalCallerException */;
+  String apply(ImageEditorModel model) throws IllegalArgumentException;
 }

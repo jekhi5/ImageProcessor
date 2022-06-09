@@ -21,7 +21,7 @@ public abstract class AbstractCommand implements ImageEditorCommand {
    *
    * @param in      the {@link Scanner}
    * @param numArgs the number of arguments
-   * @throws IllegalArgumentException if {@code numArgs} is negative
+   * @throws IllegalArgumentException if {@code numArgs} is negative, or {@code in} is null
    * @throws IllegalStateException    if {@code in} runs out of inputs before collecting
    *                                  {@code numArgs} inputs.
    */
@@ -29,6 +29,9 @@ public abstract class AbstractCommand implements ImageEditorCommand {
           throws IllegalStateException, IllegalArgumentException {
     if (numArgs < 0) {
       throw new IllegalArgumentException("Commands must expect a non-negative number of inputs.");
+    }
+    if (in == null) {
+      throw new IllegalArgumentException();
     }
     args = new String[numArgs];
     for (int i = 0; i < numArgs; i += 1) {
@@ -49,6 +52,12 @@ public abstract class AbstractCommand implements ImageEditorCommand {
         Pixel p = img.getPixelAt(r, c);
         img.setPixelAt(r, c, func.apply(p));
       }
+    }
+  }
+
+  protected void checkNullModel(ImageEditorModel model) throws IllegalArgumentException {
+    if (model == null) {
+      throw new IllegalArgumentException("Model can't be null!");
     }
   }
 }

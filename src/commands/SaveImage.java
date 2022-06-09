@@ -36,7 +36,9 @@ public class SaveImage extends AbstractCommand {
   }
 
   @Override
-  public String apply(ImageEditorModel model) {
+  public String apply(ImageEditorModel model) throws IllegalArgumentException {
+    checkNullModel(model);
+
     Image img;
     try {
       img = model.getImage(args[1]);

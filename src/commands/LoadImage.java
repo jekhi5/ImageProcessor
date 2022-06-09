@@ -32,7 +32,9 @@ public class LoadImage extends AbstractCommand {
   }
 
   @Override
-  public String apply(ImageEditorModel model) {
+  public String apply(ImageEditorModel model) throws IllegalArgumentException {
+    checkNullModel(model);
+
     Image img;
     try {
       img = ImageUtil.createImageFromPath(args[0]);

@@ -1,5 +1,6 @@
 package model;
 
+import commands.ImageEditorCommand;
 import model.image.Image;
 
 /**
@@ -30,4 +31,14 @@ public interface ImageEditorModel {
    * @throws IllegalArgumentException if either argument is null
    */
   void addImage(String name, Image image) throws IllegalArgumentException;
+
+
+  /**
+   * Executes the given {@link ImageEditorCommand} on this model.
+   *
+   * @param cmd the command to execute
+   * @return the result message of the command's execution
+   * @throws IllegalArgumentException if the command is null
+   */
+  String execute(ImageEditorCommand cmd) throws IllegalArgumentException;
 }

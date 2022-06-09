@@ -11,8 +11,6 @@ import model.pixel.Pixel;
  */
 public interface Image extends Iterable<Pixel> {
 
-  //TODO: Support only rectangular images
-
   /**
    * To get a {@code Pixel} at the given coordinates.
    *

@@ -38,7 +38,9 @@ public class Grayscale extends AbstractCommand {
   }
 
   @Override
-  public String apply(ImageEditorModel model) {
+  public String apply(ImageEditorModel model) throws IllegalArgumentException {
+    checkNullModel(model);
+
     // get the image
     Image orig;
     try {

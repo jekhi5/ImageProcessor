@@ -90,10 +90,6 @@ public class ImageEditorTextController implements ImageEditorController {
       // get input
       String cmdString = getNextCommand();
 
-      // this return statement is only reached if input runs out of inputs.
-      // therefore, we just return a command to quit the editor.
-      //return QUIT_ALIASES.get(0);
-
       // quit if necessary
       if (QUIT_ALIASES.contains(cmdString)) {
         hasQuit = true;
@@ -101,9 +97,20 @@ public class ImageEditorTextController implements ImageEditorController {
         // we don't have to worry about a null value
         // because getNextCommand ensures that cmdString is a valid command.
         Function<Scanner, ImageEditorCommand> cmdFunc = commands.get(cmdString);
-        ImageEditorCommand cmd = cmdFunc.apply(in);
+        try {
+          ImageEditorCommand cmd = cmdFunc.apply(in);
+          // we could have simply called cmd.execute(model);
+          // however, we felt that it was better for the model to be the agent in this thematic
+          // relationship. This way, the commands are data passed from the controller to the model,
+          // and not bridges between the two in and of themselves.
+          this.transmit(model.execute(cmd));
 
-        this.transmit(cmd.apply(model));
+        } catch (IllegalStateException e){
+          // if we run out of arguments WITHIN A COMMAND, we want to note that before quitting.
+          this.transmit("Error: Insufficient command input. Quitting...");
+          hasQuit = true;
+        }
+
       }
     }
 
