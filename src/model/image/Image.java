@@ -58,5 +58,5 @@ public interface Image extends Iterable<Pixel> {
    *
    * @return the PPM string
    */
-  String toString();
+  String toPPMText();
 }

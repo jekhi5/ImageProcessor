@@ -1,3 +1,4 @@
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -5,8 +6,11 @@ import java.io.File;
 import java.io.IOException;
 import java.io.Reader;
 import java.io.StringReader;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
+import commands.AbstractCommand;
 import commands.Brighten;
 import commands.Darken;
 import commands.Flip;
@@ -37,6 +41,8 @@ public class ImageEditorTextControllerTest {
   ImageEditorController controller;
   Appendable log;
 
+  Map<Class<? extends AbstractCommand>, String> commandNames;
+
   static final String NEW_LINE = System.lineSeparator();
   private static final String SLASH = System.getProperty("file.separator");
 
@@ -45,9 +51,7 @@ public class ImageEditorTextControllerTest {
   String finalMessage = "> Thanks for using ImageEditor!" + NEW_LINE;
 
   String loadingCheckeredImage =
-          initialMessage + "addImage(checkered," + NEW_LINE +
-                  ImageUtil.createImageFromPath("res" + SLASH + "CheckeredBlackBottom_3x4.ppm")
-                          .toString() + ")" + NEW_LINE +
+          initialMessage + "Executed command: LoadImage" + NEW_LINE +
                   "Successfully loaded image \"checkered\" from res" +
                   SLASH + "CheckeredBlackBottom_3x4.ppm!" + NEW_LINE;
   String loadCheckeredBottom = "load res" + SLASH + "CheckeredBlackBottom_3x4.ppm checkered ";
@@ -58,6 +62,22 @@ public class ImageEditorTextControllerTest {
     log = new StringBuilder();
     model = new MockModel(log);
     view = new ImageEditorTextView(log);
+
+    commandNames = new HashMap<>();
+    commandNames.put(commands.Brighten.class, "Brighten");
+    commandNames.put(commands.Darken.class, "Darken");
+    commandNames.put(commands.Flip.class, "Flip");
+    commandNames.put(commands.Grayscale.class, "Grayscale");
+    commandNames.put(commands.LoadImage.class, "Load");
+    commandNames.put(commands.SaveImage.class, "Save");
+  }
+
+  @After
+  public void deleteFiles() {
+    File testOut = new File("testOut");
+    for(File f : testOut.listFiles()) {
+      f.delete();
+    }
   }
 
   // Testing constructor with null model
@@ -87,9 +107,7 @@ public class ImageEditorTextControllerTest {
 
     assertEquals("", this.log.toString());
     controller.launch();
-    assertEquals(initialMessage + "addImage(checkered," + NEW_LINE + ImageUtil.createImageFromPath(
-                    "res" +
-                            "" + SLASH + "CheckeredBlackBottom_3x4.ppm").toString() + ")" +
+    assertEquals(initialMessage + "Executed command: LoadImage" +
                     NEW_LINE + "Successfully loaded image " +
                     "\"checkered\" from res" + SLASH + "CheckeredBlackBottom_3x4.ppm!" + NEW_LINE +
                     finalMessage,
@@ -106,8 +124,8 @@ public class ImageEditorTextControllerTest {
 
     assertEquals("", this.log.toString());
     controller.launch();
-    assertEquals(loadingCheckeredImage + "> addImage(image," + NEW_LINE + image2.toString() +
-            ")" + NEW_LINE + "Successfully loaded image \"image\" from res" + SLASH +
+    assertEquals(loadingCheckeredImage + "> Executed command: LoadImage"
+            + NEW_LINE + "Successfully loaded image \"image\" from res" + SLASH +
             "LemonChiffon_1x1.ppm!" + NEW_LINE +
             finalMessage, this.log.toString());
   }
@@ -124,7 +142,8 @@ public class ImageEditorTextControllerTest {
     assertEquals("", this.log.toString());
     controller.launch();
     assertEquals(
-            loadingCheckeredImage + "> getImage(checkered)" + NEW_LINE + "Image successfully " +
+            loadingCheckeredImage + "> Executed command: SaveImage" + NEW_LINE + "Image " +
+                    "successfully " +
                     "saved to testOut" + SLASH + "checkered_saved.ppm" + NEW_LINE + finalMessage,
             this.log.toString());
 
@@ -163,7 +182,7 @@ public class ImageEditorTextControllerTest {
 
     assertEquals("", this.log.toString());
     controller.launch();
-    assertEquals(loadingCheckeredImage + "> getImage(checkered)" + NEW_LINE +
+    assertEquals(loadingCheckeredImage + "> Executed command: SaveImage" + NEW_LINE +
             "Image successfully saved to testOut" + SLASH + "tempFile.ppm" + NEW_LINE +
             finalMessage, this.log.toString());
 
@@ -184,15 +203,15 @@ public class ImageEditorTextControllerTest {
       for (String formOfCommand : types) {
         this.init();
         ImageEditorCommand command = getCommand(typeOfCommand, formOfCommand);
-        command.apply(tempModel);
+        tempModel.execute(command);
 
         assertEquals("", this.log.toString());
         runCommand(typeOfCommand, formOfCommand);
-        assertEquals(
-                loadingCheckeredImage + "> getImage(checkered)" + NEW_LINE + "addImage(checkered," +
-                        NEW_LINE + tempModel.getImage("post-op").toString() + ")" +
-                        NEW_LINE +
-                        resultingMessageHalf2 + NEW_LINE + "> Thanks for using ImageEditor!" +
+        assertEquals(initialMessage + "Executed command: LoadImage" + NEW_LINE +
+                        "Successfully loaded image \"checkered\" from" +
+                        " res\\CheckeredBlackBottom_3x4.ppm!" + NEW_LINE + "> Executed command: "
+                        + commandNames.get(command.getClass()) + NEW_LINE + resultingMessageHalf2 +
+                        NEW_LINE + "> Thanks for using ImageEditor!" +
                         NEW_LINE,
                 this.log.toString());
       }
@@ -240,7 +259,7 @@ public class ImageEditorTextControllerTest {
   @Test
   public void greyScale() {
     String[] spellings = {"Grayscale", "GrAyScAle", "greyscale", "gREYSCALE", "grey", "GREY",
-            "gray", "GrAY"};
+                          "gray", "GrAY"};
     String[] typesOfGreyscale = {"red", "ReD", "green", "GReeN", "blue", "BlUE", "value", "VaLuE"
             , "intensity", "INtENsITy", "luma", "Luma"};
     String resultingMessageHalf2 = "Grayscale successful!";
@@ -321,18 +340,22 @@ public class ImageEditorTextControllerTest {
   public void testHangingInCommand() {
 
     String[] commandString = {"load", "LoAd", "save", "SaVE", "flip", "fLIp", "gray", "GrAY",
-            "grey", "GREY", "grayscale", "GRaYscALe", "greyscale", "GReYSCAle", "brighten",
-            "BRIghTEn", "darken", "DARKEn"};
+                              "grey", "GREY", "grayscale", "GRaYscALe", "greyscale", "GReYSCAle",
+                              "brighten",
+                              "BRIghTEn", "darken", "DARKEn"};
 
     for (String command : commandString) {
-      try {
-        Reader reader = new StringReader(command);
-        controller = new ImageEditorTextController(model, view, reader);
+      Appendable output = new StringBuilder();
+      ImageEditorView v = new ImageEditorTextView(output);
+      Reader reader = new StringReader(command);
+      controller = new ImageEditorTextController(model, v, reader);
 
-        controller.launch();
-      } catch (IllegalStateException e) {
-        assertEquals("Scanner ran out of inputs.", e.getMessage());
-      }
+      controller.launch();
+
+      assertEquals(output.toString(),
+              "Welcome to ImageEditor! Please enter a command:" + NEW_LINE +
+                      "> Error: Insufficient command input. Quitting..." + NEW_LINE +
+                      "Thanks for using ImageEditor!" + NEW_LINE);
     }
   }
 
@@ -354,7 +377,7 @@ public class ImageEditorTextControllerTest {
     @Override
     public Image getImage(String name) throws IllegalArgumentException {
       try {
-        this.log.append("getImage(").append(name).append(")").append("" + NEW_LINE);
+        this.log.append("Executed command: SaveImage").append(NEW_LINE);
       } catch (IOException e) {
         this.log = new StringBuilder("ERROR APPENDING IN getImage()!!");
       }
@@ -364,15 +387,25 @@ public class ImageEditorTextControllerTest {
     @Override
     public void addImage(String name, Image image) throws IllegalArgumentException {
       try {
-        this.log.append("addImage(").append(name).append("," + NEW_LINE).append(image.toString())
-                .append(
-                        ")")
-                .append("" + NEW_LINE);
+        this.log.append("addImage(").append(name)/*.append("," + NEW_LINE).append(image.toPPMText
+        ())*/.append(")").append("").append(NEW_LINE);
       } catch (IOException e) {
         this.log = new StringBuilder("ERROR APPENDING IN addImage()!!");
       }
 
       this.model.addImage(name, image);
+    }
+
+    @Override
+    public String execute(ImageEditorCommand cmd) throws IllegalArgumentException {
+      try {
+        this.log.append("Executed command: ").append(cmd.getClass().toString()
+                        .substring(1 + cmd.getClass().toString().lastIndexOf(".")))
+                .append(NEW_LINE);
+      } catch (IOException e) {
+        throw new RuntimeException(e);
+      }
+      return model.execute(cmd);
     }
   }
 }

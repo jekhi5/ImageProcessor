@@ -187,7 +187,7 @@ public class ImageUtil {
     BufferedWriter ppmWriter;
     try {
       ppmWriter = new BufferedWriter(new FileWriter(path));
-      ppmWriter.write(image.toString());
+      ppmWriter.write(image.toPPMText());
       ppmWriter.close();
     } catch (IOException e) {
       throw new IllegalArgumentException(

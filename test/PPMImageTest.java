@@ -67,7 +67,7 @@ public class PPMImageTest {
   @Test(expected = IllegalArgumentException.class)
   public void Constructor_NonRect() {
     List<List<Pixel>> nonRectList = new ArrayList<>();
-    nonRectList.add(Arrays.asList(tl));
+    nonRectList.add(List.of(tl));
     nonRectList.add(Arrays.asList(tm, tr));
     new PPMImage(nonRectList);
   }
@@ -196,7 +196,7 @@ public class PPMImageTest {
   }
 
   @Test
-  public void testToString() {
+  public void testToPPMText() {
     String output = "P3\n# This image was created by the the Jacob Kline and Emery Jacobowitz's" +
             " Image Editor on: 06/08/2022 13:08:10\n" +
             "3 2\n2\n0\n0\n0\n0\n1\n0\n0\n2\n0\n1\n0\n0\n1\n1\n0\n1\n2\n0\n";
@@ -204,8 +204,12 @@ public class PPMImageTest {
     LocalDateTime now = LocalDateTime.now();
 
     String timestamp = output.substring(91, 110);
-    assertEquals(output.substring(0, 91), new PPMImage(grid).toString().substring(0, 91));
-    assertEquals(output.substring(110), new PPMImage(grid).toString().substring(110));
+
+
+
+    assertEquals(output.substring(0, 91), new PPMImage(grid).toPPMText().substring(0, 91));
+    assertEquals(output.substring(110),
+            new PPMImage(grid).toPPMText().substring(110));
   }
 
   @Test

@@ -101,7 +101,7 @@ public class PPMImage implements Image {
   }
 
   @Override
-  public String toString() {
+  public String toPPMText() {
     List<String> result = new ArrayList<>();
     result.add("P3");
 
