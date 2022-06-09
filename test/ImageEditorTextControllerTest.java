@@ -8,6 +8,7 @@ import java.io.Reader;
 import java.io.StringReader;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Scanner;
 
 import commands.AbstractCommand;
@@ -75,8 +76,10 @@ public class ImageEditorTextControllerTest {
   @After
   public void deleteFiles() {
     File testOut = new File("testOut");
-    for(File f : testOut.listFiles()) {
-      f.delete();
+    for (File f : Objects.requireNonNull(testOut.listFiles())) {
+      if (!f.delete()) {
+        throw new IllegalStateException("Error deleting files. Please clear testOut directory.");
+      }
     }
   }
 
@@ -120,7 +123,6 @@ public class ImageEditorTextControllerTest {
     Reader reader = new StringReader(
             loadCheckeredBottom + "load res" + SLASH + "LemonChiffon_1x1.ppm image quit");
     controller = new ImageEditorTextController(model, view, reader);
-    Image image2 = ImageUtil.createImageFromPath("res" + SLASH + "LemonChiffon_1x1.ppm");
 
     assertEquals("", this.log.toString());
     controller.launch();
@@ -209,10 +211,9 @@ public class ImageEditorTextControllerTest {
         runCommand(typeOfCommand, formOfCommand);
         assertEquals(initialMessage + "Executed command: LoadImage" + NEW_LINE +
                         "Successfully loaded image \"checkered\" from" +
-                        " res\\CheckeredBlackBottom_3x4.ppm!" + NEW_LINE + "> Executed command: "
+                        " res" + SLASH + "CheckeredBlackBottom_3x4.ppm!" + NEW_LINE + "> Executed command: "
                         + commandNames.get(command.getClass()) + NEW_LINE + resultingMessageHalf2 +
-                        NEW_LINE + "> Thanks for using ImageEditor!" +
-                        NEW_LINE,
+                        NEW_LINE + "> Thanks for using ImageEditor!" + NEW_LINE,
                 this.log.toString());
       }
     }
@@ -259,7 +260,7 @@ public class ImageEditorTextControllerTest {
   @Test
   public void greyScale() {
     String[] spellings = {"Grayscale", "GrAyScAle", "greyscale", "gREYSCALE", "grey", "GREY",
-                          "gray", "GrAY"};
+            "gray", "GrAY"};
     String[] typesOfGreyscale = {"red", "ReD", "green", "GReeN", "blue", "BlUE", "value", "VaLuE"
             , "intensity", "INtENsITy", "luma", "Luma"};
     String resultingMessageHalf2 = "Grayscale successful!";
@@ -340,9 +341,9 @@ public class ImageEditorTextControllerTest {
   public void testHangingInCommand() {
 
     String[] commandString = {"load", "LoAd", "save", "SaVE", "flip", "fLIp", "gray", "GrAY",
-                              "grey", "GREY", "grayscale", "GRaYscALe", "greyscale", "GReYSCAle",
-                              "brighten",
-                              "BRIghTEn", "darken", "DARKEn"};
+            "grey", "GREY", "grayscale", "GRaYscALe", "greyscale", "GReYSCAle",
+            "brighten",
+            "BRIghTEn", "darken", "DARKEn"};
 
     for (String command : commandString) {
       Appendable output = new StringBuilder();
