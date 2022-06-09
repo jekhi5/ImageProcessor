@@ -16,8 +16,8 @@ import model.pixel.PixelImpl;
  * several components that can be considered for this grayscale. These are: {@code red},
  * {@code green}, {@code blue}, {@code value}, {@code intensity}, and {@code luma}. These components
  * are case-insensitive.
- * <p>
- * Command syntax: {@code grayscale <component> <original-image-name> <new-image-name>}
+ *
+ * <p>Command syntax: {@code grayscale <component> <original-image-name> <new-image-name>}
  *
  * @author emery
  * @created 2022-06-06

@@ -5,14 +5,13 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
-import commands.Brighten;
 import commands.Darken;
 import commands.ImageEditorCommand;
 
 import static org.junit.Assert.assertEquals;
 
 /**
- * Tests for Darken.
+ * Tests for {@link Darken}.
  */
 public class DarkenTest extends AbstractCommandTest {
   private static final List<ImageEditorCommand> COMMAND_FORMS = Arrays.asList(

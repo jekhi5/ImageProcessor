@@ -15,6 +15,12 @@ import view.ImageEditorTextView;
  * @created 2022-06-05
  */
 public class TextRunner {
+
+  /**
+   * The main method that runs the program.
+   *
+   * @param args are the command line arguments
+   */
   public static void main(String[] args) {
     if (args.length == 0) {
       throw new RuntimeException("You need to specify the mode! Read the README!");

@@ -17,8 +17,8 @@ import static org.junit.Assert.assertEquals;
  * Tests for LoadImage.
  */
 public class LoadTest {
-  ImageEditorModel model;
   static String SLASH = System.getProperty("file.separator");
+  ImageEditorModel model;
 
   @Before
   public void init() {

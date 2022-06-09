@@ -6,13 +6,12 @@ import java.util.List;
 import java.util.Scanner;
 
 import commands.Brighten;
-import commands.Darken;
 import commands.ImageEditorCommand;
 
 import static org.junit.Assert.assertEquals;
 
 /**
- * Tests for Brighten.
+ * Tests for {@link Brighten}.
  */
 public class BrightenTest extends AbstractCommandTest {
   private static final List<ImageEditorCommand> COMMAND_FORMS = Arrays.asList(

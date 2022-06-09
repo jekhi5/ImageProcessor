@@ -8,9 +8,7 @@ import model.image.Image;
 /**
  * A command that flips an image in the horizontal or vertical dimension.
  *
- * <p>
- * <p>
- * Command syntax: {@code flip <mode> <original-image-name> <new-image-name>}.
+ * <p>Command syntax: {@code flip <mode> <original-image-name> <new-image-name>}.
  *
  * @author emery
  * @created 2022-06-06
@@ -60,11 +58,11 @@ public class Flip extends AbstractCommand {
     // loop through every pixel and swap them!
     for (int r = 0; r < vertBound; r += 1) {
       for (int c = 0; c < horizBound; c += 1) {
-        //System.out.println("r: " + r + ", c: " + c);
+
 
         if (args[0].equalsIgnoreCase("horizontal")) {
           swapPixels(orig, r, c, r, orig.getWidth() - 1 - c);
-          //System.out.println(String.format("r1: %d, c1: %d, r2: %d, c2: %d", r, c, r, orig.getWidth() - 1 - c));
+
         } else {
           swapPixels(orig, r, c, orig.getHeight() - 1 - r, c);
         }

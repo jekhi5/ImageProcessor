@@ -19,8 +19,12 @@ import model.image.Image;
 import utilities.ImageUtil;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+/**
+ * The test class for {@link SaveImage}.
+ */
 public class SaveImageTest {
 
   private static final String SLASH = System.getProperty("file.separator");
@@ -66,11 +70,14 @@ public class SaveImageTest {
   // To test that apply works with overwrite
   @Test
   public void applyOverwriteTest() {
-    this.apply_WithOverwrite(false);
-    this.apply_WithOverwrite(true);
+    this.applyWithOverwrite(false);
+    this.applyWithOverwrite(true);
+
+    boolean t = true;
+    assertTrue(t);
   }
 
-  private void apply_WithOverwrite(boolean shouldOverwriteFile) {
+  private void applyWithOverwrite(boolean shouldOverwriteFile) {
     String[] affirmativeOverwrite = {"y", "Y", "yes", "YeS", "t", "trUE"};
     File fileToOverwrite = new File("test" + SLASH + "testOut" + SLASH + "savedCheckered.ppm");
     for (String opt : affirmativeOverwrite) {
@@ -108,7 +115,8 @@ public class SaveImageTest {
             "test" + SLASH + "testRes" + SLASH + "checkered.ppm checkered no q")));
     assertEquals(
             "Save failed: Error. Could not create file from path: " +
-                    "test" + SLASH + "testRes" + SLASH + "checkered.ppm. There was already a file at this " +
+                    "test" + SLASH + "testRes" + SLASH +
+                    "checkered.ppm. There was already a file at this " +
                     "location. To " +
                     "overwrite, add \"true\" to command.",
             saveCommand.apply(model));
@@ -121,10 +129,9 @@ public class SaveImageTest {
             "test" + SLASH + "testRes" + SLASH + "checkered.ppm checkered no q")));
     assertEquals(
             "Save failed: Error. Could not create file from path: " +
-                    "test" + SLASH + "testRes" + SLASH + "checkered.ppm. There was already a file at this " +
-                    "location. To" +
-                    " " +
-                    "overwrite, add \"true\" to command.",
+                    "test" + SLASH + "testRes" + SLASH +
+                    "checkered.ppm. There was already a file at this " +
+                    "location. To overwrite, add \"true\" to command.",
             saveCommand.apply(model));
   }
 

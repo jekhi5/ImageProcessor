@@ -10,9 +10,7 @@ import utilities.ImageUtil;
  * Opens an image from a PPM file (specified by path) into the editor, where further commands can be
  * run on it. The given name is used to refer to it within the editor. All args are case-sensitive.
  *
- * </p>
- * <p>
- * Command syntax: {@code load <image-path> <image-name>}
+ * <p>Command syntax: {@code load <image-path> <image-name>}
  *
  * @author emery
  * @created 2022-06-06

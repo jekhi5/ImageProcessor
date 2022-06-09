@@ -165,9 +165,12 @@ public class ImageUtilTest {
 
 
     try {
-      ImageUtil.saveImage(((Image) new PPMImage(Arrays.asList(List.of(new PixelImpl(0, 0, 0,
-                      0)), List.of(new PixelImpl(0, 0, 0, 0))))), "res" + SLASH + "fileToOverwrite.ppm",
-              false);
+      ImageUtil.saveImage((
+                      (Image) new PPMImage(Arrays.asList(List.of(
+                                      new PixelImpl(0, 0, 0, 0)),
+                              List.of(
+                                      new PixelImpl(0, 0, 0, 0))))),
+              "res" + SLASH + "fileToOverwrite.ppm", false);
       fail("Expected IllegalArgumentException but didn't get it!");
     } catch (IllegalArgumentException e) {
       if (!toOverwrite.delete()) {

@@ -10,11 +10,11 @@ import java.util.function.Function;
 
 import commands.Brighten;
 import commands.Darken;
-import commands.SameImageCommand;
 import commands.Flip;
 import commands.Grayscale;
 import commands.ImageEditorCommand;
 import commands.LoadImage;
+import commands.SameImageCommand;
 import commands.SaveImage;
 import model.ImageEditorModel;
 import view.ImageEditorView;

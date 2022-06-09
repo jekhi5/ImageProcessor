@@ -10,7 +10,7 @@ import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.fail;
 
 /**
- * Tests for {@link model.pixel.PixelBuilder};
+ * Tests for {@link model.pixel.PixelBuilder}.
  *
  * @author emery
  * @created 2022-06-07
@@ -166,5 +166,5 @@ public abstract class PixelBuilderTest {
   }
 
   @Test
-  public abstract void build_Default();
+  public abstract void buildDefault();
 }

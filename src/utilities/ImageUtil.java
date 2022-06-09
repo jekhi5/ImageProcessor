@@ -27,15 +27,11 @@ import model.pixel.PixelImpl;
 public class ImageUtil {
 
   /**
-   * To create an {@link Image} object of the proper type based on the given path to the image.
-   * In order to create uniformity between many different file types, our program normalizes
-   * all colors to have minimum component values of 0, and maximum component values of 255.
-   * This has the following benefits:
-   * - uniformity
-   * - easy conversion to hexadecimal color codes
-   * - easier to work and do math with
-   * and the following cons:
-   * - loss of information in some file formats (uncommon)
+   * To create an {@link Image} object of the proper type based on the given path to the image. In
+   * order to create uniformity between many different file types, our program normalizes all colors
+   * to have minimum component values of 0, and maximum component values of 255. This has the
+   * following benefits: - uniformity - easy conversion to hexadecimal color codes - easier to work
+   * and do math with and the following cons: - loss of information in some file formats (uncommon)
    *
    * @param path is the path to the image
    * @return the newly created image
@@ -155,22 +151,18 @@ public class ImageUtil {
    * match the filetype that the image was originally loaded from, it may corrupt the file, and this
    * is on the user.
    *
-   * <p>
-   * <p>
-   * If {@code shouldOverwrite} is {@code true}:
+   * <p></p>If {@code shouldOverwrite} is {@code true}:
    * <ol>
    *   <li>this method will attempt to delete the file currently stored at the given path</li>
    *   <li>and then attempt to place the given image at the given path</li>
    * </ol>
-   * <p>
-   * If {code shouldOverwrite} is {@code false}:
+   *
+   * <p>If {code shouldOverwrite} is {@code false}:
    * <ol>
    *   <li>this method will attempt to place the given image at the given path</li>
    * </ol>
-   * <p>
-   * If any of these operations fail, the method will throw an IllegalArgumentException.
    *
-   * </p>
+   * <p>If any of these operations fail, the method will throw an IllegalArgumentException.
    *
    * @param image           is the image to store
    * @param path            is the path to store the image
@@ -198,7 +190,8 @@ public class ImageUtil {
     try {
       if (!file.createNewFile()) {
         throw new IllegalArgumentException("Error. Could not create file from path: " + path +
-                ". There was already a file at this location. To overwrite, add \"true\" to command.");
+                ". There was already a file at this location. " +
+                "To overwrite, add \"true\" to command.");
       }
     } catch (IOException e) {
       throw new IllegalArgumentException("Error. Bad path: " + path);

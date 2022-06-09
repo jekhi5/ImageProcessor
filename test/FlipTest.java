@@ -6,6 +6,9 @@ import java.util.Scanner;
 import commands.Flip;
 import commands.ImageEditorCommand;
 
+/**
+ * The test for the {@link Flip} command.
+ */
 public class FlipTest extends AbstractCommandTest {
 
   private static final List<ImageEditorCommand> COMMAND_FORMS =
@@ -28,6 +31,9 @@ public class FlipTest extends AbstractCommandTest {
 
   private static final String SUCCESSFUL_MESSAGE = "Flip successful!";
 
+  /**
+   * To construct a flip command test.
+   */
   public FlipTest() {
     super(COMMAND_FORMS, ORDER_OF_TYPES, ILLEGAL_FORMS, SUCCESSFUL_MESSAGE);
   }

@@ -8,6 +8,10 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotSame;
 
+
+/**
+ * The test class for {@link PixelImpl}.
+ */
 public class PixelImplTest {
 
   Pixel fullyVisibleWhite;

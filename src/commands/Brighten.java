@@ -11,8 +11,8 @@ import model.pixel.PixelImpl;
  * A command that brightens the original image by a given amount, storing the resultant image under
  * a new name. It should be given a positive integer value between 0 and 255, which is adds to each
  * color component of each pixel in the image. Brightening cannot increase values above 255.
- * <p>
- * Command syntax: {@code brighten <amount> <original-image-name> <new-image-name>}.
+ *
+ * <p>Command syntax: {@code brighten <amount> <original-image-name> <new-image-name>}.
  *
  * @author emery
  * @created 2022-06-07

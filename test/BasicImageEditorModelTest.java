@@ -13,6 +13,9 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+/**
+ * The test class for {@link BasicImageEditorModel}.
+ */
 public class BasicImageEditorModelTest {
 
   Image fullyRedPPM;

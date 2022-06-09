@@ -14,7 +14,7 @@ public class PixelImplBuilderTest extends PixelBuilderTest {
   }
 
   @Override
-  public void build_Default() {
+  public void buildDefault() {
     assertEquals(new PixelImpl(0, 0, 0, 255), builder.build());
   }
 }

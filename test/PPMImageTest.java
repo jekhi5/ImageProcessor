@@ -30,6 +30,7 @@ import static org.junit.Assert.assertTrue;
  */
 public class PPMImageTest {
 
+  private static final String SLASH = System.getProperty("file.separator");
   private Pixel tl;
   private Pixel tm;
   private Pixel tr;
@@ -37,8 +38,6 @@ public class PPMImageTest {
   private Pixel bm;
   private Pixel br;
   private List<List<Pixel>> grid;
-
-  private static final String SLASH = System.getProperty("file.separator");
 
   @Before
   public void init() {
@@ -51,10 +50,6 @@ public class PPMImageTest {
     grid = new ArrayList<>();
     grid.add(Arrays.asList(tl, tm, tr));
     grid.add(Arrays.asList(bl, bm, br));
-  }
-
-  @Test
-  public void Constructor() {
   }
 
   @Test(expected = IllegalArgumentException.class)

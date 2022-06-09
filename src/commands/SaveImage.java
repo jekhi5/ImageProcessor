@@ -13,9 +13,7 @@ import utilities.ImageUtil;
  * already stored at the given path. Case-insensitive values of "yes", "y", "true", or "t" overwrite
  * older files, if any. All other arguments are case-sensitive.
  *
- * </p>
- * <p>
- * Command syntax: {@code save <image-path> <image-name> <shouldOverwrite>}
+ * <p>Command syntax: {@code save <image-path> <image-name> <shouldOverwrite>}
  *
  * @author emery
  * @created 2022-06-06

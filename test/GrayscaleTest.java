@@ -6,6 +6,9 @@ import java.util.Scanner;
 import commands.Grayscale;
 import commands.ImageEditorCommand;
 
+/**
+ * The test class for the {@link Grayscale} command.
+ */
 public class GrayscaleTest extends AbstractCommandTest {
 
   private static final List<ImageEditorCommand> COMMAND_FORMS =
@@ -36,6 +39,9 @@ public class GrayscaleTest extends AbstractCommandTest {
 
   private static final String SUCCESSFUL_MESSAGE = "Grayscale successful!";
 
+  /**
+   * To construct a grayscale command test.
+   */
   public GrayscaleTest() {
     super(COMMAND_FORMS, ORDER_OF_TYPES, ILLEGAL_FORMS, SUCCESSFUL_MESSAGE);
   }

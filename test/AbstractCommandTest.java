@@ -17,7 +17,7 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 /**
- * Tests for all commands.
+ * Tests for all {@link ImageEditorCommand}s.
  */
 public abstract class AbstractCommandTest {
 
@@ -33,17 +33,22 @@ public abstract class AbstractCommandTest {
   protected static final Image VALUE_CHECKERED =
           ImageUtil.createImageFromPath("test" + SLASH + "testRes" + SLASH + "checkered_value.ppm");
   protected static final Image INTENSITY_CHECKERED =
-          ImageUtil.createImageFromPath("test" + SLASH + "testRes" + SLASH + "checkered_intensity.ppm");
+          ImageUtil.createImageFromPath(
+                  "test" + SLASH + "testRes" + SLASH + "checkered_intensity.ppm");
   protected static final Image LUMA_CHECKERED =
           ImageUtil.createImageFromPath("test" + SLASH + "testRes" + SLASH + "checkered_luma.ppm");
   protected static final Image BRIGHTEN_CHECKERED =
-          ImageUtil.createImageFromPath("test" + SLASH + "testRes" + SLASH + "checkered_brighten_100.ppm");
+          ImageUtil.createImageFromPath(
+                  "test" + SLASH + "testRes" + SLASH + "checkered_brighten_100.ppm");
   protected static final Image DARKEN_CHECKERED =
-          ImageUtil.createImageFromPath("test" + SLASH + "testRes" + SLASH + "checkered_darken_150.ppm");
+          ImageUtil.createImageFromPath(
+                  "test" + SLASH + "testRes" + SLASH + "checkered_darken_150.ppm");
   protected static final Image HORIZONTAL_CHECKERED =
-          ImageUtil.createImageFromPath("test" + SLASH + "testRes" + SLASH + "checkered_horizontal_flip.ppm");
+          ImageUtil.createImageFromPath(
+                  "test" + SLASH + "testRes" + SLASH + "checkered_horizontal_flip.ppm");
   protected static final Image VERTICAL_CHECKERED =
-          ImageUtil.createImageFromPath("test" + SLASH + "testRes" + SLASH + "checkered_vertical_flip.ppm");
+          ImageUtil.createImageFromPath(
+                  "test" + SLASH + "testRes" + SLASH + "checkered_vertical_flip.ppm");
   // The images in the test resources folder
   protected final Map<String, Image> testResourceImages;
   // This is all different forms of a given command (IE a red grayscale, a blue grayscale, etc)
@@ -56,6 +61,17 @@ public abstract class AbstractCommandTest {
   protected String successfulMessage;
   protected ImageEditorModel model;
 
+  /**
+   * To construct a test for an arbitrary command.
+   *
+   * @param commandForms      the different forms that the command could be used in (vertical, red,
+   *                          100, etc)
+   * @param orderOfTypes      the order that the types of commands are listed in
+   * @param illegalForms      examples of illegal types that are not allowed to be used with the
+   *                          command
+   * @param successfulMessage the message that the command returns when the operation is fully
+   *                          successful
+   */
   public AbstractCommandTest(List<ImageEditorCommand> commandForms, List<String> orderOfTypes,
                              List<ImageEditorCommand> illegalForms, String successfulMessage) {
     this.commandForms = commandForms;
@@ -80,8 +96,9 @@ public abstract class AbstractCommandTest {
   @Before
   public void init() {
     Map<String, Image> editorImages = new HashMap<>();
-    editorImages.put("checkered", ImageUtil.createImageFromPath("test" + SLASH + "testRes" + SLASH + "checkered" +
-            ".ppm"));
+    editorImages.put("checkered",
+            ImageUtil.createImageFromPath("test" + SLASH + "testRes" + SLASH + "checkered" +
+                    ".ppm"));
 
     model = new BasicImageEditorModel(editorImages);
   }
@@ -94,7 +111,8 @@ public abstract class AbstractCommandTest {
         cmd.apply(null);
         fail("Error. Should have thrown IllegalArgumentException but did not.");
       } catch (IllegalArgumentException e) {
-        assertTrue(true);
+        boolean t = true;
+        assertTrue(t);
       }
     }
   }

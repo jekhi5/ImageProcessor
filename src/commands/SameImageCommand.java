@@ -9,8 +9,8 @@ import model.image.Image;
  * A debug command. With overwriting and image manipulation, it can be difficult to tell if you've
  * made a change to an image or not. This command allows the user to "debug," by comparing two
  * images.
- * <p>
- * Command syntax: {@code same <image-name> <image-name>}
+ *
+ * <p>Command syntax: {@code same <image-name> <image-name>}
  *
  * @author emery
  * @created 2022-06-05
