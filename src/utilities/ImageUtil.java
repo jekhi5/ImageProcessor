@@ -105,7 +105,7 @@ public class ImageUtil {
       throw new IllegalArgumentException("Error. The given image has a width or height of 0.");
     }
 
-    int maxValue = sc.nextInt();
+    sc.nextInt(); // max value
 
     for (int i = 0; i < height; i++) {
       List<Pixel> curRow = new ArrayList<>();

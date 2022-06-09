@@ -37,18 +37,21 @@ public class ImageEditorTextControllerTest {
   ImageEditorController controller;
   Appendable log;
 
+  static final String NEW_LINE = System.lineSeparator();
+  private static final String SLASH = System.getProperty("file.separator");
+
   String initialMessage =
-          "Welcome to ImageEditor! Please enter a command:\n> ";
-  String finalMessage = "> Thanks for using ImageEditor!\n";
+          "Welcome to ImageEditor! Please enter a command:" + NEW_LINE + "> ";
+  String finalMessage = "> Thanks for using ImageEditor!" + NEW_LINE;
 
   String loadingCheckeredImage =
-          initialMessage + "addImage(checkered,\n" + ImageUtil.createImageFromPath("res" +
-                  "" + slash + "CheckeredBlackBottom_3x4.ppm").toString() +
-                  ")\nSuccessfully loaded image \"checkered\" from res" +
-                  slash + "CheckeredBlackBottom_3x4.ppm!\n";
-  String loadCheckeredBottom = "load res" + slash + "CheckeredBlackBottom_3x4.ppm checkered ";
+          initialMessage + "addImage(checkered," + NEW_LINE +
+                  ImageUtil.createImageFromPath("res" + SLASH + "CheckeredBlackBottom_3x4.ppm")
+                          .toString() + ")" + NEW_LINE +
+                  "Successfully loaded image \"checkered\" from res" +
+                  SLASH + "CheckeredBlackBottom_3x4.ppm!" + NEW_LINE;
+  String loadCheckeredBottom = "load res" + SLASH + "CheckeredBlackBottom_3x4.ppm checkered ";
 
-  private static final String slash = System.getProperty("file.separator");
 
   @Before
   public void init() {
@@ -84,10 +87,12 @@ public class ImageEditorTextControllerTest {
 
     assertEquals("", this.log.toString());
     controller.launch();
-    assertEquals(initialMessage + "addImage(checkered,\n" + ImageUtil.createImageFromPath("res" +
-                    "" + slash + "CheckeredBlackBottom_3x4.ppm").toString() + ")" +
-                    "\nSuccessfully loaded image " +
-                    "\"checkered\" from res" + slash + "CheckeredBlackBottom_3x4.ppm!\n" + finalMessage,
+    assertEquals(initialMessage + "addImage(checkered," + NEW_LINE + ImageUtil.createImageFromPath(
+                    "res" +
+                            "" + SLASH + "CheckeredBlackBottom_3x4.ppm").toString() + ")" +
+                    NEW_LINE + "Successfully loaded image " +
+                    "\"checkered\" from res" + SLASH + "CheckeredBlackBottom_3x4.ppm!" + NEW_LINE +
+                    finalMessage,
             this.log.toString());
   }
 
@@ -95,15 +100,15 @@ public class ImageEditorTextControllerTest {
   @Test
   public void loadingImageWithOverwrite() {
     Reader reader = new StringReader(
-            loadCheckeredBottom + "load res" + slash + "LemonChiffon_1x1.ppm image quit");
+            loadCheckeredBottom + "load res" + SLASH + "LemonChiffon_1x1.ppm image quit");
     controller = new ImageEditorTextController(model, view, reader);
-    Image image2 = ImageUtil.createImageFromPath("res" + slash + "LemonChiffon_1x1.ppm");
+    Image image2 = ImageUtil.createImageFromPath("res" + SLASH + "LemonChiffon_1x1.ppm");
 
     assertEquals("", this.log.toString());
     controller.launch();
-    assertEquals(loadingCheckeredImage + "> addImage(image,\n" + image2.toString() +
-            ")\nSuccessfully loaded image \"image\" from res" + slash + "LemonChiffon_1x1" +
-            ".ppm!\n" +
+    assertEquals(loadingCheckeredImage + "> addImage(image," + NEW_LINE + image2.toString() +
+            ")" + NEW_LINE + "Successfully loaded image \"image\" from res" + SLASH +
+            "LemonChiffon_1x1.ppm!" + NEW_LINE +
             finalMessage, this.log.toString());
   }
 
@@ -112,18 +117,20 @@ public class ImageEditorTextControllerTest {
   public void saving_NotOverwriting() {
     Reader reader =
             new StringReader(
-                    loadCheckeredBottom + " save testOut" + slash +
+                    loadCheckeredBottom + " save testOut" + SLASH +
                             "checkered_saved.ppm checkered false exit");
     controller = new ImageEditorTextController(model, view, reader);
 
     assertEquals("", this.log.toString());
     controller.launch();
-    assertEquals(loadingCheckeredImage + "> getImage(checkered)\nImage successfully saved to " +
-            "testOut" + slash + "checkered_saved.ppm\n" + finalMessage, this.log.toString());
+    assertEquals(
+            loadingCheckeredImage + "> getImage(checkered)" + NEW_LINE + "Image successfully " +
+                    "saved to testOut" + SLASH + "checkered_saved.ppm" + NEW_LINE + finalMessage,
+            this.log.toString());
 
 
     // CLEANUP
-    if (!new File("testOut" + slash + "checkered_saved.ppm").delete()) {
+    if (!new File("testOut" + SLASH + "checkered_saved.ppm").delete()) {
       fail("File was not deleted! Please try again!");
     }
   }
@@ -139,7 +146,7 @@ public class ImageEditorTextControllerTest {
   }
 
   private void savingHandling(String overwriteCommand) {
-    File tempFile = new File("testOut" + slash + "tempFile.ppm");
+    File tempFile = new File("testOut" + SLASH + "tempFile.ppm");
     try {
       if (!tempFile.createNewFile()) {
         fail("Temp file wasn't created!");
@@ -150,18 +157,19 @@ public class ImageEditorTextControllerTest {
 
 
     Reader reader =
-            new StringReader(loadCheckeredBottom + " save testOut" + slash + "tempFile.ppm " +
+            new StringReader(loadCheckeredBottom + " save testOut" + SLASH + "tempFile.ppm " +
                     "checkered " + overwriteCommand + " exit");
     controller = new ImageEditorTextController(model, view, reader);
 
     assertEquals("", this.log.toString());
     controller.launch();
-    assertEquals(loadingCheckeredImage + "> getImage(checkered)\nImage successfully saved to " +
-            "testOut" + slash + "tempFile.ppm\n" + finalMessage, this.log.toString());
+    assertEquals(loadingCheckeredImage + "> getImage(checkered)" + NEW_LINE +
+            "Image successfully saved to testOut" + SLASH + "tempFile.ppm" + NEW_LINE +
+            finalMessage, this.log.toString());
 
 
     // CLEANUP
-    if (!new File("testOut" + slash + "tempFile.ppm").delete()) {
+    if (!new File("testOut" + SLASH + "tempFile.ppm").delete()) {
       fail("File was not deleted! Please try again!");
     }
   }
@@ -170,7 +178,7 @@ public class ImageEditorTextControllerTest {
 
     ImageEditorModel tempModel = new BasicImageEditorModel();
     tempModel.addImage("pre-op", ImageUtil.createImageFromPath("res"
-            + slash + "CheckeredBlackBottom_3x4.ppm"));
+            + SLASH + "CheckeredBlackBottom_3x4.ppm"));
 
     for (String typeOfCommand : spellings) {
       for (String formOfCommand : types) {
@@ -180,9 +188,13 @@ public class ImageEditorTextControllerTest {
 
         assertEquals("", this.log.toString());
         runCommand(typeOfCommand, formOfCommand);
-        assertEquals(loadingCheckeredImage + "> getImage(checkered)\naddImage" +
-                "(checkered,\n" + tempModel.getImage("post-op").toString() + ")\n" +
-                resultingMessageHalf2 + "\n> Thanks for using ImageEditor!\n", this.log.toString());
+        assertEquals(
+                loadingCheckeredImage + "> getImage(checkered)" + NEW_LINE + "addImage(checkered," +
+                        NEW_LINE + tempModel.getImage("post-op").toString() + ")" +
+                        NEW_LINE +
+                        resultingMessageHalf2 + NEW_LINE + "> Thanks for using ImageEditor!" +
+                        NEW_LINE,
+                this.log.toString());
       }
     }
   }
@@ -278,8 +290,8 @@ public class ImageEditorTextControllerTest {
 
     assertEquals("", this.log.toString());
     controller.launch();
-    assertEquals(initialMessage + "Invalid command: \"hello\". Please try again.\n" +
-                    "> Invalid command: \"world\". Please try again.\n" + finalMessage,
+    assertEquals(initialMessage + "Invalid command: \"hello\". Please try again." + NEW_LINE +
+                    "> Invalid command: \"world\". Please try again." + NEW_LINE + finalMessage,
             this.log.toString());
   }
 
@@ -342,7 +354,7 @@ public class ImageEditorTextControllerTest {
     @Override
     public Image getImage(String name) throws IllegalArgumentException {
       try {
-        this.log.append("getImage(").append(name).append(")").append("\n");
+        this.log.append("getImage(").append(name).append(")").append("" + NEW_LINE);
       } catch (IOException e) {
         this.log = new StringBuilder("ERROR APPENDING IN getImage()!!");
       }
@@ -352,8 +364,10 @@ public class ImageEditorTextControllerTest {
     @Override
     public void addImage(String name, Image image) throws IllegalArgumentException {
       try {
-        this.log.append("addImage(").append(name).append(",\n").append(image.toString()).append(")")
-                .append("\n");
+        this.log.append("addImage(").append(name).append("," + NEW_LINE).append(image.toString())
+                .append(
+                        ")")
+                .append("" + NEW_LINE);
       } catch (IOException e) {
         this.log = new StringBuilder("ERROR APPENDING IN addImage()!!");
       }
