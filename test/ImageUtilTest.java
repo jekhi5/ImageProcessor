@@ -70,12 +70,12 @@ public class ImageUtilTest {
   @Test(expected = IllegalArgumentException.class)
   public void loadImage_BadName() {
     // this test fails if you create a file called "bungus.ppm"
-    ImageUtil.createImageFromPath("testRes" + SLASH + "bungus.ppm");
+    ImageUtil.createImageFromPath("test" + SLASH + "testRes" + SLASH + "bungus.ppm");
   }
 
   @Test(expected = IllegalArgumentException.class)
   public void loadImage_BadExtension() {
-    ImageUtil.createImageFromPath("testRes" + SLASH + "dummy.txt");
+    ImageUtil.createImageFromPath("test" + SLASH + "testRes" + SLASH + "dummy.txt");
   }
 
   @Test(expected = IllegalArgumentException.class)
@@ -86,13 +86,14 @@ public class ImageUtilTest {
 
   @Test
   public void createImageFromPathReadingPPM() {
-    Image imgLoaded = ImageUtil.createImageFromPath("testRes" + SLASH + "FullyBlue_3x3.ppm");
+    Image imgLoaded =
+            ImageUtil.createImageFromPath("test" + SLASH + "testRes" + SLASH + "FullyBlue_3x3.ppm");
     assertEquals(blue, imgLoaded);
   }
 
   @Test(expected = IllegalArgumentException.class)
   public void saveImage_NullImage() {
-    ImageUtil.saveImage(null, "testRes" + SLASH + "out.ppm", true);
+    ImageUtil.saveImage(null, "test" + SLASH + "testRes" + SLASH + "out.ppm", true);
   }
 
   @Test(expected = IllegalArgumentException.class)
