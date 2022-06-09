@@ -4,19 +4,16 @@ import org.junit.Test;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.Reader;
 import java.io.StringReader;
 import java.util.Objects;
 import java.util.Random;
+import java.util.Scanner;
 
+import commands.ImageEditorCommand;
 import commands.SaveImage;
-import controller.ImageEditorController;
-import controller.ImageEditorTextController;
 import model.BasicImageEditorModel;
 import model.ImageEditorModel;
 import utilities.ImageUtil;
-import view.ImageEditorTextView;
-import view.ImageEditorView;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
@@ -26,15 +23,10 @@ public class SaveImageTest {
   private static final String SLASH = System.getProperty("file.separator");
 
   ImageEditorModel model;
-  ImageEditorView view;
 
   @Before
   public void init() {
     this.model = new BasicImageEditorModel();
-    view = new ImageEditorTextView(new StringBuilder());
-    Reader reader = new StringReader("load testRes" + SLASH + "checkered.ppm checkered");
-    ImageEditorController controller = new ImageEditorTextController(model, view, reader);
-    controller.launch();
   }
 
   @After
@@ -56,15 +48,13 @@ public class SaveImageTest {
     // Can be anything other than affirmative
     String negativeOverwrite = new Random().nextFloat() + "";
 
-    Reader reader = new StringReader(
-            "save test" + SLASH + "testOut" + SLASH + "savedCheckered.ppm checkered " +
-                    negativeOverwrite + "q");
-    ImageEditorController controller = new ImageEditorTextController(this.model, this.view, reader);
-    controller.launch();
+    ImageEditorCommand saveCommand =
+            new SaveImage(new Scanner(new StringReader("test" + SLASH + "testOut" + SLASH +
+                    "savedChecker.ppm " + negativeOverwrite + " q")));
+    saveCommand.apply(this.model);
 
     assertEquals(ImageUtil.createImageFromPath("test" + SLASH + "testOut" + SLASH +
-                    "savedCheckered.ppm"),
-            this.model.getImage("checkered"));
+            "savedCheckered.ppm"), this.model.getImage("checkered"));
 
   }
 
@@ -89,18 +79,12 @@ public class SaveImageTest {
         }
       }
 
+      ImageEditorCommand saveCommand =
+              new SaveImage(new Scanner(new StringReader("test" + SLASH + "testOut" + SLASH +
+                      "savedCheckered.ppm checkered " + opt + " q")));
 
-      Reader reader = new StringReader(
-              "save test" + SLASH + "testOut" + SLASH + "savedCheckered.ppm checkered " + opt +
-                      " q");
-      ImageEditorController controller =
-              new ImageEditorTextController(this.model, this.view, reader);
-      controller.launch();
-
-      assertEquals(ImageUtil.createImageFromPath("test" + SLASH + "testOut" + SLASH +
-                      "savedCheckered.ppm"),
+      assertEquals(ImageUtil.createImageFromPath("res" + SLASH + "savedCheckered.ppm"),
               this.model.getImage("checkered"));
-
 
       if (shouldOverwriteFile && !fileToOverwrite.delete()) {
         fail("File not deleted! Oops!");
