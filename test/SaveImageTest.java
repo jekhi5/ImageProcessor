@@ -69,6 +69,7 @@ public class SaveImageTest {
     String[] affirmativeOverwrite = {"y", "Y", "yes", "YeS", "t", "trUE"};
     File fileToOverwrite = new File("test" + SLASH + "testOut" + SLASH + "savedCheckered.ppm");
     for (String opt : affirmativeOverwrite) {
+      this.init();
       if (shouldOverwriteFile) {
         try {
           if (!fileToOverwrite.createNewFile()) {
@@ -82,8 +83,10 @@ public class SaveImageTest {
       ImageEditorCommand saveCommand =
               new SaveImage(new Scanner(new StringReader("test" + SLASH + "testOut" + SLASH +
                       "savedCheckered.ppm checkered " + opt + " q")));
+      saveCommand.apply(this.model);
 
-      assertEquals(ImageUtil.createImageFromPath("res" + SLASH + "savedCheckered.ppm"),
+      assertEquals(ImageUtil.createImageFromPath("test" + SLASH + "testOut" + SLASH +
+              "savedCheckered.ppm"),
               this.model.getImage("checkered"));
 
       if (shouldOverwriteFile && !fileToOverwrite.delete()) {
