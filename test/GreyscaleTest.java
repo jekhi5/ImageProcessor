@@ -1,62 +1,46 @@
-import org.junit.Test;
-
-import java.io.Reader;
 import java.io.StringReader;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 import commands.Grayscale;
-import controller.ImageEditorController;
-import controller.ImageEditorTextController;
-import model.BasicImageEditorModel;
-import model.ImageEditorModel;
-import view.ImageEditorTextView;
-import view.ImageEditorView;
+import commands.ImageEditorCommand;
 
-public class GreyscaleTest {
+public class GreyscaleTest extends AbstractCommandTest {
+  private static final List<ImageEditorCommand> COMMAND_FORMS =
+          Arrays.asList(
+                  new Grayscale(new Scanner(new StringReader("red checkered red_checkered"))),
+                  new Grayscale(new Scanner(new StringReader("ReD checkered red_checkered"))),
+                  new Grayscale(new Scanner(new StringReader("green checkered green_checkered"))),
+                  new Grayscale(new Scanner(new StringReader("GReEn checkered green_checkered"))),
+                  new Grayscale(new Scanner(new StringReader("blue checkered blue_checkered"))),
+                  new Grayscale(new Scanner(new StringReader("blUE checkered blue_checkered"))),
+                  new Grayscale(new Scanner(new StringReader("value checkered value_checkered"))),
+                  new Grayscale(new Scanner(new StringReader("vAluE checkered value_checkered"))),
+                  new Grayscale(
+                          new Scanner(new StringReader("intensity checkered intensity_checkered"))),
+                  new Grayscale(
+                          new Scanner(new StringReader("intEnSIty checkered intensity_checkered"))),
+                  new Grayscale(new Scanner(new StringReader("luma checkered luma_checkered"))),
+                  new Grayscale(new Scanner(new StringReader("LUMA checkered luma_checkered"))));
 
+  private static final List<String> ORDER_OF_TYPES = Arrays.asList("red", "red", "green", "green"
+          , "blue", "blue", "value", "value", "intensity", "intensity", "luma", "luma");
 
-  // Testing constructor w/ null scanner
-  @Test(expected = IllegalArgumentException.class)
-  public void constructor_NullScanner() {
+  private static final List<ImageEditorCommand> ILLEGAL_FORMS =
+          Arrays.asList(new Grayscale(new Scanner(new StringReader("ReD NOT_AN_IMAGE " +
+                          "wont-reach-this-argument"))),
+                  new Grayscale(new Scanner(new StringReader("purple NOT_AN_IMAGE " +
+                          "wont-reach-this-argument"))));
+
+  private static final String SUCCESSFUL_MESSAGE = "Grayscale successful!";
+
+  public GreyscaleTest() {
+    super(COMMAND_FORMS, ORDER_OF_TYPES, ILLEGAL_FORMS, SUCCESSFUL_MESSAGE);
+  }
+
+  @Override
+  protected void getNullCommand() {
     new Grayscale(null);
   }
-
-  // Testing apply w/ null model
-  @Test(expected = IllegalArgumentException.class)
-  public void apply_NullModel() {
-    new Grayscale(new Scanner(System.in)).apply(null);
-  }
-
-  // Testing apply w/ valid model
-  @Test
-  public void apply() {
-    ImageEditorModel model = new BasicImageEditorModel();
-    ImageEditorView view = new ImageEditorTextView();
-    Reader reader = new StringReader("load res/CheckeredBlackBottom_3x4.ppm checkered\n" +
-            "flip vertical checkered checkered_vertical_flip\n" +
-            "flip horizontal checkered checkered_horizontal_flip\n" +
-            "gray red checkered checkered_red\n" +
-            "gray green checkered checkered_green\n" +
-            "gray blue checkered checkered_blue\n" +
-            "gray value checkered checkered_value\n" +
-            "gray intensity checkered checkered_intensity\n" +
-            "gray luma checkered checkered_luma\n" +
-            "brighten 100 checkered checkered_brighten_100\n" +
-            "darken 100 checkered checkered_darken_100\n" +
-            "save testOut/checkered_vertical_flip.ppm checkered_vertical_flip y\n" +
-            "save testOut/checkered_horizontal_flip.ppm checkered_horizontal_flip y\n" +
-            "save testOut/checkered_red.ppm checkered_red y\n" +
-            "save testOut/checkered_green.ppm checkered_green y\n" +
-            "save testOut/checkered_blue.ppm checkered_blue y\n" +
-            "save testOut/checkered_value.ppm checkered_value y\n" +
-            "save testOut/checkered_intensity.ppm checkered_intensity y\n" +
-            "save testOut/checkered_luma.ppm checkered_luma y\n" +
-            "save testOut/checkered_brighten_100.ppm checkered_brighten_100 y\n" +
-            "save testOut/checkered_darken_100.ppm checkered_darken_100 y");
-    ImageEditorController controller = new ImageEditorTextController(model, view, reader);
-    controller.launch();
-
-    //Scanner scanner = new Scanner(new StringReader(""))
-  }
-
 }
