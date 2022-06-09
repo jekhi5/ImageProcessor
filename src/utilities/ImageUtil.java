@@ -16,6 +16,7 @@ import java.util.function.Function;
 import model.image.Image;
 import model.image.PPMImage;
 import model.pixel.Pixel;
+import model.pixel.PixelBuilder;
 import model.pixel.PixelImpl;
 
 
@@ -27,6 +28,14 @@ public class ImageUtil {
 
   /**
    * To create an {@link Image} object of the proper type based on the given path to the image.
+   * In order to create uniformity between many different file types, our program normalizes
+   * all colors to have minimum component values of 0, and maximum component values of 255.
+   * This has the following benefits:
+   * - uniformity
+   * - easy conversion to hexadecimal color codes
+   * - easier to work and do math with
+   * and the following cons:
+   * - loss of information in some file formats (uncommon)
    *
    * @param path is the path to the image
    * @return the newly created image
@@ -105,7 +114,7 @@ public class ImageUtil {
       throw new IllegalArgumentException("Error. The given image has a width or height of 0.");
     }
 
-    sc.nextInt(); // max value
+    int maxValue = sc.nextInt(); // max value
 
     for (int i = 0; i < height; i++) {
       List<Pixel> curRow = new ArrayList<>();
@@ -113,7 +122,22 @@ public class ImageUtil {
         int r = sc.nextInt();
         int g = sc.nextInt();
         int b = sc.nextInt();
-        curRow.add(new PixelImpl(r, g, b, 255));
+
+        if (Math.min(r, Math.min(g, b)) < 0 || maxValue >= 65536) {
+          throw new IllegalArgumentException("Invalid PPM file!");
+        }
+
+        // scale values into 255
+        // overflow is intended for the math to work
+        r = (int) (255 * Math.log(r + 1) / Math.log(Integer.MAX_VALUE + 1));
+        g = (int) (255 * Math.log(g + 1) / Math.log(Integer.MAX_VALUE + 1));
+        b = (int) (255 * Math.log(b + 1) / Math.log(Integer.MAX_VALUE + 1));
+
+        PixelBuilder build = new PixelImpl.PixelImplBuilder();
+        build.red(r);
+        build.green(g);
+        build.blue(b);
+        curRow.add(build.build());
       }
       resultingPixelGrid.add(curRow);
     }
