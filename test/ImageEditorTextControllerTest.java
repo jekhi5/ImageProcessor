@@ -364,9 +364,6 @@ public class ImageEditorTextControllerTest {
     }
   }
 
-  // TODO: Integration tests
-  // TODO: For every command show one argument being wrong in each location (can be same method)
-
 
   private static class MockModel implements ImageEditorModel {
 
