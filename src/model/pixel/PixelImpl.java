@@ -40,7 +40,10 @@ public class PixelImpl implements Pixel {
    *
    * @param pixel the pixel whose values will be copied into this pixel
    */
-  public PixelImpl(Pixel pixel) {
+  public PixelImpl(Pixel pixel) throws IllegalArgumentException {
+    if (pixel == null) {
+      throw new IllegalArgumentException("Pixel cannot be null.");
+    }
     this.red = pixel.getRed();
     this.green = pixel.getGreen();
     this.blue = pixel.getBlue();
@@ -108,11 +111,11 @@ public class PixelImpl implements Pixel {
    */
   @Override
   public boolean equals(Object other) {
-    if (other instanceof PixelImpl) {
-      return this.red == ((PixelImpl) other).red
-              && this.green == ((PixelImpl) other).green
-              && this.blue == ((PixelImpl) other).blue
-              && this.alpha == ((PixelImpl) other).alpha;
+    if (other instanceof Pixel) {
+      return this.getRed() == ((Pixel) other).getRed()
+              && this.getGreen() == ((Pixel) other).getGreen()
+              && this.getBlue() == ((Pixel) other).getBlue()
+              && this.getAlpha() == ((Pixel) other).getAlpha();
     } else {
       return false;
     }

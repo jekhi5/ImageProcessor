@@ -69,12 +69,14 @@ public class ImageUtil {
    * @throws IllegalArgumentException if there is a bad path, or the width or height of the image is
    *                                  less than 1
    */
-  public static PPMImage readPPM(String filename) throws IllegalArgumentException {
+  private static PPMImage readPPM(String filename) throws IllegalArgumentException {
     List<List<Pixel>> resultingPixelGrid = new ArrayList<>();
     Scanner sc;
 
+    FileInputStream fis;
     try {
-      sc = new Scanner(new FileInputStream(filename));
+      fis = new FileInputStream(filename);
+      sc = new Scanner(fis);
     } catch (FileNotFoundException e) {
       throw new IllegalArgumentException("File " + filename + " not found!");
     }
@@ -116,6 +118,12 @@ public class ImageUtil {
       resultingPixelGrid.add(curRow);
     }
 
+    try {
+      fis.close();
+    } catch (IOException e) {
+      throw new IllegalArgumentException(e);
+    }
+    sc.close();
     return new PPMImage(resultingPixelGrid);
   }
 
@@ -145,7 +153,7 @@ public class ImageUtil {
    * @param path            is the path to store the image
    * @param shouldOverwrite is a flag for whether this method should overwrite the file currently
    *                        stored at this location
-   * @throws IllegalArgumentException if the path is bad or any of the storing/deleting
+   * @throws IllegalArgumentException if the path is bad or any of the storing/deleting fails
    */
   public static void saveImage(Image image, String path, boolean shouldOverwrite)
           throws IllegalArgumentException {

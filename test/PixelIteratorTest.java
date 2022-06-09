@@ -1,10 +1,9 @@
-package model.image;
-
 import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import model.image.PixelIterator;
 import model.pixel.Pixel;
 import model.pixel.PixelImpl;
 

@@ -4,6 +4,8 @@ import model.pixel.Pixel;
 import model.pixel.PixelImpl;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertNotSame;
 
 public class PixelImplTest {
 
@@ -77,5 +79,46 @@ public class PixelImplTest {
   @Test(expected = IllegalArgumentException.class)
   public void badAlphaValue_TooLow() {
     new PixelImpl(5, 5, 5, -32);
+  }
+
+  @Test
+  public void pixelConstructor() {
+    Pixel p1 = new PixelImpl(1, 2, 3, 4);
+    Pixel p2 = new PixelImpl(p1);
+
+    assertEquals(p1, p2);
+    assertNotSame(p1, p2);
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void nullPixelConstructor() {
+    new PixelImpl(null);
+  }
+
+  @Test
+  public void testEquals() {
+    assertNotEquals(fullyVisibleBlack, fullyVisibleWhite);
+    assertNotEquals(fullyVisibleWhite, fullyVisibleBlack);
+
+    assertEquals(fullyVisibleWhite, fullyVisibleWhite);
+    Pixel anotherWhite = new PixelImpl(255, 255, 255, 255);
+    assertEquals(fullyVisibleWhite, anotherWhite);
+    assertEquals(anotherWhite, fullyVisibleWhite);
+
+    assertEquals(fullyVisibleWhite.hashCode(), anotherWhite.hashCode());
+    assertNotEquals(fullyVisibleWhite.hashCode(), fullyVisibleBlack.getAlpha());
+  }
+
+  @Test
+  public void testEqualsNonPixel() {
+    assertNotEquals(null, fullyVisibleBlack);
+    assertNotEquals("uwu", fullyVisibleWhite);
+    assertNotEquals(1, fullyVisibleWhite);
+  }
+
+  @Test
+  public void testHashCode() {
+    assertEquals(23549777, fullyVisibleWhite.hashCode());
+    assertEquals(15700112, fullyVisibleBlack.hashCode());
   }
 }
