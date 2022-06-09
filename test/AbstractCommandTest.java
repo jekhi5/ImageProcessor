@@ -39,7 +39,7 @@ public abstract class AbstractCommandTest {
   protected static final Image BRIGHTEN_CHECKERED =
           ImageUtil.createImageFromPath("testRes" + slash + "checkered_brighten_100.ppm");
   protected static final Image DARKEN_CHECKERED =
-          ImageUtil.createImageFromPath("testRes" + slash + "checkered_darken_100.ppm");
+          ImageUtil.createImageFromPath("testRes" + slash + "checkered_darken_150.ppm");
   protected static final Image HORIZONTAL_CHECKERED =
           ImageUtil.createImageFromPath("testRes" + slash + "checkered_horizontal_flip.ppm");
   protected static final Image VERTICAL_CHECKERED =
@@ -72,7 +72,7 @@ public abstract class AbstractCommandTest {
     this.testResourceImages.put("intensity", INTENSITY_CHECKERED);
     this.testResourceImages.put("luma", LUMA_CHECKERED);
     this.testResourceImages.put("100", BRIGHTEN_CHECKERED);
-    this.testResourceImages.put("100.0", DARKEN_CHECKERED);
+    this.testResourceImages.put("150", DARKEN_CHECKERED);
     this.testResourceImages.put("horizontal", HORIZONTAL_CHECKERED);
     this.testResourceImages.put("vertical", VERTICAL_CHECKERED);
   }

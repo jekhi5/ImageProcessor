@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import commands.Brighten;
+import commands.Darken;
 import commands.ImageEditorCommand;
 
 import static org.junit.Assert.assertEquals;
@@ -45,6 +46,13 @@ public class BrightenTest extends AbstractCommandTest {
     Scanner sc = new Scanner(new StringReader(" -1 checkered br-new-1"));
     String r = new Brighten(sc).apply(model);
     assertEquals("Brighten failed: amount must be positive, was: -1", r);
+  }
+
+  @Test
+  public void brightenNonInt() {
+    Scanner sc = new Scanner(new StringReader(" 10.2 checkered da-new-1"));
+    String r = new Brighten(sc).apply(model);
+    assertEquals("Brighten failed: amount must be a positive integer!", r);
   }
 
   @Test
