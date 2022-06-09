@@ -190,8 +190,7 @@ public class ImageEditorTextControllerTest {
         runCommand(typeOfCommand, formOfCommand);
         assertEquals(
                 loadingCheckeredImage + "> getImage(checkered)" + NEW_LINE + "addImage(checkered," +
-                        NEW_LINE + tempModel.getImage("post-op").toString() + ")" +
-                        NEW_LINE +
+                        NEW_LINE + tempModel.getImage("post-op").toString() + ")" + NEW_LINE +
                         resultingMessageHalf2 + NEW_LINE + "> Thanks for using ImageEditor!" +
                         NEW_LINE,
                 this.log.toString());
