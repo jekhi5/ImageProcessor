@@ -83,8 +83,8 @@ public abstract class AbstractCommandTest {
     this.testResourceImages.put("value", VALUE_CHECKERED);
     this.testResourceImages.put("intensity", INTENSITY_CHECKERED);
     this.testResourceImages.put("luma", LUMA_CHECKERED);
-    this.testResourceImages.put("brighten", BRIGHTEN_CHECKERED);
-    this.testResourceImages.put("darken", DARKEN_CHECKERED);
+    this.testResourceImages.put("100", BRIGHTEN_CHECKERED);
+    this.testResourceImages.put("100.0", DARKEN_CHECKERED);
     this.testResourceImages.put("horizontal", HORIZONTAL_CHECKERED);
     this.testResourceImages.put("vertical", VERTICAL_CHECKERED);
   }

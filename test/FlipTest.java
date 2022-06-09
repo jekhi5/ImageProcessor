@@ -22,9 +22,9 @@ public class FlipTest extends AbstractCommandTest {
           "horizontal", "HOriZOntAL");
 
   private static final List<ImageEditorCommand> ILLEGAL_FORMS =
-          Arrays.asList(new Grayscale(new Scanner(new StringReader("VerTiCaL NOT_AN_IMAGE " +
+          Arrays.asList(new Flip(new Scanner(new StringReader("VerTiCaL NOT_AN_IMAGE " +
                           "wont-reach-this-argument"))),
-                  new Grayscale(new Scanner(new StringReader("diagonal checkered " +
+                  new Flip(new Scanner(new StringReader("diagonal checkered " +
                           "wont-reach-this-argument"))));
 
   private static final String SUCCESSFUL_MESSAGE = "Flip successful!";

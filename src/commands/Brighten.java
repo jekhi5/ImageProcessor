@@ -12,7 +12,7 @@ import model.pixel.PixelImpl;
  * a new name. It should be given a positive integer value between 0 and 255, which is adds to each
  * color component of each pixel in the image. Brightening cannot increase values above 255.
  * <p>
- * Command syntax: {@code darken <amount> <original-image-name> <new-image-name>}.
+ * Command syntax: {@code brighten <amount> <original-image-name> <new-image-name>}.
  *
  * @author emery
  * @created 2022-06-07
