@@ -44,11 +44,6 @@ public class GrayscaleTest extends AbstractCommandTest {
     super(COMMAND_FORMS, ORDER_OF_TYPES, ILLEGAL_FORMS, SUCCESSFUL_MESSAGE);
   }
 
-  @Test
-  public void test() {
-    assertEquals(1, 2);
-  }
-
   @Override
   protected void getNullCommand() {
     new Grayscale(null);
