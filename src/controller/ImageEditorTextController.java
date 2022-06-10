@@ -60,7 +60,7 @@ public class ImageEditorTextController implements ImageEditorController {
     this.commands = new HashMap<>();
 
     // Add all new commands here:
-    commands.put("debug", s -> new SameImageCommand(s));
+    commands.put("same", s -> new SameImageCommand(s));
 
     // different misspellings of "grayscale"
     commands.put("grayscale", s -> new Grayscale(s));
