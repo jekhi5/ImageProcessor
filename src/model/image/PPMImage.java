@@ -12,9 +12,6 @@ import model.pixel.PixelImpl;
 /**
  * Represents a PPM Image. The text of the image is converted to an array of pixels that can be
  * individually modified.
- *
- * @author Jacob Kline
- * @created 06/06/2022
  */
 public class PPMImage implements Image {
 

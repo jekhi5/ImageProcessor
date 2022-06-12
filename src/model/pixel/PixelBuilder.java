@@ -2,9 +2,6 @@ package model.pixel;
 
 /**
  * A Builder for {@link Pixel}s that can specify red, green, blue, and alpha channels.
- *
- * @author emery
- * @created 2022-06-06
  */
 public abstract class PixelBuilder {
   protected int red;

@@ -10,9 +10,6 @@ import view.ImageEditorTextView;
 
 /**
  * A class to run a text-based version of ImageEditor.
- *
- * @author emery
- * @created 2022-06-05
  */
 public class TextRunner {
 

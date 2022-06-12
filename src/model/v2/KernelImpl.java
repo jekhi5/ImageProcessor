@@ -25,7 +25,7 @@ public class KernelImpl implements Kernel {
   }
 
   @Override
-  public int applyToImage(int row, int col, Image image) throws IllegalArgumentException {
+  public int resultAt(int row, int col, Image image) throws IllegalArgumentException {
 
     if (image == null) {
       throw new IllegalArgumentException("Error. The given image cannot be null.");

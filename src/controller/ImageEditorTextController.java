@@ -28,9 +28,6 @@ import view.ImageEditorView;
 
 /**
  * An {@link ImageEditorController} that reads input in the form of text.
- *
- * @author emery
- * @created 2022-06-05
  */
 public class ImageEditorTextController implements ImageEditorController {
   private static final List<String> QUIT_ALIASES = Arrays.asList("q", "quit", "exit");

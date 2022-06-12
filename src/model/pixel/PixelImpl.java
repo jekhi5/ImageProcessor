@@ -3,9 +3,6 @@ package model.pixel;
 /**
  * This represents a pixel. It is made up of the red, green, and blue components. Its opacity is
  * determined by the user at creation.
- *
- * @author Jacob Kline
- * @created 06/06/2022
  */
 public class PixelImpl implements Pixel {
   private final int red;

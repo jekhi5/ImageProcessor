@@ -9,9 +9,6 @@ import model.image.Image;
  * A command that flips an image in the horizontal or vertical dimension.
  *
  * <p>Command syntax: {@code flip <mode> <original-image-name> <new-image-name>}.
- *
- * @author emery
- * @created 2022-06-06
  */
 public class Flip extends AbstractCommand {
   /**

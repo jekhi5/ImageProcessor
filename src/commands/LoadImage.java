@@ -11,9 +11,6 @@ import utilities.ImageUtil;
  * run on it. The given name is used to refer to it within the editor. All args are case-sensitive.
  *
  * <p>Command syntax: {@code load <image-path> <image-name>}
- *
- * @author emery
- * @created 2022-06-06
  */
 public class LoadImage extends AbstractCommand {
   /**

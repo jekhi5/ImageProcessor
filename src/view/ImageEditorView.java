@@ -4,9 +4,6 @@ import java.io.IOException;
 
 /**
  * A simple view for the image editor. The only functionality is writing text to an output stream.
- *
- * @author emery
- * @created 2022-06-05
  */
 public interface ImageEditorView {
 

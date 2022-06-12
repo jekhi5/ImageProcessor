@@ -13,9 +13,6 @@ import model.pixel.PixelImpl;
  * color component of each pixel in the image. Brightening cannot increase values above 255.
  *
  * <p>Command syntax: {@code brighten <amount> <original-image-name> <new-image-name>}.
- *
- * @author emery
- * @created 2022-06-07
  */
 public class Brighten extends AbstractCommand {
 

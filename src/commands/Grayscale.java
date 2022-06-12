@@ -18,9 +18,6 @@ import model.pixel.PixelImpl;
  * are case-insensitive.
  *
  * <p>Command syntax: {@code grayscale <component> <original-image-name> <new-image-name>}
- *
- * @author emery
- * @created 2022-06-06
  */
 public class Grayscale extends AbstractCommand {
 

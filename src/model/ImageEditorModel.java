@@ -7,9 +7,6 @@ import model.image.Image;
  * This interface represents the actual model of editing the images. It houses the functionality to
  * control how pixels get modified, and in what way. It supports editing images with and without
  * alpha-modification capabilities (jpegs vs PNGs)
- *
- * @author Jacob Kline
- * @created 06/06/2022
  */
 public interface ImageEditorModel {
 

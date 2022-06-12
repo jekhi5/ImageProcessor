@@ -5,9 +5,6 @@ import model.pixel.Pixel;
 
 /**
  * An image that will be used with the {@link ImageEditorModel}.
- *
- * @author Jacob Kline
- * @created 06/06/2022
  */
 public interface Image extends Iterable<Pixel> {
 

@@ -7,9 +7,6 @@ import model.ImageEditorModel;
  * example, in order to greyscale an image according to the red-level, ALL the pixels in the image
  * must be updated. This can be accomplished by allowing a single command to handle the entire
  * operation. This is both to make the code easier to read, and more user-friendly.
- *
- * @author Jacob Kline
- * @created 06/06/2022
  */
 public interface ImageEditorCommand {
   /**

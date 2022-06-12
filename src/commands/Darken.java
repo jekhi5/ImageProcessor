@@ -13,9 +13,6 @@ import model.pixel.PixelImpl;
  * each color component of each pixel in the image. Darkening cannot reduce values below 0.
  *
  * <p>Command syntax: {@code darken <amount> <original-image-name> <new-image-name>}.
- *
- * @author emery
- * @created 2022-06-07
  */
 public class Darken extends AbstractCommand {
 

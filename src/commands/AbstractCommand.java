@@ -9,9 +9,6 @@ import model.pixel.Pixel;
 
 /**
  * An abstract command.
- *
- * @author emery
- * @created 2022-06-05
  */
 public abstract class AbstractCommand implements ImageEditorCommand {
   protected final String[] args;

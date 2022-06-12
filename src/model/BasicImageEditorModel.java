@@ -9,9 +9,6 @@ import model.image.Image;
 /**
  * To represent a basic image the only supports simple pixels. IE, ones with no toggle-able alpha
  * value.
- *
- * @author Jacob Kline
- * @created 06/06/2022
  */
 public class BasicImageEditorModel implements ImageEditorModel {
 

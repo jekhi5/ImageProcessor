@@ -10,9 +10,6 @@ import model.pixel.Pixel;
  * An iterator over a list of {@link Pixel}s.  We initially thought this would be more helpful;,
  * however we decided to change our design.  We are keeping this in because it might come in handy
  * in the next iteration of this project.
- *
- * @author Jacob Kline
- * @created 06/06/2022
  */
 public class PixelIterator implements Iterator<Pixel> {
 

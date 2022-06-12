@@ -22,5 +22,5 @@ public interface Kernel {
    * @throws IllegalArgumentException if the row or col is out of bounds of the given {@code image},
    *                                  or if the {@code image} is {@code null}
    */
-  int applyToImage(int row, int col, Image image) throws IllegalArgumentException;
+  int resultAt(int row, int col, Image image) throws IllegalArgumentException;
 }

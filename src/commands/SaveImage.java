@@ -14,9 +14,6 @@ import utilities.ImageUtil;
  * older files, if any. All other arguments are case-sensitive.
  *
  * <p>Command syntax: {@code save <image-path> <image-name> <shouldOverwrite>}
- *
- * @author emery
- * @created 2022-06-06
  */
 public class SaveImage extends AbstractCommand {
 
