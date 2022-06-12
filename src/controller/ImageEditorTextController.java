@@ -19,13 +19,6 @@ import commands.SaveImage;
 import model.ImageEditorModel;
 import view.ImageEditorView;
 
-// TODO: Make fun name
-// TODO: "help" command
-// TODO: file-by-file cleanup (remove System.out.println(), check for leakage, remove warnings, etc)
-// TODO: run coverage on all tests
-// TODO: See how to handle the image-creation-time in the tests
-// TODO: Handle testCommand/debugCommand
-
 /**
  * An {@link ImageEditorController} that reads input in the form of text.
  */
