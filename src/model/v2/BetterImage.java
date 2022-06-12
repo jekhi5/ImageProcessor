@@ -1,5 +1,6 @@
 package model.v2;
 
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.Iterator;
 
@@ -30,45 +31,41 @@ public class BetterImage implements Image {
 
   @Override
   public Pixel getPixelAt(int row, int col) throws IllegalArgumentException {
+    if (Math.min(row, col) < 0 || row >= getHeight() || col >= getWidth()) {
+      throw new IllegalArgumentException("Invalid position: " + row + ", " + col);
+    }
+    int argb = image.getRGB(col, row);
 
-    // thanks to icza and laplasz on StackOverflow for teaching us how to deal with this output
-    //https://stackoverflow.com/questions/25761438/understanding-bufferedimage-getrgb-output-values
-    int rgba = image.getRGB(col, row);
-    int blue = rgba & 0xff;
-    int green = (rgba & 0xff00) >> 8;
-    int red = (rgba & 0xff0000) >> 16;
-    int alpha = (rgba & 0xff000000) >>> 24;
-    Pixel p = new PixelImpl.PixelImplBuilder()
+    // we use java.awt.Color to do the bitwise math for us (:
+    Color c = new Color(argb, true);
+    int blue = c.getBlue();
+    int green = c.getGreen();
+    int red = c.getRed();
+    int alpha = c.getAlpha();
+    return new PixelImpl.PixelImplBuilder()
             .red(red)
             .blue(blue)
             .green(green)
             .alpha(alpha)
             .build();
-    return p;
   }
 
   @Override
   public Pixel setPixelAt(int row, int col, Pixel newPixel) throws IllegalArgumentException {
     Pixel p = getPixelAt(row, col);
-
-    byte red = (byte) newPixel.getRed();
-    byte green = (byte) newPixel.getGreen();
-    byte blue = (byte) newPixel.getBlue();
-    byte alpha = (byte) newPixel.getAlpha();
-    int rgba = alpha + red + green + blue;
-
-    image.setRGB(col, row, rgba);
+    Color c = new Color(p.getRed(), p.getGreen(), p.getBlue(), p.getAlpha());
+    image.setRGB(col, row, c.getRGB());
     return p;
   }
 
   @Override
   public int getWidth() {
-    return 0;
+    return image.getHeight();
   }
 
   @Override
   public int getHeight() {
-    return 0;
+    return image.getWidth();
   }
 
   @Override
