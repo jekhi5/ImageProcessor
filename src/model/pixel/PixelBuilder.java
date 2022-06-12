@@ -21,44 +21,52 @@ public abstract class PixelBuilder {
    * Sets the red channel of this builder.
    *
    * @param r red amount
+   * @return this {@code PixelBuilder}
    * @author emery
    * @created 2022-06-06
    */
-  public void red(int r) {
+  public PixelBuilder red(int r) {
     red = r;
+    return this;
   }
 
   /**
    * Sets the green channel of this builder.
    *
    * @param g green amount
+   * @return this {@code PixelBuilder}
    * @author emery
    * @created 2022-06-06
    */
-  public void green(int g) {
+  public PixelBuilder green(int g) {
     green = g;
+    return this;
   }
 
   /**
    * Sets the blue channel of this builder.
    *
    * @param b blue amount
+   * @return this {@code PixelBuilder}
    * @author emery
    * @created 2022-06-06
    */
-  public void blue(int b) {
+  public PixelBuilder blue(int b) {
     blue = b;
+    return this;
   }
 
   /**
    * Sets the alpha channel of this builder.
    *
    * @param a opacity
+   * @return this {@code PixelBuilder}
    * @author emery
    * @created 2022-06-06
    */
-  public void alpha(int a) {
+  public PixelBuilder alpha(int a) {
     alpha = a;
+    return this;
   }
 
   /**
