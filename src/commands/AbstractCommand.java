@@ -6,6 +6,7 @@ import java.util.function.Function;
 import model.ImageEditorModel;
 import model.image.Image;
 import model.pixel.Pixel;
+import model.v2.Kernel;
 
 /**
  * An abstract command.

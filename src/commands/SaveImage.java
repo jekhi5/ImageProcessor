@@ -1,5 +1,6 @@
 package commands;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 import model.ImageEditorModel;
@@ -41,15 +42,18 @@ public class SaveImage extends AbstractCommand {
       return e.getMessage();
     }
 
-    boolean overwrite = args[2].equalsIgnoreCase("yes") || args[2].equalsIgnoreCase("y") ||
-            args[2].equalsIgnoreCase("true") || args[2].equalsIgnoreCase("t");
+//    boolean overwrite = args[2].equalsIgnoreCase("yes") || args[2].equalsIgnoreCase("y") ||
+//            args[2].equalsIgnoreCase("true") || args[2].equalsIgnoreCase("t");
+//
+//    // actually attempt to save the image
+//    try {
+//      ImageUtil.saveImage(img, args[0], overwrite);
+//    } catch (IllegalArgumentException e) {
+//      return "Save failed: " + e.getMessage();
+//    }
 
-    // actually attempt to save the image
-    try {
-      ImageUtil.saveImage(img, args[0], overwrite);
-    } catch (IllegalArgumentException e) {
-      return "Save failed: " + e.getMessage();
-    }
+//    System.out.println(img.getPixelAt(0,0).getAlpha());
+    img.toSavableText();
 
     // success!
     return "Image successfully saved to " + args[0];

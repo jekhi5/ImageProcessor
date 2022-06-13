@@ -1,9 +1,11 @@
 package model.v2;
 
+import java.lang.invoke.SwitchPoint;
 import java.util.function.Function;
 
 import model.image.Image;
 import model.pixel.Pixel;
+import model.pixel.PixelImpl;
 
 /**
  * Represents the implementation of an image kernel that is an odd-sided square mapping of numbers.
@@ -31,27 +33,30 @@ public class KernelImpl implements Kernel {
       throw new IllegalArgumentException("Error. The given image cannot be null.");
     }
 
-    int topLeftR = row - (this.matrix.length / 2);
-    int topLeftC = col - (this.matrix.length / 2);
+    int pixelR = row - (this.matrix.length / 2);
+    int pixelC = col - (this.matrix.length / 2);
     int result = 0;
 
-    for (int currentRow = topLeftR; currentRow < topLeftR + this.matrix.length; currentRow += 1) {
-      for (int currentCol = 0; currentCol < topLeftC + this.matrix.length; currentCol += 1) {
+    for (int r = 0; r < this.matrix.length; r++) {
+      for (int c = 0; c < this.matrix.length; c++) {
         int channelValue = 0;
-        // If the pixel exists, then set the channel value to the desired channel's value in that
+        // If the pixel exists, then set channelValue to the desired channel's value in that
         // pixel, if not, we've already instantiated _channelValue_ to 0
         try {
-          channelValue =
-                  this.channelFunc.apply(image.getPixelAt(currentRow, currentCol)) *
-                          ((int) this.matrix[currentRow - topLeftR][currentCol - topLeftC]);
+          Pixel p = image.getPixelAt(pixelR, pixelC);
+          channelValue = (int) (this.channelFunc.apply(p) * (this.matrix[r][c]));
+
+
         } catch (IllegalArgumentException ignored) {
         }
 
         result += channelValue;
-      }
-    }
 
-    return result;
+        pixelC++;
+      }
+      pixelR++;
+    }
+    return Math.max(0, Math.min(255, result));
   }
 
   /**
@@ -77,7 +82,7 @@ public class KernelImpl implements Kernel {
                 "Error. Given size cannot be negative or even. Given: " + size);
       }
 
-      // Will initialize all locations to "0.0"
+      // Will initialize all locations to 0.0
       this.matrix = new double[size][size];
       return this;
     }
@@ -96,10 +101,10 @@ public class KernelImpl implements Kernel {
     public KernelBuilder valueAt(int row, int col, double value) throws IllegalArgumentException {
       if (this.matrix == null) {
         this.throwSizeNotSet();
-      } else if (row < 0 || row > this.matrix.length || col < 0 || col < this.matrix[row].length) {
+      } else if (row < 0 || row > this.matrix.length || col < 0 || col > this.matrix[row].length) {
         throw new IllegalArgumentException("Error. The given coordinates are out of bounds for " +
                 "this kernel. Given: (" + row + ", " + col + "). The dimensions of this matrix " +
-                "are: " + row + "X" + col);
+                "are: " + this.matrix.length + "x" + this.matrix.length);
       }
 
       this.matrix[row][col] = value;

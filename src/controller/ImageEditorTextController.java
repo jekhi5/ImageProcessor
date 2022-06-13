@@ -16,6 +16,7 @@ import commands.ImageEditorCommand;
 import commands.LoadImage;
 import commands.SameImageCommand;
 import commands.SaveImage;
+import commands.v2.Blur;
 import model.ImageEditorModel;
 import view.ImageEditorView;
 
@@ -63,6 +64,8 @@ public class ImageEditorTextController implements ImageEditorController {
     commands.put("flip", s -> new Flip(s));
     commands.put("brighten", s -> new Brighten(s));
     commands.put("darken", s -> new Darken(s));
+
+    commands.put("blur", s -> new Blur(s));
   }
 
   @Override

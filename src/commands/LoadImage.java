@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 import model.ImageEditorModel;
 import model.image.Image;
+import model.v2.ImageFactory;
 import utilities.ImageUtil;
 
 /**
@@ -32,7 +33,8 @@ public class LoadImage extends AbstractCommand {
 
     Image img;
     try {
-      img = ImageUtil.createImageFromPath(args[0]);
+      //img = ImageUtil.createImageFromPath(args[0]);
+      img = ImageFactory.createImage(args[0]);
     } catch (IllegalArgumentException e) {
       return e.getMessage();
     }
