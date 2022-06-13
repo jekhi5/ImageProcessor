@@ -53,7 +53,12 @@ public class SaveImage extends AbstractCommand {
 //    }
 
 //    System.out.println(img.getPixelAt(0,0).getAlpha());
-    img.toSavableText();
+    try {
+      img.saveToPath(args[0]);
+    } catch (IOException e) {
+      return "Save failed: " + e.getMessage();
+    }
+
 
     // success!
     return "Image successfully saved to " + args[0];

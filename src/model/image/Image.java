@@ -1,5 +1,7 @@
 package model.image;
 
+import java.io.IOException;
+
 import model.ImageEditorModel;
 import model.pixel.Pixel;
 
@@ -51,9 +53,11 @@ public interface Image extends Iterable<Pixel> {
   Image getCopy();
 
   /**
-   * To get a string representation of this image in a PPM format.
-   *
-   * @return the PPM string
+   * Saves this image to the given path.
+   * This method used to be {@code toSavableText} because we were under the assumption that
+   * all image formats could, like PPM images, be saved to a file as text.
+   * @param path the path of the new image
+   * @throws java.io.IOException if there is an issue with saving the file (bad path, etc.)
    */
-  String toSavableText();
+  void saveToPath(String path) throws IOException;
 }
