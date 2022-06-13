@@ -4,6 +4,7 @@
 // TODO: run coverage on all tests
 // TODO: See how to handle the image-creation-time in the tests
 // TODO: Handle testCommand/debugCommand
+// TODO: Abstract getting image from model in commands
 
 
 
