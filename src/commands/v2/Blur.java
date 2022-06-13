@@ -43,7 +43,7 @@ public class Blur extends AbstractCommand {
             .valueAt(2, 1, 0.125)
             .valueAt(2, 2, 0.0625);
 
-    AbstractCommand.applyKernel(model, orig, newImg, kb, args[1]);
+    AbstractCommand.applyKernelStaticallyAcrossAll(model, orig, newImg, kb, args[1]);
 
     return "Blur successful!";
   }

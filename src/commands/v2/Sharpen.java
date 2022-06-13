@@ -62,7 +62,7 @@ public class Sharpen extends AbstractCommand {
             .valueAt(4, 4, -0.125);
 
 
-    AbstractCommand.applyKernel(model, orig, newImg, kb, args[1]);
+    AbstractCommand.applyKernelStaticallyAcrossAll(model, orig, newImg, kb, args[1]);
 
     return "Sharpen successful!";
 

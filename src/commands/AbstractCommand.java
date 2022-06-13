@@ -68,8 +68,10 @@ public abstract class AbstractCommand implements ImageEditorCommand {
     }
   }
 
-  protected static void applyKernel(ImageEditorModel model, Image orig, Image newImg,
-                                    KernelImpl.KernelBuilder kb, String newImageName) {
+  protected static void applyKernelStaticallyAcrossAll(ImageEditorModel model, Image orig,
+                                                       Image newImg,
+                                                       KernelImpl.KernelBuilder kb,
+                                                       String newImageName) {
     for (int r = 0; r < orig.getHeight(); r++) {
       for (int c = 0; c < orig.getWidth(); c++) {
         int finalR = r;
