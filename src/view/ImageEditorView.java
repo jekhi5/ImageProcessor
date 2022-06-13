@@ -12,8 +12,6 @@ public interface ImageEditorView {
    *
    * @param msg the message
    * @throws IOException if appending to the output stream fails
-   * @author emery
-   * @created 2022-06-05
    */
   void renderMessage(String msg) throws IOException;
 }

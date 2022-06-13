@@ -22,8 +22,6 @@ public abstract class PixelBuilder {
    *
    * @param r red amount
    * @return this {@code PixelBuilder}
-   * @author emery
-   * @created 2022-06-06
    */
   public PixelBuilder red(int r) {
     red = r;
@@ -35,8 +33,6 @@ public abstract class PixelBuilder {
    *
    * @param g green amount
    * @return this {@code PixelBuilder}
-   * @author emery
-   * @created 2022-06-06
    */
   public PixelBuilder green(int g) {
     green = g;
@@ -48,8 +44,6 @@ public abstract class PixelBuilder {
    *
    * @param b blue amount
    * @return this {@code PixelBuilder}
-   * @author emery
-   * @created 2022-06-06
    */
   public PixelBuilder blue(int b) {
     blue = b;
@@ -61,8 +55,6 @@ public abstract class PixelBuilder {
    *
    * @param a opacity
    * @return this {@code PixelBuilder}
-   * @author emery
-   * @created 2022-06-06
    */
   public PixelBuilder alpha(int a) {
     alpha = a;
@@ -74,8 +66,6 @@ public abstract class PixelBuilder {
    * implementation with the desired settings.
    *
    * @return a {@link Pixel}
-   * @author emery
-   * @created 2022-06-06
    */
   public abstract Pixel build();
 }

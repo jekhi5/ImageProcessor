@@ -22,9 +22,6 @@ import static org.junit.Assert.assertTrue;
 
 /**
  * Tests for PPMImage.
- *
- * @author emery
- * @created 2022-06-08
  */
 public class PPMImageTest {
 

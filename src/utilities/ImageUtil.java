@@ -151,7 +151,7 @@ public class ImageUtil {
    * match the filetype that the image was originally loaded from, it may corrupt the file, and this
    * is on the user.
    *
-   * <p></p>If {@code shouldOverwrite} is {@code true}:
+   * <p>If {@code shouldOverwrite} is {@code true}:
    * <ol>
    *   <li>this method will attempt to delete the file currently stored at the given path</li>
    *   <li>and then attempt to place the given image at the given path</li>

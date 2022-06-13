@@ -142,8 +142,7 @@ public class PPMImage implements Image {
    *
    * <ol>
    *   <li> the width and height of image {@code A} are the same as the width and height of image
-   *   {@code B}.</li>
-   *   AND
+   *   {@code B}. AND</li>
    *   <li> each {@link Pixel} of image {@code A} are .equals() to the corresponding
    *   {@link Pixel} in image {@code B}.
    *   </li>
