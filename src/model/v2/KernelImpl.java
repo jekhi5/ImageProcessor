@@ -55,6 +55,7 @@ public class KernelImpl implements Kernel {
         pixelC++;
       }
       pixelR++;
+      pixelC = col - (this.matrix.length / 2);
     }
     return Math.max(0, Math.min(255, result));
   }

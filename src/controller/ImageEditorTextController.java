@@ -17,6 +17,7 @@ import commands.LoadImage;
 import commands.SameImageCommand;
 import commands.SaveImage;
 import commands.v2.Blur;
+import commands.v2.Sharpen;
 import model.ImageEditorModel;
 import view.ImageEditorView;
 
@@ -65,7 +66,10 @@ public class ImageEditorTextController implements ImageEditorController {
     commands.put("brighten", s -> new Brighten(s));
     commands.put("darken", s -> new Darken(s));
 
+    // Added in Assignment 5:
     commands.put("blur", s -> new Blur(s));
+
+    commands.put("sharpen", s -> new Sharpen(s));
   }
 
   @Override

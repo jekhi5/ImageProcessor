@@ -98,6 +98,10 @@ public class PPMImage implements Image {
   }
 
   @Override
+  public void saveToPath(String path) {
+    String text = this.toSavableText();
+  }
+
   public String toSavableText() {
     List<String> result = new ArrayList<>();
     result.add("P3");

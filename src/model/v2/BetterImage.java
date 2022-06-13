@@ -11,17 +11,18 @@ import javax.imageio.ImageIO;
 import model.image.Image;
 import model.pixel.Pixel;
 import model.pixel.PixelImpl;
+import utilities.ImageUtil;
 
 /**
- * An improved implementation of {@link Image}. Uses a {@link java.awt.image.BufferedImage}
- * instead of a 2D list, and can work with more file types than just .ppm.
- *
+ * An improved implementation of {@link Image}. Uses a {@link java.awt.image.BufferedImage} instead
+ * of a 2D list, and can work with more file types than just .ppm.
  */
 public class BetterImage implements Image {
   private final BufferedImage image;
 
   /**
    * Creates a new {@code BetterImage} from the given {@link BufferedImage};
+   *
    * @param image the {@link BufferedImage}
    * @throws IllegalArgumentException if {@code image} is null.
    */
@@ -31,6 +32,7 @@ public class BetterImage implements Image {
     }
     this.image = image;
   }
+
   @Override
   public Pixel getPixelAt(int row, int col) throws IllegalArgumentException {
     if (Math.min(row, col) < 0 || row >= getHeight() || col >= getWidth()) {
@@ -57,7 +59,8 @@ public class BetterImage implements Image {
       throw new IllegalArgumentException("Invalid position: " + row + ", " + col);
     }
     Pixel p = getPixelAt(row, col);
-    Color c = new Color(newPixel.getRed(), newPixel.getGreen(), newPixel.getBlue(), newPixel.getAlpha());
+    Color c = new Color(newPixel.getRed(), newPixel.getGreen(), newPixel.getBlue(),
+            newPixel.getAlpha());
     image.setRGB(col, row, c.getRGB());
     return p;
   }
@@ -78,7 +81,7 @@ public class BetterImage implements Image {
     // https://stackoverflow.com/a/31226502
     BufferedImage img = new BufferedImage(getWidth(), getHeight(), image.getType());
     for (int r = 0; r < image.getHeight(); r++) {
-      for(int c = 0; c < image.getWidth(); c++) {
+      for (int c = 0; c < image.getWidth(); c++) {
         img.setRGB(c, r, image.getRGB(c, r));
       }
     }
@@ -86,16 +89,11 @@ public class BetterImage implements Image {
   }
 
   @Override
-  public String toSavableText() {
-    String slash = System.getProperty("file.separator");
-    File outputfile = new File("test" + slash + "testOut" + slash + "new.png");
-    try {
-      ImageIO.write(image, "png", outputfile);
-    } catch (IOException e) {
-      throw new RuntimeException(e);
-    }
+  public void saveToPath(String path) throws IOException {
+    String suffix = ImageUtil.getSuffix(path);
 
-    return "placeholder";
+    File outputfile = new File(path);
+    ImageIO.write(image, suffix, outputfile);
   }
 
   @Override
