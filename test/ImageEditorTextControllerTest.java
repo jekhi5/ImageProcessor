@@ -48,9 +48,9 @@ public class ImageEditorTextControllerTest {
 
   String loadingCheckeredImage =
           initialMessage + "Executed command: LoadImage" + NEW_LINE +
-                  "Successfully loaded image \"checkered\" from res" +
-                  SLASH + "CheckeredBlackBottom_3x4.ppm!" + NEW_LINE;
-  String loadCheckeredBottom = "load res" + SLASH + "CheckeredBlackBottom_3x4.ppm checkered ";
+                  "Successfully loaded image \"checkered\" from test" +
+                  SLASH + "testRes" + SLASH + "checkered.ppm!";
+  String loadCheckeredBottom = "load test" + SLASH + "testRes" + SLASH + "checkered.ppm checkered ";
 
 
   @Before
@@ -203,8 +203,8 @@ public class ImageEditorTextControllerTest {
   private void commandTesting(String[] spellings, String[] types, String resultingMessageHalf2) {
 
     ImageEditorModel tempModel = new BasicImageEditorModel();
-    tempModel.addImage("pre-op", ImageUtil.createImageFromPath("res"
-            + SLASH + "CheckeredBlackBottom_3x4.ppm"));
+    tempModel.addImage("pre-op", ImageUtil.createImageFromPath("test" + SLASH + "testRes"
+            + SLASH + "checkered.ppm"));
 
     for (String typeOfCommand : spellings) {
       for (String formOfCommand : types) {
@@ -214,9 +214,7 @@ public class ImageEditorTextControllerTest {
 
         assertEquals("", this.log.toString());
         runCommand(typeOfCommand, formOfCommand);
-        assertEquals(initialMessage + "Executed command: LoadImage"
-                + NEW_LINE + "Successfully loaded image \"checkered\" from res"
-                + SLASH + "CheckeredBlackBottom_3x4.ppm!"
+        assertEquals(loadingCheckeredImage
                 + NEW_LINE + "> Executed command: " + commandNames.get(command.getClass())
                 + NEW_LINE + resultingMessageHalf2
                 + NEW_LINE + "> Thanks for using ImageEditor!"
@@ -234,7 +232,7 @@ public class ImageEditorTextControllerTest {
   }
 
   private ImageEditorCommand getCommand(String typeOfCommand, String formOfCommand) {
-    String naming = " pre-op " + " post-op";
+    String naming = " pre-op post-op";
     switch (typeOfCommand.toLowerCase()) {
       case "greyscale":
       case "grayscale":
@@ -269,10 +267,10 @@ public class ImageEditorTextControllerTest {
   @Test
   public void greyScale() {
     String[] spellings =
-        {"Grayscale", "GrAyScAle", "greyscale", "gREYSCALE", "grey", "GREY", "gray", "GrAY"};
+            {"Grayscale", "GrAyScAle", "greyscale", "gREYSCALE", "grey", "GREY", "gray", "GrAY"};
     String[] typesOfGreyscale =
-        {"red", "ReD", "green", "GReeN", "blue", "BlUE", "value", "VaLuE", "intensity",
-            "INtENsITy", "luma", "Luma"};
+            {"red", "ReD", "green", "GReeN", "blue", "BlUE", "value", "VaLuE", "intensity",
+                    "INtENsITy", "luma", "Luma"};
     String resultingMessageHalf2 = "Grayscale successful!";
 
     commandTesting(spellings, typesOfGreyscale, resultingMessageHalf2);
@@ -363,9 +361,9 @@ public class ImageEditorTextControllerTest {
   public void testHangingInCommand() {
 
     String[] commandString =
-        {"load", "LoAd", "save", "SaVE", "flip", "fLIp", "gray", "GrAY", "grey",
-            "GREY", "grayscale", "GRaYscALe", "greyscale", "GReYSCAle", "brighten",
-            "BRIghTEn", "darken", "DARKEn"};
+            {"load", "LoAd", "save", "SaVE", "flip", "fLIp", "gray", "GrAY", "grey",
+                    "GREY", "grayscale", "GRaYscALe", "greyscale", "GReYSCAle", "brighten",
+                    "BRIghTEn", "darken", "DARKEn"};
 
     for (String command : commandString) {
       Appendable output = new StringBuilder();
