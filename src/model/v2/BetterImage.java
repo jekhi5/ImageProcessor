@@ -87,7 +87,8 @@ public class BetterImage implements Image {
 
   @Override
   public String toSavableText() {
-    File outputfile = new File("testOut" + System.getProperty("file.separator") + "new.png");
+    String slash = System.getProperty("file.separator");
+    File outputfile = new File("test" + slash + "testOut" + slash + "new.png");
     try {
       ImageIO.write(image, "png", outputfile);
     } catch (IOException e) {
