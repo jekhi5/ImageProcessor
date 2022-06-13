@@ -37,7 +37,7 @@ public class BetterImage implements Image {
       throw new IllegalArgumentException("Invalid position: " + row + ", " + col);
     }
     int argb = image.getRGB(col, row);
-    // we use java.awt.Color to do the bitwise math for us (:
+    // we use java.awt.Color to do the bitwise math for us :)
     Color c = new Color(argb, true);
     int blue = c.getBlue();
     int green = c.getGreen();

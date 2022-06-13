@@ -6,7 +6,8 @@ import java.util.function.Function;
 import model.ImageEditorModel;
 import model.image.Image;
 import model.pixel.Pixel;
-import model.v2.Kernel;
+import model.pixel.PixelImpl;
+import model.v2.KernelImpl;
 
 /**
  * An abstract command.
@@ -57,5 +58,34 @@ public abstract class AbstractCommand implements ImageEditorCommand {
     if (model == null) {
       throw new IllegalArgumentException("Model can't be null!");
     }
+  }
+
+  protected Image handleGettingImage(ImageEditorModel model) {
+    try {
+      return model.getImage(args[0]);
+    } catch (IllegalArgumentException e) {
+      return null;
+    }
+  }
+
+  protected static void applyKernel(ImageEditorModel model, Image orig, Image newImg,
+                                    KernelImpl.KernelBuilder kb, String newImageName) {
+    for (int r = 0; r < orig.getHeight(); r++) {
+      for (int c = 0; c < orig.getWidth(); c++) {
+        int finalR = r;
+        int finalC = c;
+        Function<Function<Pixel, Integer>, Integer> op =
+                f -> kb.channelFunc(f).build().resultAt(finalR, finalC, orig);
+
+        Pixel newPixel = new PixelImpl.PixelImplBuilder()
+                .red(op.apply(Pixel::getRed))
+                .green(op.apply(Pixel::getGreen))
+                .blue(op.apply(Pixel::getBlue))
+                .alpha(op.apply(Pixel::getAlpha))
+                .build();
+        newImg.setPixelAt(r, c, newPixel);
+      }
+    }
+    model.addImage(newImageName, newImg);
   }
 }
