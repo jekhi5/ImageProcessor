@@ -241,7 +241,8 @@ public class PPMImageTest {
     assertNotEquals(i3, i1);
     assertNotEquals(i3.hashCode(), i1.hashCode());
 
-    assertFalse(ImageUtil.createImageFromPath("test" + SLASH + "testRes" + SLASH +
-            "checkered_blue.ppm").equals("butts"));
+    //noinspection AssertBetweenInconvertibleTypes
+    assertNotEquals(ImageUtil.createImageFromPath("test" + SLASH + "testRes" + SLASH +
+            "checkered_blue.ppm"), "butts");
   }
 }
