@@ -11,9 +11,6 @@ import model.image.Image;
  * images.
  *
  * <p>Command syntax: {@code same <image-name> <image-name>}
- *
- * @author emery
- * @created 2022-06-05
  */
 public class SameImageCommand extends AbstractCommand {
 

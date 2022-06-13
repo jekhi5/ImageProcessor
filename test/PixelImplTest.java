@@ -4,7 +4,6 @@ import model.pixel.Pixel;
 import model.pixel.PixelImpl;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotSame;
 
@@ -112,14 +111,16 @@ public class PixelImplTest {
 
     assertEquals(fullyVisibleWhite.hashCode(), anotherWhite.hashCode());
     assertNotEquals(fullyVisibleWhite.hashCode(), fullyVisibleBlack.getAlpha());
-    assertFalse(fullyVisibleBlack.equals("banana"));
+    //noinspection AssertBetweenInconvertibleTypes
+    assertNotEquals(fullyVisibleBlack, "banana");
   }
 
+  @SuppressWarnings("AssertBetweenInconvertibleTypes")
   @Test
   public void testEqualsNonPixel() {
     assertNotEquals(null, fullyVisibleBlack);
-    assertNotEquals("uwu", fullyVisibleWhite);
-    assertNotEquals(1, fullyVisibleWhite);
+    assertNotEquals(fullyVisibleWhite, "uwu");
+    assertNotEquals(fullyVisibleWhite, 1);
   }
 
   @Test

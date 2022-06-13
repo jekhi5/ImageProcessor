@@ -83,8 +83,7 @@ public class PixelImpl implements Pixel {
    * Two {@code PixelImpl}s are .equal() IFF:
    *
    * <ol>
-   *   <li> they are both of type {@code PixelImpl}</li>
-   *   AND
+   *   <li> they are both of type {@code PixelImpl} AND</li>
    *   <li> each field of pixel {@code A} has an equal value to the same field of pixel {@code B}
    *   </li>
    * </ol>
@@ -106,9 +105,6 @@ public class PixelImpl implements Pixel {
 
   /**
    * A builder for {@link PixelImpl}.
-   *
-   * @author emery
-   * @created 2022-06-06
    */
   public static class PixelImplBuilder extends PixelBuilder {
 

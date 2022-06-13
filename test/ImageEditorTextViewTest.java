@@ -11,9 +11,6 @@ import static org.junit.Assert.assertEquals;
 
 /**
  * Tests for {@link view.ImageEditorTextView}.
- *
- * @author emery
- * @created 2022-06-05
  */
 public class ImageEditorTextViewTest {
   Random rand;

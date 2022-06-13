@@ -32,9 +32,6 @@ import static org.junit.Assert.fail;
 
 /**
  * Tests for {@link ImageEditorTextController}.
- *
- * @author emery and Jacob Kline
- * @created 2022-06-05
  */
 public class ImageEditorTextControllerTest {
 
