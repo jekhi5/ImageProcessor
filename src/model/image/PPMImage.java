@@ -1,13 +1,20 @@
 package model.image;
 
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import model.pixel.Pixel;
 import model.pixel.PixelImpl;
+import model.v2.ImageSaver;
+import utilities.ImageUtil;
 
 /**
  * Represents a PPM Image. The text of the image is converted to an array of pixels that can be
@@ -34,11 +41,6 @@ public class PPMImage implements Image {
         throw new IllegalArgumentException("Error. PPM images must be rectangular.");
       }
     }
-  }
-
-  @Override
-  public Iterator<Pixel> iterator() {
-    return new PixelIterator(new ArrayList<>(this.pixelArray));
   }
 
   @Override
@@ -98,43 +100,20 @@ public class PPMImage implements Image {
   }
 
   @Override
-  public void saveToPath(String path) {
-    String text = this.toSavableText();
-  }
-
-  public String toSavableText() {
-    List<String> result = new ArrayList<>();
-    result.add("P3");
-
-    DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MM/dd/yyyy HH:mm:ss");
-    LocalDateTime now = LocalDateTime.now();
-
-    result.add("# This image was created by the the Jacob Kline and Emery Jacobowitz's Image " +
-            "Editor on: " + dtf.format(now));
-
-    result.add(this.pixelArray.get(0).size() + " " + this.pixelArray.size());
-
-    // The maxValue will go here
-
-    int highestValue = -1;
-    for (List<Pixel> row : this.pixelArray) {
-      for (Pixel pix : row) {
-        int pixRed = pix.getRed();
-        int pixGreen = pix.getGreen();
-        int pixBlue = pix.getBlue();
-
-        highestValue = Math.max(highestValue, (Math.max(Math.max(pixRed, pixGreen), pixBlue)));
-
-        result.add(pixRed + "");
-        result.add(pixGreen + "");
-        result.add(pixBlue + "");
-      }
+  public void saveToPath(String path, boolean shouldOverwrite) throws IOException {
+    if (path == null) {
+      throw new IOException("Can't save to null path");
     }
+    File f = new File(path);
 
-    result.add(3, highestValue + "");
-
-    return String.join("\n", result) + "\n";
+    if (f.exists() && !f.isDirectory() && !shouldOverwrite) {
+      throw new IOException("can't overwrite file!");
+    } else {
+      ImageSaver.write(this.toBufferedImage(), ImageUtil.getSuffix(path), f);
+    }
   }
+
+
 
   @Override
   public int hashCode() {
@@ -185,5 +164,20 @@ public class PPMImage implements Image {
       }
     }
     return true;
+  }
+
+
+  private BufferedImage toBufferedImage() {
+    BufferedImage bi =
+            new BufferedImage(this.getWidth(), this.getHeight(), BufferedImage.TYPE_INT_ARGB);
+    for(int r = 0; r < this.getHeight(); r++) {
+      for(int c = 0; c < this.getWidth(); c++) {
+        Pixel p = this.getPixelAt(r, c);
+        Color color = new Color(p.getRed(), p.getGreen(), p.getBlue(), p.getAlpha());
+        bi.setRGB(c, r, color.getRGB());
+      }
+    }
+
+    return bi;
   }
 }

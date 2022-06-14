@@ -36,7 +36,7 @@ public class LoadImage extends AbstractCommand {
       //img = ImageUtil.createImageFromPath(args[0]);
       img = ImageFactory.createImage(args[0]);
     } catch (IllegalArgumentException e) {
-      return e.getMessage();
+      return "Load failed: " + e.getMessage();
     }
 
     model.addImage(args[1], img);

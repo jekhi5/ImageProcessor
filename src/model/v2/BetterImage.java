@@ -77,8 +77,6 @@ public class BetterImage implements Image {
 
   @Override
   public Image getCopy() {
-    // how to deep copy a BufferedImage from hyper-neutrino on StackOverflow:
-    // https://stackoverflow.com/a/31226502
     BufferedImage img = new BufferedImage(getWidth(), getHeight(), image.getType());
     for (int r = 0; r < image.getHeight(); r++) {
       for (int c = 0; c < image.getWidth(); c++) {
@@ -89,15 +87,17 @@ public class BetterImage implements Image {
   }
 
   @Override
-  public void saveToPath(String path) throws IOException {
-    String suffix = ImageUtil.getSuffix(path);
+  public void saveToPath(String path, boolean shouldOverwrite) throws IOException {
+    if (path == null) {
+      throw new IOException("Can't save to null path");
+    }
+    File f = new File(path);
 
-    File outputfile = new File(path);
-    ImageIO.write(image, suffix, outputfile);
+    if (f.exists() && !f.isDirectory() && !shouldOverwrite) {
+      throw new IOException("can't overwrite file!");
+    } else {
+      ImageSaver.write(this.image, ImageUtil.getSuffix(path), f);
+    }
   }
 
-  @Override
-  public Iterator<Pixel> iterator() {
-    return null;
-  }
 }

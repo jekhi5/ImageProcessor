@@ -40,7 +40,7 @@ public class ImageUtil {
   public static Image createImageFromPath(String path) throws IllegalArgumentException {
     // As more filetypes become accepted, we will extend this map
     Map<String, Function<String, Image>> supportedFileTypes = new HashMap<>();
-    supportedFileTypes.put(".ppm", ImageUtil::readPPM);
+    supportedFileTypes.put("ppm", ImageUtil::readPPM);
 
     String suffix = ImageUtil.getSuffix(path);
     if (supportedFileTypes.containsKey(suffix)) {
@@ -171,45 +171,45 @@ public class ImageUtil {
    *                        stored at this location
    * @throws IllegalArgumentException if the path is bad or any of the storing/deleting fails
    */
-  public static void saveImage(Image image, String path, boolean shouldOverwrite)
-          throws IllegalArgumentException {
-
-    if (image == null || path == null) {
-      throw new IllegalArgumentException("Error. The given image or path was null.");
-    }
-
-    File file = new File(path);
-
-    if (shouldOverwrite && file.exists()) {
-      boolean wasSuccessfullyDeleted = file.delete();
-
-      if (!wasSuccessfullyDeleted) {
-        throw new IllegalArgumentException("Error. Cannot delete file at path: " + path);
-      }
-    }
-
-    try {
-      if (!file.createNewFile()) {
-        throw new IllegalArgumentException("Error. Could not create file from path: " + path +
-                ". There was already a file at this location. " +
-                "To overwrite, add \"true\" to command.");
-      }
-    } catch (IOException e) {
-      throw new IllegalArgumentException("Error. Bad path: " + path);
-    } catch (SecurityException e) {
-      throw new IllegalArgumentException(
-              "Error. Cannot create file at given path: " + path + "\n" + e.getMessage());
-    }
-
-    BufferedWriter ppmWriter;
-    try {
-      ppmWriter = new BufferedWriter(new FileWriter(path));
-      ppmWriter.write(((PPMImage) image).toSavableText());
-      ppmWriter.close();
-    } catch (IOException e) {
-      throw new IllegalArgumentException(
-              "Error. Cannot write to a file at the given path: " + path);
-    }
-  }
+//  public static void saveImage(Image image, String path, boolean shouldOverwrite)
+//          throws IllegalArgumentException {
+//
+//    if (image == null || path == null) {
+//      throw new IllegalArgumentException("Error. The given image or path was null.");
+//    }
+//
+//    File file = new File(path);
+//
+//    if (shouldOverwrite && file.exists()) {
+//      boolean wasSuccessfullyDeleted = file.delete();
+//
+//      if (!wasSuccessfullyDeleted) {
+//        throw new IllegalArgumentException("Error. Cannot delete file at path: " + path);
+//      }
+//    }
+//
+//    try {
+//      if (!file.createNewFile()) {
+//        throw new IllegalArgumentException("Error. Could not create file from path: " + path +
+//                ". There was already a file at this location. " +
+//                "To overwrite, add \"true\" to command.");
+//      }
+//    } catch (IOException e) {
+//      throw new IllegalArgumentException("Error. Bad path: " + path);
+//    } catch (SecurityException e) {
+//      throw new IllegalArgumentException(
+//              "Error. Cannot create file at given path: " + path + "\n" + e.getMessage());
+//    }
+//
+//    BufferedWriter ppmWriter;
+//    try {
+//      ppmWriter = new BufferedWriter(new FileWriter(path));
+//      ppmWriter.write(((PPMImage) image).toSavableText());
+//      ppmWriter.close();
+//    } catch (IOException e) {
+//      throw new IllegalArgumentException(
+//              "Error. Cannot write to a file at the given path: " + path);
+//    }
+//  }
 }
 

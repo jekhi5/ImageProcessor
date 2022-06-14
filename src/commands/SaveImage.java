@@ -1,11 +1,11 @@
 package commands;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Scanner;
 
 import model.ImageEditorModel;
 import model.image.Image;
-import utilities.ImageUtil;
 
 /**
  * Saves an image currently open in the editor under the given name to the given file path. DOES NOT
@@ -42,8 +42,8 @@ public class SaveImage extends AbstractCommand {
       return e.getMessage();
     }
 
-//    boolean overwrite = args[2].equalsIgnoreCase("yes") || args[2].equalsIgnoreCase("y") ||
-//            args[2].equalsIgnoreCase("true") || args[2].equalsIgnoreCase("t");
+    List<String> aliasesOW = List.of("yes", "y", "true", "t");
+    boolean overwrite = aliasesOW.contains(args[2]);
 //
 //    // actually attempt to save the image
 //    try {
@@ -52,9 +52,8 @@ public class SaveImage extends AbstractCommand {
 //      return "Save failed: " + e.getMessage();
 //    }
 
-//    System.out.println(img.getPixelAt(0,0).getAlpha());
     try {
-      img.saveToPath(args[0]);
+      img.saveToPath(args[0], overwrite);
     } catch (IOException e) {
       return "Save failed: " + e.getMessage();
     }

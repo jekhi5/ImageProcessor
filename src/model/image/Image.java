@@ -8,7 +8,7 @@ import model.pixel.Pixel;
 /**
  * An image that will be used with the {@link ImageEditorModel}.
  */
-public interface Image extends Iterable<Pixel> {
+public interface Image {
 
   /**
    * To get a {@code Pixel} at the given coordinates.
@@ -57,7 +57,8 @@ public interface Image extends Iterable<Pixel> {
    * This method used to be {@code toSavableText} because we were under the assumption that
    * all image formats could, like PPM images, be saved to a file as text.
    * @param path the path of the new image
+   * @param shouldOverwrite should the new file overwrite any existing file?
    * @throws java.io.IOException if there is an issue with saving the file (bad path, etc.)
    */
-  void saveToPath(String path) throws IOException;
+  void saveToPath(String path, boolean shouldOverwrite) throws IOException;
 }
