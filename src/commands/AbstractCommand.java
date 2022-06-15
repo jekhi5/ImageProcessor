@@ -7,7 +7,8 @@ import model.ImageEditorModel;
 import model.image.Image;
 import model.pixel.Pixel;
 import model.pixel.PixelImpl;
-import model.v2.KernelImpl;
+import model.v2.kernels.FilterKernel;
+import model.v2.kernels.PixelOperator;
 
 /**
  * An abstract command.
@@ -70,21 +71,11 @@ public abstract class AbstractCommand implements ImageEditorCommand {
 
   protected static void applyKernelStaticallyAcrossAll(ImageEditorModel model, Image orig,
                                                        Image newImg,
-                                                       KernelImpl.KernelBuilder kb,
+                                                       PixelOperator op,
                                                        String newImageName) {
     for (int r = 0; r < orig.getHeight(); r++) {
       for (int c = 0; c < orig.getWidth(); c++) {
-        int finalR = r;
-        int finalC = c;
-        Function<Function<Pixel, Integer>, Integer> op =
-                f -> kb.channelFunc(f).build().resultAt(finalR, finalC, orig);
-
-        Pixel newPixel = new PixelImpl.PixelImplBuilder()
-                .red(op.apply(Pixel::getRed))
-                .green(op.apply(Pixel::getGreen))
-                .blue(op.apply(Pixel::getBlue))
-                .alpha(op.apply(Pixel::getAlpha))
-                .build();
+        Pixel newPixel = op.resultAt(r, c, orig);
         newImg.setPixelAt(r, c, newPixel);
       }
     }

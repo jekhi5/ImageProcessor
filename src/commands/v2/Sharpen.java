@@ -5,7 +5,7 @@ import java.util.Scanner;
 import commands.AbstractCommand;
 import model.ImageEditorModel;
 import model.image.Image;
-import model.v2.KernelImpl;
+import model.v2.kernels.FilterKernel;
 
 /**
  * A command that sharpens an image. Command syntax:
@@ -29,7 +29,7 @@ public class Sharpen extends AbstractCommand {
 
     Image newImg = orig.getCopy();
 
-    KernelImpl.KernelBuilder kb = new KernelImpl.KernelBuilder()
+    FilterKernel.KernelBuilder kb = new FilterKernel.KernelBuilder()
             .size(5)
             .valueAt(0, 0, -0.125)
             .valueAt(0, 1, -0.125)
@@ -62,7 +62,7 @@ public class Sharpen extends AbstractCommand {
             .valueAt(4, 4, -0.125);
 
 
-    AbstractCommand.applyKernelStaticallyAcrossAll(model, orig, newImg, kb, args[1]);
+    AbstractCommand.applyKernelStaticallyAcrossAll(model, orig, newImg, kb.build(), args[1]);
 
     return "Sharpen successful!";
 
