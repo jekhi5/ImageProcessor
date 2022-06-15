@@ -56,6 +56,10 @@ public class Transformer extends AbstractMatrixOperator {
       super(new double[3][3]);
     }
 
+    private TransformerBuilder(double[][] matrix) {
+      super(matrix);
+    }
+
     /**
      * Throws an IllegalCallerException because we can't set the size of a Color Transformer.
      *
@@ -69,8 +73,13 @@ public class Transformer extends AbstractMatrixOperator {
     }
 
     @Override
+    protected MatrixOperatorBuilder getType(double[][] matrix) {
+      return new TransformerBuilder(matrix);
+    }
+
+    @Override
     public PixelOperator build() throws IllegalStateException {
-      return new FilterKernel(matrix);
+      return new Transformer(matrix);
     }
   }
 }

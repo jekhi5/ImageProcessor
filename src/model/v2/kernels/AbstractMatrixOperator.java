@@ -16,7 +16,7 @@ public abstract class AbstractMatrixOperator implements PixelOperator {
   @Override
   public abstract Pixel resultAt(int row, int col, Image image) throws IllegalArgumentException;
 
-  protected static abstract class MatrixOperatorBuilder {
+  public static abstract class MatrixOperatorBuilder {
     protected double[][] matrix;
 
     protected MatrixOperatorBuilder(double[][] matrix) {
@@ -44,7 +44,7 @@ public abstract class AbstractMatrixOperator implements PixelOperator {
 
       // Will initialize all locations to 0.0
       this.matrix = new double[size][size];
-      return this;
+      return this.getType(this.matrix);
     }
 
     /**
@@ -69,8 +69,16 @@ public abstract class AbstractMatrixOperator implements PixelOperator {
       }
 
       this.matrix[row][col] = value;
-      return this;
+      return this.getType(this.matrix);
     }
+
+    /**
+     * To get the proper Matrix Operator Builder for the operation.
+     *
+     * @param matrix the matrix of this operator builder
+     * @return a MatrixOperatorBuilder of the proper type
+     */
+    protected abstract MatrixOperatorBuilder getType(double[][] matrix);
 
     /**
      * To build this PixelOperator as the relevant implementation.

@@ -54,19 +54,17 @@ public class FilterKernel extends AbstractMatrixOperator {
       pixelC = col - (this.matrix.length / 2);
     }
     int alpha = image.getPixelAt(row, col).getAlpha();
-    PixelImpl.PixelImplBuilder pb = new PixelImpl.PixelImplBuilder()
+
+    return new PixelImpl.PixelImplBuilder()
             .red(resultRGB[0])
             .green(resultRGB[1])
             .blue(resultRGB[2])
             .alpha(alpha)
-
-    return new PixelImpl(resultRGB[0], resultRGB[1], resultRGB[2],
-            );
+            .build();
   }
 
   /**
-   * A builder for FilterKernel.
-   * Allows user to set size and values.
+   * A builder for FilterKernel. Allows user to set size and values.
    */
   public static class KernelBuilder extends MatrixOperatorBuilder {
 
@@ -75,6 +73,21 @@ public class FilterKernel extends AbstractMatrixOperator {
      */
     public KernelBuilder() {
       super();
+    }
+
+    /**
+     * To create a KernelBuilder with the given Matrix.
+     *
+     * @param matrix the matrix to make the kernel builder with
+     * @return the newly constructed KernelBuilder
+     */
+    public KernelBuilder(double[][] matrix) {
+      super(matrix);
+    }
+
+    @Override
+    protected MatrixOperatorBuilder getType(double[][] matrix) {
+      return new KernelBuilder(matrix);
     }
 
     @Override

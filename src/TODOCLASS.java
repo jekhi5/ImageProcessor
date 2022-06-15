@@ -7,5 +7,4 @@
 // TODO: Abstract getting image from model in commands
 
 
-
 // TODO: DELETE THIS FILE

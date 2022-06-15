@@ -6,8 +6,6 @@ import java.util.function.Function;
 import model.ImageEditorModel;
 import model.image.Image;
 import model.pixel.Pixel;
-import model.pixel.PixelImpl;
-import model.v2.kernels.FilterKernel;
 import model.v2.kernels.PixelOperator;
 
 /**
@@ -43,6 +41,19 @@ public abstract class AbstractCommand implements ImageEditorCommand {
     }
   }
 
+  protected static void applyKernelStaticallyAcrossAll(ImageEditorModel model, Image orig,
+                                                       Image newImg,
+                                                       PixelOperator op,
+                                                       String newImageName) {
+    for (int r = 0; r < orig.getHeight(); r++) {
+      for (int c = 0; c < orig.getWidth(); c++) {
+        Pixel newPixel = op.resultAt(r, c, orig);
+        newImg.setPixelAt(r, c, newPixel);
+      }
+    }
+    model.addImage(newImageName, newImg);
+  }
+
   @Override
   public abstract String apply(ImageEditorModel model);
 
@@ -67,18 +78,5 @@ public abstract class AbstractCommand implements ImageEditorCommand {
     } catch (IllegalArgumentException e) {
       return null;
     }
-  }
-
-  protected static void applyKernelStaticallyAcrossAll(ImageEditorModel model, Image orig,
-                                                       Image newImg,
-                                                       PixelOperator op,
-                                                       String newImageName) {
-    for (int r = 0; r < orig.getHeight(); r++) {
-      for (int c = 0; c < orig.getWidth(); c++) {
-        Pixel newPixel = op.resultAt(r, c, orig);
-        newImg.setPixelAt(r, c, newPixel);
-      }
-    }
-    model.addImage(newImageName, newImg);
   }
 }

@@ -1,10 +1,7 @@
 package utilities;
 
-import java.io.BufferedWriter;
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -56,14 +53,14 @@ public class ImageUtil {
    * @param path is the path to the file
    * @return the string version of the filetype including the period
    * @throws IllegalArgumentException if the path is bad
-   * TODO: tests for getSuffix (now public)
+   *                                                                   TODO: tests for getSuffix (now public)
    */
   public static String getSuffix(String path) throws IllegalArgumentException {
     int indexOfSuffix = path.lastIndexOf(".");
     if (indexOfSuffix < 0 || indexOfSuffix >= path.length() - 1) {
       throw new IllegalArgumentException("Error. Invalid path.");
     } else {
-      return path.substring(indexOfSuffix +  1);
+      return path.substring(indexOfSuffix + 1);
     }
   }
 

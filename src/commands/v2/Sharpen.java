@@ -5,6 +5,7 @@ import java.util.Scanner;
 import commands.AbstractCommand;
 import model.ImageEditorModel;
 import model.image.Image;
+import model.v2.kernels.AbstractMatrixOperator;
 import model.v2.kernels.FilterKernel;
 
 /**
@@ -29,7 +30,7 @@ public class Sharpen extends AbstractCommand {
 
     Image newImg = orig.getCopy();
 
-    FilterKernel.KernelBuilder kb = new FilterKernel.KernelBuilder()
+    AbstractMatrixOperator.MatrixOperatorBuilder kb = new FilterKernel.KernelBuilder()
             .size(5)
             .valueAt(0, 0, -0.125)
             .valueAt(0, 1, -0.125)

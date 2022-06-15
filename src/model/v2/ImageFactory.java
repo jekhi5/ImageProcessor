@@ -17,6 +17,7 @@ public class ImageFactory {
 
   /**
    * Creates a new {@link model.image.Image}, generated from the given path.
+   *
    * @param path the path of the image file
    * @return a new {@link model.image.Image}.
    * @throws IllegalArgumentException if the path is invalid, or the image type is not supported

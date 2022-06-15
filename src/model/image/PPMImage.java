@@ -2,12 +2,8 @@ package model.image;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -114,7 +110,6 @@ public class PPMImage implements Image {
   }
 
 
-
   @Override
   public int hashCode() {
     return this.pixelArray.hashCode();
@@ -170,8 +165,8 @@ public class PPMImage implements Image {
   private BufferedImage toBufferedImage() {
     BufferedImage bi =
             new BufferedImage(this.getWidth(), this.getHeight(), BufferedImage.TYPE_INT_ARGB);
-    for(int r = 0; r < this.getHeight(); r++) {
-      for(int c = 0; c < this.getWidth(); c++) {
+    for (int r = 0; r < this.getHeight(); r++) {
+      for (int c = 0; c < this.getWidth(); c++) {
         Pixel p = this.getPixelAt(r, c);
         Color color = new Color(p.getRed(), p.getGreen(), p.getBlue(), p.getAlpha());
         bi.setRGB(c, r, color.getRGB());

@@ -17,8 +17,8 @@ public interface PixelOperator {
    * @param col   the col of the {@link Pixel} in the {@code Image}, to be placed at the center of
    *              {@code this} {@code Kernel}
    * @param image the {@code Image} that {@code this} {@code Kernel} will be applied to
-   * @return a {@link Pixel} with the  resulting RGB values of after applying {@code this Kernel}
-   * to the given {@code Image} and chopping off the resulting double's decimal value
+   * @return a {@link Pixel} with the  resulting RGB values of after applying {@code this Kernel} to
+   *         the given {@code Image} and chopping off the resulting double's decimal value
    * @throws IllegalArgumentException if the row or col is out of bounds of the given {@code image},
    *                                  or if the {@code image} is {@code null}
    */
