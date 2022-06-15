@@ -24,28 +24,34 @@ public class ImageSaver {
    * Functionally identical to ImageIO.write(~), except that it adds support for PPM files.
    * Note that a PPMImage will have to be converted to a {@link BufferedImage} before writing.
    *
-   * @param img        the {@link BufferedImage} representing the image.
+   * @param img        the {@link BufferedImage} representing the image. This should be a
+   *                   {@code TYPE_INT_ARBG} {@link BufferedImage}.
    * @param type       the desired image file type
    * @param outputFile the file to where the image will be saved.
    * @throws IOException if there was an issue saving the file
    */
   public static void write(BufferedImage img, String type, File outputFile) throws IOException {
-    if (type.equals("ppm")) {
-      savePPM(outputFile, toPPMText(img));
-    } else if (type.equals("png")){
-      ImageIO.write(img, type, outputFile);
-    } else if (type.equals("jpg") || type.equals("bmp")) {
-      // basically there is a bug where ImageIO.write() doesn't work properly
-      // if it is using ARGB color values (32-bit) to save to an image format without transparency.
-      // We surmount this by creating a new BI with RGB color values (24-bit) for the relevant types
-      BufferedImage noAlpha = new BufferedImage(
-              img.getWidth(),
-              img.getHeight(),
-              BufferedImage.TYPE_INT_RGB);
-      Graphics g = noAlpha.getGraphics();
-      g.drawImage(img, 0, 0, null);
-      g.dispose();
-      ImageIO.write(noAlpha, type, outputFile);
+    switch (type) {
+      case "ppm":
+        savePPM(outputFile, toPPMText(img));
+        break;
+      case "png":
+        ImageIO.write(img, type, outputFile);
+        break;
+      case "jpg":
+      case "bmp":
+        // basically there is a bug where ImageIO.write() doesn't work properly
+        // if it is using ARGB color values (32-bit) to save to an image format without transparency.
+        // We surmount this by creating a new BI with RGB color values (24-bit) for the relevant types
+        BufferedImage noAlpha = new BufferedImage(
+                img.getWidth(),
+                img.getHeight(),
+                BufferedImage.TYPE_INT_RGB);
+        Graphics g = noAlpha.getGraphics();
+        g.drawImage(img, 0, 0, null);
+        g.dispose();
+        ImageIO.write(noAlpha, type, outputFile);
+        break;
     }
   }
 

@@ -27,7 +27,7 @@ public class FilterKernel extends AbstractMatrixOperator {
 
     int pixelR = row - (this.matrix.length / 2);
     int pixelC = col - (this.matrix.length / 2);
-    int[] resultRGB = new int[4];
+    int[] resultRGB = new int[3];
 
     for (int r = 0; r < this.matrix.length; r++) {
       for (int c = 0; c < this.matrix.length; c++) {
@@ -53,36 +53,33 @@ public class FilterKernel extends AbstractMatrixOperator {
       pixelR++;
       pixelC = col - (this.matrix.length / 2);
     }
+    int alpha = image.getPixelAt(row, col).getAlpha();
+    PixelImpl.PixelImplBuilder pb = new PixelImpl.PixelImplBuilder()
+            .red(resultRGB[0])
+            .green(resultRGB[1])
+            .blue(resultRGB[2])
+            .alpha(alpha)
+
     return new PixelImpl(resultRGB[0], resultRGB[1], resultRGB[2],
-            image.getPixelAt(row, col).getAlpha());
+            );
   }
 
+  /**
+   * A builder for FilterKernel.
+   * Allows user to set size and values.
+   */
   public static class KernelBuilder extends MatrixOperatorBuilder {
+
+    /**
+     * Creates a new KernelBuilder.
+     */
+    public KernelBuilder() {
+      super();
+    }
 
     @Override
     public PixelOperator build() throws IllegalStateException {
-      return null;
+      return new FilterKernel(matrix);
     }
-
-    /**
-     * To set the size of the matrix. This must be the first call after the constructor and cannot
-     * be called more than once.
-     *
-     * @param size the dimensions of the matrix. Must be positive and odd
-     * @return this builder after setting the size
-     * @throws IllegalArgumentException if the size of the matrix has already been set or the size
-     *                                  is negative/even
-     */
-    public MatrixOperatorBuilder size(int size) throws IllegalArgumentException {
-      if (this.matrix == null && (size < 1 || size % 2 == 0)) {
-        throw new IllegalArgumentException(
-                "Error. Given size cannot be negative or even. Given: " + size);
-      }
-
-      // Will initialize all locations to 0.0
-      this.matrix = new double[size][size];
-      return this;
-    }
-
   }
 }
