@@ -19,7 +19,33 @@ public abstract class AbstractMatrixOperator implements PixelOperator {
   protected static abstract class MatrixOperatorBuilder {
     protected double[][] matrix;
 
-    public
+    protected MatrixOperatorBuilder(double[][] matrix) {
+      this.matrix = matrix;
+    }
+
+    protected MatrixOperatorBuilder() {
+
+    }
+
+    /**
+     * To set the size of the matrix. This must be the first call after the constructor and cannot
+     * be called more than once.
+     *
+     * @param size the dimensions of the matrix. Must be positive and odd
+     * @return this builder after setting the size
+     * @throws IllegalArgumentException if the size of the matrix has already been set or the size
+     *                                  is negative/even
+     */
+    public MatrixOperatorBuilder size(int size) throws IllegalArgumentException {
+      if (this.matrix == null && (size < 1 || size % 2 == 0)) {
+        throw new IllegalArgumentException(
+                "Error. Given size cannot be negative or even. Given: " + size);
+      }
+
+      // Will initialize all locations to 0.0
+      this.matrix = new double[size][size];
+      return this;
+    }
 
     /**
      * To set the value held at the given coordinates in the matrix to the given value.
@@ -28,9 +54,9 @@ public abstract class AbstractMatrixOperator implements PixelOperator {
      * @param col   the col of the matrix to set the given value
      * @param value the value that will be placed at the given coordinates
      * @return this builder after setting the value
-     * @throws IllegalArgumentException if the matrix's size has not been set using the
-     *                                  {@link KernelBuilder#size(int)} method, or if the
-     *                                  coordinates are out of bounds of the matrix
+     * @throws IllegalArgumentException if the matrix's size has not been set using the {@code size}
+     *                                  method, or if the coordinates are out of bounds of the
+     *                                  matrix
      */
     public MatrixOperatorBuilder valueAt(int row, int col, double value)
             throws IllegalArgumentException {
@@ -47,7 +73,7 @@ public abstract class AbstractMatrixOperator implements PixelOperator {
     }
 
     /**
-     * To build this kernel builder as a {@link FilterKernel}.
+     * To build this PixelOperator as the relevant implementation.
      *
      * @return the newly constructed KernelImpl with this matrix as the new KernelImpl's matrix
      * @throws IllegalStateException if the size of the matrix was never set
