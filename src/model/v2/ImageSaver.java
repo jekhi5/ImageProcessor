@@ -35,8 +35,8 @@ public class ImageSaver {
     } else if (type.equals("png")){
       ImageIO.write(img, type, outputFile);
     } else if (type.equals("jpg") || type.equals("bmp")) {
-      // basically there is a bug where ImageIO.write() doesn't work properly
-      // if it is using ARGB color values (32-bit) to save to an image format without transparency.
+      // basically there is a bug where ImageIO.write() doesn't work properly if it is using ARGB
+      // color values (32-bit) to save to an image format without transparency.
       // We surmount this by creating a new BI with RGB color values (24-bit) for the relevant types
       BufferedImage noAlpha = new BufferedImage(
               img.getWidth(),

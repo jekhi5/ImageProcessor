@@ -13,6 +13,11 @@ import model.v2.kernels.FilterKernel;
  */
 public class Blur extends AbstractCommand {
 
+  /**
+   * To construct a Blur command.
+   *
+   * @param in the scanner connected to the user
+   */
   public Blur(Scanner in) {
     super(in, 2);
   }

@@ -263,7 +263,7 @@ public class ImageEditorTextControllerTest {
     assertTrue(t);
   }
 
-  // Testing Greyscale using all spellings and all types
+  // Testing GenericGrayscale using all spellings and all types
   @Test
   public void greyScale() {
     String[] spellings =
