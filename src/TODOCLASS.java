@@ -5,6 +5,7 @@
 // TODO: See how to handle the image-creation-time in the tests
 // TODO: Handle testCommand/debugCommand
 // TODO: Abstract getting image from model in commands
+// TODO: Add JavaDoc to all Protected methods for grader
 
 
 // TODO: DELETE THIS FILE

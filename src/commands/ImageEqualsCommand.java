@@ -12,7 +12,7 @@ import model.image.Image;
  *
  * <p>Command syntax: {@code same <image-name> <image-name>}
  */
-public class SameImageCommand extends AbstractCommand {
+public class ImageEqualsCommand extends AbstractCommand {
 
   /**
    * Creates a new {@code DebugCommand}.
@@ -20,7 +20,7 @@ public class SameImageCommand extends AbstractCommand {
    * @param in the scanner
    * @throws IllegalArgumentException if {@code in} is null
    */
-  public SameImageCommand(Scanner in) throws IllegalArgumentException {
+  public ImageEqualsCommand(Scanner in) throws IllegalArgumentException {
     super(in, 2);
   }
 
@@ -33,13 +33,13 @@ public class SameImageCommand extends AbstractCommand {
     try {
       img1 = model.getImage(args[0]);
     } catch (IllegalArgumentException e) {
-      return "Same failed: invalid image \"" + args[0] + "\".";
+      return "Equality check failed: invalid image \"" + args[0] + "\".";
     }
     Image img2;
     try {
       img2 = model.getImage(args[1]);
     } catch (IllegalArgumentException e) {
-      return "Same failed: invalid image \"" + args[1] + "\".";
+      return "Equality check failed: invalid image \"" + args[1] + "\".";
     }
 
     // generate the result string

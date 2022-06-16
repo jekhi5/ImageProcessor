@@ -14,7 +14,7 @@ import commands.Flip;
 import commands.Grayscale;
 import commands.ImageEditorCommand;
 import commands.LoadImage;
-import commands.SameImageCommand;
+import commands.ImageEqualsCommand;
 import commands.SaveImage;
 import commands.v2.Blur;
 import commands.v2.Sharpen;
@@ -52,7 +52,7 @@ public class ImageEditorTextController implements ImageEditorController {
     this.commands = new HashMap<>();
 
     // Add all new commands here:
-    commands.put("same", s -> new SameImageCommand(s));
+    commands.put("same", s -> new ImageEqualsCommand(s));
 
     // different misspellings of "grayscale"
     commands.put("grayscale", s -> new Grayscale(s));

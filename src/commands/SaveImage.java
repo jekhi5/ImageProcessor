@@ -43,21 +43,13 @@ public class SaveImage extends AbstractCommand {
     }
 
     List<String> aliasesOW = List.of("yes", "y", "true", "t");
-    boolean overwrite = aliasesOW.contains(args[2]);
-//
-//    // actually attempt to save the image
-//    try {
-//      ImageUtil.saveImage(img, args[0], overwrite);
-//    } catch (IllegalArgumentException e) {
-//      return "Save failed: " + e.getMessage();
-//    }
+    boolean shouldOverwrite = aliasesOW.contains(args[2]);
 
     try {
-      img.saveToPath(args[0], overwrite);
+      img.saveToPath(args[0], shouldOverwrite);
     } catch (IOException e) {
       return "Save failed: " + e.getMessage();
     }
-
 
     // success!
     return "Image successfully saved to " + args[0];

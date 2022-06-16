@@ -32,7 +32,6 @@ public class LoadImage extends AbstractCommand {
 
     Image img;
     try {
-      //img = ImageUtil.createImageFromPath(args[0]);
       img = ImageFactory.createImage(args[0]);
     } catch (IllegalArgumentException e) {
       return "Load failed: " + e.getMessage();

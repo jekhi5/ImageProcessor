@@ -33,8 +33,6 @@ public class Blur extends AbstractCommand {
       return "Blur failed: invalid image \"" + args[0] + "\".";
     }
 
-    Image newImg = orig.getCopy();
-
     AbstractMatrixOperator.MatrixOperatorBuilder kb = new FilterKernel.KernelBuilder()
             .size(3)
             .valueAt(0, 0, 0.0625)
@@ -49,7 +47,7 @@ public class Blur extends AbstractCommand {
             .valueAt(2, 1, 0.125)
             .valueAt(2, 2, 0.0625);
 
-    AbstractCommand.applyKernelStaticallyAcrossAll(model, orig, newImg, kb.build(), args[1]);
+    AbstractCommand.applyPixelOperator(model, orig, kb.build(), args[1]);
 
     return "Blur successful!";
   }

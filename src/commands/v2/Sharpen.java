@@ -28,8 +28,6 @@ public class Sharpen extends AbstractCommand {
       return "Sharpen failed: invalid image \"" + args[0] + "\".";
     }
 
-    Image newImg = orig.getCopy();
-
     AbstractMatrixOperator.MatrixOperatorBuilder kb = new FilterKernel.KernelBuilder()
             .size(5)
             .valueAt(0, 0, -0.125)
@@ -63,7 +61,7 @@ public class Sharpen extends AbstractCommand {
             .valueAt(4, 4, -0.125);
 
 
-    AbstractCommand.applyKernelStaticallyAcrossAll(model, orig, newImg, kb.build(), args[1]);
+    AbstractCommand.applyPixelOperator(model, orig, kb.build(), args[1]);
 
     return "Sharpen successful!";
 

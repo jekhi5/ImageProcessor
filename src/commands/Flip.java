@@ -43,7 +43,8 @@ public class Flip extends AbstractCommand {
     int horizBound = orig.getWidth();
     int vertBound = orig.getHeight();
 
-    // set the bounds, so that we don't undo our flipping by flipping the other halfback to normal
+    // set the bounds, so that we don't undo our flipping by flipping back the other half to
+    // normal
     if (args[0].equalsIgnoreCase("horizontal")) {
       horizBound = orig.getWidth() / 2;
     } else if (args[0].equalsIgnoreCase("vertical")) {
@@ -55,11 +56,8 @@ public class Flip extends AbstractCommand {
     // loop through every pixel and swap them!
     for (int r = 0; r < vertBound; r += 1) {
       for (int c = 0; c < horizBound; c += 1) {
-
-
         if (args[0].equalsIgnoreCase("horizontal")) {
           swapPixels(orig, r, c, r, orig.getWidth() - 1 - c);
-
         } else {
           swapPixels(orig, r, c, orig.getHeight() - 1 - r, c);
         }
@@ -67,7 +65,7 @@ public class Flip extends AbstractCommand {
     }
 
     // put orig back into the ImageEditor as a new image.
-    // This breaks if ImageEditor.getImageAt() returns an alias instead of a deep copy.
+    // This breaks if ImageEditor.getImage() returns an alias instead of a deep copy.
     model.addImage(args[2], orig);
 
     // success!

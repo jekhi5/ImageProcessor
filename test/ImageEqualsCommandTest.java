@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.Scanner;
 
 import commands.ImageEditorCommand;
-import commands.SameImageCommand;
+import commands.ImageEqualsCommand;
 import model.BasicImageEditorModel;
 import model.ImageEditorModel;
 import model.image.Image;
@@ -18,7 +18,7 @@ import static org.junit.Assert.assertEquals;
 /**
  * Tests for SameImage.
  */
-public class SameImageCommandTest {
+public class ImageEqualsCommandTest {
   static String slash = System.getProperty("file.separator");
 
   ImageEditorModel m;
@@ -37,38 +37,38 @@ public class SameImageCommandTest {
 
   @Test
   public void sameImages() {
-    ImageEditorCommand s1 = new SameImageCommand(new Scanner(new StringReader("a b")));
+    ImageEditorCommand s1 = new ImageEqualsCommand(new Scanner(new StringReader("a b")));
     assertEquals("Images \"a\" and \"b\" are the same, with width 3px and height 3px.",
             s1.apply(m));
   }
 
   @Test(expected = IllegalArgumentException.class)
   public void nullModel() {
-    ImageEditorCommand s1 = new SameImageCommand(new Scanner(new StringReader("a b")));
+    ImageEditorCommand s1 = new ImageEqualsCommand(new Scanner(new StringReader("a b")));
     s1.apply(null);
   }
 
   @Test(expected = IllegalArgumentException.class)
   public void nullScanner() {
-    new SameImageCommand(null);
+    new ImageEqualsCommand(null);
   }
 
   @Test
   public void differentImages() {
-    ImageEditorCommand s1 = new SameImageCommand(new Scanner(new StringReader("a c")));
+    ImageEditorCommand s1 = new ImageEqualsCommand(new Scanner(new StringReader("a c")));
     assertEquals("Images \"a\" and \"c\" are different.",
             s1.apply(m));
   }
 
   @Test
   public void invalidImage1() {
-    ImageEditorCommand s1 = new SameImageCommand(new Scanner(new StringReader("q c")));
+    ImageEditorCommand s1 = new ImageEqualsCommand(new Scanner(new StringReader("q c")));
     assertEquals("Same failed: invalid image \"q\".", s1.apply(m));
   }
 
   @Test
   public void invalidImage2() {
-    ImageEditorCommand s1 = new SameImageCommand(new Scanner(new StringReader("a x")));
+    ImageEditorCommand s1 = new ImageEqualsCommand(new Scanner(new StringReader("a x")));
     assertEquals("Same failed: invalid image \"x\".", s1.apply(m));
   }
 }

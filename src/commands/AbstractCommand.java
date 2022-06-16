@@ -6,6 +6,7 @@ import java.util.function.Function;
 import model.ImageEditorModel;
 import model.image.Image;
 import model.pixel.Pixel;
+import model.v2.kernels.AbstractMatrixOperator;
 import model.v2.kernels.PixelOperator;
 
 /**
@@ -41,10 +42,12 @@ public abstract class AbstractCommand implements ImageEditorCommand {
     }
   }
 
-  protected static void applyKernelStaticallyAcrossAll(ImageEditorModel model, Image orig,
-                                                       Image newImg,
-                                                       PixelOperator op,
-                                                       String newImageName) {
+  protected static void applyPixelOperator(ImageEditorModel model,
+                                           Image orig,
+                                           PixelOperator op,
+                                           String newImageName) {
+    Image newImg = orig.getCopy();
+
     for (int r = 0; r < orig.getHeight(); r++) {
       for (int c = 0; c < orig.getWidth(); c++) {
         Pixel newPixel = op.resultAt(r, c, orig);
@@ -62,6 +65,17 @@ public abstract class AbstractCommand implements ImageEditorCommand {
       for (int c = 0; c < img.getWidth(); c += 1) {
         Pixel p = img.getPixelAt(r, c);
         img.setPixelAt(r, c, func.apply(p));
+      }
+    }
+  }
+
+  protected static void applyToEveryPixel(Image orig,
+                                          AbstractMatrixOperator.MatrixOperatorBuilder tb) {
+    PixelOperator transformer = tb.build();
+
+    for (int row = 0; row < orig.getHeight(); row += 1) {
+      for (int col = 0; col < orig.getWidth(); col += 1) {
+        orig.setPixelAt(row, col, transformer.resultAt(row, col, orig));
       }
     }
   }

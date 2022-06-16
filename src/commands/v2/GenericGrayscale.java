@@ -30,23 +30,20 @@ public class GenericGrayscale extends AbstractCommand {
     checkNullModel(model);
 
     Image orig = handleGettingImage(model);
+
     if (orig == null) {
       return "Generic Grayscale failed: invalid image \"" + args[0] + "\"";
     }
 
     AbstractMatrixOperator.MatrixOperatorBuilder tb = new Transformer.TransformerBuilder();
+
     for (int row = 0; row < 3; row += 1) {
       tb.valueAt(row, 0, 0.2126)
               .valueAt(row, 1, 0.7152)
               .valueAt(row, 2, 0.0722);
     }
-    PixelOperator transformer = tb.build();
 
-    for (int row = 0; row < orig.getHeight(); row += 1) {
-      for (int col = 0; col < orig.getWidth(); col += 1) {
-        orig.setPixelAt(row, col, transformer.resultAt(row, col, orig));
-      }
-    }
+    applyToEveryPixel(orig, tb);
 
     return "Generic Grayscale successful!";
   }

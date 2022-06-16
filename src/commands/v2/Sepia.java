@@ -42,13 +42,7 @@ public class Sepia extends AbstractCommand {
             .valueAt(2, 1, 0.534)
             .valueAt(2, 2, 0.131);
 
-    PixelOperator transformer = tb.build();
-
-    for (int row = 0; row < orig.getHeight(); row += 1) {
-      for (int col = 0; col < orig.getWidth(); col += 1) {
-        orig.setPixelAt(row, col, transformer.resultAt(row, col, orig));
-      }
-    }
+    GenericGrayscale.applyToEveryPixel(orig, tb);
 
     return "Sepia successful!";
   }
