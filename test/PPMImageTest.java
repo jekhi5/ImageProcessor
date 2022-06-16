@@ -66,20 +66,6 @@ public class PPMImageTest {
   }
 
   @Test
-  public void iterator() {
-    Iterator<Pixel> iter1 = new PixelIterator(grid);
-    Iterator<Pixel> iter2 = new PPMImage(grid).iterator();
-
-    for (int i = 0; i < 6; i += 1) {
-      assertTrue(iter1.hasNext());
-      assertTrue(iter2.hasNext());
-      assertEquals(iter1.next(), iter2.next());
-    }
-    assertFalse(iter1.hasNext());
-    assertFalse(iter2.hasNext());
-  }
-
-  @Test
   public void getPixelAt() {
     Image img = new PPMImage(grid);
     for (int r = 0; r < grid.size(); r += 1) {
@@ -188,17 +174,17 @@ public class PPMImageTest {
     assertNotSame(img, copy);
   }
 
-  @Test
-  public void testToPPMText() {
-    String output = "P3\n# This image was created by the the Jacob Kline and Emery Jacobowitz's" +
-            " Image Editor on: 06/08/2022 13:08:10\n" +
-            "3 2\n2\n0\n0\n0\n0\n1\n0\n0\n2\n0\n1\n0\n0\n1\n1\n0\n1\n2\n0\n";
-
-
-    assertEquals(output.substring(0, 91), new PPMImage(grid).toSavableText().substring(0, 91));
-    assertEquals(output.substring(110),
-            new PPMImage(grid).toSavableText().substring(110));
-  }
+//  @Test
+//  public void testToPPMText() {
+//    String output = "P3\n# This image was created by the the Jacob Kline and Emery Jacobowitz's" +
+//            " Image Editor on: 06/08/2022 13:08:10\n" +
+//            "3 2\n2\n0\n0\n0\n0\n1\n0\n0\n2\n0\n1\n0\n0\n1\n1\n0\n1\n2\n0\n";
+//
+//
+//    assertEquals(output.substring(0, 91), new PPMImage(grid).toSavableText().substring(0, 91));
+//    assertEquals(output.substring(110),
+//            new PPMImage(grid).toSavableText().substring(110));
+//  }
 
   @Test
   public void testHashCode() {

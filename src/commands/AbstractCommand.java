@@ -6,7 +6,6 @@ import java.util.function.Function;
 import model.ImageEditorModel;
 import model.image.Image;
 import model.pixel.Pixel;
-import model.v2.kernels.AbstractMatrixOperator;
 import model.v2.kernels.PixelOperator;
 
 /**
@@ -29,7 +28,9 @@ public abstract class AbstractCommand implements ImageEditorCommand {
     if (numArgs < 0) {
       throw new IllegalArgumentException("Commands must expect a non-negative number of inputs.");
     }
-    if (in == null) {
+
+    // If it takes in no arguments, then there doesn't need to be a scanner
+    if (numArgs > 0 && in == null) {
       throw new IllegalArgumentException();
     }
     args = new String[numArgs];
@@ -65,14 +66,6 @@ public abstract class AbstractCommand implements ImageEditorCommand {
       for (int c = 0; c < img.getWidth(); c += 1) {
         Pixel p = img.getPixelAt(r, c);
         img.setPixelAt(r, c, func.apply(p));
-      }
-    }
-  }
-
-  protected static void applyToEachPixel(Image orig, PixelOperator op) {
-    for (int row = 0; row < orig.getHeight(); row += 1) {
-      for (int col = 0; col < orig.getWidth(); col += 1) {
-        orig.setPixelAt(row, col, op.resultAt(row, col, orig));
       }
     }
   }

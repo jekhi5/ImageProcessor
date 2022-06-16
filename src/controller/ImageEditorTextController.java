@@ -13,11 +13,12 @@ import commands.Darken;
 import commands.Flip;
 import commands.Grayscale;
 import commands.ImageEditorCommand;
-import commands.LoadImage;
 import commands.ImageEqualsCommand;
+import commands.LoadImage;
 import commands.SaveImage;
 import commands.v2.Blur;
 import commands.v2.GenericGrayscale;
+import commands.v2.HelpCommand;
 import commands.v2.Sepia;
 import commands.v2.Sharpen;
 import model.ImageEditorModel;
@@ -76,14 +77,17 @@ public class ImageEditorTextController implements ImageEditorController {
     commands.put("sepia", s -> new Sepia(s));
 
     commands.put("generic-grayscale", s -> new GenericGrayscale(s));
+
+    commands.put("help", s -> new HelpCommand());
+    commands.put("h", s -> new HelpCommand());
   }
 
   @Override
   public void launch() throws IllegalStateException {
     boolean hasQuit = false;
 
-    this.transmit("Welcome to ImageEditor! Please enter a command:");
-    //TODO: create a help menu and allow the user to display it with the "help" command
+    this.transmit("Welcome to ImageEditor! For information about the supported file types " +
+            "or available commands enter \"help\" and press <enter>. Please enter a command:");
 
     // main controller loop
     while (!hasQuit) {

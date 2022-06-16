@@ -94,41 +94,41 @@ public class ImageUtilTest {
     assertEquals(blue, imgLoaded);
   }
 
-  @Test(expected = IllegalArgumentException.class)
-  public void saveImage_NullImage() {
-    ImageUtil.saveImage(null, "test" + SLASH + "testRes" + SLASH + "out.ppm", true);
-  }
-
-  @Test(expected = IllegalArgumentException.class)
-  public void saveImage_NullPath() {
-    ImageUtil.saveImage(blue, null, true);
-  }
-
-  @Test
-  public void saveImage() {
-    ImageUtil.saveImage(red, "test" + SLASH + "testOut" + SLASH + "red.ppm", true);
-    Image readImage = ImageUtil.createImageFromPath("test" + SLASH + "testOut" + SLASH + "red.ppm");
-    assertEquals(red, readImage);
-  }
-
-  @Test
-  public void saveImage_OverwriteTrue() {
-    ImageUtil.saveImage(red, "test" + SLASH + "testOut" + SLASH + "img.ppm", true);
-    ImageUtil.saveImage(blue, "test" + SLASH + "testOut" + SLASH + "img.ppm", true);
-    assertEquals(blue,
-            ImageUtil.createImageFromPath("test" + SLASH + "testOut" + SLASH + "img.ppm"));
-  }
-
-  @Test
-  public void saveImage_OverwriteFalse() {
-    ImageUtil.saveImage(red, "test" + SLASH + "testOut" + SLASH + "img.ppm", true);
-    try {
-      ImageUtil.saveImage(blue, "test" + SLASH + "testOut" + SLASH + "img.ppm", false);
-    } catch (IllegalArgumentException e) {
-      assertEquals(red,
-              ImageUtil.createImageFromPath("test" + SLASH + "testOut" + SLASH + "img.ppm"));
-    }
-  }
+//  @Test(expected = IllegalArgumentException.class)
+//  public void saveImage_NullImage() {
+//    ImageUtil.saveImage(null, "test" + SLASH + "testRes" + SLASH + "out.ppm", true);
+//  }
+//
+//  @Test(expected = IllegalArgumentException.class)
+//  public void saveImage_NullPath() {
+//    ImageUtil.saveImage(blue, null, true);
+//  }
+//
+//  @Test
+//  public void saveImage() {
+//    ImageUtil.saveImage(red, "test" + SLASH + "testOut" + SLASH + "red.ppm", true);
+//    Image readImage = ImageUtil.createImageFromPath("test" + SLASH + "testOut" + SLASH + "red.ppm");
+//    assertEquals(red, readImage);
+//  }
+//
+//  @Test
+//  public void saveImage_OverwriteTrue() {
+//    ImageUtil.saveImage(red, "test" + SLASH + "testOut" + SLASH + "img.ppm", true);
+//    ImageUtil.saveImage(blue, "test" + SLASH + "testOut" + SLASH + "img.ppm", true);
+//    assertEquals(blue,
+//            ImageUtil.createImageFromPath("test" + SLASH + "testOut" + SLASH + "img.ppm"));
+//  }
+//
+//  @Test
+//  public void saveImage_OverwriteFalse() {
+//    ImageUtil.saveImage(red, "test" + SLASH + "testOut" + SLASH + "img.ppm", true);
+//    try {
+//      ImageUtil.saveImage(blue, "test" + SLASH + "testOut" + SLASH + "img.ppm", false);
+//    } catch (IllegalArgumentException e) {
+//      assertEquals(red,
+//              ImageUtil.createImageFromPath("test" + SLASH + "testOut" + SLASH + "img.ppm"));
+//    }
+//  }
 
   // Testing trying to read a file with no suffix
   @Test(expected = IllegalArgumentException.class)
@@ -148,35 +148,35 @@ public class ImageUtilTest {
     ImageUtil.createImageFromPath("res" + SLASH + "negativePPM.ppm");
   }
 
-  // Testing trying to save an image with a nonsense path
-  @Test(expected = IllegalArgumentException.class)
-  public void saveBadPath() {
-    ImageUtil.saveImage(new PPMImage(Arrays.asList(List.of(new PixelImpl(0, 0, 0,
-            0)), List.of(new PixelImpl(0, 0, 0, 0)))), "", true);
-  }
-
-  // Testing trying to save an image without overwrite when there's already a file there
-  @Test
-  public void saveNoOverwritePerms() throws IOException {
-    File toOverwrite = new File("res" + SLASH + "fileToOverwrite.ppm");
-    if (!toOverwrite.createNewFile()) {
-      fail("File was not created");
-    }
-
-
-    try {
-      ImageUtil.saveImage(new PPMImage(Arrays.asList(List.of(
-                      new PixelImpl(0, 0, 0, 0)),
-              List.of(
-                      new PixelImpl(0, 0, 0, 0)))),
-              "res" + SLASH + "fileToOverwrite.ppm", false);
-      fail("Expected IllegalArgumentException but didn't get it!");
-    } catch (IllegalArgumentException e) {
-      if (!toOverwrite.delete()) {
-        fail("File was not deleted");
-      }
-    }
-
-
-  }
+//  // Testing trying to save an image with a nonsense path
+//  @Test(expected = IllegalArgumentException.class)
+//  public void saveBadPath() {
+//    ImageUtil.saveImage(new PPMImage(Arrays.asList(List.of(new PixelImpl(0, 0, 0,
+//            0)), List.of(new PixelImpl(0, 0, 0, 0)))), "", true);
+//  }
+//
+//  // Testing trying to save an image without overwrite when there's already a file there
+//  @Test
+//  public void saveNoOverwritePerms() throws IOException {
+//    File toOverwrite = new File("res" + SLASH + "fileToOverwrite.ppm");
+//    if (!toOverwrite.createNewFile()) {
+//      fail("File was not created");
+//    }
+//
+//
+//    try {
+//      ImageUtil.saveImage(new PPMImage(Arrays.asList(List.of(
+//                              new PixelImpl(0, 0, 0, 0)),
+//                      List.of(
+//                              new PixelImpl(0, 0, 0, 0)))),
+//              "res" + SLASH + "fileToOverwrite.ppm", false);
+//      fail("Expected IllegalArgumentException but didn't get it!");
+//    } catch (IllegalArgumentException e) {
+//      if (!toOverwrite.delete()) {
+//        fail("File was not deleted");
+//      }
+//    }
+//
+//
+//  }
 }
