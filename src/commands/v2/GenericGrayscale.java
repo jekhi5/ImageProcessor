@@ -10,8 +10,7 @@ import model.v2.kernels.Transformer;
 
 /**
  * Represents a generic gray-scaling operation which performs a single luma calculation across each
- * pixel.
- * {@code generic-grayscale <original-image-name> <new-image-name>}
+ * pixel. {@code generic-grayscale <original-image-name> <new-image-name>}
  */
 public class GenericGrayscale extends AbstractCommand {
 

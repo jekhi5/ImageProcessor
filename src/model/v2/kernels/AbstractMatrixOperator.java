@@ -16,6 +16,9 @@ public abstract class AbstractMatrixOperator implements PixelOperator {
   @Override
   public abstract Pixel resultAt(int row, int col, Image image) throws IllegalArgumentException;
 
+  /**
+   * Represents a builder for a Matrix Operator.
+   */
   public static abstract class MatrixOperatorBuilder {
     protected double[][] matrix;
 
@@ -24,7 +27,6 @@ public abstract class AbstractMatrixOperator implements PixelOperator {
     }
 
     protected MatrixOperatorBuilder() {
-
     }
 
     /**
@@ -33,10 +35,13 @@ public abstract class AbstractMatrixOperator implements PixelOperator {
      *
      * @param size the dimensions of the matrix. Must be positive and odd
      * @return this builder after setting the size
-     * @throws IllegalArgumentException if the size of the matrix has already been set or the size
-     *                                  is negative/even
+     * @throws IllegalArgumentException      if the size of the matrix has already been set or the
+     *                                       size is negative/even
+     * @throws UnsupportedOperationException if this method is called on a MatrixOperator builder
+     *                                       that doesn't support this operation
      */
-    public MatrixOperatorBuilder size(int size) throws IllegalArgumentException {
+    public MatrixOperatorBuilder size(int size)
+            throws IllegalArgumentException, UnsupportedOperationException {
       if (this.matrix == null && (size < 1 || size % 2 == 0)) {
         throw new IllegalArgumentException(
                 "Error. Given size cannot be negative or even. Given: " + size);

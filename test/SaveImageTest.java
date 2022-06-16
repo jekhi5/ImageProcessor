@@ -128,10 +128,8 @@ public class SaveImageTest {
             "test" + SLASH + "testRes" + SLASH + "checkered.ppm checkered no q")));
     assertEquals(
             "Save failed: Error. Could not create file from path: " +
-                    "test" + SLASH + "testRes" + SLASH +
-                    "checkered.ppm. There was already a file at this " +
-                    "location. To " +
-                    "overwrite, add \"true\" to command.",
+                    "test" + SLASH + "testRes" + SLASH + "checkered.ppm. There was already a " +
+                    "file at this location. To overwrite, add \"true\" to command.",
             saveCommand.apply(model));
   }
 

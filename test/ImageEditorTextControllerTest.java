@@ -43,13 +43,15 @@ public class ImageEditorTextControllerTest {
   Appendable log;
   Map<Class<? extends AbstractCommand>, String> commandNames;
   String initialMessage =
-          "Welcome to ImageEditor! Please enter a command:" + NEW_LINE + "> ";
+          "Welcome to ImageEditor! For information about the supported file types or available " +
+                  "commands enter \"help\" and press <enter>. Please enter a command:" + NEW_LINE +
+                  "> ";
   String finalMessage = "> Thanks for using ImageEditor!" + NEW_LINE;
 
   String loadingCheckeredImage =
           initialMessage + "Executed command: LoadImage" + NEW_LINE +
                   "Successfully loaded image \"checkered\" from test" +
-                  SLASH + "testRes" + SLASH + "checkered.ppm!";
+                  SLASH + "testRes" + SLASH + "checkered.ppm!" + NEW_LINE;
   String loadCheckeredBottom = "load test" + SLASH + "testRes" + SLASH + "checkered.ppm checkered ";
 
 
@@ -109,10 +111,9 @@ public class ImageEditorTextControllerTest {
     assertEquals("", this.log.toString());
     controller.launch();
     assertEquals(initialMessage + "Executed command: LoadImage" +
-                    NEW_LINE + "Successfully loaded image " +
-                    "\"checkered\" from res" + SLASH + "CheckeredBlackBottom_3x4.ppm!" + NEW_LINE +
-                    finalMessage,
-            this.log.toString());
+            NEW_LINE + "Successfully loaded image " +
+            "\"checkered\" from test" + SLASH + "testRes" + SLASH + "checkered.ppm!"
+            + NEW_LINE + finalMessage, this.log.toString());
   }
 
   // Testing loading an image and overwriting the name of another image
@@ -143,10 +144,8 @@ public class ImageEditorTextControllerTest {
     controller.launch();
     assertEquals(
             loadingCheckeredImage + "> Executed command: SaveImage" + NEW_LINE + "Image " +
-                    "successfully " +
-                    "saved to test" + SLASH + "testOut" + SLASH + "checkered_saved.ppm" + NEW_LINE +
-                    finalMessage,
-            this.log.toString());
+                    "successfully saved to test" + SLASH + "testOut" + SLASH + "checkered_saved.ppm"
+                    + NEW_LINE + finalMessage, this.log.toString());
 
 
     // CLEANUP
@@ -181,17 +180,14 @@ public class ImageEditorTextControllerTest {
 
     Reader reader =
             new StringReader(loadCheckeredBottom + " save test" + SLASH + "testOut" + SLASH +
-                    "tempFile" +
-                    ".ppm " +
-                    "checkered " + overwriteCommand + " exit");
+                    "tempFile.ppm checkered " + overwriteCommand + " exit");
     controller = new ImageEditorTextController(model, view, reader);
 
     assertEquals("", this.log.toString());
     controller.launch();
     assertEquals(loadingCheckeredImage + "> Executed command: SaveImage" + NEW_LINE +
             "Image successfully saved to test" + SLASH + "testOut" + SLASH + "tempFile.ppm" +
-            NEW_LINE +
-            finalMessage, this.log.toString());
+            NEW_LINE + finalMessage, this.log.toString());
 
 
     // CLEANUP
@@ -215,7 +211,7 @@ public class ImageEditorTextControllerTest {
         assertEquals("", this.log.toString());
         runCommand(typeOfCommand, formOfCommand);
         assertEquals(loadingCheckeredImage
-                + NEW_LINE + "> Executed command: " + commandNames.get(command.getClass())
+                + "> Executed command: " + commandNames.get(command.getClass())
                 + NEW_LINE + resultingMessageHalf2
                 + NEW_LINE + "> Thanks for using ImageEditor!"
                 + NEW_LINE, this.log.toString());
@@ -374,8 +370,9 @@ public class ImageEditorTextControllerTest {
       controller.launch();
 
       assertEquals(output.toString(),
-              "Welcome to ImageEditor! Please enter a command:" + NEW_LINE +
-                      "> Error: Insufficient command input. Quitting..." + NEW_LINE +
+              "Welcome to ImageEditor! For information about the supported file types or " +
+                      "available commands enter \"help\" and press <enter>. Please enter a command:"
+                      + NEW_LINE + "> Error: Insufficient command input. Quitting..." + NEW_LINE +
                       "Thanks for using ImageEditor!" + NEW_LINE);
     }
   }

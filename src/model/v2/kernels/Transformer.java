@@ -35,7 +35,7 @@ public class Transformer extends AbstractMatrixOperator {
 //    }
 
     for (int r = 0; r < 3; r++) {
-      for(int c = 0; c < 3; c++) {
+      for (int c = 0; c < 3; c++) {
         rgbPrime[r] += matrix[r][c] * rgb[c];
       }
     }
@@ -71,17 +71,16 @@ public class Transformer extends AbstractMatrixOperator {
     }
 
     /**
-     * Throws an IllegalCallerException because we can't set the size of a Color Transformer.
-     * This allows us to enforce an invariant such that the dimensions of a Transformer matrix
-     * are al
+     * Throws an IllegalCallerException because we can't set the size of a Color Transformer. This
+     * allows us to enforce an invariant such that the dimensions of a Transformer matrix are al
      *
      * @param size a size
      * @return nothing
      * @throws IllegalCallerException when called.
      */
     @Override
-    public MatrixOperatorBuilder size(int size) throws IllegalCallerException {
-      throw new IllegalCallerException("A transformer matrix is always 3x3!");
+    public MatrixOperatorBuilder size(int size) throws UnsupportedOperationException {
+      throw new UnsupportedOperationException("A transformer matrix is always 3x3!");
     }
 
     @Override

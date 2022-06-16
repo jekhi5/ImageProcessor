@@ -3,22 +3,18 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Iterator;
 import java.util.List;
 
 import model.image.Image;
 import model.image.PPMImage;
-import model.image.PixelIterator;
 import model.pixel.Pixel;
 import model.pixel.PixelImpl;
 import utilities.ImageUtil;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.assertSame;
-import static org.junit.Assert.assertTrue;
 
 /**
  * Tests for PPMImage.

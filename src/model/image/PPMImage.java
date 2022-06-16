@@ -96,17 +96,29 @@ public class PPMImage implements Image {
   }
 
   @Override
-  public void saveToPath(String path, boolean shouldOverwrite) throws IOException {
+  public void saveToPath(String path, boolean shouldOverwrite)
+          throws IOException, IllegalArgumentException {
     if (path == null) {
-      throw new IOException("Can't save to null path");
+      throw new IllegalArgumentException("Can't save to null path");
     }
     File f = new File(path);
 
-    if (f.exists() && !f.isDirectory() && !shouldOverwrite) {
-      throw new IOException("can't overwrite file!");
-    } else {
-      ImageSaver.write(this.toBufferedImage(), ImageUtil.getSuffix(path), f);
+    if (f.exists() && f.isDirectory()) {
+      throw new IllegalArgumentException("Error. Could not create file from path: " + path +
+              ". This is a directory.");
+    } else if (f.exists() && shouldOverwrite) {
+      boolean wasSuccessfullyDeleted = f.delete();
+
+      if (!wasSuccessfullyDeleted) {
+        throw new IOException("Error. Cannot delete file at path: " + f.getPath());
+      }
+    } else if (f.exists() && !shouldOverwrite) {
+      throw new IllegalArgumentException(
+              "Error. Could not create file from path: " + path + ". There was " +
+                      "already a file at this location. To overwrite, add \"true\" to command.");
     }
+
+    ImageSaver.write(this.toBufferedImage(), ImageUtil.getSuffix(path), f);
   }
 
 

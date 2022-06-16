@@ -47,7 +47,7 @@ public class SaveImage extends AbstractCommand {
 
     try {
       img.saveToPath(args[0], shouldOverwrite);
-    } catch (IOException e) {
+    } catch (IOException | IllegalArgumentException e) {
       return "Save failed: " + e.getMessage();
     }
 

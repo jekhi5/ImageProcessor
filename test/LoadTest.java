@@ -64,7 +64,8 @@ public class LoadTest {
             new LoadImage(new Scanner(new StringReader("test" + SLASH + "testRes" + SLASH +
                     "bungus.ppm " +
                     "bungus")));
-    assertEquals("File test" + SLASH + "testRes" + SLASH + "bungus.ppm not found!", l.apply(model));
+    assertEquals("Load failed: File test" + SLASH + "testRes" + SLASH + "bungus.ppm not found!",
+            l.apply(model));
   }
 
   @Test

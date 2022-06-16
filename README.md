@@ -1,5 +1,7 @@
 # ImageEditor
+
 CHANGES:
+
 - PPMImage -> ImageImpl
 - Additions to ImageUtil.CreateImageFromPath for more filetypes
 

@@ -59,7 +59,10 @@ public interface Image {
    *
    * @param path            the path of the new image
    * @param shouldOverwrite should the new file overwrite any existing file?
-   * @throws java.io.IOException if there is an issue with saving the file (bad path, etc.)
+   * @throws java.io.IOException      if there is an issue with saving the file on the system end
+   * @throws IllegalArgumentException if the given path is not a valid path (is a directory, is
+   *                                  null, etc.)
    */
-  void saveToPath(String path, boolean shouldOverwrite) throws IOException;
+  void saveToPath(String path, boolean shouldOverwrite)
+          throws IOException, IllegalArgumentException;
 }

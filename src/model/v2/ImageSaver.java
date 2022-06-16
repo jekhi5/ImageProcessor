@@ -99,14 +99,6 @@ public class ImageSaver {
   }
 
   private static void savePPM(File file, String ppmText) throws IOException {
-    if (file.exists() && !file.isDirectory()) {
-      boolean wasSuccessfullyDeleted = file.delete();
-
-      if (!wasSuccessfullyDeleted) {
-        throw new IOException("Error. Cannot delete file at path: " + file.getPath());
-      }
-    }
-
     try {
       if (!file.createNewFile()) {
         throw new IOException("Error. Could not create file from path: " + file.getPath() +
