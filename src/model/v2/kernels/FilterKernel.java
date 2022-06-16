@@ -27,36 +27,39 @@ public class FilterKernel extends AbstractMatrixOperator {
 
     int pixelR = row - (this.matrix.length / 2);
     int pixelC = col - (this.matrix.length / 2);
-    int[] resultRGB = new int[3];
+    double[] resultRGB = new double[3];
 
     for (int r = 0; r < this.matrix.length; r++) {
       for (int c = 0; c < this.matrix.length; c++) {
-        int red = 0;
-        int green = 0;
-        int blue = 0;
+        double red = 0;
+        double green = 0;
+        double blue = 0;
         try {
           Pixel p = image.getPixelAt(pixelR, pixelC);
-          red = (int) (p.getRed() * (this.matrix[r][c]));
-          green = (int) (p.getGreen() * (this.matrix[r][c]));
-          blue = (int) (p.getBlue() * (this.matrix[r][c]));
+          red = (p.getRed() * (this.matrix[r][c]));
+          green = (p.getGreen() * (this.matrix[r][c]));
+          blue = (p.getBlue() * (this.matrix[r][c]));
         } catch (IllegalArgumentException ignored) {
         }
 
-        resultRGB[0] = Math.max(0, Math.min(resultRGB[0] + red, 255));
-        resultRGB[1] = Math.max(0, Math.min(resultRGB[1] + green, 255));
-        resultRGB[2] = Math.max(0, Math.min(resultRGB[2] + blue, 255));
+        resultRGB[0] += red;
+        resultRGB[1] += green;
+        resultRGB[2] += blue;
 
         pixelC++;
       }
       pixelR++;
       pixelC = col - (this.matrix.length / 2);
     }
+    resultRGB[0] = Math.max(0, Math.min(resultRGB[0], 255));
+    resultRGB[1] = Math.max(0, Math.min(resultRGB[1], 255));
+    resultRGB[2] = Math.max(0, Math.min(resultRGB[2], 255));
     int alpha = image.getPixelAt(row, col).getAlpha();
 
     return new PixelImpl.PixelImplBuilder()
-            .red(resultRGB[2])
-            .green(resultRGB[0])
-            .blue(resultRGB[1])
+            .red((int) resultRGB[0])
+            .green((int) resultRGB[1])
+            .blue((int) resultRGB[2])
             .alpha(alpha)
             .build();
   }
@@ -81,11 +84,6 @@ public class FilterKernel extends AbstractMatrixOperator {
      */
     public KernelBuilder(double[][] matrix) {
       super(matrix);
-    }
-
-    @Override
-    protected MatrixOperatorBuilder getType(double[][] matrix) {
-      return new KernelBuilder(matrix);
     }
 
     @Override

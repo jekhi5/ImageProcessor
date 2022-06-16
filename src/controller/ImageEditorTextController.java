@@ -17,6 +17,8 @@ import commands.LoadImage;
 import commands.ImageEqualsCommand;
 import commands.SaveImage;
 import commands.v2.Blur;
+import commands.v2.GenericGrayscale;
+import commands.v2.Sepia;
 import commands.v2.Sharpen;
 import model.ImageEditorModel;
 import view.ImageEditorView;
@@ -70,6 +72,10 @@ public class ImageEditorTextController implements ImageEditorController {
     commands.put("blur", s -> new Blur(s));
 
     commands.put("sharpen", s -> new Sharpen(s));
+
+    commands.put("sepia", s -> new Sepia(s));
+
+    commands.put("generic-grayscale", s -> new GenericGrayscale(s));
   }
 
   @Override

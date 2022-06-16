@@ -6,7 +6,6 @@ import commands.AbstractCommand;
 import model.ImageEditorModel;
 import model.image.Image;
 import model.v2.kernels.AbstractMatrixOperator;
-import model.v2.kernels.PixelOperator;
 import model.v2.kernels.Transformer;
 
 /**
@@ -16,7 +15,7 @@ import model.v2.kernels.Transformer;
 public class Sepia extends AbstractCommand {
 
 
-  public Sepia(Scanner in, int numArgs) {
+  public Sepia(Scanner in) {
     super(in, 2);
   }
 
@@ -42,7 +41,7 @@ public class Sepia extends AbstractCommand {
             .valueAt(2, 1, 0.534)
             .valueAt(2, 2, 0.131);
 
-    GenericGrayscale.applyToEveryPixel(orig, tb);
+    applyPixelOperator(model, orig, tb.build(), args[1]);
 
     return "Sepia successful!";
   }
