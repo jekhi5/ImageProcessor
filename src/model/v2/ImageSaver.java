@@ -4,6 +4,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -32,7 +33,11 @@ public class ImageSaver {
         savePPM(outputFile, toPPMText(img));
         break;
       case "png":
-        ImageIO.write(img, type, outputFile);
+        try {
+          ImageIO.write(img, type, outputFile);
+        } catch (FileNotFoundException e) {
+          throw new IOException("can't find path!");
+        }
         break;
       case "jpg":
       case "bmp":
@@ -46,7 +51,13 @@ public class ImageSaver {
         Graphics g = noAlpha.getGraphics();
         g.drawImage(img, 0, 0, null);
         g.dispose();
-        ImageIO.write(noAlpha, type, outputFile);
+        try {
+          ImageIO.write(noAlpha, type, outputFile);
+        } catch (FileNotFoundException e) {
+          throw new IOException("can't find path!");
+        }
+
+
         break;
     }
   }
