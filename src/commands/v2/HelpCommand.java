@@ -17,13 +17,8 @@ public class HelpCommand extends AbstractCommand {
 
   /**
    * Creates a new Help command that takes in no arguments.
-   *
-   * @throws IllegalArgumentException if {@code numArgs} is negative, or {@code in} is null
-   * @throws IllegalStateException    if {@code in} runs out of inputs before collecting
-   *                                  {@code numArgs} inputs.
    */
-  public HelpCommand()
-          throws IllegalStateException, IllegalArgumentException {
+  public HelpCommand() {
     super(null, 0);
   }
 
@@ -75,8 +70,8 @@ public class HelpCommand extends AbstractCommand {
             "the other given name.  To use this command, use the following syntax:" +
             LINE_SEPARATOR + "\t{" + ORANGE + "darken" + RESET + "/" + ORANGE + "brighten" +
             RESET + "}" + GRAY + " <AMT_TO_ADJUST (\"" + ORANGE + "0-255" + GRAY +
-            "\")> <ORIGINAL_IMAGE_NAME> " + "<NEWLY_ADJUSTED_IMAGE> " + RESET +
-            LINE_SEPARATOR + LINE_SEPARATOR +
+            "\")> <ORIGINAL_IMAGE_NAME> <NEWLY_ADJUSTED_IMAGE> " + RESET + LINE_SEPARATOR +
+            LINE_SEPARATOR +
 
             "The \"" + ITALICS_ON + "Grayscale" + RESET + " command has many options. The " +
             "following are supported grayscale modes:" + LINE_SEPARATOR +
@@ -98,7 +93,7 @@ public class HelpCommand extends AbstractCommand {
             "This command performs the requested grayscale on the image with the given name and " +
             "adds it to the editor with the other given name. To use this command, use the " +
             "following syntax:" + LINE_SEPARATOR + "\t" + ORANGE + "grayscale " + GRAY +
-            "<GRAYSCALE_MODE> " + "<ORIGINAL_IMAGE_NAME> <GRAYSCALED_IMAGE_NAME> " + RESET +
+            "<GRAYSCALE_MODE> <ORIGINAL_IMAGE_NAME> <GRAYSCALED_IMAGE_NAME> " + RESET +
             LINE_SEPARATOR + LINE_SEPARATOR +
 
             "The \"" + ITALICS_ON + "Generic-Grascale" + RESET + "\" command performs a luma " +
