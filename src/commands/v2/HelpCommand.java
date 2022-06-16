@@ -51,33 +51,32 @@ public class HelpCommand extends AbstractCommand {
             "<SHOULD_OVERWRITE (\"" + ORANGE + "yes" + GRAY + "\" or \"" + ORANGE + "no" + GRAY +
             "\")>" + RESET + LINE_SEPARATOR + LINE_SEPARATOR +
 
+            ITALICS_ON + ORANGE + "Note: For all of the following commands, If you want to " +
+            "overwrite the original image in the editor, provide the same name for the original " +
+            "image and the newly-modified image." + RESET + LINE_SEPARATOR +
+
             "The \"" + ITALICS_ON + "Blur" + RESET + "\" command blurs the image with the given " +
-            "custom name and adds it to the editor with the given custom name. If you want to " +
-            "overwrite the original image in the editor, provide the same name for the " +
-            "original image and the newly-blurred image. To use this command, use the following " +
-            "syntax:" + LINE_SEPARATOR + "\t" + ORANGE + "blur " + GRAY +
+            "custom name and adds it to the editor with the given custom name. To use this " +
+            "command, use the following syntax:" + LINE_SEPARATOR + "\t" + ORANGE + "blur " + GRAY +
             "<ORIGINAL_IMAGE_NAME> <BLURRED_IMAGE_NAME> " + RESET + LINE_SEPARATOR +
             LINE_SEPARATOR +
 
             "The \"" + ITALICS_ON + "Flip" + RESET + "\" command either vertically or " +
             "horizontally flips the image with the given name based on the requested " +
-            "type of flip and adds it to the editor with the other given name. If you want to " +
-            "overwrite the original image in the editor, provide the same name for the " +
-            "original image and the newly-flipped image. To use this command, use the following " +
-            "syntax:" + LINE_SEPARATOR + "\t" + ORANGE + "flip " + GRAY + "<TYPE_OF_FLIP (\"" +
-            ORANGE + "vertical" + GRAY + "\" or \"" + ORANGE + "horizontal" + GRAY +
-            "\")> <ORIGINAL_IMAGE_NAME> <FLIPPED_IMAGE_NAME> " + RESET + LINE_SEPARATOR +
-            LINE_SEPARATOR +
+            "type of flip and adds it to the editor with the other given name. To use this " +
+            "command, use the following syntax:" + LINE_SEPARATOR + "\t" + ORANGE + "flip " +
+            GRAY + "<TYPE_OF_FLIP (\"" + ORANGE + "vertical" + GRAY + "\" or \"" + ORANGE +
+            "horizontal" + GRAY + "\")> <ORIGINAL_IMAGE_NAME> <FLIPPED_IMAGE_NAME> " + RESET +
+            LINE_SEPARATOR + LINE_SEPARATOR +
 
             "The \"" + ITALICS_ON + "Darken" + RESET + "\" and \"" + ITALICS_ON + "Brighten" +
             RESET + "\" commands are very similar. They brighten and darken (depending on the " +
             "requested operation) the image with the given name and adds it to the editor with " +
-            "the other given name. If you want to overwrite the original image in the editor, " +
-            "provide the same name for the original image and the newly-darkened/brightened image. " +
-            "To use this command, use the following syntax:" + LINE_SEPARATOR +
-            "\t{" + ORANGE + "darken" + RESET + "/" + ORANGE + "brighten" + RESET + "}" + GRAY +
-            " <AMT_TO_ADJUST (\"" + ORANGE + "0-255" + GRAY + "\")> <ORIGINAL_IMAGE_NAME> " +
-            "<NEWLY_ADJUSTED_IMAGE> " + RESET + LINE_SEPARATOR + LINE_SEPARATOR +
+            "the other given name.  To use this command, use the following syntax:" +
+            LINE_SEPARATOR + "\t{" + ORANGE + "darken" + RESET + "/" + ORANGE + "brighten" +
+            RESET + "}" + GRAY + " <AMT_TO_ADJUST (\"" + ORANGE + "0-255" + GRAY +
+            "\")> <ORIGINAL_IMAGE_NAME> " + "<NEWLY_ADJUSTED_IMAGE> " + RESET +
+            LINE_SEPARATOR + LINE_SEPARATOR +
 
             "The \"" + ITALICS_ON + "Grayscale" + RESET + " command has many options. The " +
             "following are supported grayscale modes:" + LINE_SEPARATOR +
@@ -97,36 +96,28 @@ public class HelpCommand extends AbstractCommand {
             LINE_SEPARATOR +
 
             "This command performs the requested grayscale on the image with the given name and " +
-            "adds it to the editor with the other given name. If you want to overwrite the " +
-            "original image in the editor, provide the same name for the original image and the " +
-            "newly-grayscaled image. To use this command, use the following syntax:" +
-            LINE_SEPARATOR + "\t" + ORANGE + "grayscale " + GRAY + "<GRAYSCALE_MODE> " +
-            "<ORIGINAL_IMAGE_NAME> <GRAYSCALED_IMAGE_NAME> " + RESET + LINE_SEPARATOR +
-            LINE_SEPARATOR +
+            "adds it to the editor with the other given name. To use this command, use the " +
+            "following syntax:" + LINE_SEPARATOR + "\t" + ORANGE + "grayscale " + GRAY +
+            "<GRAYSCALE_MODE> " + "<ORIGINAL_IMAGE_NAME> <GRAYSCALED_IMAGE_NAME> " + RESET +
+            LINE_SEPARATOR + LINE_SEPARATOR +
 
             "The \"" + ITALICS_ON + "Generic-Grascale" + RESET + "\" command performs a luma " +
             "grayscale in a single command on the image with the given custom name and adds it " +
-            "to the editor with the given custom name. If you want to overwrite the original " +
-            "image in the editor, provide the same name for the original image and the " +
-            "newly-grayed image. To use this command, use the following syntax:" + LINE_SEPARATOR +
-            "\t" + ORANGE + "generic-grayscale " + GRAY + "<ORIGINAL_IMAGE_NAME> " +
-            "<GRAYED_IMAGE_NAME> " + RESET + LINE_SEPARATOR + LINE_SEPARATOR +
+            "to the editor with the given custom name. To use this command, use the following " +
+            "syntax:" + LINE_SEPARATOR + "\t" + ORANGE + "generic-grayscale " + GRAY +
+            "<ORIGINAL_IMAGE_NAME> <GRAYED_IMAGE_NAME> " + RESET + LINE_SEPARATOR + LINE_SEPARATOR +
 
             "The \"" + ITALICS_ON + "Sepia" + RESET + "\" command performs a Sepia " +
             "filter on the image with the given custom name and adds it to the editor with the " +
-            "given custom name. If you want to overwrite the original image in the editor, " +
-            "provide the same name for the original image and the newly-filtered image. To use " +
-            "this command, use the following syntax:" + LINE_SEPARATOR +
-            "\t" + ORANGE + "sepia " + GRAY + "<ORIGINAL_IMAGE_NAME> " +
-            "<FILTERED_IMAGE_NAME> " + RESET + LINE_SEPARATOR + LINE_SEPARATOR +
+            "given custom name. To use this command, use the following syntax:" + LINE_SEPARATOR +
+            "\t" + ORANGE + "sepia " + GRAY + "<ORIGINAL_IMAGE_NAME> <FILTERED_IMAGE_NAME> " +
+            RESET + LINE_SEPARATOR + LINE_SEPARATOR +
 
             "The \"" + ITALICS_ON + "Sharpen" + RESET + "\" command performs a sharpening " +
             "filter on the image with the given custom name and adds it to the editor with the " +
-            "given custom name. If you want to overwrite the original image in the editor, " +
-            "provide the same name for the original image and the newly-filtered image. To use " +
-            "this command, use the following syntax:" + LINE_SEPARATOR +
-            "\t" + ORANGE + "sharpen " + GRAY + "<ORIGINAL_IMAGE_NAME> " +
-            "<FILTERED_IMAGE_NAME> " + RESET + LINE_SEPARATOR + LINE_SEPARATOR +
+            "given custom name. To use this command, use the following syntax:" + LINE_SEPARATOR +
+            "\t" + ORANGE + "sharpen " + GRAY + "<ORIGINAL_IMAGE_NAME> <FILTERED_IMAGE_NAME> " +
+            RESET + LINE_SEPARATOR + LINE_SEPARATOR +
 
             "Enjoy!!";
   }
