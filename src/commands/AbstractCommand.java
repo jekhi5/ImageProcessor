@@ -69,17 +69,6 @@ public abstract class AbstractCommand implements ImageEditorCommand {
     }
   }
 
-  protected static void applyToEveryPixel(Image orig,
-                                          AbstractMatrixOperator.MatrixOperatorBuilder tb) {
-    PixelOperator transformer = tb.build();
-
-    for (int row = 0; row < orig.getHeight(); row += 1) {
-      for (int col = 0; col < orig.getWidth(); col += 1) {
-        orig.setPixelAt(row, col, transformer.resultAt(row, col, orig));
-      }
-    }
-  }
-
   protected void checkNullModel(ImageEditorModel model) throws IllegalArgumentException {
     if (model == null) {
       throw new IllegalArgumentException("Model can't be null!");

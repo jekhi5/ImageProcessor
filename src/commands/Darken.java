@@ -59,7 +59,7 @@ public class Darken extends AbstractCommand {
     });
 
     // put orig back into the ImageEditor as a new image.
-    // This breaks if ImageEditor.getImageAt() returns an alias instead of a deep copy.
+    // This breaks if ImageEditor.getImage() returns an alias instead of a deep copy.
     model.addImage(args[2], orig);
 
     // Success!
