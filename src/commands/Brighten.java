@@ -14,7 +14,7 @@ import model.pixel.PixelImpl;
  *
  * <p>Command syntax: {@code brighten <amount> <original-image-name> <new-image-name>}.
  */
-public class Brighten extends AbstractCommand {
+public class Brighten extends AdjustLightCommand {
 
 
   /**
@@ -29,7 +29,14 @@ public class Brighten extends AbstractCommand {
   }
 
   @Override
-  public String apply(ImageEditorModel model) throws IllegalArgumentException {
-
+  protected int performOperation(int compValue, int amtToAdjust) {
+    return Math.min(compValue + amtToAdjust, 255);
   }
+
+  @Override
+  protected String getName() {
+    return "Brighten";
+  }
+
+
 }

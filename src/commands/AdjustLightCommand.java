@@ -9,45 +9,49 @@ import model.pixel.PixelImpl;
 
 public abstract class AdjustLightCommand extends AbstractCommand {
 
+
   /**
-   * Creates a new AdjustLightCommand command with the given scanner.
+   * Creates a new lighting based command with the given number of arguments.
    *
    * @param in      the {@link Scanner}
-   * @throws IllegalArgumentException if {@code in} is null
+   * @param numArgs the number of arguments
+   * @throws IllegalArgumentException if {@code numArgs} is negative, or {@code in} is null
    * @throws IllegalStateException    if {@code in} runs out of inputs before collecting
    *                                  {@code numArgs} inputs.
    */
-  public AdjustLightCommand(Scanner in)
+  public AdjustLightCommand(Scanner in, int numArgs)
           throws IllegalStateException, IllegalArgumentException {
-    super(in, 3);
+    super(in, numArgs);
   }
 
   public String apply(ImageEditorModel model) {
     checkNullModel(model);
+
+    String commandName = this.getName();
 
     // get the image
     Image orig;
     try {
       orig = model.getImage(args[1]);
     } catch (IllegalArgumentException e) {
-      return "Brighten failed: invalid image \"" + args[1] + "\".";
+      return commandName + " failed: invalid image \"" + args[1] + "\".";
     }
 
     int amount;
     try {
       amount = Integer.parseInt(args[0]);
       if (amount < 0) {
-        return "Brighten failed: amount must be positive, was: " + amount;
+        return commandName + " failed: amount must be positive, was: " + amount;
       }
     } catch (NumberFormatException e) {
-      return "Brighten failed: amount must be a positive integer!";
+      return commandName + " failed: amount must be a positive integer!";
     }
 
     applyToEachPixel(orig, p -> {
       PixelBuilder builder = new PixelImpl.PixelImplBuilder();
-      builder.red(Math.min(p.getRed() + amount, 255));
-      builder.green(Math.min(p.getGreen() + amount, 255));
-      builder.blue(Math.min(p.getBlue() + amount, 255));
+      builder.red(this.performOperation(p.getRed(), amount));
+      builder.green(this.performOperation(p.getGreen(), amount));
+      builder.blue(this.performOperation(p.getBlue(), amount));
       return builder.build();
     });
 
@@ -56,6 +60,22 @@ public abstract class AdjustLightCommand extends AbstractCommand {
     model.addImage(args[2], orig);
 
     // Success!
-    return "Brighten successful!";
+    return commandName + " successful!";
   }
+
+  /**
+   * To perform the necessary lighting operation on the given component value
+   *
+   * @param compValue   the value of the component to use
+   * @param amtToAdjust is the amount to adjust the given component value by
+   * @return the resulting value of that component after performing the operation
+   */
+  protected abstract int performOperation(int compValue, int amtToAdjust);
+
+  /**
+   * To get the String representation of the type of command. To be used in the Error messages.
+   *
+   * @return the name of the command as a String
+   */
+  protected abstract String getName();
 }

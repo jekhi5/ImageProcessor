@@ -14,7 +14,7 @@ import model.pixel.PixelImpl;
  *
  * <p>Command syntax: {@code darken <amount> <original-image-name> <new-image-name>}.
  */
-public class Darken extends AbstractCommand {
+public class Darken extends AdjustLightCommand {
 
 
   /**
@@ -29,40 +29,14 @@ public class Darken extends AbstractCommand {
   }
 
   @Override
-  public String apply(ImageEditorModel model) throws IllegalArgumentException {
-    checkNullModel(model);
-
-    // get the image
-    Image orig;
-    try {
-      orig = model.getImage(args[1]);
-    } catch (IllegalArgumentException e) {
-      return "Darken failed: invalid image \"" + args[1] + "\".";
-    }
-
-    int amount;
-    try {
-      amount = Integer.parseInt(args[0]);
-      if (amount < 0) {
-        return "Darken failed: amount must be positive, was: " + amount;
-      }
-    } catch (NumberFormatException e) {
-      return "Darken failed: amount must be a positive integer!";
-    }
-
-    applyToEachPixel(orig, p -> {
-      PixelBuilder builder = new PixelImpl.PixelImplBuilder();
-      builder.red(Math.max(p.getRed() - amount, 0));
-      builder.green(Math.max(p.getGreen() - amount, 0));
-      builder.blue(Math.max(p.getBlue() - amount, 0));
-      return builder.build();
-    });
-
-    // put orig back into the ImageEditor as a new image.
-    // This breaks if ImageEditor.getImage() returns an alias instead of a deep copy.
-    model.addImage(args[2], orig);
-
-    // Success!
-    return "Darken successful!";
+  protected int performOperation(int compValue, int amtToAdjust) {
+    return Math.max(compValue - amtToAdjust, 0);
   }
+
+  @Override
+  protected String getName() {
+    return "Darken";
+  }
+
+
 }
