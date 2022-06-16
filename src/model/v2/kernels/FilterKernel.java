@@ -34,8 +34,6 @@ public class FilterKernel extends AbstractMatrixOperator {
         int red = 0;
         int green = 0;
         int blue = 0;
-        // If the pixel exists, then set channelValue to the desired channel's value in that
-        // pixel, if not, we've already instantiated _channelValue_ to 0
         try {
           Pixel p = image.getPixelAt(pixelR, pixelC);
           red = (int) (p.getRed() * (this.matrix[r][c]));
@@ -56,9 +54,9 @@ public class FilterKernel extends AbstractMatrixOperator {
     int alpha = image.getPixelAt(row, col).getAlpha();
 
     return new PixelImpl.PixelImplBuilder()
-            .red(resultRGB[0])
-            .green(resultRGB[1])
-            .blue(resultRGB[2])
+            .red(resultRGB[2])
+            .green(resultRGB[0])
+            .blue(resultRGB[1])
             .alpha(alpha)
             .build();
   }
