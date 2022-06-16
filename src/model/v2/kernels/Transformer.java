@@ -24,20 +24,30 @@ public class Transformer extends AbstractMatrixOperator {
   public Pixel resultAt(int row, int col, Image image) throws IllegalArgumentException {
     Pixel origPixel = image.getPixelAt(row, col);
     int[] rgb = new int[]{origPixel.getRed(), origPixel.getGreen(), origPixel.getBlue()};
-    int[] rgbPrime = new int[3];
+    double[] rgbPrime = new double[3];
 
-    for (int c = 0; c < 3; c++) {
-      double prime = 0;
-      for (int r = 0; r < 3; r++) {
-        prime += matrix[r][c] * rgb[c];
+//    for (int c = 0; c < 3; c++) {
+//      double prime = 0;
+//      for (int r = 0; r < 3; r++) {
+//        prime += matrix[r][c] * rgb[c];
+//      }
+//      rgbPrime[c] = prime;
+//    }
+
+    for (int r = 0; r < 3; r++) {
+      for(int c = 0; c < 3; c++) {
+        rgbPrime[r] += matrix[r][c] * rgb[c];
       }
-      rgbPrime[c] = (int) prime;
+    }
+
+    for (int i = 0; i < 3; i++) {
+      rgbPrime[i] = Math.max(0, Math.min(255, rgbPrime[i]));
     }
 
     return new PixelImpl.PixelImplBuilder()
-            .red(rgbPrime[0])
-            .green(rgbPrime[1])
-            .blue(rgbPrime[2])
+            .red((int) rgbPrime[0])
+            .green((int) rgbPrime[1])
+            .blue((int) rgbPrime[2])
             .alpha(origPixel.getAlpha())
             .build();
   }
@@ -62,6 +72,8 @@ public class Transformer extends AbstractMatrixOperator {
 
     /**
      * Throws an IllegalCallerException because we can't set the size of a Color Transformer.
+     * This allows us to enforce an invariant such that the dimensions of a Transformer matrix
+     * are al
      *
      * @param size a size
      * @return nothing
@@ -70,11 +82,6 @@ public class Transformer extends AbstractMatrixOperator {
     @Override
     public MatrixOperatorBuilder size(int size) throws IllegalCallerException {
       throw new IllegalCallerException("A transformer matrix is always 3x3!");
-    }
-
-    @Override
-    protected MatrixOperatorBuilder getType(double[][] matrix) {
-      return new TransformerBuilder(matrix);
     }
 
     @Override

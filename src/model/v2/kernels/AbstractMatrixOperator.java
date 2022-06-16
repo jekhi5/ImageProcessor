@@ -44,7 +44,7 @@ public abstract class AbstractMatrixOperator implements PixelOperator {
 
       // Will initialize all locations to 0.0
       this.matrix = new double[size][size];
-      return this.getType(this.matrix);
+      return this;
     }
 
     /**
@@ -69,16 +69,8 @@ public abstract class AbstractMatrixOperator implements PixelOperator {
       }
 
       this.matrix[row][col] = value;
-      return this.getType(this.matrix);
+      return this;
     }
-
-    /**
-     * To get the proper Matrix Operator Builder for the operation.
-     *
-     * @param matrix the matrix of this operator builder
-     * @return a MatrixOperatorBuilder of the proper type
-     */
-    protected abstract MatrixOperatorBuilder getType(double[][] matrix);
 
     /**
      * To build this PixelOperator as the relevant implementation.

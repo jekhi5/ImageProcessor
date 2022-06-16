@@ -61,7 +61,7 @@ public class Sharpen extends AbstractCommand {
             .valueAt(4, 4, -0.125);
 
 
-    AbstractCommand.applyPixelOperator(model, orig, kb.build(), args[1]);
+    applyPixelOperator(model, orig, kb.build(), args[1]);
 
     return "Sharpen successful!";
 

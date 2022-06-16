@@ -6,7 +6,6 @@ import commands.AbstractCommand;
 import model.ImageEditorModel;
 import model.image.Image;
 import model.v2.kernels.AbstractMatrixOperator;
-import model.v2.kernels.PixelOperator;
 import model.v2.kernels.Transformer;
 
 /**
@@ -43,7 +42,7 @@ public class GenericGrayscale extends AbstractCommand {
               .valueAt(row, 2, 0.0722);
     }
 
-    applyToEveryPixel(orig, tb);
+    applyPixelOperator(model, orig, tb.build(), args[1]);
 
     return "Generic Grayscale successful!";
   }
