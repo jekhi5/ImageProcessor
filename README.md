@@ -11,3 +11,8 @@
   helper class. 
   - Furthermore, this allowed us to limit our reliance on `ImageUtil`,
   which now only has the ability to read PPM files.
+
+## Completeness
+
+The whole program is complete. It may still be extended in the future,
+but it currently works in its entirety.

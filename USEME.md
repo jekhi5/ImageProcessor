@@ -84,22 +84,22 @@ Our design follows the Model-View-Controller archetype.
 
 #### Model
 
-The model consists of several parts. The most important is an `ImageEditorModel`, an interface that
+- The model consists of several parts. The most important is an `ImageEditorModel`, an interface that
 provides three methods: storing images, retrieving images, and executing commands on images.
 This interface is implemented by `BasicImageEditorModel.` Think of this as a box that all the images
 are stored in, so that they can be taken out and manipulated.
 
-We have standardized implementations of `Image`s and `Pixel`s, which provide the bare minimum
+- We have standardized implementations of `Image`s and `Pixel`s, which provide the bare minimum
 functionality.
 An `Image` knows how to get and set pixels at given positions, and get its dimensions. A `Pixel` can
 give
 information about its 4-channel colors (RGBA). Pixels can be built using the `PixelBuilder` class,
 which provides an easy way to construct them.
 
-`Image` is  implemented by `PPMImage`--which specifically represents a P3 PPM image--
+- `Image` is  implemented by `PPMImage`--which specifically represents a P3 PPM image--
 and `BetterImage`, which can represent any kind of image.
 
-The reason that `Image` and `Pixel` exist as public interfaces is so that they can be influenced by
+- The reason that `Image` and `Pixel` exist as public interfaces is so that they can be influenced by
 commands. The `ImageEditorCommand` interface merely allows commands to be executed by
 an `ImageEditorModel`,
 which then provides any `Image`s the command queries. Commands should all extend `AbstractCommand`,
@@ -112,11 +112,15 @@ controller
 can simply pass the relevant command to the model. Some commands also interact with the file system,
 like `SaveImage` and `LoadImage`.
 
-The `ImageEditorCommand` interface also facilitates the transfer of data from the model to the
+- The `ImageEditorCommand` interface also facilitates the transfer of data from the model to the
 controller,
 as it returns a status method for each command, which is generated using details normally invisible
 to the controller.
 This way, the controller can tell if anything else needs to be done.
+
+- The `PixelOperator` interface represents either a Kernel or Color Transformation operation.
+While these have different functions, they have the same general form (i.e. applying a matrix to a pixel on an image,
+and subsequently returning a new pixel).
 
 #### View
 
