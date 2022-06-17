@@ -25,10 +25,16 @@ public class ImageSaver {
    *                   {@code TYPE_INT_ARBG} {@link BufferedImage}.
    * @param type       the desired image file type
    * @param outputFile the file to where the image will be saved.
-   * @throws IOException if there was an issue saving the file
+   * @throws IOException              if there was an issue saving the file
+   * @throws IllegalArgumentException if any argument is null, or if the type is bad
    */
-  public static void write(BufferedImage img, String type, File outputFile) throws IOException {
-    switch (type) {
+  public static void write(BufferedImage img, String type, File outputFile) throws IOException,
+          IllegalArgumentException {
+    if (img == null || type == null || outputFile == null) {
+      throw new IllegalArgumentException("Can't write with null args!");
+    }
+
+    switch (type.toLowerCase()) {
       case "ppm":
         savePPM(outputFile, toPPMText(img));
         break;
@@ -56,9 +62,9 @@ public class ImageSaver {
         } catch (FileNotFoundException e) {
           throw new IOException("can't find path!");
         }
-
-
         break;
+      default:
+        throw new IllegalArgumentException("Invalid type: " + type);
     }
   }
 
