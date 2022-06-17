@@ -8,10 +8,10 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Objects;
 
+import model.image.BetterImage;
 import model.image.Image;
 import model.pixel.Pixel;
 import model.pixel.PixelImpl;
-import model.image.BetterImage;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;

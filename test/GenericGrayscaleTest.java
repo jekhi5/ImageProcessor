@@ -3,8 +3,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
-import commands.ImageEditorCommand;
 import commands.GenericGrayscale;
+import commands.ImageEditorCommand;
 
 /**
  * Tests for GenericGrayscale.

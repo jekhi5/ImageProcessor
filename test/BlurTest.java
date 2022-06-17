@@ -3,8 +3,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
-import commands.ImageEditorCommand;
 import commands.Blur;
+import commands.ImageEditorCommand;
 
 /**
  * The testing class for the Blue command.

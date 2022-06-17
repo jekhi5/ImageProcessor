@@ -2,14 +2,14 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.awt.*;
+import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.Objects;
 
-import model.image.Image;
 import model.image.BetterImage;
+import model.image.Image;
 import utilities.ImageFactory;
 import utilities.ImageSaver;
 

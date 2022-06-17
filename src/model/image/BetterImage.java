@@ -1,6 +1,5 @@
 package model.image;
 
-
 import java.awt.Color;
 import java.awt.image.BufferedImage;
 

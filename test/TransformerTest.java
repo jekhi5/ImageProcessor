@@ -5,9 +5,9 @@ import java.util.Arrays;
 
 import model.image.Image;
 import model.image.PPMImage;
-import model.pixel.PixelImpl;
 import model.kernels.PixelOperator;
 import model.kernels.Transformer;
+import model.pixel.PixelImpl;
 
 import static org.junit.Assert.assertEquals;
 

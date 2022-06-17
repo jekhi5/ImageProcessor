@@ -8,7 +8,6 @@ import javax.imageio.ImageIO;
 
 import model.image.BetterImage;
 import model.image.Image;
-import utilities.ImageUtil;
 
 /**
  * A factory that for creating an {@link model.image.Image}, with implementation type determined at
