@@ -1,6 +1,5 @@
 package commands;
 
-import commands.AbstractCommand;
 import model.ImageEditorModel;
 
 /**

@@ -1,7 +1,7 @@
 import org.junit.Test;
 
-import commands.ImageEditorCommand;
 import commands.HelpCommand;
+import commands.ImageEditorCommand;
 
 import static org.junit.Assert.assertEquals;
 

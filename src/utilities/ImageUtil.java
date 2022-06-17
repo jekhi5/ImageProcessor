@@ -53,7 +53,7 @@ public class ImageUtil {
    * @param path is the path to the file
    * @return the string version of the filetype including the period
    * @throws IllegalArgumentException if the path is bad
-   *                                                                                                                                                                                                                                                                                                                                                                                                             TODO: tests for getSuffix (now public)
+   *                                                                                                                                                                                                                                                                                                                                                                                                                                              TODO: tests for getSuffix (now public)
    */
   public static String getSuffix(String path) throws IllegalArgumentException {
     int indexOfSuffix = path.lastIndexOf(".");
