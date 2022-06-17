@@ -18,7 +18,7 @@ import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.fail;
 
 /**
- * Tests for ImageSaver
+ * Tests for ImageSaver.
  */
 public class ImageSaverTest {
   static final String SEP = System.getProperty("file.separator");

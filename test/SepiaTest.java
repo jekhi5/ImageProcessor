@@ -6,6 +6,9 @@ import java.util.Scanner;
 import commands.ImageEditorCommand;
 import commands.Sepia;
 
+/**
+ * Tests for sepia.
+ */
 public class SepiaTest extends AbstractCommandTest {
 
   private static final List<ImageEditorCommand> COMMAND_FORMS =
