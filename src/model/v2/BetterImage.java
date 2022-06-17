@@ -52,6 +52,9 @@ public class BetterImage implements Image {
 
   @Override
   public Pixel setPixelAt(int row, int col, Pixel newPixel) throws IllegalArgumentException {
+    if (newPixel == null) {
+      throw new IllegalArgumentException("Can't have null pixel!");
+    }
     if (Math.min(row, col) < 0 || row >= getHeight() || col >= getWidth()) {
       throw new IllegalArgumentException("Invalid position: " + row + ", " + col);
     }
@@ -97,4 +100,23 @@ public class BetterImage implements Image {
     }
   }
 
+  @Override
+  public boolean equals(Object o) {
+    if (!(o instanceof Image)) {
+      return false;
+    }
+    for (int c = 0; c < getWidth(); c++) {
+      for (int r = 0; r < getHeight(); r++) {
+        if (!getPixelAt(r, c).equals(((Image) o).getPixelAt(r, c))) {
+          return false;
+        }
+      }
+    }
+    return true;
+  }
+
+  @Override
+  public int hashCode() {
+    return image.hashCode();
+  }
 }
