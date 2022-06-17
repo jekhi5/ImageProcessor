@@ -28,6 +28,7 @@ public abstract class AdjustLightCommand extends AbstractCommand {
     super(in, numArgs);
   }
 
+  @Override
   public String apply(ImageEditorModel model) {
     checkNullModel(model);
 
@@ -68,7 +69,7 @@ public abstract class AdjustLightCommand extends AbstractCommand {
   }
 
   /**
-   * To perform the necessary lighting operation on the given component value
+   * To perform the necessary lighting operation on the given component value.
    *
    * @param compValue   the value of the component to use
    * @param amtToAdjust is the amount to adjust the given component value by
