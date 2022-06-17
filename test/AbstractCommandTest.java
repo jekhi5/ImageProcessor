@@ -125,7 +125,7 @@ public abstract class AbstractCommandTest {
     for (ImageEditorCommand cmd : this.commandForms) {
       try {
         cmd.apply(null);
-        fail("Error. Should have thrown IllegalArgumentException but did not.");
+        fail("Should have thrown IllegalArgumentException but did not.");
       } catch (IllegalArgumentException e) {
         boolean t = true;
         assertTrue(t);

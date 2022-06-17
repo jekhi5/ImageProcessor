@@ -30,7 +30,7 @@ public class BasicImageEditorModel implements ImageEditorModel {
    */
   public BasicImageEditorModel(Map<String, Image> images) throws IllegalArgumentException {
     if (images == null) {
-      throw new IllegalArgumentException("Error. The given Map cannot be null.");
+      throw new IllegalArgumentException("The given Map cannot be null.");
     } else {
       this.images = new HashMap<>(images);
       this.images.replaceAll((name, value/*unused*/) -> this.images.get(name).getCopy());
@@ -43,14 +43,14 @@ public class BasicImageEditorModel implements ImageEditorModel {
     if (this.images.containsKey(name)) {
       return this.images.get(name).getCopy();
     } else {
-      throw new IllegalArgumentException("Error. No image found with the name: \"" + name + "\"");
+      throw new IllegalArgumentException("No image found with the name: \"" + name + "\"");
     }
   }
 
   @Override
   public void addImage(String name, Image image) throws IllegalArgumentException {
     if (name == null || image == null) {
-      throw new IllegalArgumentException("Error. The given name nor image can be null.");
+      throw new IllegalArgumentException("The given name nor image can be null.");
     } else {
       this.images.put(name, image.getCopy());
     }

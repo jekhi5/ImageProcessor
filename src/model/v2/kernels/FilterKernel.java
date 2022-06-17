@@ -22,7 +22,7 @@ public class FilterKernel extends AbstractMatrixOperator {
   public Pixel resultAt(int row, int col, Image image) throws IllegalArgumentException {
 
     if (image == null) {
-      throw new IllegalArgumentException("Error. The given image cannot be null.");
+      throw new IllegalArgumentException("The given image cannot be null.");
     }
 
     int pixelR = row - (this.matrix.length / 2);

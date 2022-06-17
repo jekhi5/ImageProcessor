@@ -44,7 +44,7 @@ public class SaveImageTest {
     File directory = new File("test" + SLASH + "testOut");
     for (File file : Objects.requireNonNull(directory.listFiles())) {
       if (!file.delete()) {
-        throw new IllegalStateException("Error. File:" + file.getName() + " was not deleted! " +
+        throw new IllegalStateException("File:" + file.getName() + " was not deleted! " +
                 "Clear test" + SLASH + "testOut directory before continuing with testing or false" +
                 " tests may occur!");
       }
@@ -114,7 +114,7 @@ public class SaveImageTest {
     ImageEditorCommand saveCommand = new SaveImage(new Scanner(new StringReader(
             "test" + SLASH + "testRes" + SLASH + "checkered.ppm checkered no q")));
     assertEquals(
-            "Save failed: Error. Could not create file from path: " +
+            "Save failed: Could not create file from path: " +
                     "test" + SLASH + "testRes" + SLASH +
                     "checkered.ppm. There was already a file at this " +
                     "location. To " +
@@ -127,7 +127,7 @@ public class SaveImageTest {
     ImageEditorCommand saveCommand = new SaveImage(new Scanner(new StringReader(
             "test" + SLASH + "testRes" + SLASH + "checkered.ppm checkered no q")));
     assertEquals(
-            "Save failed: Error. Could not create file from path: " +
+            "Save failed: Could not create file from path: " +
                     "test" + SLASH + "testRes" + SLASH + "checkered.ppm. There was already a " +
                     "file at this location. To overwrite, add \"true\" to command.",
             saveCommand.apply(model));
@@ -139,7 +139,7 @@ public class SaveImageTest {
     ImageEditorCommand saveCommand = new SaveImage(new Scanner(new StringReader(
             "test" + SLASH + "testRes" + SLASH + "checkered.ppm checkered no q")));
     assertEquals(
-            "Save failed: Error. Could not create file from path: " +
+            "Save failed: Could not create file from path: " +
                     "test" + SLASH + "testRes" + SLASH +
                     "checkered.ppm. There was already a file at this " +
                     "location. To overwrite, add \"true\" to command.",
