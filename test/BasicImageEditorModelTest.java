@@ -18,14 +18,13 @@ import static org.junit.Assert.assertTrue;
  */
 public class BasicImageEditorModelTest {
 
+  private static String SLASH = System.getProperty("file.separator");
   Image fullyRedPPM;
   Image fullyGreenPPM;
   Image fullyBluePPM;
   Image checkeredBlackRight;
   Image checkeredBlackBottom;
   ImageEditorModel model;
-
-  private static String SLASH = System.getProperty("file.separator");
 
   @Before
   public void init() {
