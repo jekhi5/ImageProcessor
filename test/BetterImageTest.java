@@ -145,7 +145,7 @@ public class BetterImageTest {
     img.saveToPath(null, true);
   }
 
-  @Test(expected = IOException.class)
+  @Test(expected = IllegalArgumentException.class)
   public void saveNoOverwrite() throws IOException {
     String sep = System.getProperty("file.separator");
     img.saveToPath("test" + sep + "testOut" + sep + "temp.png", true);
