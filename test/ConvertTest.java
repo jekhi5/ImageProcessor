@@ -17,10 +17,10 @@ import static org.junit.Assert.fail;
  */
 public class ConvertTest {
 
-  ImageEditorCommand convertCommand;
   private static final String SLASH = System.getProperty("file.separator");
   private static final String FROM_PATH = "test" + SLASH + "testRes" + SLASH + "checkered.";
   private static final String TO_PATH = "test" + SLASH + "testOut" + SLASH + "checkered.";
+  ImageEditorCommand convertCommand;
 
   // Testing converting
   @Test

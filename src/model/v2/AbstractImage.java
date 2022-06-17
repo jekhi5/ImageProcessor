@@ -20,17 +20,17 @@ public abstract class AbstractImage implements Image {
     File f = new File(path);
 
     if (f.exists() && f.isDirectory()) {
-      throw new IllegalArgumentException("Error. Could not create file from path: " + path +
+      throw new IllegalArgumentException("Could not create file from path: " + path +
               ". This is a directory.");
     } else if (f.exists() && shouldOverwrite) {
       boolean wasSuccessfullyDeleted = f.delete();
 
       if (!wasSuccessfullyDeleted) {
-        throw new IOException("Error. Cannot delete file at path: " + f.getPath());
+        throw new IOException("Cannot delete file at path: " + f.getPath());
       }
     } else if (f.exists() && !shouldOverwrite) {
       throw new IllegalArgumentException(
-              "Error. Could not create file from path: " + path + ". There was " +
+              "Could not create file from path: " + path + ". There was " +
                       "already a file at this location. To overwrite, add \"true\" to command.");
     }
 

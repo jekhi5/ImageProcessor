@@ -14,7 +14,7 @@ public class BlurTest extends AbstractCommandTest {
   private static final List<ImageEditorCommand> COMMAND_FORMS =
           Arrays.asList(new Blur(new Scanner(new StringReader("checkered blur_checkered"))),
                   new Blur(new Scanner(new StringReader("checkered blur_checkered"))));
-  private static final List<String> ORDER_OF_TYPES = Arrays.asList("blur", "blur");
+  private static final List<String> ORDER_OF_TYPES = List.of("blur", "blur");
   private static final List<ImageEditorCommand> ILLEGAL_FORMS =
           Arrays.asList(new Blur(new Scanner(new StringReader("NOT_AN_IMAGE whoopsies"))),
                   new Blur(new Scanner(new StringReader("NOT_AN_IMAGE whoopsies"))));

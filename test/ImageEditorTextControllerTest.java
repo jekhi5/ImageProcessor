@@ -120,14 +120,15 @@ public class ImageEditorTextControllerTest {
   @Test
   public void loadingImageWithOverwrite() {
     Reader reader = new StringReader(
-            loadCheckeredBottom + "load res" + SLASH + "LemonChiffon_1x1.ppm image quit");
+            loadCheckeredBottom + "load test" + SLASH + "testRes" + SLASH +
+                    "LemonChiffon_1x1.ppm image quit");
     controller = new ImageEditorTextController(model, view, reader);
 
     assertEquals("", this.log.toString());
     controller.launch();
     assertEquals(loadingCheckeredImage + "> Executed command: LoadImage"
-            + NEW_LINE + "Successfully loaded image \"image\" from res" + SLASH +
-            "LemonChiffon_1x1.ppm!" + NEW_LINE +
+            + NEW_LINE + "Successfully loaded image \"image\" from test" + SLASH + "testRes" +
+            SLASH + "LemonChiffon_1x1.ppm!" + NEW_LINE +
             finalMessage, this.log.toString());
   }
 

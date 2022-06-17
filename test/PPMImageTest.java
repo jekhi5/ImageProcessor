@@ -170,25 +170,14 @@ public class PPMImageTest {
     assertNotSame(img, copy);
   }
 
-//  @Test
-//  public void testToPPMText() {
-//    String output = "P3\n# This image was created by the the Jacob Kline and Emery Jacobowitz's" +
-//            " Image Editor on: 06/08/2022 13:08:10\n" +
-//            "3 2\n2\n0\n0\n0\n0\n1\n0\n0\n2\n0\n1\n0\n0\n1\n1\n0\n1\n2\n0\n";
-//
-//
-//    assertEquals(output.substring(0, 91), new PPMImage(grid).toSavableText().substring(0, 91));
-//    assertEquals(output.substring(110),
-//            new PPMImage(grid).toSavableText().substring(110));
-//  }
-
   @Test
   public void testHashCode() {
     List<List<Pixel>> lst = new ArrayList<>();
     for (int i = 1; i <= 500; i += 1) {
       lst.add(List.of(new PixelImpl(255, 255, 255, 255)));
       Image img = new PPMImage(lst);
-      assertEquals(lst.hashCode(), img.hashCode());
+      Image img2 = new PPMImage(lst);
+      assertEquals(img2.hashCode(), img.hashCode());
     }
 
   }

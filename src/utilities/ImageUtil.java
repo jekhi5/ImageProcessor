@@ -43,7 +43,7 @@ public class ImageUtil {
     if (supportedFileTypes.containsKey(suffix)) {
       return supportedFileTypes.get(suffix).apply(path);
     } else {
-      throw new IllegalArgumentException("Error. Filetype: \"" + suffix + "\" is not supported.");
+      throw new IllegalArgumentException("Filetype: \"" + suffix + "\" is not supported.");
     }
   }
 
@@ -53,12 +53,12 @@ public class ImageUtil {
    * @param path is the path to the file
    * @return the string version of the filetype including the period
    * @throws IllegalArgumentException if the path is bad
-   *                                                                                                                                                                                                       TODO: tests for getSuffix (now public)
+   *                                                                                                                                                                                                                                        TODO: tests for getSuffix (now public)
    */
   public static String getSuffix(String path) throws IllegalArgumentException {
     int indexOfSuffix = path.lastIndexOf(".");
     if (indexOfSuffix < 0 || indexOfSuffix >= path.length() - 1) {
-      throw new IllegalArgumentException("Error. Invalid path.");
+      throw new IllegalArgumentException("Invalid path.");
     } else {
       return path.substring(indexOfSuffix + 1);
     }
@@ -105,7 +105,7 @@ public class ImageUtil {
     int height = sc.nextInt();
 
     if (width < 1 || height < 1) {
-      throw new IllegalArgumentException("Error. The given image has a width or height of 0.");
+      throw new IllegalArgumentException("The given image has a width or height of 0.");
     }
 
     double maxValue = sc.nextInt(); // max value
