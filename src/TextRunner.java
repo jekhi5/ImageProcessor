@@ -19,12 +19,9 @@ public class TextRunner {
    * @param args are the command line arguments
    */
   public static void main(String[] args) {
-    if (args.length == 0) {
-      throw new RuntimeException("You need to specify the mode! Read the README!");
-    }
-
     Readable input;
-    if (args[0].equalsIgnoreCase("manual")) {
+
+    if (args.length == 0) {
       input = new InputStreamReader(System.in);
     } else {
       try {
@@ -33,7 +30,6 @@ public class TextRunner {
         throw new RuntimeException(e);
       }
     }
-
 
     ImageEditorModel m = new BasicImageEditorModel();
     ImageEditorTextView v = new ImageEditorTextView();
