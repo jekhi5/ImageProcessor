@@ -45,7 +45,7 @@ public class ImageUtilTest {
     File testOut = new File("test" + SLASH + "testOut");
     for (File f : Objects.requireNonNull(testOut.listFiles())) {
       if (!f.delete()) {
-        throw new IllegalStateException("Error. File:" + f.getName() + " was not deleted! " +
+        throw new IllegalStateException("File:" + f.getName() + " was not deleted! " +
                 "Clear test" + SLASH + "testOut directory before continuing with testing or false" +
                 " tests may " +
                 "occur!");

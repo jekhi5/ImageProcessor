@@ -44,7 +44,7 @@ public abstract class AbstractMatrixOperator implements PixelOperator {
             throws IllegalArgumentException, UnsupportedOperationException {
       if (this.matrix == null && (size < 1 || size % 2 == 0)) {
         throw new IllegalArgumentException(
-                "Error. Given size cannot be negative or even. Given: " + size);
+                "Given size cannot be negative or even. Given: " + size);
       }
 
       // Will initialize all locations to 0.0
@@ -68,7 +68,7 @@ public abstract class AbstractMatrixOperator implements PixelOperator {
       if (this.matrix == null) {
         this.throwSizeNotSet();
       } else if (row < 0 || row > this.matrix.length || col < 0 || col > this.matrix[row].length) {
-        throw new IllegalArgumentException("Error. The given coordinates are out of bounds for " +
+        throw new IllegalArgumentException("The given coordinates are out of bounds for " +
                 "this matrix. Given: (" + row + ", " + col + "). The dimensions of this matrix " +
                 "are: " + this.matrix.length + "x" + this.matrix.length);
       }
@@ -87,7 +87,7 @@ public abstract class AbstractMatrixOperator implements PixelOperator {
 
 
     protected void throwSizeNotSet() throws IllegalStateException {
-      throw new IllegalStateException("Error. The size of the matrix was not set! You must call" +
+      throw new IllegalStateException("The size of the matrix was not set! You must call" +
               " size(int) as the first call after creating the builder.");
     }
   }

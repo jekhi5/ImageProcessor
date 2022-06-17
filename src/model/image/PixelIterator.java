@@ -38,7 +38,7 @@ public class PixelIterator implements Iterator<Pixel> {
     if (this.hasNext()) {
       return this.pixels.get(this.index++);
     } else {
-      throw new IllegalStateException("Error. Attempting to get next value when no next value " +
+      throw new IllegalStateException("Attempting to get next value when no next value " +
               "exists!");
     }
   }

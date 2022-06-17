@@ -242,7 +242,7 @@ public class ImageEditorTextControllerTest {
       case "darken":
         return new Darken(new Scanner(new StringReader(formOfCommand + naming)));
       default:
-        throw new IllegalStateException("Error. No found command with this name.");
+        throw new IllegalStateException("No found command with this name.");
     }
   }
 

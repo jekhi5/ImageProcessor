@@ -22,7 +22,7 @@ public class PixelImpl implements Pixel {
   public PixelImpl(int red, int green, int blue, int alpha) throws IllegalArgumentException {
     if (red < 0 || red > 255 || green < 0 || green > 255 || blue < 0 || blue > 255 || alpha < 0 ||
             alpha > 255) {
-      throw new IllegalArgumentException("Error. All components must be between 0-255 (inclusive)" +
+      throw new IllegalArgumentException("All components must be between 0-255 (inclusive)" +
               ". Given: [(red)" + red + ", (green)" + green + ", (blue)" + blue + ", (alpha)" +
               alpha + "].");
     }

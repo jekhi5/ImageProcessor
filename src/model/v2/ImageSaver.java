@@ -101,15 +101,15 @@ public class ImageSaver {
   private static void savePPM(File file, String ppmText) throws IOException {
     try {
       if (!file.createNewFile()) {
-        throw new IOException("Error. Could not create file from path: " + file.getPath() +
+        throw new IOException("Could not create file from path: " + file.getPath() +
                 ". There was already a file at this location. " +
                 "To overwrite, add \"true\" to command.");
       }
     } catch (IOException e) {
-      throw new IOException("Error. Bad path: " + file.getPath());
+      throw new IOException("Bad path: " + file.getPath());
     } catch (SecurityException e) {
       throw new IOException(
-              "Error. Cannot create file at given path: " + file.getPath() + "\n" + e.getMessage());
+              "Cannot create file at given path: " + file.getPath() + "\n" + e.getMessage());
     }
 
     BufferedWriter ppmWriter;
@@ -119,7 +119,7 @@ public class ImageSaver {
       ppmWriter.close();
     } catch (IOException e) {
       throw new IOException(
-              "Error. Cannot write to a file at the given path: " + file.getPath());
+              "Cannot write to a file at the given path: " + file.getPath());
     }
   }
 }
