@@ -6,6 +6,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.Objects;
 
 import model.image.Image;
 import model.v2.BetterImage;
@@ -13,6 +14,8 @@ import model.v2.ImageFactory;
 import model.v2.ImageSaver;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.fail;
 
 /**
  * Tests for ImageFactory.
@@ -30,14 +33,19 @@ public class ImageFactoryTest {
     bi.setRGB(1, 0, new Color(255, 0, 0, 255).getRGB());
     bi.setRGB(0, 1, new Color(0, 255, 0, 255).getRGB());
     bi.setRGB(1, 1, new Color(0, 255, 0, 255).getRGB());
-    bi.setRGB(0, 0, new Color(0, 0, 255, 255).getRGB());
-    bi.setRGB(0, 0, new Color(0, 0, 255, 255).getRGB());
+    bi.setRGB(0, 2, new Color(0, 0, 255, 255).getRGB());
+    bi.setRGB(1, 2, new Color(0, 0, 255, 255).getRGB());
     img = new BetterImage(bi);
   }
 
   @After
   public void purgeTestOut() {
-
+    File dir = new File("test" + SEP + "testOut");
+    for (File f : Objects.requireNonNull(dir.listFiles())) {
+      if (!f.delete()) {
+        fail("couldn't remove files");
+      }
+    }
   }
 
   @Test(expected = IllegalArgumentException.class)
@@ -78,7 +86,8 @@ public class ImageFactoryTest {
   public void loadJPG() throws IOException {
     ImageSaver.write(bi, "jpg", new File("test" + SEP + "testOut" + SEP + "test.jpg"));
     Image img2 = ImageFactory.createImage("test" + SEP + "testOut" + SEP + "test.jpg");
-    assertEquals(img, img2);
+    // due to JPG conversion, this is image should not be the same.
+    assertNotEquals(img, img2);
   }
 
   @Test

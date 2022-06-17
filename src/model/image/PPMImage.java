@@ -9,6 +9,7 @@ import java.util.List;
 
 import model.pixel.Pixel;
 import model.pixel.PixelImpl;
+import model.v2.AbstractImage;
 import model.v2.ImageSaver;
 import utilities.ImageUtil;
 
@@ -16,7 +17,7 @@ import utilities.ImageUtil;
  * Represents a PPM Image. The text of the image is converted to an array of pixels that can be
  * individually modified.
  */
-public class PPMImage implements Image {
+public class PPMImage extends AbstractImage {
 
   private final List<List<Pixel>> pixelArray;
 
@@ -96,35 +97,14 @@ public class PPMImage implements Image {
   }
 
   @Override
-  public void saveToPath(String path, boolean shouldOverwrite)
-          throws IOException, IllegalArgumentException {
-    if (path == null) {
-      throw new IllegalArgumentException("Can't save to null path");
-    }
-    File f = new File(path);
-
-    if (f.exists() && f.isDirectory()) {
-      throw new IllegalArgumentException("Error. Could not create file from path: " + path +
-              ". This is a directory.");
-    } else if (f.exists() && shouldOverwrite) {
-      boolean wasSuccessfullyDeleted = f.delete();
-
-      if (!wasSuccessfullyDeleted) {
-        throw new IOException("Error. Cannot delete file at path: " + f.getPath());
-      }
-    } else if (f.exists() && !shouldOverwrite) {
-      throw new IllegalArgumentException(
-              "Error. Could not create file from path: " + path + ". There was " +
-                      "already a file at this location. To overwrite, add \"true\" to command.");
-    }
-
-    ImageSaver.write(this.toBufferedImage(), ImageUtil.getSuffix(path), f);
-  }
-
-
-  @Override
   public int hashCode() {
-    return this.pixelArray.hashCode();
+    int hash = 0;
+    for (int row = 0; row < getHeight(); row++) {
+      for (int col = 0; col < getWidth(); col++) {
+        hash += getPixelAt(row, col).hashCode();
+      }
+    }
+    return hash;
   }
 
   /**
@@ -174,7 +154,8 @@ public class PPMImage implements Image {
   }
 
 
-  private BufferedImage toBufferedImage() {
+  @Override
+  protected BufferedImage toBufferedImage() {
     BufferedImage bi =
             new BufferedImage(this.getWidth(), this.getHeight(), BufferedImage.TYPE_INT_ARGB);
     for (int r = 0; r < this.getHeight(); r++) {
@@ -184,7 +165,6 @@ public class PPMImage implements Image {
         bi.setRGB(c, r, color.getRGB());
       }
     }
-
     return bi;
   }
 }

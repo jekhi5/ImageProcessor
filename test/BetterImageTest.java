@@ -3,6 +3,7 @@ import org.junit.Test;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
 
 import model.image.Image;
 import model.pixel.Pixel;
@@ -10,7 +11,9 @@ import model.pixel.PixelImpl;
 import model.v2.BetterImage;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotSame;
+import static org.junit.Assert.assertSame;
 
 /**
  * Tests for BetterImage.
@@ -96,5 +99,62 @@ public class BetterImageTest {
     }
   }
 
+  @Test
+  public void copyOf(){
+    assertEquals(img, img.getCopy());
+    assertNotSame(img, img.getCopy());
+  }
 
+  @Test
+  public void testEquals() {
+    Image img2 = img.getCopy();
+
+    assertEquals(img, img);
+    assertSame(img, img);
+
+    assertEquals(img, img2);
+    assertNotSame(img, img2);
+
+    assertEquals(img2, img);
+    assertNotSame(img2, img);
+
+    assertEquals(img.hashCode(), img2.hashCode());
+
+    BufferedImage bi3 = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB);
+    Image img3 = new BetterImage(bi3);
+
+    assertNotEquals(img, img3);
+    assertNotEquals(img3, img);
+  }
+
+  @Test
+  public void testHashCode() {
+    Image img2 = img.getCopy();
+    BufferedImage bi3 = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB);
+    Image img3 = new BetterImage(bi3);
+
+    assertEquals(img, img2);
+    assertEquals(img.hashCode(), img2.hashCode());
+
+    assertNotEquals(img.hashCode(), img3.hashCode());
+    assertNotEquals(img, img3);
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void saveToNullPath() throws IOException {
+    img.saveToPath(null, true);
+  }
+
+  @Test(expected = IOException.class)
+  public void saveNoOverwrite() throws IOException {
+    String sep = System.getProperty("file.separator");
+    img.saveToPath("test" + sep + "testOut" + sep + "temp.png", true);
+    assertSame(img,img);
+    img.saveToPath("test" + sep + "testOut" + sep + "temp.png", false);
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void saveDirectory() throws IOException {
+    img.saveToPath("test", true);
+  }
 }

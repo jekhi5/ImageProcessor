@@ -2,19 +2,16 @@ package model.v2;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 
 import model.image.Image;
 import model.pixel.Pixel;
 import model.pixel.PixelImpl;
-import utilities.ImageUtil;
 
 /**
  * An improved implementation of {@link Image}. Uses a {@link java.awt.image.BufferedImage} instead
  * of a 2D list, and can work with more file types than just .ppm.
  */
-public class BetterImage implements Image {
+public class BetterImage extends AbstractImage {
   private final BufferedImage image;
 
   /**
@@ -86,18 +83,10 @@ public class BetterImage implements Image {
     return new BetterImage(img);
   }
 
-  @Override
-  public void saveToPath(String path, boolean shouldOverwrite) throws IOException {
-    if (path == null) {
-      throw new IOException("Can't save to null path");
-    }
-    File f = new File(path);
 
-    if (f.exists() && !f.isDirectory() && !shouldOverwrite) {
-      throw new IOException("can't overwrite file!");
-    } else {
-      ImageSaver.write(this.image, ImageUtil.getSuffix(path), f);
-    }
+  @Override
+  protected BufferedImage toBufferedImage() {
+    return this.image;
   }
 
   @Override
@@ -121,6 +110,12 @@ public class BetterImage implements Image {
 
   @Override
   public int hashCode() {
-    return image.hashCode();
+    int hash = 0;
+    for (int row = 0; row < getHeight(); row++) {
+      for (int col = 0; col < getWidth(); col++) {
+        hash += getPixelAt(row, col).hashCode();
+      }
+    }
+    return hash;
   }
 }
