@@ -18,6 +18,9 @@ public class Blur extends AbstractCommand {
    * To construct a Blur command.
    *
    * @param in the scanner connected to the user
+   * @throws IllegalArgumentException if {@code in} is null
+   * @throws IllegalStateException    if {@code in} runs out of inputs before collecting
+   *                                  {@code numArgs} inputs.
    */
   public Blur(Scanner in) {
     super(in, 2);

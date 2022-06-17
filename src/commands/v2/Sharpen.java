@@ -14,6 +14,14 @@ import model.v2.kernels.FilterKernel;
  */
 public class Sharpen extends AbstractCommand {
 
+  /**
+   * To construct a Sharpen command that takes in two additional user inputted arguments.
+   *
+   * @param in the scanner connected to the user
+   * @throws IllegalArgumentException if {@code in} is null
+   * @throws IllegalStateException    if {@code in} runs out of inputs before collecting
+   *                                  {@code numArgs} inputs.
+   */
   public Sharpen(Scanner in) {
     super(in, 2);
   }
@@ -64,6 +72,5 @@ public class Sharpen extends AbstractCommand {
     applyPixelOperator(model, orig, kb.build(), args[1]);
 
     return "Sharpen successful!";
-
   }
 }

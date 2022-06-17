@@ -9,7 +9,7 @@ import model.pixel.PixelImpl;
 import model.v2.kernels.PixelOperator;
 import model.v2.kernels.Transformer;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 /**
  * Test class for a Transformer.
@@ -46,7 +46,6 @@ public class TransformerTest {
                             new PixelImpl(1, 1, 1, 1),
                             new PixelImpl(1, 1, 1, 1))));
   }
-
 
 
   // Size throws error

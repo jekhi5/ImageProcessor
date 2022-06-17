@@ -15,6 +15,14 @@ import model.v2.kernels.Transformer;
 public class Sepia extends AbstractCommand {
 
 
+  /**
+   * To construct a Sepia command that takes in two additional user inputted arguments.
+   *
+   * @param in the scanner connected to the user
+   * @throws IllegalArgumentException if {@code in} is null
+   * @throws IllegalStateException    if {@code in} runs out of inputs before collecting
+   *                                  {@code numArgs} inputs.
+   */
   public Sepia(Scanner in) {
     super(in, 2);
   }
