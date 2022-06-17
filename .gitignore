@@ -8,6 +8,7 @@ production/
 !src/test/**/out/
 /javadoc/
 /test/testOut/
+/res/examples
 
 ### Eclipse ###
 .apt_generated
