@@ -35,16 +35,21 @@ recommended for clarity.
 
 ### Command List
 
-| Command     | Syntax                                                 | Description                                                                                                                 |
-|:------------|:-------------------------------------------------------|:----------------------------------------------------------------------------------------------------------------------------|
-| `load `     | `load <path> <image-name>`                             | Loads an image from the path into the editor, under the given name                                                          |
-| `save`      | `save <path> <image-name> {yes ǀ no}`                  | Saves an image currently open in the editor to the given path. Overwrites any existing file if the final argument is `yes`. |
-| `brighten`  | `brighten <amount> <image-name> <new-name>`            | Increases the brightness of the image by the given amount in the range [0-255]                                              |
-| `darken`    | `darken <amount> <image-name> <new-name>`              | Decreases the brightness of the image by the given amount in the range [0-255]                                              |
-| `flip`      | `flip {vertical ǀ horizontal} <image-name> <new-name>` | Mirrors the image in the given dimension                                                                                    |
-| `grayscale` | `grayscale <mode> <image-name> <new-name>`             | Grayscale the image based on the given mode. See [Grayscale](#Grayscale) for more information                               |
-| `same`      | `same <image-name> <image-name>`                       | Tells you if the two images are the same or different.                                                                      |
-| `quit`      | `quit` or `q` or `exit`                                | Exits the ImageEditor. All unsaved data will be lost.                                                                       |
+| Command             | Syntax                                                 | Description                                                                                                                 |
+|:--------------------|:-------------------------------------------------------|:----------------------------------------------------------------------------------------------------------------------------|
+| `load `             | `load <path> <image-name>`                             | Loads an image from the path into the editor, under the given name                                                          |
+| `save`              | `save <path> <image-name> {yes ǀ no}`                  | Saves an image currently open in the editor to the given path. Overwrites any existing file if the final argument is `yes`. |
+| `brighten`          | `brighten <amount> <image-name> <new-name>`            | Increases the brightness of the image by the given amount in the range [0-255]                                              |
+| `darken`            | `darken <amount> <image-name> <new-name>`              | Decreases the brightness of the image by the given amount in the range [0-255]                                              |
+| `flip`              | `flip {vertical ǀ horizontal} <image-name> <new-name>` | Mirrors the image in the given dimension                                                                                    |
+| `grayscale`         | `grayscale <mode> <image-name> <new-name>`             | Grayscale the image based on the given mode. See [Grayscale](#Grayscale) for more information                               |
+| `same`              | `same <image-name> <image-name>`                       | Tells you if the two images are the same or different.                                                                      |
+| `blur`              | `blur <image-name> <new-name>`                         | Applies a Gaussian blur                                                                                                     |
+| `sharpen`           | `sharpen <image-name> <new-name>`                      | Sharpens the image                                                                                                          |
+| `generic-grayscale` | `generic-grayscale <image-name> <new-name>`            | Applies a luma grayscale to the image using a color transformation.                                                         |
+| `sepia`             | `sepia <image-name> <new-name>`                        | Applies a sepia filter to the image.                                                                                        |
+| `help`              | `help` or `h`                                          | Displays information about all available commands.                                                                          |
+| `quit`              | `quit` or `q` or `exit`                                | Exits the ImageEditor. All unsaved data will be lost.                                                                       |
 
 No commands *modify* the existing image in the editor. Instead, they open a new image in the editor
 with the `<new-name>`,
@@ -90,12 +95,8 @@ give
 information about its 4-channel colors (RGBA). Pixels can be built using the `PixelBuilder` class,
 which provides an easy way to construct them.
 
-For now, `Image` is only implemented by `PPMImage`, which specifically represents a P3 PPM image.
-More implementations may be added in the future. `PPMmage`s specifically are iterable, and produce
-a `PixelIterator`,
-though we contend that not every kind of `Image` will need to be iterable, so we didn't put that in
-the interface.
-`PixelIterator` is as of now unused, though it may be helpful in the future.
+`Image` is  implemented by `PPMImage`--which specifically represents a P3 PPM image--
+and `BetterImage`, which can represent any kind of image.
 
 The reason that `Image` and `Pixel` exist as public interfaces is so that they can be influenced by
 commands. The `ImageEditorCommand` interface merely allows commands to be executed by
