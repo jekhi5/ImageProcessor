@@ -53,7 +53,7 @@ public class ImageUtil {
    * @param path is the path to the file
    * @return the string version of the filetype including the period
    * @throws IllegalArgumentException if the path is bad
-   *                                                                                                                                                                                                                                        TODO: tests for getSuffix (now public)
+   *                                                                                                                                                                                                                                                                                                          TODO: tests for getSuffix (now public)
    */
   public static String getSuffix(String path) throws IllegalArgumentException {
     int indexOfSuffix = path.lastIndexOf(".");
@@ -143,70 +143,5 @@ public class ImageUtil {
     sc.close();
     return new PPMImage(resultingPixelGrid);
   }
-
-  /**
-   * To save the given image to the given path. If the user provides an extension which does not
-   * match the filetype that the image was originally loaded from, it may corrupt the file, and this
-   * is on the user.
-   *
-   * <p>If {@code shouldOverwrite} is {@code true}:
-   * <ol>
-   *   <li>this method will attempt to delete the file currently stored at the given path</li>
-   *   <li>and then attempt to place the given image at the given path</li>
-   * </ol>
-   *
-   * <p>If {code shouldOverwrite} is {@code false}:
-   * <ol>
-   *   <li>this method will attempt to place the given image at the given path</li>
-   * </ol>
-   *
-   * <p>If any of these operations fail, the method will throw an IllegalArgumentException.
-   *
-   * @param image           is the image to store
-   * @param path            is the path to store the image
-   * @param shouldOverwrite is a flag for whether this method should overwrite the file currently
-   *                        stored at this location
-   * @throws IllegalArgumentException if the path is bad or any of the storing/deleting fails
-   */
-//  public static void saveImage(Image image, String path, boolean shouldOverwrite)
-//          throws IllegalArgumentException {
-//
-//    if (image == null || path == null) {
-//      throw new IllegalArgumentException("Error. The given image or path was null.");
-//    }
-//
-//    File file = new File(path);
-//
-//    if (shouldOverwrite && file.exists()) {
-//      boolean wasSuccessfullyDeleted = file.delete();
-//
-//      if (!wasSuccessfullyDeleted) {
-//        throw new IllegalArgumentException("Error. Cannot delete file at path: " + path);
-//      }
-//    }
-//
-//    try {
-//      if (!file.createNewFile()) {
-//        throw new IllegalArgumentException("Error. Could not create file from path: " + path +
-//                ". There was already a file at this location. " +
-//                "To overwrite, add \"true\" to command.");
-//      }
-//    } catch (IOException e) {
-//      throw new IllegalArgumentException("Error. Bad path: " + path);
-//    } catch (SecurityException e) {
-//      throw new IllegalArgumentException(
-//              "Error. Cannot create file at given path: " + path + "\n" + e.getMessage());
-//    }
-//
-//    BufferedWriter ppmWriter;
-//    try {
-//      ppmWriter = new BufferedWriter(new FileWriter(path));
-//      ppmWriter.write(((PPMImage) image).toSavableText());
-//      ppmWriter.close();
-//    } catch (IOException e) {
-//      throw new IllegalArgumentException(
-//              "Error. Cannot write to a file at the given path: " + path);
-//    }
-//  }
 }
 

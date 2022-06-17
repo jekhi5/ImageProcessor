@@ -76,15 +76,6 @@ public class FilterKernel extends AbstractMatrixOperator {
       super();
     }
 
-    /**
-     * To create a KernelBuilder with the given Matrix.
-     *
-     * @param matrix the matrix to make the kernel builder with
-     */
-    public KernelBuilder(double[][] matrix) {
-      super(matrix);
-    }
-
     @Override
     public PixelOperator build() throws IllegalStateException {
       return new FilterKernel(matrix);

@@ -29,7 +29,12 @@ public class Convert extends AbstractCommand {
 
   @Override
   public String apply(ImageEditorModel model) {
-    Image initialImage = ImageFactory.createImage(args[0]);
+    Image initialImage;
+    try {
+      initialImage = ImageFactory.createImage(args[0]);
+    } catch (IllegalArgumentException e) {
+      return "Convert failed: " + e.getMessage();
+    }
     String destinationLocation = args[1];
     String[] overwriteAliases = {"y", "yes", "t", "true"};
     boolean shouldOverwrite =

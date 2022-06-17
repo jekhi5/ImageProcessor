@@ -6,6 +6,8 @@ import java.util.Scanner;
 
 import commands.ImageEditorCommand;
 import commands.v2.Convert;
+import model.BasicImageEditorModel;
+import model.ImageEditorModel;
 import model.v2.ImageFactory;
 
 import static org.junit.Assert.assertEquals;
@@ -45,8 +47,29 @@ public class ConvertTest {
         }
       }
     }
+  }
+
+  // To test trying to convert an image that doesn't exist
+  @Test
+  public void invalidSource() {
+    ImageEditorModel temp = new BasicImageEditorModel();
+    ImageEditorCommand convertCommand = new Convert(new Scanner(new StringReader("test" + SLASH +
+            "bungus" + SLASH + "checkered.ppm test" + SLASH + "testOut" + SLASH +
+            "checkered.jpg n")));
+    assertEquals("Convert failed: File test/bungus/checkered.ppm not found!",
+            convertCommand.apply(temp));
+  }
 
 
+  // To test trying to save an image that doesn't exist
+  @Test
+  public void invalidDestination() {
+    ImageEditorModel temp = new BasicImageEditorModel();
+    ImageEditorCommand convertCommand = new Convert(new Scanner(new StringReader("test" + SLASH +
+            "testRes" + SLASH + "checkered.ppm test" + SLASH + "bungus" + SLASH +
+            "checkered.ppm n")));
+    assertEquals("Convert failed: Bad path: test/bungus/checkered.ppm",
+            convertCommand.apply(temp));
   }
 
   // Performing the actual conversion

@@ -14,6 +14,7 @@ import model.pixel.PixelImpl;
 import model.v2.BetterImage;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.assertSame;
@@ -162,5 +163,12 @@ public class BetterImageTest {
   @Test(expected = IllegalArgumentException.class)
   public void saveDirectory() throws IOException {
     img.saveToPath("test", true);
+  }
+
+  // Testing equals against a non-image
+  @Test
+  public void equalsNotImage() {
+    //noinspection AssertBetweenInconvertibleTypes
+    assertNotEquals(img, "butthole!");
   }
 }
