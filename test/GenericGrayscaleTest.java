@@ -6,6 +6,9 @@ import java.util.Scanner;
 import commands.GenericGrayscale;
 import commands.ImageEditorCommand;
 
+/**
+ * Tests for GenericGrayscale.
+ */
 public class GenericGrayscaleTest extends AbstractCommandTest {
 
   private static final List<ImageEditorCommand> COMMAND_FORMS =

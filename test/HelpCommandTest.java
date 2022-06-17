@@ -5,6 +5,9 @@ import commands.ImageEditorCommand;
 
 import static org.junit.Assert.assertEquals;
 
+/**
+ * Tests for HelpCommand.
+ */
 public class HelpCommandTest {
 
   private static final String ITALICS_ON = "\033[3m";

@@ -4,7 +4,7 @@ import model.image.Image;
 import model.pixel.Pixel;
 
 /**
- * An abstract class which contains code used in both FilterKernel and Transformer
+ * An abstract class which contains code used in both FilterKernel and Transformer.
  */
 public abstract class AbstractMatrixOperator implements PixelOperator {
   protected double[][] matrix;
@@ -27,6 +27,7 @@ public abstract class AbstractMatrixOperator implements PixelOperator {
     }
 
     protected MatrixOperatorBuilder() {
+      // Empty constructor so we can call it later.
     }
 
     /**
