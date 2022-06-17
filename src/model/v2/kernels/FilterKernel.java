@@ -80,7 +80,6 @@ public class FilterKernel extends AbstractMatrixOperator {
      * To create a KernelBuilder with the given Matrix.
      *
      * @param matrix the matrix to make the kernel builder with
-     * @return the newly constructed KernelBuilder
      */
     public KernelBuilder(double[][] matrix) {
       super(matrix);
