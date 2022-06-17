@@ -96,4 +96,11 @@ public class ImageFactoryTest {
     Image img2 = ImageFactory.createImage("test" + SEP + "testOut" + SEP + "test.bmp");
     assertEquals(img, img2);
   }
+
+  // Testing giving an invalid non-ppm path
+  @Test(expected = IllegalArgumentException.class)
+  public void invalidPath() {
+    ImageFactory.createImage("test" + SEP + "bungus" + SEP + " checkered.jpg");
+  }
+
 }

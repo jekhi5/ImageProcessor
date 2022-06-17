@@ -153,4 +153,12 @@ public class SaveImageTest {
   }
 
 
+  // To test trying to save an image that doesn't exist
+  @Test
+  public void invalidImage() {
+    ImageEditorModel temp = new BasicImageEditorModel();
+    ImageEditorCommand saveCommand = new SaveImage(new Scanner(new StringReader("test" + SLASH +
+            "testOut" + SLASH + "newImage.ppm invalid-image-name n")));
+    assertEquals("No image found with the name: \"invalid-image-name\"", saveCommand.apply(temp));
+  }
 }

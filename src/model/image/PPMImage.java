@@ -2,16 +2,12 @@ package model.image;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import model.pixel.Pixel;
 import model.pixel.PixelImpl;
 import model.v2.AbstractImage;
-import model.v2.ImageSaver;
-import utilities.ImageUtil;
 
 /**
  * Represents a PPM Image. The text of the image is converted to an array of pixels that can be

@@ -29,7 +29,7 @@ public class ImageFactory {
 
     if (path.endsWith(".ppm")) {
       return ImageUtil.createImageFromPath(path);
-    } else if (path.endsWith(".png") || path.endsWith("jpg") || path.endsWith("bmp")) {
+    } else if (path.endsWith(".png") || path.endsWith(".jpg") || path.endsWith(".bmp")) {
       File f = new File(path);
       try {
         BufferedImage img = ImageIO.read(f);

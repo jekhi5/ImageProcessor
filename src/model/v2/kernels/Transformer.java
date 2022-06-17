@@ -22,17 +22,14 @@ public class Transformer extends AbstractMatrixOperator {
 
   @Override
   public Pixel resultAt(int row, int col, Image image) throws IllegalArgumentException {
+
+    if (image == null) {
+      throw new IllegalArgumentException("The given image cannot be null.");
+    }
+
     Pixel origPixel = image.getPixelAt(row, col);
     int[] rgb = new int[]{origPixel.getRed(), origPixel.getGreen(), origPixel.getBlue()};
     double[] rgbPrime = new double[3];
-
-//    for (int c = 0; c < 3; c++) {
-//      double prime = 0;
-//      for (int r = 0; r < 3; r++) {
-//        prime += matrix[r][c] * rgb[c];
-//      }
-//      rgbPrime[c] = prime;
-//    }
 
     for (int r = 0; r < 3; r++) {
       for (int c = 0; c < 3; c++) {
@@ -64,10 +61,6 @@ public class Transformer extends AbstractMatrixOperator {
      */
     public TransformerBuilder() {
       super(new double[3][3]);
-    }
-
-    private TransformerBuilder(double[][] matrix) {
-      super(matrix);
     }
 
     /**
