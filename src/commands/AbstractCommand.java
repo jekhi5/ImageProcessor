@@ -9,7 +9,8 @@ import model.pixel.Pixel;
 import model.v2.kernels.PixelOperator;
 
 /**
- * An abstract command.
+ * Represents an abstract command. All commands extend this abstract class because they all have
+ * some sort of similar operation.
  */
 public abstract class AbstractCommand implements ImageEditorCommand {
   protected final String[] args;

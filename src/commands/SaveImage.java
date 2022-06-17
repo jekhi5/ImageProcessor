@@ -43,7 +43,7 @@ public class SaveImage extends AbstractCommand {
     }
 
     List<String> aliasesOW = List.of("yes", "y", "true", "t");
-    boolean shouldOverwrite = aliasesOW.contains(args[2]);
+    boolean shouldOverwrite = aliasesOW.contains(args[2].toLowerCase());
 
     try {
       img.saveToPath(args[0], shouldOverwrite);

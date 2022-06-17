@@ -77,7 +77,7 @@ public class BetterImageTest {
     for (int r = 0; r < img.getHeight(); r++) {
       for (int c = 0; c < img.getWidth(); c++) {
         Pixel p = new PixelImpl(255, 255, 255, 255);
-        img.setPixelAt(r,c, p);
+        img.setPixelAt(r, c, p);
         assertEquals(p, img.getPixelAt(r, c));
         assertNotSame(p, img.getPixelAt(r, c));
       }

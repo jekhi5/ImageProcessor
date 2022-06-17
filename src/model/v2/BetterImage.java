@@ -102,17 +102,21 @@ public class BetterImage implements Image {
 
   @Override
   public boolean equals(Object o) {
-    if (!(o instanceof Image)) {
-      return false;
-    }
-    for (int c = 0; c < getWidth(); c++) {
-      for (int r = 0; r < getHeight(); r++) {
-        if (!getPixelAt(r, c).equals(((Image) o).getPixelAt(r, c))) {
-          return false;
+    if (o instanceof Image) {
+      if (this.getWidth() != ((Image) o).getWidth() ||
+              this.getHeight() != ((Image) o).getHeight()) {
+        return false;
+      }
+      for (int row = 0; row < getHeight(); row++) {
+        for (int col = 0; col < getWidth(); col++) {
+          if (!getPixelAt(row, col).equals(((Image) o).getPixelAt(row, col))) {
+            return false;
+          }
         }
       }
+      return true;
     }
-    return true;
+    return false;
   }
 
   @Override
