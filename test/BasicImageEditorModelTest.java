@@ -25,15 +25,20 @@ public class BasicImageEditorModelTest {
   Image checkeredBlackBottom;
   ImageEditorModel model;
 
+  private static String SLASH = System.getProperty("file.separator");
+
   @Before
   public void init() {
-    fullyRedPPM = ImageUtil.createImageFromPath("res/FullyRed_3x3.ppm");
-    fullyGreenPPM = ImageUtil.createImageFromPath("res/FullyGreen_3x3.ppm");
-    fullyBluePPM = ImageUtil.createImageFromPath("res/FullyBlue_3x3.ppm");
-    checkeredBlackRight = ImageUtil.createImageFromPath("res/CheckeredBlackRight_3x4" +
-            ".ppm");
-    checkeredBlackBottom = ImageUtil.createImageFromPath("res/CheckeredBlackBottom_3x4" +
-            ".ppm");
+    fullyRedPPM = ImageUtil.createImageFromPath("test" + SLASH + "testRes" + SLASH +
+            "FullyRed_3x3.ppm");
+    fullyGreenPPM = ImageUtil.createImageFromPath("test" + SLASH + "testRes" + SLASH +
+            "FullyGreen_3x3.ppm");
+    fullyBluePPM = ImageUtil.createImageFromPath("test" + SLASH + "testRes" + SLASH +
+            "FullyBlue_3x3.ppm");
+    checkeredBlackRight = ImageUtil.createImageFromPath("test" + SLASH + "testRes" + SLASH +
+            "CheckeredBlackRight_3x4.ppm");
+    checkeredBlackBottom = ImageUtil.createImageFromPath("test" + SLASH + "testRes" + SLASH +
+            "CheckeredBlackBottom_3x4.ppm");
     model = new BasicImageEditorModel();
   }
 
