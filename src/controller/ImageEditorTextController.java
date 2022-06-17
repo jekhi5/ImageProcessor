@@ -17,6 +17,7 @@ import commands.ImageEqualsCommand;
 import commands.LoadImage;
 import commands.SaveImage;
 import commands.v2.Blur;
+import commands.v2.Convert;
 import commands.v2.GenericGrayscale;
 import commands.v2.HelpCommand;
 import commands.v2.Sepia;
@@ -80,6 +81,8 @@ public class ImageEditorTextController implements ImageEditorController {
 
     commands.put("help", s -> new HelpCommand());
     commands.put("h", s -> new HelpCommand());
+
+    commands.put("convert", s -> new Convert(s));
   }
 
   @Override

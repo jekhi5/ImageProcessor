@@ -89,11 +89,6 @@ public class BetterImage implements Image {
   @Override
   public void saveToPath(String path, boolean shouldOverwrite)
           throws IOException, IllegalArgumentException {
-    handleSave(path, shouldOverwrite, this.image);
-  }
-
-  static void handleSave(String path, boolean shouldOverwrite, BufferedImage img)
-          throws IOException {
     if (path == null) {
       throw new IllegalArgumentException("Can't save to null path");
     }
@@ -115,7 +110,7 @@ public class BetterImage implements Image {
     }
 
 
-    ImageSaver.write(img, ImageUtil.getSuffix(path), f);
+    ImageSaver.write(this.image, ImageUtil.getSuffix(path), f);
   }
 
   @Override
