@@ -1,0 +1,32 @@
+load res/examples/blerny.ppm blerny
+flip vertical blerny blerny_vertical_flip
+flip horizontal blerny blerny_horizontal_flip
+gray red blerny blerny_red
+gray green blerny blerny_green
+gray blue blerny blerny_blue
+gray value blerny blerny_value
+gray intensity blerny blerny_intensity
+gray luma blerny blerny_luma
+brighten 100 blerny blerny_brighten_100
+darken 150 blerny blerny_darken_150
+same blerny blerny
+blur blerny blerny_blur
+sharpen blerny blerny_sharp
+generic-grayscale blerny blerny_gray
+sepia blerny blerny_sepia
+save blerny_vertical_flip.png blerny_vertical_flip y
+save blerny_horizontal_flip.png blerny_horizontal_flip y
+save blerny_red.png blerny_red y
+save blerny_green.png blerny_green y
+save blerny_blue.png blerny_blue y
+save blerny_value.png blerny_value y
+save blerny_intensity.png blerny_intensity y
+save blerny_luma.png blerny_luma y
+save blerny_brighten_100.png blerny_brighten_100 y
+save blerny_darken_150.png blerny_darken_150 y
+save blerny_blur.png blerny_blur y
+save blerny_sharp.png blerny_sharp y
+save blerny_ggs.png blerny_gray y
+save blerny_sepia.png blerny_sepia y
+convert blerny_sepia.png blerny_sepia_jpg.jpg
+quit
