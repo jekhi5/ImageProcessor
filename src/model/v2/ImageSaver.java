@@ -71,10 +71,6 @@ public class ImageSaver {
   private static String toPPMText(BufferedImage img) {
     List<String> result = new ArrayList<>();
     result.add("P3");
-
-//    DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MM/dd/yyyy HH:mm:ss");
-//    LocalDateTime now = LocalDateTime.now();
-
     result.add("# This image was created by the the Jacob Kline and Emery Jacobowitz's Image " +
             "Editor on: "/* + dtf.format(now)*/);
 
