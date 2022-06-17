@@ -1,9 +1,12 @@
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
+import java.util.Objects;
 
 import model.image.Image;
 import model.pixel.Pixel;
@@ -14,6 +17,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.assertSame;
+import static org.junit.Assert.fail;
 
 /**
  * Tests for BetterImage.
@@ -35,13 +39,15 @@ public class BetterImageTest {
     img = new BetterImage(bi);
   }
 
-  /*
-  - save as each type (PNG, PPM, BMP, JPG)
-  - save to directory
-  - save to invalid filetype
-  - save without overwriting
-  - save with overwrite
-   */
+  @After
+  public void clearOut() {
+    for (File f : Objects.requireNonNull(
+            new File("test" + System.getProperty("file.separator") + "testOut").listFiles())) {
+      if (!f.delete()) {
+        fail("Couldn't delete file!");
+      }
+    }
+  }
 
   @Test(expected = IllegalArgumentException.class)
   public void nullConstr() {
@@ -100,7 +106,7 @@ public class BetterImageTest {
   }
 
   @Test
-  public void copyOf(){
+  public void copyOf() {
     assertEquals(img, img.getCopy());
     assertNotSame(img, img.getCopy());
   }
@@ -149,7 +155,7 @@ public class BetterImageTest {
   public void saveNoOverwrite() throws IOException {
     String sep = System.getProperty("file.separator");
     img.saveToPath("test" + sep + "testOut" + sep + "temp.png", true);
-    assertSame(img,img);
+    assertSame(img, img);
     img.saveToPath("test" + sep + "testOut" + sep + "temp.png", false);
   }
 
