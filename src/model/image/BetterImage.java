@@ -1,6 +1,7 @@
 package model.image;
 
-import java.awt.*;
+
+import java.awt.Color;
 import java.awt.image.BufferedImage;
 
 import model.pixel.Pixel;
@@ -14,7 +15,7 @@ public class BetterImage extends AbstractImage {
   private final BufferedImage image;
 
   /**
-   * Creates a new {@code BetterImage} from the given {@link BufferedImage};
+   * Creates a new {@code BetterImage} from the given {@link BufferedImage}.
    *
    * @param image the {@link BufferedImage}
    * @throws IllegalArgumentException if {@code image} is null.

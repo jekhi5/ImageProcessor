@@ -28,8 +28,8 @@ public class ImageSaver {
    * @throws IOException              if there was an issue saving the file
    * @throws IllegalArgumentException if any argument is null, or if the type is bad
    */
-  public static void write(BufferedImage img, String type, File outputFile) throws IOException,
-          IllegalArgumentException {
+  public static void write(BufferedImage img, String type, File outputFile)
+          throws IOException, IllegalArgumentException {
     if (img == null || type == null || outputFile == null) {
       throw new IllegalArgumentException("Can't write with null args!");
     }
@@ -48,12 +48,12 @@ public class ImageSaver {
       case "jpg":
       case "bmp":
         // basically there is a bug where ImageIO.write() doesn't work properly
-        // if it is using ARGB color values (32-bit) to save to an image format without transparency.
-        // We surmount this by creating a new BI with RGB color values (24-bit) for the relevant types
-        BufferedImage noAlpha = new BufferedImage(
-                img.getWidth(),
-                img.getHeight(),
-                BufferedImage.TYPE_INT_RGB);
+        // if it is using ARGB color values (32-bit) to save to an image format
+        // without transparency.
+        // We surmount this by creating a new BI with RGB color values (24-bit)
+        // for the relevant types
+        BufferedImage noAlpha =
+                new BufferedImage(img.getWidth(), img.getHeight(), BufferedImage.TYPE_INT_RGB);
         Graphics g = noAlpha.getGraphics();
         g.drawImage(img, 0, 0, null);
         g.dispose();
@@ -71,10 +71,6 @@ public class ImageSaver {
   private static String toPPMText(BufferedImage img) {
     List<String> result = new ArrayList<>();
     result.add("P3");
-
-//    DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MM/dd/yyyy HH:mm:ss");
-//    LocalDateTime now = LocalDateTime.now();
-
     result.add("# This image was created by the the Jacob Kline and Emery Jacobowitz's Image " +
             "Editor on: "/* + dtf.format(now)*/);
 
@@ -124,8 +120,7 @@ public class ImageSaver {
       ppmWriter.write(ppmText);
       ppmWriter.close();
     } catch (IOException e) {
-      throw new IOException(
-              "Cannot write to a file at the given path: " + file.getPath());
+      throw new IOException("Cannot write to a file at the given path: " + file.getPath());
     }
   }
 }
