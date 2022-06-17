@@ -96,17 +96,6 @@ public class PPMImage extends AbstractImage {
     return new PPMImage(newPixelArray);
   }
 
-  @Override
-  public int hashCode() {
-    int hash = 0;
-    for (int row = 0; row < getHeight(); row++) {
-      for (int col = 0; col < getWidth(); col++) {
-        hash += getPixelAt(row, col).hashCode();
-      }
-    }
-    return hash;
-  }
-
   /**
    * Two {@code PPMImage}s are equal IFF.
    *

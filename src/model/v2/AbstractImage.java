@@ -38,4 +38,15 @@ public abstract class AbstractImage implements Image {
   }
 
   protected abstract BufferedImage toBufferedImage();
+
+  @Override
+  public int hashCode() {
+    int hash = 0;
+    for (int row = 0; row < getHeight(); row++) {
+      for (int col = 0; col < getWidth(); col++) {
+        hash += getPixelAt(row, col).hashCode() * row % (col + 1);
+      }
+    }
+    return hash;
+  }
 }
