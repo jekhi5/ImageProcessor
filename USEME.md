@@ -13,7 +13,7 @@ including functionality such as flipping, gray-scaling, brightening, and darkeni
 
 ### Setup
 
-There is one command line argument used in this program. Launch the program with `manual` to use
+There is one command line argument used in this program. Launch the program with no arguments to use
 input from the console,
 or use a file path to read input from a text file. The file path may not contain any spaces.
 
@@ -48,6 +48,7 @@ recommended for clarity.
 | `sharpen`           | `sharpen <image-name> <new-name>`                      | Sharpens the image                                                                                                          |
 | `generic-grayscale` | `generic-grayscale <image-name> <new-name>`            | Applies a luma grayscale to the image using a color transformation.                                                         |
 | `sepia`             | `sepia <image-name> <new-name>`                        | Applies a sepia filter to the image.                                                                                        |
+| `convert`           | `convert <image-path> <new-path>`                      | Converts an image from one type to another. DOES NOT add images to the editor.                                              |
 | `help`              | `help` or `h`                                          | Displays information about all available commands.                                                                          |
 | `quit`              | `quit` or `q` or `exit`                                | Exits the ImageEditor. All unsaved data will be lost.                                                                       |
 

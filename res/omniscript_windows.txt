@@ -1,21 +1,32 @@
-load res\CheckeredBlackBottom_3x4.ppm checkered
-flip vertical checkered checkered_vertical_flip
-flip horizontal checkered checkered_horizontal_flip
-gray red checkered checkered_red
-gray green checkered checkered_green
-gray blue checkered checkered_blue
-gray value checkered checkered_value
-gray intensity checkered checkered_intensity
-gray luma checkered checkered_luma
-brighten 100 checkered checkered_brighten_100
-darken 150 checkered checkered_darken_150
-save testOut\checkered_vertical_flip.ppm checkered_vertical_flip y
-save testOut\checkered_horizontal_flip.ppm checkered_horizontal_flip y
-save testOut\checkered_red.ppm checkered_red y
-save testOut\checkered_green.ppm checkered_green y
-save testOut\checkered_blue.ppm checkered_blue y
-save testOut\checkered_value.ppm checkered_value y
-save testOut\checkered_intensity.ppm checkered_intensity y
-save testOut\checkered_luma.ppm checkered_luma y
-save testOut\checkered_brighten_100.ppm checkered_brighten_100 y
-save testOut\checkered_darken_150.ppm checkered_darken_150 y
+load res\examples\blerny.ppm blerny
+flip vertical blerny blerny_vertical_flip
+flip horizontal blerny blerny_horizontal_flip
+gray red blerny blerny_red
+gray green blerny blerny_green
+gray blue blerny blerny_blue
+gray value blerny blerny_value
+gray intensity blerny blerny_intensity
+gray luma blerny blerny_luma
+brighten 100 blerny blerny_brighten_100
+darken 150 blerny blerny_darken_150
+same blerny blerny
+blur blerny blerny_blur
+sharpen blerny blerny_sharp
+generic-grayscale blerny blerny_gray
+sepia blerny blerny_sepia
+save blerny_vertical_flip.png blerny_vertical_flip y
+save blerny_horizontal_flip.png blerny_horizontal_flip y
+save blerny_red.png blerny_red y
+save blerny_green.png blerny_green y
+save blerny_blue.png blerny_blue y
+save blerny_value.png blerny_value y
+save blerny_intensity.png blerny_intensity y
+save blerny_luma.png blerny_luma y
+save blerny_brighten_100.png blerny_brighten_100 y
+save blerny_darken_150.png blerny_darken_150 y
+save blerny_blur.png blerny_blur y
+save blerny_sharp.png blerny_sharp y
+save blerny_ggs.png blerny_gray y
+save blerny_sepia.png blerny_sepia y
+convert blerny_sepia.png blerny_sepia_jpg.jpg
+quit
