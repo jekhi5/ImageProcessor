@@ -15,9 +15,12 @@ import model.v2.kernels.Transformer;
 public class GenericGrayscale extends AbstractCommand {
 
   /**
-   * To construct a GenericGreyscale command.
+   * To construct a GenericGreyscale command that takes in 2 additional user given arguments.
    *
    * @param in the scanner connected to the user
+   * @throws IllegalArgumentException if {@code in} is null
+   * @throws IllegalStateException    if {@code in} runs out of inputs before collecting
+   *                                  {@code numArgs} inputs.
    */
   public GenericGrayscale(Scanner in) {
     super(in, 2);

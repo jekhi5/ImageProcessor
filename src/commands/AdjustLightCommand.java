@@ -7,6 +7,10 @@ import model.image.Image;
 import model.pixel.PixelBuilder;
 import model.pixel.PixelImpl;
 
+/**
+ * Represents a command that modifies the lighting of an image like in {@link Brighten} and
+ * {@link Darken}.
+ */
 public abstract class AdjustLightCommand extends AbstractCommand {
 
 

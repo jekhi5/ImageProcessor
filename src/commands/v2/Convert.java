@@ -22,8 +22,7 @@ public class Convert extends AbstractCommand {
    * @throws IllegalStateException    if {@code in} runs out of inputs before collecting
    *                                  {@code numArgs} inputs.
    */
-  public Convert(Scanner in)
-          throws IllegalStateException, IllegalArgumentException {
+  public Convert(Scanner in) throws IllegalStateException, IllegalArgumentException {
     super(in, 3);
   }
 
