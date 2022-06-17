@@ -16,12 +16,12 @@ import commands.ImageEditorCommand;
 import commands.ImageEqualsCommand;
 import commands.LoadImage;
 import commands.SaveImage;
-import commands.v2.Blur;
-import commands.v2.Convert;
-import commands.v2.GenericGrayscale;
-import commands.v2.HelpCommand;
-import commands.v2.Sepia;
-import commands.v2.Sharpen;
+import commands.Blur;
+import commands.Convert;
+import commands.GenericGrayscale;
+import commands.HelpCommand;
+import commands.Sepia;
+import commands.Sharpen;
 import model.ImageEditorModel;
 import view.ImageEditorView;
 

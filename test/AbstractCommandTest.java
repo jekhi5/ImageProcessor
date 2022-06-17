@@ -9,7 +9,7 @@ import commands.ImageEditorCommand;
 import model.BasicImageEditorModel;
 import model.ImageEditorModel;
 import model.image.Image;
-import model.v2.ImageFactory;
+import utilities.ImageFactory;
 import utilities.ImageUtil;
 
 import static org.junit.Assert.assertEquals;

@@ -1,4 +1,4 @@
-package model.v2.kernels;
+package model.kernels;
 
 import model.image.Image;
 import model.pixel.Pixel;

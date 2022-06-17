@@ -5,10 +5,10 @@ import java.io.StringReader;
 import java.util.Scanner;
 
 import commands.ImageEditorCommand;
-import commands.v2.Convert;
+import commands.Convert;
 import model.BasicImageEditorModel;
 import model.ImageEditorModel;
-import model.v2.ImageFactory;
+import utilities.ImageFactory;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;

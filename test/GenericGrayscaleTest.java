@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import commands.ImageEditorCommand;
-import commands.v2.GenericGrayscale;
+import commands.GenericGrayscale;
 
 public class GenericGrayscaleTest extends AbstractCommandTest {
 

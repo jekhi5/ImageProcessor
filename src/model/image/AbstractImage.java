@@ -1,10 +1,10 @@
-package model.v2;
+package model.image;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
-import model.image.Image;
+import utilities.ImageSaver;
 import utilities.ImageUtil;
 
 /**

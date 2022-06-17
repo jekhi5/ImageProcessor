@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 import model.ImageEditorModel;
 import model.image.Image;
-import model.v2.ImageFactory;
+import utilities.ImageFactory;
 
 /**
  * Opens an image from a PPM file (specified by path) into the editor, where further commands can be

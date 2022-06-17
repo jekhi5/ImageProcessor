@@ -11,7 +11,7 @@ import java.util.Objects;
 import model.image.Image;
 import model.pixel.Pixel;
 import model.pixel.PixelImpl;
-import model.v2.BetterImage;
+import model.image.BetterImage;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;

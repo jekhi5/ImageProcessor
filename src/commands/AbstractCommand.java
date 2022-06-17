@@ -6,7 +6,7 @@ import java.util.function.Function;
 import model.ImageEditorModel;
 import model.image.Image;
 import model.pixel.Pixel;
-import model.v2.kernels.PixelOperator;
+import model.kernels.PixelOperator;
 
 /**
  * Represents an abstract command. All commands extend this abstract class because they all have

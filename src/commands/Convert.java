@@ -1,13 +1,12 @@
-package commands.v2;
+package commands;
 
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Scanner;
 
-import commands.AbstractCommand;
 import model.ImageEditorModel;
 import model.image.Image;
-import model.v2.ImageFactory;
+import utilities.ImageFactory;
 
 /**
  * Represents a command that will convert one file type to another file type.

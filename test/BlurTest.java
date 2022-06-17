@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import commands.ImageEditorCommand;
-import commands.v2.Blur;
+import commands.Blur;
 
 /**
  * The testing class for the Blue command.

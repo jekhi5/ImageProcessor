@@ -1,4 +1,4 @@
-package commands.v2;
+package commands;
 
 import commands.AbstractCommand;
 import model.ImageEditorModel;

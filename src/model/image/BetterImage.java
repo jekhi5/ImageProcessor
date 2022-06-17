@@ -1,9 +1,8 @@
-package model.v2;
+package model.image;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-import model.image.Image;
 import model.pixel.Pixel;
 import model.pixel.PixelImpl;
 

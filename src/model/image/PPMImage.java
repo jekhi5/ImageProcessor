@@ -7,7 +7,6 @@ import java.util.List;
 
 import model.pixel.Pixel;
 import model.pixel.PixelImpl;
-import model.v2.AbstractImage;
 
 /**
  * Represents a PPM Image. The text of the image is converted to an array of pixels that can be

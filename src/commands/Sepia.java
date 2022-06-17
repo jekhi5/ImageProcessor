@@ -1,12 +1,11 @@
-package commands.v2;
+package commands;
 
 import java.util.Scanner;
 
-import commands.AbstractCommand;
 import model.ImageEditorModel;
 import model.image.Image;
-import model.v2.kernels.AbstractMatrixOperator;
-import model.v2.kernels.Transformer;
+import model.kernels.AbstractMatrixOperator;
+import model.kernels.Transformer;
 
 /**
  * A command to apply a Sepia filter to an image.

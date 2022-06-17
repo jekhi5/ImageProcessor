@@ -1,4 +1,4 @@
-package model.v2;
+package utilities;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;

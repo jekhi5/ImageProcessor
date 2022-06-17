@@ -1,4 +1,4 @@
-package model.v2;
+package utilities;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -6,6 +6,7 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+import model.image.BetterImage;
 import model.image.Image;
 import utilities.ImageUtil;
 

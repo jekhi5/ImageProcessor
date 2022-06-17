@@ -1,12 +1,11 @@
-package commands.v2;
+package commands;
 
 import java.util.Scanner;
 
-import commands.AbstractCommand;
 import model.ImageEditorModel;
 import model.image.Image;
-import model.v2.kernels.AbstractMatrixOperator;
-import model.v2.kernels.FilterKernel;
+import model.kernels.AbstractMatrixOperator;
+import model.kernels.FilterKernel;
 
 /**
  * A command that blurs an image. Command syntax:
