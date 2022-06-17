@@ -2,19 +2,16 @@ package model.v2;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 
 import model.image.Image;
 import model.pixel.Pixel;
 import model.pixel.PixelImpl;
-import utilities.ImageUtil;
 
 /**
  * An improved implementation of {@link Image}. Uses a {@link java.awt.image.BufferedImage} instead
  * of a 2D list, and can work with more file types than just .ppm.
  */
-public class BetterImage implements Image {
+public class BetterImage extends AbstractImage {
   private final BufferedImage image;
 
   /**
@@ -86,31 +83,10 @@ public class BetterImage implements Image {
     return new BetterImage(img);
   }
 
+
   @Override
-  public void saveToPath(String path, boolean shouldOverwrite)
-          throws IOException, IllegalArgumentException {
-    if (path == null) {
-      throw new IllegalArgumentException("Can't save to null path");
-    }
-    File f = new File(path);
-
-    if (f.exists() && f.isDirectory()) {
-      throw new IllegalArgumentException("Could not create file from path: " + path +
-              ". This is a directory.");
-    } else if (f.exists() && shouldOverwrite) {
-      boolean wasSuccessfullyDeleted = f.delete();
-
-      if (!wasSuccessfullyDeleted) {
-        throw new IOException("Cannot delete file at path: " + f.getPath());
-      }
-    } else if (f.exists() && !shouldOverwrite) {
-      throw new IllegalArgumentException(
-              "Could not create file from path: " + path + ". There was " +
-                      "already a file at this location. To overwrite, add \"true\" to command.");
-    }
-
-
-    ImageSaver.write(this.image, ImageUtil.getSuffix(path), f);
+  protected BufferedImage toBufferedImage() {
+    return this.image;
   }
 
   @Override
@@ -134,6 +110,12 @@ public class BetterImage implements Image {
 
   @Override
   public int hashCode() {
-    return image.hashCode();
+    int hash = 0;
+    for (int row = 0; row < getHeight(); row++) {
+      for (int col = 0; col < getWidth(); col++) {
+        hash += getPixelAt(row, col).hashCode();
+      }
+    }
+    return hash;
   }
 }
