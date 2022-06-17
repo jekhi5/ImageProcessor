@@ -49,4 +49,23 @@ public abstract class AbstractImage implements Image {
     }
     return hash;
   }
+
+  @Override
+  public boolean equals(Object o) {
+    if (o instanceof Image) {
+      if (this.getWidth() != ((Image) o).getWidth() ||
+              this.getHeight() != ((Image) o).getHeight()) {
+        return false;
+      }
+      for (int row = 0; row < getHeight(); row++) {
+        for (int col = 0; col < getWidth(); col++) {
+          if (!getPixelAt(row, col).equals(((Image) o).getPixelAt(row, col))) {
+            return false;
+          }
+        }
+      }
+      return true;
+    }
+    return false;
+  }
 }
