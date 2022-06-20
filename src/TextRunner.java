@@ -2,8 +2,8 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.InputStreamReader;
 
-import controller.ImageEditorController;
 import controller.ImageEditorTextController;
+import controller.ImageEditorTextControllerImpl;
 import model.BasicImageEditorModel;
 import model.ImageEditorModel;
 import view.ImageEditorTextView;
@@ -33,7 +33,7 @@ public class TextRunner {
 
     ImageEditorModel m = new BasicImageEditorModel();
     ImageEditorTextView v = new ImageEditorTextView();
-    ImageEditorController c = new ImageEditorTextController(m, v, input);
+    ImageEditorTextController c = new ImageEditorTextControllerImpl(m, v, input);
     c.launch();
   }
 }
