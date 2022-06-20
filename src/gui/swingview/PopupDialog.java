@@ -39,7 +39,7 @@ public class PopupDialog extends JFrame {
     SimpleAttributeSet centeringAttribute = new SimpleAttributeSet();
     StyleConstants.setAlignment(centeringAttribute, StyleConstants.ALIGN_CENTER);
     styledDocument.setParagraphAttributes(0, styledDocument.getLength(), centeringAttribute, false);
-    
+
     Style styledText = textPane.addStyle("", null);
     StyleConstants.setForeground(styledText, new Color(109, 109, 109));
     try {
