@@ -4,11 +4,11 @@ import java.io.File;
 import java.io.StringReader;
 import java.util.Scanner;
 
+import commands.Convert;
 import commands.ImageEditorCommand;
-import commands.v2.Convert;
 import model.BasicImageEditorModel;
 import model.ImageEditorModel;
-import model.v2.ImageFactory;
+import utilities.ImageFactory;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
@@ -56,7 +56,8 @@ public class ConvertTest {
     ImageEditorCommand convertCommand = new Convert(new Scanner(new StringReader("test" + SLASH +
             "bungus" + SLASH + "checkered.ppm test" + SLASH + "testOut" + SLASH +
             "checkered.jpg n")));
-    assertEquals("Convert failed: File test/bungus/checkered.ppm not found!",
+    assertEquals(
+            "Convert failed: File test" + SLASH + "bungus" + SLASH + "checkered.ppm not found!",
             convertCommand.apply(temp));
   }
 
@@ -68,7 +69,7 @@ public class ConvertTest {
     ImageEditorCommand convertCommand = new Convert(new Scanner(new StringReader("test" + SLASH +
             "testRes" + SLASH + "checkered.ppm test" + SLASH + "bungus" + SLASH +
             "checkered.ppm n")));
-    assertEquals("Convert failed: Bad path: test/bungus/checkered.ppm",
+    assertEquals("Convert failed: Bad path: test" + SLASH + "bungus" + SLASH + "checkered.ppm",
             convertCommand.apply(temp));
   }
 

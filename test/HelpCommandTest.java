@@ -1,10 +1,13 @@
 import org.junit.Test;
 
+import commands.HelpCommand;
 import commands.ImageEditorCommand;
-import commands.v2.HelpCommand;
 
 import static org.junit.Assert.assertEquals;
 
+/**
+ * Tests for HelpCommand.
+ */
 public class HelpCommandTest {
 
   private static final String ITALICS_ON = "\033[3m";

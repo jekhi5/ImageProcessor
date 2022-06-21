@@ -3,9 +3,12 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
+import commands.GenericGrayscale;
 import commands.ImageEditorCommand;
-import commands.v2.GenericGrayscale;
 
+/**
+ * Tests for GenericGrayscale.
+ */
 public class GenericGrayscaleTest extends AbstractCommandTest {
 
   private static final List<ImageEditorCommand> COMMAND_FORMS =

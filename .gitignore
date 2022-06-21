@@ -9,6 +9,7 @@ production/
 /javadoc/
 /test/testOut/
 /res/examples
+*.jar
 
 ### Eclipse ###
 .apt_generated

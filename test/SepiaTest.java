@@ -4,8 +4,11 @@ import java.util.List;
 import java.util.Scanner;
 
 import commands.ImageEditorCommand;
-import commands.v2.Sepia;
+import commands.Sepia;
 
+/**
+ * Tests for sepia.
+ */
 public class SepiaTest extends AbstractCommandTest {
 
   private static final List<ImageEditorCommand> COMMAND_FORMS =

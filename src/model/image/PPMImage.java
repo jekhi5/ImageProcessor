@@ -1,13 +1,12 @@
 package model.image;
 
-import java.awt.*;
+import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 
 import model.pixel.Pixel;
 import model.pixel.PixelImpl;
-import model.v2.AbstractImage;
 
 /**
  * Represents a PPM Image. The text of the image is converted to an array of pixels that can be
@@ -90,43 +89,6 @@ public class PPMImage extends AbstractImage {
     }
 
     return new PPMImage(newPixelArray);
-  }
-
-  /**
-   * Two {@code PPMImage}s are equal IFF.
-   *
-   * <ol>
-   *   <li> the width and height of image {@code A} are the same as the width and height of image
-   *   {@code B}. AND</li>
-   *   <li> each {@link Pixel} of image {@code A} are .equals() to the corresponding
-   *   {@link Pixel} in image {@code B}.
-   *   </li>
-   * </ol>
-   *
-   * @param other is the other object to compare
-   * @return if this object is equal to the other object
-   */
-  @Override
-  public boolean equals(Object other) {
-    if (other instanceof PPMImage) {
-      if (this.getWidth() != ((PPMImage) other).getWidth() ||
-              this.getHeight() != ((PPMImage) other).getHeight()) {
-        return false;
-      } else {
-
-        for (int row = 0; row < this.getHeight(); row += 1) {
-          for (int col = 0; col < this.getWidth(); col += 1) {
-            if (!this.getPixelAt(row, col).equals(((PPMImage) other).getPixelAt(row, col))) {
-              return false;
-            }
-          }
-        }
-
-        return true;
-      }
-    } else {
-      return false;
-    }
   }
 
   private boolean isRectangular() {

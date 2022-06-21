@@ -1,2 +1,0 @@
-#!/bin/zsh
-java -cp /Users/jacobkline/OOD/OOD-Homework-ImageProcessor/out/production/OOD-Homework-ImageProcessor TextRunner manual

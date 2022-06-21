@@ -17,8 +17,8 @@ import commands.Darken;
 import commands.Flip;
 import commands.Grayscale;
 import commands.ImageEditorCommand;
-import controller.ImageEditorController;
 import controller.ImageEditorTextController;
+import controller.ImageEditorTextControllerImpl;
 import model.BasicImageEditorModel;
 import model.ImageEditorModel;
 import model.image.Image;
@@ -31,7 +31,7 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 /**
- * Tests for {@link ImageEditorTextController}.
+ * Tests for {@link ImageEditorTextControllerImpl}.
  */
 public class ImageEditorTextControllerTest {
 
@@ -39,7 +39,7 @@ public class ImageEditorTextControllerTest {
   private static final String SLASH = System.getProperty("file.separator");
   ImageEditorModel model;
   ImageEditorView view;
-  ImageEditorController controller;
+  ImageEditorTextController controller;
   Appendable log;
   Map<Class<? extends AbstractCommand>, String> commandNames;
   String initialMessage =
@@ -86,19 +86,19 @@ public class ImageEditorTextControllerTest {
   // Testing constructor with null model
   @Test(expected = IllegalArgumentException.class)
   public void testingConstructor_NullModel() {
-    new ImageEditorTextController(null, new ImageEditorTextView(), new StringReader(""));
+    new ImageEditorTextControllerImpl(null, new ImageEditorTextView(), new StringReader(""));
   }
 
   // Testing constructor with null view
   @Test(expected = IllegalArgumentException.class)
   public void testingConstructor_NullView() {
-    new ImageEditorTextController(new BasicImageEditorModel(), null, new StringReader(""));
+    new ImageEditorTextControllerImpl(new BasicImageEditorModel(), null, new StringReader(""));
   }
 
   // Testing constructor with null readable
   @Test(expected = IllegalArgumentException.class)
   public void testingConstructor_NullReadable() {
-    new ImageEditorTextController(new BasicImageEditorModel(), new ImageEditorTextView(),
+    new ImageEditorTextControllerImpl(new BasicImageEditorModel(), new ImageEditorTextView(),
             null);
   }
 
@@ -106,7 +106,7 @@ public class ImageEditorTextControllerTest {
   @Test
   public void loadingImageNoOverwrite() {
     Reader reader = new StringReader(loadCheckeredBottom + "q");
-    controller = new ImageEditorTextController(model, view, reader);
+    controller = new ImageEditorTextControllerImpl(model, view, reader);
 
     assertEquals("", this.log.toString());
     controller.launch();
@@ -122,7 +122,7 @@ public class ImageEditorTextControllerTest {
     Reader reader = new StringReader(
             loadCheckeredBottom + "load test" + SLASH + "testRes" + SLASH +
                     "LemonChiffon_1x1.ppm image quit");
-    controller = new ImageEditorTextController(model, view, reader);
+    controller = new ImageEditorTextControllerImpl(model, view, reader);
 
     assertEquals("", this.log.toString());
     controller.launch();
@@ -139,7 +139,7 @@ public class ImageEditorTextControllerTest {
             new StringReader(
                     loadCheckeredBottom + " save test" + SLASH + "testOut" + SLASH +
                             "checkered_saved.ppm checkered false exit");
-    controller = new ImageEditorTextController(model, view, reader);
+    controller = new ImageEditorTextControllerImpl(model, view, reader);
 
     assertEquals("", this.log.toString());
     controller.launch();
@@ -182,7 +182,7 @@ public class ImageEditorTextControllerTest {
     Reader reader =
             new StringReader(loadCheckeredBottom + " save test" + SLASH + "testOut" + SLASH +
                     "tempFile.ppm checkered " + overwriteCommand + " exit");
-    controller = new ImageEditorTextController(model, view, reader);
+    controller = new ImageEditorTextControllerImpl(model, view, reader);
 
     assertEquals("", this.log.toString());
     controller.launch();
@@ -223,7 +223,7 @@ public class ImageEditorTextControllerTest {
   private void runCommand(String spelling, String typeOfCommand) {
     Reader reader = new StringReader(
             loadCheckeredBottom + spelling + " " + typeOfCommand + " checkered checkered q");
-    controller = new ImageEditorTextController(model, view, reader);
+    controller = new ImageEditorTextControllerImpl(model, view, reader);
 
     controller.launch();
   }
@@ -264,10 +264,10 @@ public class ImageEditorTextControllerTest {
   @Test
   public void greyScale() {
     String[] spellings =
-            {"Grayscale", "GrAyScAle", "greyscale", "gREYSCALE", "grey", "GREY", "gray", "GrAY"};
+    {"Grayscale", "GrAyScAle", "greyscale", "gREYSCALE", "grey", "GREY", "gray", "GrAY"};
     String[] typesOfGreyscale =
-            {"red", "ReD", "green", "GReeN", "blue", "BlUE", "value", "VaLuE", "intensity",
-                    "INtENsITy", "luma", "Luma"};
+    {"red", "ReD", "green", "GReeN", "blue", "BlUE", "value", "VaLuE", "intensity",
+      "INtENsITy", "luma", "Luma"};
     String resultingMessageHalf2 = "Grayscale successful!";
 
     commandTesting(spellings, typesOfGreyscale, resultingMessageHalf2);
@@ -320,7 +320,7 @@ public class ImageEditorTextControllerTest {
   @Test
   public void badCommand() {
     Reader reader = new StringReader("hello world exit");
-    controller = new ImageEditorTextController(model, view, reader);
+    controller = new ImageEditorTextControllerImpl(model, view, reader);
 
     assertEquals("", this.log.toString());
     controller.launch();
@@ -346,7 +346,7 @@ public class ImageEditorTextControllerTest {
 
   private void runQuitting(String quitOption) {
     Reader reader = new StringReader(quitOption);
-    controller = new ImageEditorTextController(model, view, reader);
+    controller = new ImageEditorTextControllerImpl(model, view, reader);
 
     assertEquals("", this.log.toString());
     controller.launch();
@@ -358,15 +358,15 @@ public class ImageEditorTextControllerTest {
   public void testHangingInCommand() {
 
     String[] commandString =
-            {"load", "LoAd", "save", "SaVE", "flip", "fLIp", "gray", "GrAY", "grey",
-                    "GREY", "grayscale", "GRaYscALe", "greyscale", "GReYSCAle", "brighten",
-                    "BRIghTEn", "darken", "DARKEn"};
+    {"load", "LoAd", "save", "SaVE", "flip", "fLIp", "gray", "GrAY", "grey",
+      "GREY", "grayscale", "GRaYscALe", "greyscale", "GReYSCAle", "brighten",
+      "BRIghTEn", "darken", "DARKEn"};
 
     for (String command : commandString) {
       Appendable output = new StringBuilder();
       ImageEditorView v = new ImageEditorTextView(output);
       Reader reader = new StringReader(command);
-      controller = new ImageEditorTextController(model, v, reader);
+      controller = new ImageEditorTextControllerImpl(model, v, reader);
 
       controller.launch();
 
@@ -400,7 +400,8 @@ public class ImageEditorTextControllerTest {
 
     Reader reader = new StringReader("load test" + SLASH + "testRes" + SLASH + "checkered.ppm " +
             "checkered");
-    ImageEditorController controller = new ImageEditorTextController(this.model, view, reader);
+    ImageEditorTextController
+            controller = new ImageEditorTextControllerImpl(this.model, view, reader);
     controller.launch();
   }
 

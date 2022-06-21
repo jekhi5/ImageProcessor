@@ -1,0 +1,2 @@
+#!/bin/sh
+java -jar /Users/jacobkline/OOD/OOD-Homework-ImageProcessor/out/artifacts/OOD_Homework_ImageProcessor_jar/OOD-Homework-ImageProcessor.jar

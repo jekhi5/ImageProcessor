@@ -2,16 +2,16 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.awt.*;
+import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.Objects;
 
+import model.image.BetterImage;
 import model.image.Image;
-import model.v2.BetterImage;
-import model.v2.ImageFactory;
-import model.v2.ImageSaver;
+import utilities.ImageFactory;
+import utilities.ImageSaver;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
