@@ -15,7 +15,7 @@ import javax.swing.text.StyledDocument;
 /**
  * Represents a window that only shows a text message and a close button.
  */
-public class PopupDialog extends JFrame implements ImageEditorSwingFeature {
+public class PopupDialog extends JFrame {
 
   private static final int WIDTH = 300;
   private static final int MAX_HEIGHT = 500;
@@ -54,7 +54,7 @@ public class PopupDialog extends JFrame implements ImageEditorSwingFeature {
     this.setSize(WIDTH, height);
     this.add(textPane);
     this.setVisible(true);
-    this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     this.setLocationRelativeTo(null);
   }
 }
