@@ -39,7 +39,7 @@ public class MenuBar extends JMenuBar {
     this.add(visualize);
 
     JMenu filter = new JMenu("Filter");
-    filter.setMnemonic(KeyEvent.VK_F);
+    filter.setMnemonic(KeyEvent.VK_I);
     this.add(filter);
 
     JMenu transform = new JMenu("Transform");
@@ -119,25 +119,46 @@ public class MenuBar extends JMenuBar {
     flip.add(flipHoriz);
 
     // Adjust
+    ActionListener niml = new NumberInputMenuListener(ctrl, curImageName);
+
     JMenuItem adjBright = new JMenuItem("Brighten");
-    JMenuItem adjDark = new JMenuItem("Darken");
+    adjBright.setActionCommand("brighten");
+    adjBright.addActionListener(niml);
     adjust.add(adjBright);
+
+    JMenuItem adjDark = new JMenuItem("Darken");
+    adjDark.setActionCommand("darken");
+    adjDark.addActionListener(niml);
     adjust.add(adjDark);
 
     // Histogram
     JMenu hgram = new JMenu("Histogram");
     hgram.setMnemonic(KeyEvent.VK_H);
+    JMenuItem hgramItem = new JMenuItem("Generate Histogram");
+    hgramItem.setActionCommand("hgram");
+    hgram.addActionListener(al);
+    hgram.add(hgramItem);
     this.add(hgram);
 
     // Save and load
-    JMenu save = new JMenu("Save...");
-    save.setMnemonic(KeyEvent.VK_S);
+    ActionListener fcml = new FileChooserMenuListener(ctrl, curImageName);
+    JMenu file = new JMenu("File");
+    file.setMnemonic(KeyEvent.VK_F);
+    this.add(file, 0);
 
-    JMenu load = new JMenu("Load...");
+    JMenuItem load = new JMenuItem("Load...");
     load.setMnemonic(KeyEvent.VK_L);
+    load.setActionCommand("load");
+    load.addActionListener(fcml);
+    file.add(load);
 
-    this.add(save, 0);
-    this.add(load, 0);
+    JMenuItem save = new JMenuItem("Save...");
+    save.setMnemonic(KeyEvent.VK_S);
+    save.setActionCommand("save");
+    save.addActionListener(fcml);
+    file.add(save);
+
+
   }
 
 
