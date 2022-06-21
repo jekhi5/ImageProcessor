@@ -10,6 +10,7 @@ import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.Style;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
+import javax.swing.text.BadLocationException;
 
 /**
  * Represents a window that only shows a text message and a close button.
@@ -25,7 +26,7 @@ public class PopupDialog extends JFrame {
    * @param msg the message to display
    */
   public PopupDialog(String msg) {
-    super("ImageEditor");
+    super("Image Processor");
 
     JTextPane textPane = new JTextPane();
     textPane.setEnabled(true);
@@ -44,7 +45,7 @@ public class PopupDialog extends JFrame {
     StyleConstants.setForeground(styledText, new Color(109, 109, 109));
     try {
       styledDocument.insertString(0, msg, styledText);
-    } catch (javax.swing.text.BadLocationException e) {
+    } catch (BadLocationException e) {
       textPane.setText(msg);
     }
 
