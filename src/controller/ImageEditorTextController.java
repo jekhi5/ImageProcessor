@@ -2,8 +2,7 @@ package controller;
 
 /**
  * Takes in user input in the form of text, and uses it to run the image editor. The controller
- * facilitates
- * the transfer of data between an {@link view.ImageEditorView} and an
+ * facilitates the transfer of data between an {@link view.ImageEditorView} and an
  * {@link model.ImageEditorModel}.
  */
 public interface ImageEditorTextController {

@@ -1,6 +1,6 @@
 package gui.swingview;
 
-import javax.swing.*;
+import javax.swing.JFrame;
 
 public class Tester {
   public static void main(String[] args) {

@@ -6,11 +6,11 @@ import java.awt.Font;
 import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JTextPane;
+import javax.swing.text.BadLocationException;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.Style;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
-import javax.swing.text.BadLocationException;
 
 /**
  * Represents a window that only shows a text message and a close button.

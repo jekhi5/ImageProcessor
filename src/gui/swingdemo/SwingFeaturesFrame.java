@@ -35,12 +35,12 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
- * This class opens the main window, that has different elements illustrated in
- * it. It also doubles up as all the listeners for simplicity. Such a design is
- * not recommended in general.
+ * This class opens the main window, that has different elements illustrated in it. It also doubles
+ * up as all the listeners for simplicity. Such a design is not recommended in general.
  */
 
-public class SwingFeaturesFrame extends JFrame implements ActionListener, ItemListener, ListSelectionListener {
+public class SwingFeaturesFrame extends JFrame
+        implements ActionListener, ItemListener, ListSelectionListener {
   private JPasswordField pfield;
   private JButton pButton;
   private JLabel pDisplay;
@@ -338,7 +338,8 @@ public class SwingFeaturesFrame extends JFrame implements ActionListener, ItemLi
         }
         break;
       case "Color chooser":
-        Color col = JColorChooser.showDialog(SwingFeaturesFrame.this, "Choose a color", colorChooserDisplay.getBackground());
+        Color col = JColorChooser.showDialog(SwingFeaturesFrame.this, "Choose a color",
+                colorChooserDisplay.getBackground());
         colorChooserDisplay.setBackground(col);
         break;
       case "Open file": {
@@ -363,17 +364,24 @@ public class SwingFeaturesFrame extends JFrame implements ActionListener, ItemLi
       }
       break;
       case "Message":
-        JOptionPane.showMessageDialog(SwingFeaturesFrame.this, "This is a demo message", "Message", JOptionPane.PLAIN_MESSAGE);
-        JOptionPane.showMessageDialog(SwingFeaturesFrame.this, "You are about to be deleted.", "Last Chance", JOptionPane.WARNING_MESSAGE);
-        JOptionPane.showMessageDialog(SwingFeaturesFrame.this, "You have been deleted.", "Too late", JOptionPane.ERROR_MESSAGE);
-        JOptionPane.showMessageDialog(SwingFeaturesFrame.this, "Please start again.", "What to do next", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(SwingFeaturesFrame.this, "This is a demo message", "Message",
+                JOptionPane.PLAIN_MESSAGE);
+        JOptionPane.showMessageDialog(SwingFeaturesFrame.this, "You are about to be deleted.",
+                "Last Chance", JOptionPane.WARNING_MESSAGE);
+        JOptionPane.showMessageDialog(SwingFeaturesFrame.this, "You have been deleted.", "Too late",
+                JOptionPane.ERROR_MESSAGE);
+        JOptionPane.showMessageDialog(SwingFeaturesFrame.this, "Please start again.",
+                "What to do next", JOptionPane.INFORMATION_MESSAGE);
         break;
       case "Input":
         inputDisplay.setText(JOptionPane.showInputDialog("Please enter your username"));
         break;
       case "Option": {
-        String[] options = {"Uno", "Dos", "Tres", "Cuatro", "Cinco", "seis", "siete", "ocho", "nueve", "dies"};
-        int retvalue = JOptionPane.showOptionDialog(SwingFeaturesFrame.this, "Please choose number", "Options", JOptionPane.YES_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options, options[4]);
+        String[] options =
+                {"Uno", "Dos", "Tres", "Cuatro", "Cinco", "seis", "siete", "ocho", "nueve", "dies"};
+        int retvalue = JOptionPane.showOptionDialog(SwingFeaturesFrame.this, "Please choose number",
+                "Options", JOptionPane.YES_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options,
+                options[4]);
         optionDisplay.setText(options[retvalue]);
       }
       break;
@@ -437,9 +445,11 @@ public class SwingFeaturesFrame extends JFrame implements ActionListener, ItemLi
             "The changing index is " + e.getFirstIndex(), "Index", JOptionPane.PLAIN_MESSAGE);
     // This gets us the string value that's currently selected
     JOptionPane.showMessageDialog(SwingFeaturesFrame.this,
-            "The current string item is " + this.listOfStrings.getSelectedValue(), "Selected string", JOptionPane.PLAIN_MESSAGE);
+            "The current string item is " + this.listOfStrings.getSelectedValue(),
+            "Selected string", JOptionPane.PLAIN_MESSAGE);
     // This gets us the integer value that's currently selected
     JOptionPane.showMessageDialog(SwingFeaturesFrame.this,
-            "The current number item is " + this.listOfIntegers.getSelectedValue(), "Selected integer", JOptionPane.PLAIN_MESSAGE);
+            "The current number item is " + this.listOfIntegers.getSelectedValue(),
+            "Selected integer", JOptionPane.PLAIN_MESSAGE);
   }
 }

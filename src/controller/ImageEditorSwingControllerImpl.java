@@ -36,8 +36,9 @@ public class ImageEditorSwingControllerImpl
 
   /**
    * Creates a new Swing controller.
+   *
    * @param model the model
-   * @param view the view
+   * @param view  the view
    * @throws IllegalArgumentException if either is null
    */
   public ImageEditorSwingControllerImpl(ImageEditorModel model, ImageEditorView view) {
