@@ -9,6 +9,7 @@ import view.ImageEditorView;
  */
 public class ImageEditorSwingView extends JFrame implements ImageEditorView {
 
+
   /**
    * Creates a popup dialog box with the message.
    *

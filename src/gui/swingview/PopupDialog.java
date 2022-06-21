@@ -15,7 +15,7 @@ import javax.swing.text.BadLocationException;
 /**
  * Represents a window that only shows a text message and a close button.
  */
-public class PopupDialog extends JFrame {
+public class PopupDialog extends JFrame implements ImageEditorSwingFeature {
 
   private static final int WIDTH = 300;
   private static final int MAX_HEIGHT = 500;
