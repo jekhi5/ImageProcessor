@@ -1,5 +1,6 @@
 package controller;
 
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.StringReader;
 import java.util.HashMap;
@@ -22,6 +23,8 @@ import commands.SaveImage;
 import commands.Sepia;
 import commands.Sharpen;
 import model.ImageEditorModel;
+import model.image.Image;
+import view.ImageEditorGUIView;
 import view.ImageEditorView;
 
 /**
@@ -31,7 +34,7 @@ public class ImageEditorSwingControllerImpl
         implements ImageEditorSwingController {
 
   private final ImageEditorModel model;
-  private final ImageEditorView view;
+  private final ImageEditorGUIView view;
   private final Map<String, Function<Scanner, ImageEditorCommand>> commands;
 
   /**
@@ -41,9 +44,11 @@ public class ImageEditorSwingControllerImpl
    * @param view  the view
    * @throws IllegalArgumentException if either is null
    */
-  public ImageEditorSwingControllerImpl(ImageEditorModel model, ImageEditorView view) {
+  public ImageEditorSwingControllerImpl(ImageEditorModel model, ImageEditorGUIView view) {
     this.model = model;
     this.view = view;
+    this.view.accept(this);
+
     this.commands = new HashMap<>();
 
     // Add all new commands here:
@@ -86,6 +91,11 @@ public class ImageEditorSwingControllerImpl
     } else {
       transmit("Error: Invalid command");
     }
+  }
+
+  @Override
+  public Image getImage(String name) throws IllegalArgumentException {
+    return model.getImage(name);
   }
 
   private void transmit(String msg) {
