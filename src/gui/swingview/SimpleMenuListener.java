@@ -2,13 +2,12 @@ package gui.swingview;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
 
 import controller.ImageEditorSwingController;
 
 /**
- * An event listener for mouse events, specialized for one-click menu bar items.
- * On click, sends the given command to the controller.
+ * An event listener for mouse events, specialized for one-click menu bar items. On click, sends the
+ * given command to the controller.
  */
 public class SimpleMenuListener implements ActionListener {
   protected final ImageEditorSwingController controller;

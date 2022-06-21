@@ -2,7 +2,8 @@ package gui.swingview;
 
 import java.awt.event.ActionEvent;
 
-import javax.swing.*;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 import controller.ImageEditorSwingController;
 

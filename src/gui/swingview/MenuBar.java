@@ -3,14 +3,14 @@ package gui.swingview;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 
-import javax.swing.*;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 
-import commands.Blur;
 import controller.ImageEditorSwingController;
 
 /**
- * The menu bar at the top of the window.
- * This will be the main mechanism for user input.
+ * The menu bar at the top of the window. This will be the main mechanism for user input.
  */
 public class MenuBar extends JMenuBar {
   private final String curImageName;
