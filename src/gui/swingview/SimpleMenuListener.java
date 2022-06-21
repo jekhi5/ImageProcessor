@@ -11,7 +11,7 @@ import controller.ImageEditorSwingController;
  * On click, sends the given command to the controller.
  */
 public class SimpleMenuListener implements ActionListener {
-  private final ImageEditorSwingController controller;
+  protected final ImageEditorSwingController controller;
 
   /**
    * Creates a new SimpleMenuListener.
@@ -28,7 +28,14 @@ public class SimpleMenuListener implements ActionListener {
 
   @Override
   public void actionPerformed(ActionEvent e) {
-    controller.runCommand(e.getActionCommand());
-    System.out.println(e.getActionCommand());
+    if (e.getActionCommand().equalsIgnoreCase("hgram")) {
+      generateHistogram();
+    } else {
+      controller.runCommand(e.getActionCommand());
+    }
+  }
+
+  private void generateHistogram() {
+    // TODO: figure out histograms!
   }
 }
