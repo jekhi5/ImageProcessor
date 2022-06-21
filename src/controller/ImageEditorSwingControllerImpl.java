@@ -47,7 +47,6 @@ public class ImageEditorSwingControllerImpl
   public ImageEditorSwingControllerImpl(ImageEditorModel model, ImageEditorGUIView view) {
     this.model = model;
     this.view = view;
-    this.view.accept(this);
 
     this.commands = new HashMap<>();
 
@@ -69,6 +68,8 @@ public class ImageEditorSwingControllerImpl
     commands.put("help", s -> new HelpCommand());
     commands.put("h", s -> new HelpCommand());
     commands.put("convert", s -> new Convert(s));
+
+    this.view.accept(this);
   }
 
 

@@ -37,7 +37,7 @@ public class NumberInputMenuListener extends SimpleMenuListener {
             "Enter amount to " + e.getActionCommand());
 
     if (input != null && !input.equals("")) {
-      String cmd = e.getActionCommand() + " " + name + " " + name;
+      String cmd = e.getActionCommand() + " " + input + " " + name + " " + name;
       controller.runCommand(cmd);
     }
   }

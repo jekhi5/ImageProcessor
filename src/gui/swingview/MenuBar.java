@@ -3,11 +3,10 @@ package gui.swingview;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
+import javax.swing.*;
 
 import controller.ImageEditorSwingController;
+import view.ImageEditorGUIView;
 
 /**
  * The menu bar at the top of the window. This will be the main mechanism for user input.
@@ -23,10 +22,10 @@ public class MenuBar extends JMenuBar {
    * @param ctrl         the controller
    * @throws IllegalArgumentException if either argument is null
    */
-  public MenuBar(String curImageName, ImageEditorSwingController ctrl)
+  public MenuBar(String curImageName, ImageEditorSwingController ctrl, ImageEditorGUIView view)
           throws IllegalArgumentException {
     super();
-    if (curImageName == null || ctrl == null) {
+    if (curImageName == null || ctrl == null || view == null) {
       throw new IllegalArgumentException("Can't have null args!");
     }
     this.curImageName = curImageName;
@@ -141,7 +140,7 @@ public class MenuBar extends JMenuBar {
     this.add(hgram);
 
     // Save and load
-    ActionListener fcml = new FileChooserMenuListener(ctrl, curImageName);
+    ActionListener fcml = new FileChooserMenuListener(ctrl, curImageName, view);
     JMenu file = new JMenu("File");
     file.setMnemonic(KeyEvent.VK_F);
     this.add(file, 0);
@@ -157,7 +156,7 @@ public class MenuBar extends JMenuBar {
     save.setActionCommand("save");
     save.addActionListener(fcml);
     file.add(save);
-
+// TODO: help menu item
 
   }
 
