@@ -7,6 +7,7 @@ import java.nio.file.Path;
 import javax.imageio.ImageIO;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JMenuBar;
 
 import controller.ImageEditorSwingController;
@@ -45,13 +46,16 @@ public class Tester {
 
 
     JFrame testViewPort = new JFrame("View Port");
+    testViewPort.setSize(750, 750);
+    testViewPort.setVisible(true);
+    testViewPort.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    testViewPort.setLocationRelativeTo(null);
+
     JComponent viewPort = new ImageViewPort(500, 500,
             ImageIO.read(new File("res/diagram.jpg")));
 
-    testViewPort.setVisible(true);
-    testViewPort.setSize(750, 750);
     testViewPort.add(viewPort);
-    testViewPort.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    testViewPort.setLocationRelativeTo(null);
+    //testViewPort.add(new JLabel("Something"));
+    testViewPort.repaint();
   }
 }

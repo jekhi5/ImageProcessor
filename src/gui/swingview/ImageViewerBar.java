@@ -10,6 +10,7 @@ import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComponent;
+import javax.swing.JPanel;
 
 import model.image.Image;
 import model.pixel.Pixel;
@@ -18,7 +19,7 @@ import model.pixel.Pixel;
  * Represents a bar where the user can scroll through the loaded images and select the one they
  * would like to work on.
  */
-public class ImageViewerBar extends JComponent {
+public class ImageViewerBar extends JPanel {
 
   private static final int BUTTON_WIDTH = 75;
   private static final int BUTTON_HEIGHT = 75;
