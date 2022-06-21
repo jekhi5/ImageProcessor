@@ -32,6 +32,7 @@ public class ImageViewerBar extends JComponent implements ImageEditorSwingFeatur
     this.buttons = new ArrayList<>();
     this.width = width;
     this.height = height;
+    this.setPreferredSize(new Dimension(width, height));
   }
 
   /**
@@ -42,10 +43,13 @@ public class ImageViewerBar extends JComponent implements ImageEditorSwingFeatur
    * @throws java.lang.IllegalArgumentException if either argument is null
    */
   public void addImageToBar(String name, Image img) throws IllegalArgumentException {
-    this.buttons.add(new ImageSelectorButton(name, this.toBufferedImage(img), this.width));
+    ImageIcon icon = new ImageIcon(toBufferedImage(img));
+    java.awt.Image resizedImage = icon.getImage().getScaledInstance(this.width,
+            ImageSelectorButton.HEIGHT_OF_BUTTON, java.awt.Image.SCALE_DEFAULT);
+    this.buttons.add(new ImageSelectorButton(name, resizedImage, this.width));
   }
 
-  private BufferedImage toBufferedImage(Image img) {
+  public static BufferedImage toBufferedImage(Image img) {
     BufferedImage result =
             new BufferedImage(img.getWidth(), img.getHeight(), BufferedImage.TYPE_INT_ARGB);
 
@@ -61,8 +65,7 @@ public class ImageViewerBar extends JComponent implements ImageEditorSwingFeatur
     return result;
   }
 
-  public void display(boolean isCollapsed) {
-    int height = this.height;
+  public void render(boolean isCollapsed) {
     int width;
     if (isCollapsed) {
       width = 0;
@@ -70,19 +73,23 @@ public class ImageViewerBar extends JComponent implements ImageEditorSwingFeatur
       width = this.width;
     }
 
+    //this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
+
     for (ImageSelectorButton button : this.buttons) {
+      button.setDimensions(width);
       this.add(button);
+      button.setVisible(true);
     }
 
-
+    this.setVisible(true);
   }
 
   /**
    * Represents a single image editor button.
    */
-  private static class ImageSelectorButton extends JButton {
+  public static class ImageSelectorButton extends JButton {
 
-    private static final int HEIGHT_OF_BUTTON = 200;
+    public static final int HEIGHT_OF_BUTTON = 20;
     private Dimension dimensions;
 
     /**
@@ -104,16 +111,17 @@ public class ImageViewerBar extends JComponent implements ImageEditorSwingFeatur
 
       this.addActionListener(new ButtonListener());
       this.dimensions = new Dimension(width, HEIGHT_OF_BUTTON);
-      this.setPreferredSize(new Dimension(width, HEIGHT_OF_BUTTON));
+      this.setPreferredSize(this.dimensions);
     }
 
     /**
      * To set the dimensions of this button.
      *
-     * @param dimensions the dimensions that this button will be
+     * @param width the new width of the button (the height is locked)
      */
-    protected void setDimensions(Dimension dimensions) {
-      this.dimensions = dimensions;
+    protected void setDimensions(int width) {
+      this.dimensions = new Dimension(width, HEIGHT_OF_BUTTON);
+      this.setPreferredSize(this.dimensions);
     }
   }
 
