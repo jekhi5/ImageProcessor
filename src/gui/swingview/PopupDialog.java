@@ -54,7 +54,7 @@ public class PopupDialog extends JFrame implements ImageEditorSwingFeature {
     this.setSize(WIDTH, height);
     this.add(textPane);
     this.setVisible(true);
-    this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     this.setLocationRelativeTo(null);
   }
 }
