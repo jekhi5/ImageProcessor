@@ -1,9 +1,15 @@
 package gui.swingview;
 
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+
+import javax.swing.*;
 
 import controller.ImageEditorSwingController;
+import model.image.Image;
+import model.pixel.Pixel;
 
 /**
  * An event listener for mouse events, specialized for one-click menu bar items. On click, sends the
@@ -27,14 +33,27 @@ public class SimpleMenuListener implements ActionListener {
 
   @Override
   public void actionPerformed(ActionEvent e) {
-    if (e.getActionCommand().equalsIgnoreCase("hgram")) {
-      generateHistogram();
+    if (e.getActionCommand().contains("hgram")) {
+      generateHistogram(e.getActionCommand().split(" ")[1]);
     } else {
       controller.runCommand(e.getActionCommand());
     }
   }
 
-  private void generateHistogram() {
-    // TODO: figure out histograms!
+  private void generateHistogram(String name) {
+    new Histogram(toBufferedImage(controller.getImage(name)));
+  }
+
+  private static BufferedImage toBufferedImage(Image image) {
+    BufferedImage bi =
+            new BufferedImage(image.getWidth(), image.getHeight(), BufferedImage.TYPE_INT_RGB);
+    for (int r = 0; r < image.getHeight(); r++) {
+      for (int c = 0; c < image.getWidth(); c++) {
+        Pixel p = image.getPixelAt(r, c);
+        Color color = new Color(p.getRed(), p.getGreen(), p.getBlue());
+        bi.setRGB(c, r, color.getRGB());
+      }
+    }
+    return bi;
   }
 }

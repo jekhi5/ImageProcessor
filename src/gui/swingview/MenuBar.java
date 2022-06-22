@@ -134,8 +134,8 @@ public class MenuBar extends JMenuBar {
     JMenu hgram = new JMenu("Histogram");
     hgram.setMnemonic(KeyEvent.VK_H);
     JMenuItem hgramItem = new JMenuItem("Generate Histogram");
-    hgramItem.setActionCommand("hgram");
-    hgram.addActionListener(al);
+    hgramItem.setActionCommand("hgram " + curImageName);
+    hgramItem.addActionListener(al);
     hgram.add(hgramItem);
     this.add(hgram);
 
