@@ -13,8 +13,6 @@ import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.ScrollPaneLayout;
 
 import view.ImageEditorGUIView;
 
@@ -26,9 +24,7 @@ public class ImageSelectorBar extends JPanel {
 
   private static final int BUTTON_WIDTH = 75;
   private static final int BUTTON_HEIGHT = 75;
-  private final JScrollPane scrollPane;
-  private static final java.awt.Image
-          NOT_FOUND_IMAGE;
+  private static final java.awt.Image NOT_FOUND_IMAGE;
 
   static {
     try {
@@ -47,19 +43,26 @@ public class ImageSelectorBar extends JPanel {
    */
   public ImageSelectorBar(int width, int height) {
     super();
-    this.scrollPane = new JScrollPane();
-    this.scrollPane.setPreferredSize(new Dimension(width, height));
-    this.scrollPane.setLayout(new ScrollPaneLayout());
-    //this.scrollPane.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-
-    this.setPreferredSize(new Dimension(width, height));
-    super.add(this.scrollPane);
+    this.setMaximumSize(new Dimension(width, height));
+    this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
   }
 
-  @Override
-  public Component add(Component component) {
-    this.scrollPane.add(component);
-    return this;
+  /**
+   * To get the button width.
+   *
+   * @return the width of a button
+   */
+  public static int getButtonWidth() {
+    return BUTTON_WIDTH;
+  }
+
+  /**
+   * To get the button height.
+   *
+   * @return the height of a button
+   */
+  public static int getButtonHeight() {
+    return BUTTON_HEIGHT;
   }
 
   /**
@@ -71,10 +74,10 @@ public class ImageSelectorBar extends JPanel {
      * To construct a button with the given image as an icon and the given name as the text for the
      * button. The dimensions are the given width by the static height of all buttons.
      *
-     * @param displayName the display name of the image
+     * @param displayName   the display name of the image
      * @param originalImage the originally sized image that will be resized for the button
-     * @param view the view that this button will appear in
-     * @param nameInEditor the name of this image in the editor
+     * @param view          the view that this button will appear in
+     * @param nameInEditor  the name of this image in the editor
      */
     protected ImageSelectorButton(String displayName, java.awt.Image originalImage,
                                   ImageEditorGUIView view, String nameInEditor) {
@@ -86,8 +89,8 @@ public class ImageSelectorBar extends JPanel {
       if (originalImage == null) {
         super.setIcon(new ImageIcon(NOT_FOUND_IMAGE));
       } else {
-        java.awt.Image resizedImage = originalImage.getScaledInstance(BUTTON_WIDTH, BUTTON_HEIGHT
-                , Image.SCALE_DEFAULT);
+        java.awt.Image resizedImage = originalImage.getScaledInstance(BUTTON_WIDTH - 30,
+                BUTTON_HEIGHT - 30, Image.SCALE_DEFAULT);
         super.setIcon(new ImageIcon(resizedImage));
       }
 
@@ -99,8 +102,7 @@ public class ImageSelectorBar extends JPanel {
       this.setAlignmentX(Component.LEFT_ALIGNMENT);
       this.setHorizontalTextPosition(CENTER);
       this.setVerticalTextPosition(TOP);
+      this.setVisible(true);
     }
   }
-
-
 }

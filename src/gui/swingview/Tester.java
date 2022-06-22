@@ -9,6 +9,7 @@ import javax.swing.JFrame;
 
 import controller.ImageEditorSwingController;
 import controller.ImageEditorSwingControllerImpl;
+import gui.swingview.ImageSelectorBar.ImageSelectorButton;
 import model.BasicImageEditorModel;
 import model.ImageEditorModel;
 import view.ImageEditorGUIView;
@@ -56,5 +57,20 @@ public class Tester {
     ImageEditorModel model = new BasicImageEditorModel();
     ImageEditorSwingController controller = new ImageEditorSwingControllerImpl(model, view);
     view.accept(controller);
+//
+//    JFrame test = new JFrame("test");
+//    test.setSize(500, 500);
+//
+//    JComponent viewPort = new ImageViewPort(200, 200, null);
+//
+////    JComponent selector = new ImageSelectorBar(200, 300);
+////    JComponent button =
+////            new ImageSelectorButton("testImage", ImageIO.read(new File("res/diagram.jpg")),
+////                    new ImageEditorSwingView(), "testImage");
+//
+//
+//    //selector.add(button);
+//    test.getContentPane().add(viewPort);
+//    test.setVisible(true);
   }
 }

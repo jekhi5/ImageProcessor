@@ -148,6 +148,7 @@ public class ImageUtil {
 
   /**
    * To construct a buffered image from an instance of {@link model.image.Image}.
+   *
    * @param image the image to convert
    * @return a buffered image of the given image
    */

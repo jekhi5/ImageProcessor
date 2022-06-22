@@ -3,13 +3,14 @@ package view;
 import controller.ImageEditorSwingController;
 
 /**
- * A view adapter interface for working with a GUI and controller features.
- * Adds the ability to accept a controller.
+ * A view adapter interface for working with a GUI and controller features. Adds the ability to
+ * accept a controller.
  */
 public interface ImageEditorGUIView extends ImageEditorView {
 
   /**
    * Adds the given controller to this view to facilitate two-way communication.
+   *
    * @param controller the controller
    * @throws IllegalArgumentException if the controller is null
    */
@@ -17,6 +18,7 @@ public interface ImageEditorGUIView extends ImageEditorView {
 
   /**
    * Changes the focused image in the editor to the given name.
+   *
    * @param nameInEditor the name of the image
    * @throws IllegalArgumentException if the name is null or not loaded in the view
    */
@@ -24,6 +26,7 @@ public interface ImageEditorGUIView extends ImageEditorView {
 
   /**
    * Adds a new Image name to the view.
+   *
    * @param nameInEditor the name of the image
    * @throws IllegalArgumentException if the name is null, or not in the model
    */

@@ -1,6 +1,5 @@
 package controller;
 
-import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.StringReader;
 import java.util.HashMap;
@@ -25,7 +24,6 @@ import commands.Sharpen;
 import model.ImageEditorModel;
 import model.image.Image;
 import view.ImageEditorGUIView;
-import view.ImageEditorView;
 
 /**
  * An implementation of {@link ImageEditorSwingController}.
