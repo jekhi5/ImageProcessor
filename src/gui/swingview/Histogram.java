@@ -20,6 +20,7 @@ public class Histogram extends JFrame {
     int[] red = new int[256];
     int[] green = new int[256];
     int[] blue = new int[256];
+    int[] intensity = new int[256];
 
     // loop through the image to populate the boxes
     for (int x = 0; x < image.getWidth(); x++) {
@@ -29,10 +30,12 @@ public class Histogram extends JFrame {
         red[c.getRed()]++;
         green[c.getGreen()]++;
         blue[c.getBlue()]++;
+        int intens = (c.getRed() + c.getGreen() + c.getBlue()) / 3;
+        intensity[intens]++;
       }
     }
 
-    HistogramBox box = new HistogramBox(red, green, blue, new int[256]);
+    HistogramBox box = new HistogramBox(red, green, blue, intensity);
     this.add(box);
 
     this.setMinimumSize(new Dimension(570, 325));
@@ -51,21 +54,21 @@ public class Histogram extends JFrame {
     int[] red;
     int[] green;
     int[] blue;
-    int[] alpha;
+    int[] intensity;
 
     /**
      * Creates a new HistogramBox.
      * @param red red
      * @param green green
      * @param blue blue
-     * @param alpha alpha
+     * @param intensity intensity
      */
-    public HistogramBox(int[] red, int[] green, int[] blue, int[] alpha) {
+    public HistogramBox(int[] red, int[] green, int[] blue, int[] intensity) {
       super();
       this.red = red;
       this.green = green;
       this.blue = blue;
-      this.alpha = alpha;
+      this.intensity = intensity;
       this.setMinimumSize(new Dimension(610, 325));
     }
 
@@ -74,7 +77,7 @@ public class Histogram extends JFrame {
       Graphics2D g2 = (Graphics2D) g;
       super.paintComponent(g);
 
-      int maxValue = findMax(red, green, blue);
+      int maxValue = findMax(red, green, blue, intensity);
       // x/max = y/256
       // 256x = max*y
       //y = 256x / max
@@ -90,6 +93,10 @@ public class Histogram extends JFrame {
 
         g2.setColor(Color.BLUE);
         g2.drawLine(x, 265 - blue[i] * 256 / maxValue, x + 2, 265 - blue[i + 1] * 256 / maxValue);
+
+        g2.setColor(Color.LIGHT_GRAY);
+        g2.drawLine(x, 265 - intensity[i] * 256 / maxValue, x + 2, 265 - intensity[i + 1] * 256 / maxValue);
+
         x += 2;
       }
 
