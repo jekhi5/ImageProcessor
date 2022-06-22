@@ -1,15 +1,9 @@
 package gui.swingview;
 
-import java.io.File;
 import java.io.IOException;
-
-import javax.imageio.ImageIO;
-import javax.swing.JComponent;
-import javax.swing.JFrame;
 
 import controller.ImageEditorSwingController;
 import controller.ImageEditorSwingControllerImpl;
-import gui.swingview.ImageSelectorBar.ImageSelectorButton;
 import model.BasicImageEditorModel;
 import model.ImageEditorModel;
 import view.ImageEditorGUIView;

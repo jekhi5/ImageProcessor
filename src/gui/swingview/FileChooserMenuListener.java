@@ -2,7 +2,6 @@ package gui.swingview;
 
 
 import java.awt.event.ActionEvent;
-import java.util.List;
 
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
@@ -18,24 +17,22 @@ import view.ImageEditorGUIView;
  */
 public class FileChooserMenuListener extends SimpleMenuListener {
   private final String name;
-  private final ImageEditorGUIView view;
 
   /**
    * Creates a new SimpleMenuListener.
    *
    * @param controller the controller
    * @param name       the image name to act upon
-   * @param view the view
+   * @param view       the view
    * @throws IllegalArgumentException if any argument is null
    */
-  public FileChooserMenuListener(ImageEditorSwingController controller, String name, ImageEditorGUIView view)
-          throws IllegalArgumentException {
-    super(controller);
-    if (name == null || view == null) {
+  public FileChooserMenuListener(ImageEditorSwingController controller, String name,
+                                 ImageEditorGUIView view) throws IllegalArgumentException {
+    super(controller, view);
+    if (name == null) {
       throw new IllegalArgumentException("Can't have null args!");
     }
     this.name = name;
-    this.view = view;
   }
 
   @Override

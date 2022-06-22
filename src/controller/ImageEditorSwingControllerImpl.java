@@ -76,7 +76,7 @@ public class ImageEditorSwingControllerImpl
     StringReader reader = new StringReader(command);
     Scanner in = new Scanner(reader);
 
-    String cmdString = "";
+    String cmdString;
     if (in.hasNext()) {
       cmdString = in.next();
     } else {

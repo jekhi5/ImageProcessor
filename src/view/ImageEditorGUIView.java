@@ -31,4 +31,9 @@ public interface ImageEditorGUIView extends ImageEditorView {
    * @throws IllegalArgumentException if the name is null, or not in the model
    */
   void addImage(String nameInEditor) throws IllegalArgumentException;
+
+  /**
+   * Updates all icons in the selector buttons as well as updates the main image in the viewport.
+   */
+  void refreshImages();
 }

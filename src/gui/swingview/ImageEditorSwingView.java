@@ -1,6 +1,5 @@
 package gui.swingview;
 
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -14,7 +13,6 @@ import javax.swing.JScrollPane;
 
 import controller.ImageEditorSwingController;
 import gui.swingview.ImageSelectorBar.ImageSelectorButton;
-import model.image.Image;
 import utilities.ImageUtil;
 import view.ImageEditorGUIView;
 
@@ -24,12 +22,12 @@ import view.ImageEditorGUIView;
 public class ImageEditorSwingView implements ImageEditorGUIView {
 
   private final JFrame frame;
-  private JComponent selectorBar;
   private final List<String> names;
+  private final GridBagLayout layout;
+  private JComponent selectorBar;
   private JComponent viewPort;
   private ImageEditorSwingController controller;
   private String curImageName;
-  private final GridBagLayout layout;
 
   public ImageEditorSwingView() {
     this.frame = new JFrame("Image Editor");
@@ -97,63 +95,66 @@ public class ImageEditorSwingView implements ImageEditorGUIView {
     }
     this.curImageName = nameInEditor;
 
-    Image toDisplay = this.controller.getImage(nameInEditor);
-    this.frame.remove(this.viewPort);
-
-    this.viewPort = new JScrollPane(new ImageViewPort(this.frame.getWidth() - 200,
-            this.frame.getHeight() - 200,
-            ImageUtil.toBufferedImage(toDisplay)));
-    this.viewPort.setLocation(this.frame.getWidth() / 5, this.frame.getHeight() / 5);
-
-    layout.addLayoutComponent(this.viewPort,
-            new GridBagConstraints(1, 0, 1, 1, 10, 1, GridBagConstraints.PAGE_START,
-                    GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
-    this.frame.getContentPane().add(this.viewPort);
-
     this.frame.setJMenuBar(new MenuBar(this.curImageName, this.controller, this));
-    this.frame.revalidate();
+
+    this.refreshViewPort();
   }
 
   @Override
   public void addImage(String nameInEditor) throws IllegalArgumentException {
     try {
-      this.names.add(nameInEditor);
+      this.names.add(0, nameInEditor);
       this.setCurrentImage(nameInEditor);
 
-      String displayName;
-      System.out.println(nameInEditor);
-      try {
-        displayName = nameInEditor.substring(
-                nameInEditor.lastIndexOf(System.getProperty("file.separator")) + 1);
-      } catch (Exception e) {
-        displayName = "UnknownName";
-      }
+      this.refreshButtons();
 
-      JComponent newButton = new ImageSelectorButton(displayName,
-              ImageUtil.toBufferedImage(this.controller.getImage(nameInEditor)), this,
-              nameInEditor);
-
-      JComponent newSelectorBar = new ImageSelectorBar(ImageSelectorBar.getButtonWidth() + 15,
-              this.frame.getHeight() - 20);
-
-      newSelectorBar.add(newButton);
-
-      for (Component comp : this.selectorBar.getComponents()) {
-        newSelectorBar.add(comp);
-      }
-      this.frame.remove(this.selectorBar);
-
-      this.selectorBar = new JScrollPane(newSelectorBar);
-      this.selectorBar.setAlignmentX(Component.LEFT_ALIGNMENT);
-      this.selectorBar.setAlignmentY(Component.CENTER_ALIGNMENT);
-
-      layout.addLayoutComponent(this.selectorBar,
-              new GridBagConstraints(0, 0, 1, 1, 1, 1, GridBagConstraints.LINE_START,
-                      GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
-      this.frame.add(this.selectorBar);
-      this.frame.revalidate();
     } catch (IllegalArgumentException e) {
       throw new IllegalArgumentException(e.getMessage());
     }
+  }
+
+  @Override
+  public void refreshImages() {
+    this.refreshButtons();
+    this.refreshViewPort();
+  }
+
+  private void refreshViewPort() {
+    this.frame.remove(this.viewPort);
+
+    this.viewPort = new JScrollPane(
+            new ImageViewPort(this.viewPort.getWidth(), this.viewPort.getHeight(),
+                    ImageUtil.toBufferedImage(this.controller.getImage(this.curImageName))));
+
+    layout.addLayoutComponent(this.viewPort,
+            new GridBagConstraints(1, 0, 1, 1, 10, 1, GridBagConstraints.PAGE_START,
+                    GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
+
+    this.frame.add(this.viewPort);
+    this.frame.revalidate();
+  }
+
+  private void refreshButtons() {
+    this.frame.remove(this.selectorBar);
+
+    JComponent newSelectorBar =
+            new ImageSelectorBar(this.selectorBar.getWidth(), this.selectorBar.getHeight());
+
+    for (String nameInEditor : this.names) {
+      java.awt.Image newImage = ImageUtil.toBufferedImage(this.controller.getImage(nameInEditor));
+      JComponent newButton =
+              new ImageSelectorButton(nameInEditor.substring(
+                      nameInEditor.lastIndexOf(System.getProperty("file.separator")) + 1), newImage,
+                      this, nameInEditor);
+      newSelectorBar.add(newButton);
+    }
+
+    this.selectorBar = new JScrollPane(newSelectorBar);
+
+    layout.addLayoutComponent(this.selectorBar,
+            new GridBagConstraints(0, 0, 1, 1, 1, 1, GridBagConstraints.LINE_START,
+                    GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
+    this.frame.add(this.selectorBar);
+    this.frame.revalidate();
   }
 }

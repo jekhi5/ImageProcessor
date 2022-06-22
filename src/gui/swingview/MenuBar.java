@@ -14,8 +14,6 @@ import view.ImageEditorGUIView;
  * The menu bar at the top of the window. This will be the main mechanism for user input.
  */
 public class MenuBar extends JMenuBar {
-  private final String curImageName;
-  private final ImageEditorSwingController ctrl;
 
   /**
    * Creates a new menu bar.
@@ -30,10 +28,8 @@ public class MenuBar extends JMenuBar {
     if (curImageName == null || ctrl == null || view == null) {
       throw new IllegalArgumentException("Can't have null args!");
     }
-    this.curImageName = curImageName;
-    this.ctrl = ctrl;
-    String mutator = this.curImageName + " " + this.curImageName;
-    ActionListener al = new SimpleMenuListener(this.ctrl);
+    String mutator = curImageName + " " + curImageName;
+    ActionListener al = new SimpleMenuListener(ctrl, view);
 
     JMenu visualize = new JMenu("Visualize");
     visualize.setMnemonic(KeyEvent.VK_V);
@@ -120,7 +116,7 @@ public class MenuBar extends JMenuBar {
     flip.add(flipHoriz);
 
     // Adjust
-    ActionListener niml = new NumberInputMenuListener(ctrl, curImageName);
+    ActionListener niml = new NumberInputMenuListener(ctrl, view, curImageName);
 
     JMenuItem adjBright = new JMenuItem("Brighten");
     adjBright.setActionCommand("brighten");

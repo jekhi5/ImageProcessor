@@ -10,6 +10,7 @@ public class HistogramFactory {
 
   /**
    * Creates a new histogram from the given image, and closes the existing one.
+   *
    * @param image the image
    */
   public static void createHistogram(BufferedImage image) {

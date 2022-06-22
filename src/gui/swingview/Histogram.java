@@ -1,9 +1,13 @@
 package gui.swingview;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
-import javax.swing.*;
+import javax.swing.JComponent;
+import javax.swing.JFrame;
 
 /**
  * A bar graph visualization of the colors in an image.
@@ -12,6 +16,7 @@ public class Histogram extends JFrame {
 
   /**
    * Creates a new Histogram from the image.
+   *
    * @param image the image
    */
   public Histogram(BufferedImage image) {
@@ -47,8 +52,7 @@ public class Histogram extends JFrame {
   }
 
   /**
-   * The main content panel which contains the histogram.
-   * This is what the graphics will act on.
+   * The main content panel which contains the histogram. This is what the graphics will act on.
    */
   private class HistogramBox extends JComponent {
     int[] red;
@@ -58,9 +62,10 @@ public class Histogram extends JFrame {
 
     /**
      * Creates a new HistogramBox.
-     * @param red red
-     * @param green green
-     * @param blue blue
+     *
+     * @param red       red
+     * @param green     green
+     * @param blue      blue
      * @param intensity intensity
      */
     public HistogramBox(int[] red, int[] green, int[] blue, int[] intensity) {
@@ -84,7 +89,7 @@ public class Histogram extends JFrame {
 
 
       int x = 15;
-      for(int i = 0; i < 255; i++) {
+      for (int i = 0; i < 255; i++) {
         g2.setColor(Color.RED);
         g2.drawLine(x, 265 - red[i] * 256 / maxValue, x + 2, 265 - red[i + 1] * 256 / maxValue);
 
@@ -95,7 +100,8 @@ public class Histogram extends JFrame {
         g2.drawLine(x, 265 - blue[i] * 256 / maxValue, x + 2, 265 - blue[i + 1] * 256 / maxValue);
 
         g2.setColor(Color.LIGHT_GRAY);
-        g2.drawLine(x, 265 - intensity[i] * 256 / maxValue, x + 2, 265 - intensity[i + 1] * 256 / maxValue);
+        g2.drawLine(x, 265 - intensity[i] * 256 / maxValue, x + 2,
+                265 - intensity[i + 1] * 256 / maxValue);
 
         x += 2;
       }
@@ -111,8 +117,8 @@ public class Histogram extends JFrame {
 
     private int findMax(int[]... arrs) {
       int max = 0;
-      for(int i = 0; i < 256; i++) {
-        for(int[] arr : arrs) {
+      for (int i = 0; i < 256; i++) {
+        for (int[] arr : arrs) {
           max = Math.max(arr[i], max);
         }
       }

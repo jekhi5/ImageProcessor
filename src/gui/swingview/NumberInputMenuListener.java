@@ -6,6 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 import controller.ImageEditorSwingController;
+import view.ImageEditorGUIView;
 
 /**
  * A menu action listener that prompts the user for an additional numerical input.
@@ -20,9 +21,10 @@ public class NumberInputMenuListener extends SimpleMenuListener {
    * @param name       the image name to act upon
    * @throws IllegalArgumentException if any argument is null
    */
-  public NumberInputMenuListener(ImageEditorSwingController controller, String name)
+  public NumberInputMenuListener(ImageEditorSwingController controller,
+                                 ImageEditorGUIView view, String name)
           throws IllegalArgumentException {
-    super(controller);
+    super(controller, view);
     if (name == null) {
       throw new IllegalArgumentException("Can't have null args!");
     }
