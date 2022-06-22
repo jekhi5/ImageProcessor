@@ -10,6 +10,10 @@ import javax.swing.*;
  */
 public class Histogram extends JFrame {
 
+  /**
+   * Creates a new Histogram from the image.
+   * @param image the image
+   */
   public Histogram(BufferedImage image) {
     super("ImageProcessor - Histogram");
     // create boxes for each color channel that we care about
@@ -28,41 +32,84 @@ public class Histogram extends JFrame {
       }
     }
 
-    JPanel redGraph = new JPanel();
-    redGraph.setAlignmentY(Component.TOP_ALIGNMENT);
-    JPanel greenGraph = new JPanel();
-    JPanel blueGraph = new JPanel();
-    redGraph.setLayout(new BoxLayout(redGraph, BoxLayout.X_AXIS));
-    for (int i = 0; i <= 255; i++) {
-      JPanel redBar = new JPanel();
-      JPanel greenBar = new JPanel();
-      JPanel blueBar = new JPanel();
+    HistogramBox box = new HistogramBox(red, green, blue, new int[256]);
+    this.add(box);
 
-      redBar.setAlignmentX(Component.LEFT_ALIGNMENT);
-      redBar.setAlignmentY(Component.CENTER_ALIGNMENT);
-      redBar.setMaximumSize(new Dimension(-5, red[i]));
-      redBar.setBackground(new Color(255, 0, 0));
-      redGraph.add(redBar);
-
-      greenBar.setAlignmentX(Component.LEFT_ALIGNMENT);
-      greenBar.setAlignmentY(Component.CENTER_ALIGNMENT);
-      greenBar.setMaximumSize(new Dimension(0, green[i]));
-      greenBar.setBackground(Color.GREEN);
-      greenGraph.add(greenBar);
-
-      blueBar.setAlignmentX(Component.LEFT_ALIGNMENT);
-      blueBar.setAlignmentY(Component.CENTER_ALIGNMENT);
-      blueBar.setMaximumSize(new Dimension(0, blue[i]));
-      blueBar.setBackground(Color.BLUE);
-      blueGraph.add(blueBar);
-    }
-    this.getContentPane().add(redGraph);
-//    this.getContentPane().add(greenGraph);
-//    this.getContentPane().add(blueGraph);
-
+    this.setMinimumSize(new Dimension(570, 325));
+    this.setResizable(false);
     this.setVisible(true);
     this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-//    this.pack();
+    this.pack();
     this.setLocationRelativeTo(null);
+  }
+
+  /**
+   * The main content panel which contains the histogram.
+   * This is what the graphics will act on.
+   */
+  private class HistogramBox extends JComponent {
+    int[] red;
+    int[] green;
+    int[] blue;
+    int[] alpha;
+
+    /**
+     * Creates a new HistogramBox.
+     * @param red red
+     * @param green green
+     * @param blue blue
+     * @param alpha alpha
+     */
+    public HistogramBox(int[] red, int[] green, int[] blue, int[] alpha) {
+      super();
+      this.red = red;
+      this.green = green;
+      this.blue = blue;
+      this.alpha = alpha;
+      this.setMinimumSize(new Dimension(610, 325));
+    }
+
+    @Override
+    public void paintComponent(Graphics g) {
+      Graphics2D g2 = (Graphics2D) g;
+      super.paintComponent(g);
+
+      int maxValue = findMax(red, green, blue);
+      // x/max = y/256
+      // 256x = max*y
+      //y = 256x / max
+
+
+      int x = 15;
+      for(int i = 0; i < 255; i++) {
+        g2.setColor(Color.RED);
+        g2.drawLine(x, 265 - red[i] * 256 / maxValue, x + 2, 265 - red[i + 1] * 256 / maxValue);
+
+        g2.setColor(Color.GREEN);
+        g2.drawLine(x, 265 - green[i] * 256 / maxValue, x + 2, 265 - green[i + 1] * 256 / maxValue);
+
+        g2.setColor(Color.BLUE);
+        g2.drawLine(x, 265 - blue[i] * 256 / maxValue, x + 2, 265 - blue[i + 1] * 256 / maxValue);
+        x += 2;
+      }
+
+
+      g2.setColor(Color.BLACK);
+      g2.drawLine(15, 10, 15, 266);
+      g2.drawLine(15, 266, 530, 266);
+      g2.drawString("0", 5, 276);
+      g2.drawString("255", 520, 276);
+      g2.drawString(Integer.toString(maxValue), 5, 10);
+    }
+
+    private int findMax(int[]... arrs) {
+      int max = 0;
+      for(int i = 0; i < 256; i++) {
+        for(int[] arr : arrs) {
+          max = Math.max(arr[i], max);
+        }
+      }
+      return max;
+    }
   }
 }

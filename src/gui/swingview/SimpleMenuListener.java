@@ -5,8 +5,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 
-import javax.swing.*;
-
 import controller.ImageEditorSwingController;
 import model.image.Image;
 import model.pixel.Pixel;
@@ -34,13 +32,17 @@ public class SimpleMenuListener implements ActionListener {
   @Override
   public void actionPerformed(ActionEvent e) {
     if (e.getActionCommand().contains("hgram")) {
-      generateHistogram(e.getActionCommand().split(" ")[1]);
+      try {
+        generateHistogram(e.getActionCommand().split(" ")[1]);
+      } catch (IllegalArgumentException ex) {
+        new PopupDialog("Can't generate histogram - no image loaded.");
+      }
     } else {
       controller.runCommand(e.getActionCommand());
     }
   }
 
-  private void generateHistogram(String name) {
+  private void generateHistogram(String name) throws IllegalArgumentException {
     new Histogram(toBufferedImage(controller.getImage(name)));
   }
 
