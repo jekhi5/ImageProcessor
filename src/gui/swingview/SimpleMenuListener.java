@@ -44,7 +44,7 @@ public class SimpleMenuListener implements ActionListener {
   }
 
   private void generateHistogram(String name) throws IllegalArgumentException {
-    new Histogram(toBufferedImage(controller.getImage(name)));
+   HistogramFactory.createHistogram(toBufferedImage(controller.getImage(name)));
   }
 
   private static BufferedImage toBufferedImage(Image image) {
