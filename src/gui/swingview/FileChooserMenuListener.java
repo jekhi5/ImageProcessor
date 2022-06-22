@@ -6,6 +6,8 @@ import java.util.List;
 
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.filechooser.FileSystemView;
 
 import controller.ImageEditorSwingController;
@@ -38,7 +40,15 @@ public class FileChooserMenuListener extends SimpleMenuListener {
 
   @Override
   public void actionPerformed(ActionEvent e) {
+    FileFilter jpg = new FileNameExtensionFilter("JPG images (.jpg)", "jpg");
+    FileFilter png = new FileNameExtensionFilter("PNG images (.png)", "png");
+    FileFilter bmp = new FileNameExtensionFilter("BMP images (.bmp)", "bmp");
+    FileFilter ppm = new FileNameExtensionFilter("PPM images (.ppm)", "ppm");
     JFileChooser f = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
+    f.setFileFilter(jpg);
+    f.addChoosableFileFilter(png);
+    f.addChoosableFileFilter(bmp);
+    f.addChoosableFileFilter(ppm);
     int i;
     if (e.getActionCommand().equalsIgnoreCase("load")) {
       i = f.showOpenDialog(new JFrame());
