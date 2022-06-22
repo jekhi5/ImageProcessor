@@ -1,5 +1,7 @@
 package utilities;
 
+import java.awt.Color;
+import java.awt.image.BufferedImage;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -141,6 +143,25 @@ public class ImageUtil {
     }
     sc.close();
     return new PPMImage(resultingPixelGrid);
+  }
+
+
+  /**
+   * To construct a buffered image from an instance of {@link model.image.Image}.
+   * @param image the image to convert
+   * @return a buffered image of the given image
+   */
+  public static BufferedImage toBufferedImage(Image image) {
+    BufferedImage bi =
+            new BufferedImage(image.getWidth(), image.getHeight(), BufferedImage.TYPE_INT_ARGB);
+    for (int r = 0; r < image.getHeight(); r++) {
+      for (int c = 0; c < image.getWidth(); c++) {
+        Pixel p = image.getPixelAt(r, c);
+        Color color = new Color(p.getRed(), p.getGreen(), p.getBlue());
+        bi.setRGB(c, r, color.getRGB());
+      }
+    }
+    return bi;
   }
 }
 

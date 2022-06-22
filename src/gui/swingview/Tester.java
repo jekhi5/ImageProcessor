@@ -7,6 +7,12 @@ import javax.imageio.ImageIO;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 
+import controller.ImageEditorSwingController;
+import controller.ImageEditorSwingControllerImpl;
+import model.BasicImageEditorModel;
+import model.ImageEditorModel;
+import view.ImageEditorGUIView;
+
 public class Tester {
   public static void main(String[] args) throws IOException {
 //    JFrame popup = new PopupDialog("Hello World");
@@ -22,27 +28,33 @@ public class Tester {
 //    test.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 //    test.setLocationRelativeTo(null);
 //
-//    JComponent viewerBar = new ImageViewerBar(500, 500);
-//    viewerBar.add(ImageViewerBar.getImageSelectorButton("test image 1", ImageFactory.createImage(
+//    JComponent viewerBar = new ImageSelectorBar(500, 500);
+//    viewerBar.add(ImageSelectorBar.getImageSelectorButton("test image 1", ImageFactory.createImage(
 //            "res/diagram.jpg")));
-//    viewerBar.add(ImageViewerBar.getImageSelectorButton("test image 2", ImageFactory.createImage(
+//    viewerBar.add(ImageSelectorBar.getImageSelectorButton("test image 2", ImageFactory.createImage(
 //            "res/diagram.jpg")));
 //
 //    test.add(viewerBar);
 //    test.repaint();
 
 
-    JFrame testViewPort = new JFrame("View Port");
-    testViewPort.setSize(750, 750);
-    testViewPort.setVisible(true);
-    testViewPort.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    testViewPort.setLocationRelativeTo(null);
+//    JFrame testViewPort = new JFrame("View Port");
+//    testViewPort.setSize(750, 750);
+//    testViewPort.setVisible(true);
+//    testViewPort.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//    testViewPort.setLocationRelativeTo(null);
+//
+//    JComponent viewPort = new ImageViewPort(500, 500,
+//            ImageIO.read(new File("res/diagram.jpg")));
+//
+//    testViewPort.add(viewPort);
+//    //testViewPort.add(new JLabel("Something"));
+//    testViewPort.repaint();
 
-    JComponent viewPort = new ImageViewPort(500, 500,
-            ImageIO.read(new File("res/diagram.jpg")));
 
-    testViewPort.add(viewPort);
-    //testViewPort.add(new JLabel("Something"));
-    testViewPort.repaint();
+    ImageEditorGUIView view = new ImageEditorSwingView();
+    ImageEditorModel model = new BasicImageEditorModel();
+    ImageEditorSwingController controller = new ImageEditorSwingControllerImpl(model, view);
+    view.accept(controller);
   }
 }

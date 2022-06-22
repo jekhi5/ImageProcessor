@@ -18,7 +18,7 @@ public interface ImageEditorSwingController {
   void runCommand(String command);
 
   /**
-   * Returns a Image of the given image name from the model.
+   * Returns an Image of the given image name from the model.
    * @param name the name of the image
    * @return the desired Image
    * @throws IllegalArgumentException if the name doesn't exist.

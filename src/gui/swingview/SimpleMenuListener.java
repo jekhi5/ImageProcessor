@@ -10,6 +10,7 @@ import javax.swing.*;
 import controller.ImageEditorSwingController;
 import model.image.Image;
 import model.pixel.Pixel;
+import utilities.ImageUtil;
 
 /**
  * An event listener for mouse events, specialized for one-click menu bar items. On click, sends the
@@ -41,19 +42,6 @@ public class SimpleMenuListener implements ActionListener {
   }
 
   private void generateHistogram(String name) {
-    new Histogram(toBufferedImage(controller.getImage(name)));
-  }
-
-  private static BufferedImage toBufferedImage(Image image) {
-    BufferedImage bi =
-            new BufferedImage(image.getWidth(), image.getHeight(), BufferedImage.TYPE_INT_RGB);
-    for (int r = 0; r < image.getHeight(); r++) {
-      for (int c = 0; c < image.getWidth(); c++) {
-        Pixel p = image.getPixelAt(r, c);
-        Color color = new Color(p.getRed(), p.getGreen(), p.getBlue());
-        bi.setRGB(c, r, color.getRGB());
-      }
-    }
-    return bi;
+    new Histogram(ImageUtil.toBufferedImage(controller.getImage(name)));
   }
 }
