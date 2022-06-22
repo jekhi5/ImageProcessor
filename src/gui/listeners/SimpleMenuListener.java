@@ -8,9 +8,9 @@ import java.awt.image.BufferedImage;
 import gui.HistogramFactory;
 import gui.PopupDialog;
 import gui.controller.ImageEditorSwingController;
+import gui.view.ImageEditorGUIView;
 import model.image.Image;
 import model.pixel.Pixel;
-import gui.view.ImageEditorGUIView;
 
 /**
  * An event listener for mouse events, specialized for one-click menu bar items. On click, sends the

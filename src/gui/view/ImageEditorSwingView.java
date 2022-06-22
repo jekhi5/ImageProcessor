@@ -12,13 +12,12 @@ import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 
 import gui.ImageSelectorBar;
+import gui.ImageSelectorBar.ImageSelectorButton;
 import gui.ImageViewPort;
 import gui.MenuBar;
 import gui.PopupDialog;
 import gui.controller.ImageEditorSwingController;
-import gui.ImageSelectorBar.ImageSelectorButton;
 import utilities.ImageUtil;
-import gui.view.ImageEditorGUIView;
 
 /**
  * A GUI view for the image editor, using Swing.

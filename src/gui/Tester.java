@@ -4,10 +4,10 @@ import java.io.IOException;
 
 import gui.controller.ImageEditorSwingController;
 import gui.controller.ImageEditorSwingControllerImpl;
+import gui.view.ImageEditorGUIView;
 import gui.view.ImageEditorSwingView;
 import model.BasicImageEditorModel;
 import model.ImageEditorModel;
-import gui.view.ImageEditorGUIView;
 
 public class Tester {
   public static void main(String[] args) throws IOException {

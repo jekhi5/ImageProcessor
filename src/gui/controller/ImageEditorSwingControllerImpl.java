@@ -21,9 +21,9 @@ import commands.LoadImage;
 import commands.SaveImage;
 import commands.Sepia;
 import commands.Sharpen;
+import gui.view.ImageEditorGUIView;
 import model.ImageEditorModel;
 import model.image.Image;
-import gui.view.ImageEditorGUIView;
 
 /**
  * An implementation of {@link ImageEditorSwingController}.
