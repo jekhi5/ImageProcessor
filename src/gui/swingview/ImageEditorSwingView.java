@@ -121,11 +121,11 @@ public class ImageEditorSwingView implements ImageEditorGUIView {
       this.setCurrentImage(nameInEditor);
 
       String displayName;
+      System.out.println(nameInEditor);
       try {
         displayName = nameInEditor.substring(
-                nameInEditor.lastIndexOf(System.getProperty("line.separator") + 1,
-                        nameInEditor.lastIndexOf(".")));
-      } catch (IndexOutOfBoundsException e) {
+                nameInEditor.lastIndexOf(System.getProperty("file.separator")) + 1);
+      } catch (Exception e) {
         displayName = "UnknownName";
       }
 
