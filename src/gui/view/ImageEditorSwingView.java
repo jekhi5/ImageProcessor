@@ -1,16 +1,13 @@
 package gui.view;
 
-import java.awt.Dimension;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.JComponent;
-import javax.swing.JFrame;
-import javax.swing.JScrollPane;
+import javax.swing.*;
 
+import gui.Histogram;
+import gui.HistogramFactory;
 import gui.ImageSelectorBar;
 import gui.ImageSelectorBar.ImageSelectorButton;
 import gui.ImageViewPort;
@@ -100,6 +97,7 @@ public class ImageEditorSwingView implements ImageEditorGUIView {
 
     this.frame.setJMenuBar(new MenuBar(this.curImageName, this.controller, this));
 
+    HistogramFactory.createHistogram(ImageUtil.toBufferedImage(controller.getImage(curImageName)));
     this.refreshViewPort();
   }
 

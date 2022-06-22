@@ -80,8 +80,8 @@ public class ImageSelectorBar extends JPanel {
      * @param view          the view that this button will appear in
      * @param nameInEditor  the name of this image in the editor
      */
-    protected ImageSelectorButton(String displayName, java.awt.Image originalImage,
-                                  ImageEditorGUIView view, String nameInEditor) {
+    public ImageSelectorButton(String displayName, java.awt.Image originalImage,
+                               ImageEditorGUIView view, String nameInEditor) {
       super();
       if (view == null) {
         throw new IllegalArgumentException("The view cannot be null!");
