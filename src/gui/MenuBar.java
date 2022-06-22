@@ -3,9 +3,7 @@ package gui;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
+import javax.swing.*;
 
 import gui.controller.ImageEditorSwingController;
 import gui.listeners.FileChooserMenuListener;
@@ -132,13 +130,15 @@ public class MenuBar extends JMenuBar {
     adjust.add(adjDark);
 
     // Histogram
-    JMenu hgram = new JMenu("Histogram");
-    hgram.setMnemonic(KeyEvent.VK_H);
-    JMenuItem hgramItem = new JMenuItem("Generate Histogram");
-    hgramItem.setActionCommand("hgram " + curImageName);
-    hgramItem.addActionListener(al);
-    hgram.add(hgramItem);
-    this.add(hgram);
+    // this code creates a button which displays the histogram.
+    // Personally we prefer it this way, though the assignment wants it to be visible at all times.
+    //    JMenu hgram = new JMenu("Histogram");
+    //    hgram.setMnemonic(KeyEvent.VK_H);
+    //    JMenuItem hgramItem = new JMenuItem("Generate Histogram");
+    //    hgramItem.setActionCommand("hgram " + curImageName);
+    //    hgramItem.addActionListener(al);
+    //    hgram.add(hgramItem);
+    //    this.add(hgram);
 
     // Save and load
     ActionListener fcml = new FileChooserMenuListener(ctrl, curImageName, view);
