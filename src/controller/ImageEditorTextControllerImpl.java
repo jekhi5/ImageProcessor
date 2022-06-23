@@ -12,12 +12,13 @@ import commands.Blur;
 import commands.Brighten;
 import commands.Convert;
 import commands.Darken;
+import commands.Downsize;
 import commands.Flip;
 import commands.GenericGrayscale;
 import commands.Grayscale;
-import commands.HelpCommand;
+import commands.Help;
 import commands.ImageEditorCommand;
-import commands.ImageEqualsCommand;
+import commands.ImageEquals;
 import commands.LoadImage;
 import commands.SaveImage;
 import commands.Sepia;
@@ -56,7 +57,7 @@ public class ImageEditorTextControllerImpl implements ImageEditorTextController 
     this.commands = new HashMap<>();
 
     // Add all new commands here:
-    commands.put("same", s -> new ImageEqualsCommand(s));
+    commands.put("same", s -> new ImageEquals(s));
 
     // different misspellings of "grayscale"
     commands.put("grayscale", s -> new Grayscale(s));
@@ -79,10 +80,14 @@ public class ImageEditorTextControllerImpl implements ImageEditorTextController 
 
     commands.put("generic-grayscale", s -> new GenericGrayscale(s));
 
-    commands.put("help", s -> new HelpCommand());
-    commands.put("h", s -> new HelpCommand());
+    commands.put("help", s -> new Help());
+    commands.put("h", s -> new Help());
 
     commands.put("convert", s -> new Convert(s));
+
+
+    // Assignment 6 extra credit:
+    commands.put("resize", s -> new Downsize(s));
   }
 
   @Override
