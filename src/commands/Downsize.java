@@ -98,22 +98,22 @@ public class Downsize extends AbstractCommand {
 
   }
 
-  private int getNewColor(double y, double x, int component) {
+  private int getNewColor(double x, double y, int component) {
 
-    double xCeil = Math.ceil(x);
-    double yCeil = Math.ceil(y);
+    double xCeil = Math.ceil(y);
+    double yCeil = Math.ceil(x);
 
-    if (xCeil == x) {
+    if (xCeil == y) {
       xCeil += 1;
     }
 
-    if (yCeil == y) {
+    if (yCeil == x) {
       yCeil += 1;
     }
 
-    Pixel A = this.originalImage.getPixelAt((int) Math.floor(x), (int) Math.floor(y));
-    Pixel B = this.originalImage.getPixelAt((int) xCeil, (int) Math.floor(y));
-    Pixel C = this.originalImage.getPixelAt((int) Math.floor(x), (int) yCeil);
+    Pixel A = this.originalImage.getPixelAt((int) Math.floor(y), (int) Math.floor(x));
+    Pixel B = this.originalImage.getPixelAt((int) xCeil, (int) Math.floor(x));
+    Pixel C = this.originalImage.getPixelAt((int) Math.floor(y), (int) yCeil);
     Pixel D = this.originalImage.getPixelAt((int) xCeil, (int) yCeil);
 
     int a;
@@ -167,9 +167,9 @@ public class Downsize extends AbstractCommand {
                 "be one of 1->RED, 2->GREEN, 3->BLUE, or 4->ALPHA.");
     }
 
-    int m = (int) ((b * (x - Math.floor(x))) + (a * (xCeil - x)));
-    int n = (int) ((d * (x - Math.floor(x))) + (c * (xCeil - x)));
+    int m = (int) ((b * (y - Math.floor(y))) + (a * (xCeil - y)));
+    int n = (int) ((d * (y - Math.floor(y))) + (c * (xCeil - y)));
 
-    return (int) ((n * (y - Math.floor(y))) + (m * (yCeil - y)));
+    return (int) ((n * (x - Math.floor(x))) + (m * (yCeil - x)));
   }
 }
