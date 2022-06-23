@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 
 import javax.swing.JComponent;
@@ -47,6 +48,11 @@ public class Histogram extends JFrame {
     this.setResizable(false);
     this.setVisible(true);
     this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+
+    Dimension screenDimensions = Toolkit.getDefaultToolkit().getScreenSize();
+
+    this.setLocation((int) screenDimensions.getWidth() - this.getWidth(),
+            (int) screenDimensions.getHeight() / 2);
     this.pack();
   }
 
