@@ -8,6 +8,7 @@ import javax.swing.*;
 import gui.controller.ImageEditorSwingController;
 import gui.listeners.FileChooserMenuListener;
 import gui.listeners.NumberInputMenuListener;
+import gui.listeners.ResizerListener;
 import gui.listeners.SimpleMenuListener;
 import gui.view.ImageEditorGUIView;
 
@@ -118,6 +119,7 @@ public class MenuBar extends JMenuBar {
 
     // Adjust
     ActionListener niml = new NumberInputMenuListener(ctrl, view, curImageName);
+    ActionListener rl = new ResizerListener(ctrl, view, curImageName);
 
     JMenuItem adjBright = new JMenuItem("Brighten");
     adjBright.setActionCommand("brighten");
@@ -128,6 +130,11 @@ public class MenuBar extends JMenuBar {
     adjDark.setActionCommand("darken");
     adjDark.addActionListener(niml);
     adjust.add(adjDark);
+
+    JMenuItem adjResize = new JMenuItem("Resize");
+    adjResize.setActionCommand("resize");
+    adjResize.addActionListener(rl);
+    adjust.add(adjResize);
 
     // Histogram
     // this code creates a button which displays the histogram.

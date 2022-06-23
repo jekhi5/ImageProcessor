@@ -10,11 +10,11 @@ import model.image.Image;
 import model.pixel.Pixel;
 
 /**
- * Represents a downsizing command that takes four arguments and maps an image of a certain size and
+ * Represents a resizing command that takes four arguments and maps an image of a certain size and
  * converts it into one of a different size.
  * {@code downsize <new-width> <new-height> <original-image-name> <new-image-name>}
  */
-public class Downsize extends AbstractCommand {
+public class Resize extends AbstractCommand {
 
   private static final int RED = 1;
   private static final int GREEN = 2;
@@ -31,7 +31,7 @@ public class Downsize extends AbstractCommand {
    * @throws IllegalArgumentException if {@code in} is null
    * @throws IllegalStateException    if {@code in} runs out of inputs before collecting 4 inputs.
    */
-  public Downsize(Scanner in)
+  public Resize(Scanner in)
           throws IllegalStateException, IllegalArgumentException {
     super(in, 4);
   }
@@ -44,44 +44,50 @@ public class Downsize extends AbstractCommand {
     Image originalImage = model.getImage(args[2]);
 
     if (originalImage == null) {
-      return "Blur failed: invalid image \"" + args[2] + "\".";
+      return "Resize failed: invalid image \"" + args[2] + "\".";
     }
 
     this.originalImage = originalImage;
 
 
-    Image newImage;
+    BufferedImage newBufferedImage;
     try {
-      newImage =
-              new BetterImage(new BufferedImage(Integer.parseInt(args[0]),
-                      Integer.parseInt(args[1]),
-                      BufferedImage.TYPE_INT_ARGB));
+      newBufferedImage =
+              new BufferedImage(Integer.parseInt(args[0]), Integer.parseInt(args[1]),
+                      BufferedImage.TYPE_INT_ARGB);
     } catch (NumberFormatException e) {
-      return "Downsize failed: the new width and height of the image must both be positive " +
+      return "Resize failed: the new width and height of the image must both be positive " +
               "integers. Given width: " + args[0] + ". Given height: " + args[1];
     }
 
 
-    int newWidth = newImage.getWidth();
-    int newHeight = newImage.getHeight();
+    int newWidth = newBufferedImage.getWidth();
+    int newHeight = newBufferedImage.getHeight();
     int oldWidth = originalImage.getWidth();
     int oldHeight = originalImage.getHeight();
 
     for (int row = 0; row < newHeight; row += 1) {
       for (int col = 0; col < newWidth; col += 1) {
-        float newX = col;
-        float newY = row;
 
-        float oldX = (newX / newWidth) * oldWidth;
-        float oldY = (newY / newHeight) * oldHeight;
-
-        Color newRGB =
-                new Color(this.getNewColor(oldX, oldY, RED), this.getNewColor(oldX, oldY, GREEN),
-                        this.getNewColor(oldX, oldY, BLUE), this.getNewColor(oldX, oldY, ALPHA));
-
-        
+        float oldX = (((float) col / newWidth) * oldWidth);
+        float oldY = (((float) row / newHeight) * oldHeight);
+        Color newRGB;
+        try {
+          newRGB =
+                  new Color(this.getNewColor(oldX, oldY, RED), this.getNewColor(oldX, oldY, GREEN),
+                          this.getNewColor(oldX, oldY, BLUE), this.getNewColor(oldX, oldY, ALPHA));
+          newBufferedImage.setRGB(col, row, newRGB.getRGB());
+        } catch (IllegalArgumentException e) {
+          return "Resize failed: Failed to parse coordinates: (" + oldX + ", " + oldY + ").";
+        }
       }
     }
+
+    Image newImage = new BetterImage(newBufferedImage);
+
+    model.addImage(args[3], newImage);
+
+    return "Resize successful!";
 
   }
 
@@ -96,31 +102,48 @@ public class Downsize extends AbstractCommand {
     int c;
     int d;
 
+
     switch (component) {
       case RED:
-        a = A.getRed();
-        b = B.getRed();
-        c = C.getRed();
-        d = D.getRed();
-        break;
+        try {
+          a = A.getRed();
+          b = B.getRed();
+          c = C.getRed();
+          d = D.getRed();
+          break;
+        } catch (IllegalArgumentException e) {
+          return -1;
+        }
       case GREEN:
-        a = A.getGreen();
-        b = B.getGreen();
-        c = C.getGreen();
-        d = D.getGreen();
-        break;
+        try {
+          a = A.getGreen();
+          b = B.getGreen();
+          c = C.getGreen();
+          d = D.getGreen();
+          break;
+        } catch (IllegalArgumentException e) {
+          return -1;
+        }
       case BLUE:
-        a = A.getBlue();
-        b = B.getBlue();
-        c = C.getBlue();
-        d = D.getBlue();
-        break;
+        try {
+          a = A.getBlue();
+          b = B.getBlue();
+          c = C.getBlue();
+          d = D.getBlue();
+          break;
+        } catch (IllegalArgumentException e) {
+          return -1;
+        }
       case ALPHA:
-        a = A.getAlpha();
-        b = B.getAlpha();
-        c = C.getAlpha();
-        d = D.getAlpha();
-        break;
+        try {
+          a = A.getAlpha();
+          b = B.getAlpha();
+          c = C.getAlpha();
+          d = D.getAlpha();
+          break;
+        } catch (IllegalArgumentException e) {
+          return -1;
+        }
       default:
         throw new IllegalArgumentException("Invalid downsize component: " + component + ". Must " +
                 "be one of 1->RED, 2->GREEN, 3->BLUE, or 4->ALPHA.");

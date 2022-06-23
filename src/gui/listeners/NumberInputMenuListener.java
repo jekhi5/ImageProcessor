@@ -15,7 +15,7 @@ public class NumberInputMenuListener extends SimpleMenuListener {
   private final String name;
 
   /**
-   * Creates a new SimpleMenuListener.
+   * Creates this menu listener with the given controller, view, and name.
    *
    * @param controller the controller
    * @param name       the image name to act upon

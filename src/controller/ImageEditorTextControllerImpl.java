@@ -19,6 +19,7 @@ import commands.Help;
 import commands.ImageEditorCommand;
 import commands.ImageEquals;
 import commands.LoadImage;
+import commands.Resize;
 import commands.SaveImage;
 import commands.Sepia;
 import commands.Sharpen;
@@ -83,6 +84,10 @@ public class ImageEditorTextControllerImpl implements ImageEditorTextController 
     commands.put("h", s -> new Help());
 
     commands.put("convert", s -> new Convert(s));
+
+
+    // Assignment 6 extra credit:
+    commands.put("resize", s -> new Resize(s));
   }
 
   @Override
