@@ -9,9 +9,9 @@ import model.ImageEditorModel;
 import view.ImageEditorTextView;
 
 /**
- * A class to run a text-based version of ImageEditor.
+ * A class to run a ImageEditor.
  */
-public class TextRunner {
+public class Runner {
 
   /**
    * The main method that runs the program.

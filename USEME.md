@@ -141,7 +141,7 @@ information to
 the user.
 
 There is also the `ImageUtil` class, which contains static methods that help read and store files,
-and the `TextRunner` class which runs the program, including telling the controller to take either
+and the `Runner` class which runs the program, including telling the controller to take either
 console or text file input.
 
 <br>

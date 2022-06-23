@@ -60,9 +60,8 @@ public class SimpleMenuListener implements ActionListener {
       }
     } else {
       controller.runCommand(e.getActionCommand());
+      this.view.refreshImages();
     }
-
-    this.view.refreshImages();
   }
 
   private void generateHistogram(String name) throws IllegalArgumentException {
