@@ -1,12 +1,14 @@
-package commands;
+import org.junit.Test;
 
-import model.ImageEditorModel;
+import commands.Help;
+import commands.ImageEditorCommand;
+
+import static org.junit.Assert.assertEquals;
 
 /**
- * Represents a command that produces a helpful message regarding all the commands in the system.
- * Syntax: {@code help}
+ * Tests for Help.
  */
-public class HelpCommand extends AbstractCommand {
+public class HelpTest {
 
   private static final String ITALICS_ON = "\033[3m";
   private static final String ORANGE = "\033[91m";
@@ -14,16 +16,11 @@ public class HelpCommand extends AbstractCommand {
   private static final String RESET = "\033[0m";
   private static final String LINE_SEPARATOR = System.lineSeparator();
 
-  /**
-   * Creates a new Help command that takes in no arguments.
-   */
-  public HelpCommand() {
-    super(null, 0);
-  }
+  @Test
+  public void apply() {
+    ImageEditorCommand helpCommand = new Help();
 
-  @Override
-  public String apply(ImageEditorModel model) {
-    return "The following file types are supported:" + LINE_SEPARATOR +
+    assertEquals("The following file types are supported:" + LINE_SEPARATOR +
             "\t.ppm, .jpg, .png, and .bmp." + LINE_SEPARATOR + LINE_SEPARATOR +
 
             "The acceptable commands are as follows:" + LINE_SEPARATOR + LINE_SEPARATOR +
@@ -113,6 +110,6 @@ public class HelpCommand extends AbstractCommand {
             "\t" + ORANGE + "sharpen " + GRAY + "<ORIGINAL_IMAGE_NAME> <FILTERED_IMAGE_NAME> " +
             RESET + LINE_SEPARATOR + LINE_SEPARATOR +
 
-            "Enjoy!!";
+            "Enjoy!!", helpCommand.apply(null));
   }
 }

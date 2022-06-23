@@ -14,9 +14,9 @@ import commands.Darken;
 import commands.Flip;
 import commands.GenericGrayscale;
 import commands.Grayscale;
-import commands.HelpCommand;
+import commands.Help;
 import commands.ImageEditorCommand;
-import commands.ImageEqualsCommand;
+import commands.ImageEquals;
 import commands.LoadImage;
 import commands.SaveImage;
 import commands.Sepia;
@@ -49,7 +49,7 @@ public class ImageEditorSwingControllerImpl
     this.commands = new HashMap<>();
 
     // Add all new commands here:
-    commands.put("same", s -> new ImageEqualsCommand(s));
+    commands.put("same", s -> new ImageEquals(s));
     commands.put("grayscale", s -> new Grayscale(s));
     commands.put("greyscale", s -> new Grayscale(s));
     commands.put("gray", s -> new Grayscale(s));
@@ -63,8 +63,8 @@ public class ImageEditorSwingControllerImpl
     commands.put("sharpen", s -> new Sharpen(s));
     commands.put("sepia", s -> new Sepia(s));
     commands.put("generic-grayscale", s -> new GenericGrayscale(s));
-    commands.put("help", s -> new HelpCommand());
-    commands.put("h", s -> new HelpCommand());
+    commands.put("help", s -> new Help());
+    commands.put("h", s -> new Help());
     commands.put("convert", s -> new Convert(s));
 
     this.view.accept(this);

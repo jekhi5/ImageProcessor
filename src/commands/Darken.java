@@ -9,7 +9,7 @@ import java.util.Scanner;
  *
  * <p>Command syntax: {@code darken <amount> <original-image-name> <new-image-name>}.
  */
-public class Darken extends AdjustLightCommand {
+public class Darken extends AbstractLightingCommand {
 
 
   /**

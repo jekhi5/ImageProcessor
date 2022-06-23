@@ -11,7 +11,7 @@ import model.pixel.PixelImpl;
  * Represents a command that modifies the lighting of an image like in {@link Brighten} and
  * {@link Darken}.
  */
-public abstract class AdjustLightCommand extends AbstractCommand {
+public abstract class AbstractLightingCommand extends AbstractCommand {
 
 
   /**
@@ -23,7 +23,7 @@ public abstract class AdjustLightCommand extends AbstractCommand {
    * @throws IllegalStateException    if {@code in} runs out of inputs before collecting
    *                                  {@code numArgs} inputs.
    */
-  public AdjustLightCommand(Scanner in, int numArgs)
+  public AbstractLightingCommand(Scanner in, int numArgs)
           throws IllegalStateException, IllegalArgumentException {
     super(in, numArgs);
   }

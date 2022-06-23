@@ -12,7 +12,7 @@ import model.image.Image;
  *
  * <p>Command syntax: {@code same <image-name> <image-name>}
  */
-public class ImageEqualsCommand extends AbstractCommand {
+public class ImageEquals extends AbstractCommand {
 
   /**
    * Creates a new {@code DebugCommand}.
@@ -20,7 +20,7 @@ public class ImageEqualsCommand extends AbstractCommand {
    * @param in the scanner
    * @throws IllegalArgumentException if {@code in} is null
    */
-  public ImageEqualsCommand(Scanner in) throws IllegalArgumentException {
+  public ImageEquals(Scanner in) throws IllegalArgumentException {
     super(in, 2);
   }
 
