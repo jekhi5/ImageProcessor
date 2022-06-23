@@ -1,12 +1,16 @@
 package gui.view;
 
-import java.awt.*;
+import java.awt.Dimension;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.*;
+import javax.swing.JComponent;
+import javax.swing.JFrame;
+import javax.swing.JScrollPane;
 
-import gui.Histogram;
 import gui.HistogramFactory;
 import gui.ImageSelectorBar;
 import gui.ImageSelectorBar.ImageSelectorButton;

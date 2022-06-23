@@ -3,7 +3,9 @@ package gui;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 
-import javax.swing.*;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 
 import gui.controller.ImageEditorSwingController;
 import gui.listeners.FileChooserMenuListener;
