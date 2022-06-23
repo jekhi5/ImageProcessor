@@ -98,6 +98,12 @@ public class Downsize extends AbstractCommand {
 
   }
 
+  @Override
+  public String applyMask(ImageEditorModel model, String pathToMask)
+          throws IllegalArgumentException, UnsupportedOperationException {
+    throw new UnsupportedOperationException("You cannot apply a mask on a save command!");
+  }
+
   private int getNewColor(double x, double y, int component) {
 
     double xCeil = Math.ceil(y);

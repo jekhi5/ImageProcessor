@@ -2,6 +2,8 @@ package commands;
 
 import java.util.Scanner;
 
+import model.ImageEditorModel;
+
 /**
  * A command that brightens the original image by a given amount, storing the resultant image under
  * a new name. It should be given a positive integer value between 0 and 255, which is adds to each
@@ -32,6 +34,4 @@ public class Brighten extends AbstractLightingCommand {
   protected String getName() {
     return "Brighten";
   }
-
-
 }

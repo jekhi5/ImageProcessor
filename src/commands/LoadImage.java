@@ -40,4 +40,10 @@ public class LoadImage extends AbstractCommand {
     model.addImage(args[1], img);
     return "Successfully loaded image \"" + args[1] + "\" from " + args[0] + "!";
   }
+
+  @Override
+  public String applyMask(ImageEditorModel model, String pathToMask)
+          throws IllegalArgumentException, UnsupportedOperationException {
+    throw new UnsupportedOperationException("You cannot apply a mask on a load command!");
+  }
 }

@@ -71,4 +71,15 @@ public class Flip extends AbstractCommand {
     // success!
     return "Flip successful!";
   }
+
+  /**
+   * @param model      the model that this image resides
+   * @param pathToMask the path in the file system to the mask that will be applied to this image
+   * @return
+   */
+  @Override
+  public String applyMask(ImageEditorModel model, String pathToMask)
+          throws IllegalArgumentException, UnsupportedOperationException {
+    throw new UnsupportedOperationException("You cannot apply a mask on a flip command!");
+  }
 }

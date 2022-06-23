@@ -32,8 +32,9 @@ public abstract class AbstractCommand implements ImageEditorCommand {
 
     // If it takes in no arguments, then there doesn't need to be a scanner
     if (numArgs > 0 && in == null) {
-      throw new IllegalArgumentException();
+      throw new IllegalArgumentException("If inputs are expected, the scanner cannot be null!");
     }
+
     args = new String[numArgs];
     for (int i = 0; i < numArgs; i += 1) {
       if (in.hasNext()) {
@@ -42,6 +43,13 @@ public abstract class AbstractCommand implements ImageEditorCommand {
         throw new IllegalStateException("Scanner ran out of inputs.");
       }
     }
+
+  }
+
+  protected static void applyPixelOperatorToPixel(int row, int col,
+                                                  Image imageCopy, PixelOperator op) {
+    Pixel newPixel = op.resultAt(row, col, imageCopy);
+    imageCopy.setPixelAt(row, col, newPixel);
   }
 
   protected static void applyPixelOperator(ImageEditorModel model,
@@ -52,8 +60,7 @@ public abstract class AbstractCommand implements ImageEditorCommand {
 
     for (int r = 0; r < orig.getHeight(); r++) {
       for (int c = 0; c < orig.getWidth(); c++) {
-        Pixel newPixel = op.resultAt(r, c, orig);
-        newImg.setPixelAt(r, c, newPixel);
+        applyPixelOperatorToPixel(r, c, newImg, op);
       }
     }
     model.addImage(newImageName, newImg);
@@ -65,15 +72,42 @@ public abstract class AbstractCommand implements ImageEditorCommand {
   protected void applyToEachPixel(Image img, Function<Pixel, Pixel> func) {
     for (int r = 0; r < img.getHeight(); r += 1) {
       for (int c = 0; c < img.getWidth(); c += 1) {
-        Pixel p = img.getPixelAt(r, c);
-        img.setPixelAt(r, c, func.apply(p));
+        this.applyToSinglePixel(r, c, img, func);
       }
     }
+  }
+
+  protected static Image applyMaskWithKernel(Image orig, Image maskImage,
+                                          PixelOperator pixelOperator) {
+    Image imageCopy = orig.getCopy();
+    for (int row = 0; row < orig.getHeight(); row += 1) {
+      for (int col = 0; col < orig.getWidth(); col += 1) {
+        if (maskImage.getPixelAt(row, col).getRed() == 0 &&
+                maskImage.getPixelAt(row, col).getGreen() == 0 &&
+                maskImage.getPixelAt(row, col).getBlue() == 0) {
+          applyPixelOperatorToPixel(row, col, imageCopy, pixelOperator);
+        }
+      }
+    }
+
+    return imageCopy;
+  }
+
+  protected void applyToSinglePixel(int row, int col, Image img, Function<Pixel, Pixel> func) {
+    Pixel p = img.getPixelAt(row, col);
+    img.setPixelAt(row, col, func.apply(p));
   }
 
   protected void checkNullModel(ImageEditorModel model) throws IllegalArgumentException {
     if (model == null) {
       throw new IllegalArgumentException("Model can't be null!");
+    }
+  }
+
+
+  protected void checkNullMask(String mask) throws IllegalArgumentException {
+    if (mask == null) {
+      throw new IllegalArgumentException("Mask can't be null!");
     }
   }
 

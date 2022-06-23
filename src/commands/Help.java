@@ -115,4 +115,10 @@ public class Help extends AbstractCommand {
 
             "Enjoy!!";
   }
+
+  @Override
+  public String applyMask(ImageEditorModel model, String pathToMask)
+          throws IllegalArgumentException, UnsupportedOperationException {
+    throw new UnsupportedOperationException("You cannot apply a mask on a save command!");
+  }
 }

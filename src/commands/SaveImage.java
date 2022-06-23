@@ -54,4 +54,10 @@ public class SaveImage extends AbstractCommand {
     // success!
     return "Image successfully saved to " + args[0];
   }
+
+  @Override
+  public String applyMask(ImageEditorModel model, String pathToMask)
+          throws IllegalArgumentException, UnsupportedOperationException {
+    throw new UnsupportedOperationException("You cannot apply a mask on a save command!");
+  }
 }

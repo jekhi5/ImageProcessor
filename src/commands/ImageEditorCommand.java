@@ -18,4 +18,18 @@ public interface ImageEditorCommand {
    * @throws IllegalArgumentException if the given model is null
    */
   String apply(ImageEditorModel model) throws IllegalArgumentException;
+
+  /**
+   * To apply the given mask on the image specified in this command.
+   *
+   * @param model      the model that this image resides
+   * @param pathToMask the path in the file system to the mask that will be applied to this image
+   * @return a message indicating the completion of this command.
+   * @throws java.lang.IllegalArgumentException      if the given model is null or the path is
+   *                                                 invalid
+   * @throws java.lang.UnsupportedOperationException if a mask command is not offered by this
+   *                                                 command
+   */
+  String applyMask(ImageEditorModel model, String pathToMask) throws IllegalArgumentException,
+          UnsupportedOperationException;
 }

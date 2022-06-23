@@ -4,8 +4,9 @@ import java.util.Scanner;
 
 import model.ImageEditorModel;
 import model.image.Image;
-import model.kernels.AbstractMatrixOperator;
+import model.kernels.PixelOperator;
 import model.kernels.Transformer;
+import utilities.ImageFactory;
 
 /**
  * A command to apply a Sepia filter to an image.
@@ -13,6 +14,18 @@ import model.kernels.Transformer;
  */
 public class Sepia extends AbstractCommand {
 
+  private static final PixelOperator TRANSFORMER = new Transformer.TransformerBuilder()
+          .valueAt(0, 0, 0.393)
+          .valueAt(0, 1, 0.769)
+          .valueAt(0, 2, 0.189)
+
+          .valueAt(1, 0, 0.349)
+          .valueAt(1, 1, 0.686)
+          .valueAt(1, 2, 0.168)
+
+          .valueAt(2, 0, 0.272)
+          .valueAt(2, 1, 0.534)
+          .valueAt(2, 2, 0.131).build();
 
   /**
    * To construct a Sepia command that takes in two additional user inputted arguments.
@@ -35,20 +48,36 @@ public class Sepia extends AbstractCommand {
       return "Sepia failed: invalid image \"" + args[0] + "\"";
     }
 
-    AbstractMatrixOperator.MatrixOperatorBuilder tb = new Transformer.TransformerBuilder()
-            .valueAt(0, 0, 0.393)
-            .valueAt(0, 1, 0.769)
-            .valueAt(0, 2, 0.189)
+    applyPixelOperator(model, orig, TRANSFORMER, args[1]);
 
-            .valueAt(1, 0, 0.349)
-            .valueAt(1, 1, 0.686)
-            .valueAt(1, 2, 0.168)
+    return "Sepia successful!";
+  }
 
-            .valueAt(2, 0, 0.272)
-            .valueAt(2, 1, 0.534)
-            .valueAt(2, 2, 0.131);
+  @Override
+  public String applyMask(ImageEditorModel model, String pathToMask)
+          throws IllegalArgumentException, UnsupportedOperationException {
+    checkNullModel(model);
+    checkNullMask(pathToMask);
 
-    applyPixelOperator(model, orig, tb.build(), args[1]);
+    Image maskImage;
+    try {
+      maskImage = ImageFactory.createImage(pathToMask);
+    } catch (IllegalArgumentException e) {
+      return "Sepia failed: invalid mask path \"" + pathToMask + "\".";
+    }
+
+    Image orig = handleGettingImage(model);
+
+    if (orig == null) {
+      return "Sepia failed: invalid image \"" + args[0] + "\"";
+    }
+
+    if (orig.getWidth() != maskImage.getWidth() || orig.getHeight() != maskImage.getHeight()) {
+      return "Sepia failed: the mask's width and height does not match that of the " +
+              "original image.";
+    }
+
+    model.addImage(args[2], applyMaskWithKernel(orig, maskImage, TRANSFORMER));
 
     return "Sepia successful!";
   }
