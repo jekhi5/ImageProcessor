@@ -76,8 +76,8 @@ public class Downsize extends AbstractCommand {
     for (int y = 0; y < newHeight; y += 1) {
       for (int x = 0; x < newWidth; x += 1) {
 
-        float oldX = (((float) x / newWidth) * oldWidth);
-        float oldY = (((float) y / newHeight) * oldHeight);
+        double oldX = (((double) x / newWidth) * oldWidth);
+        double oldY = (((double) y / newHeight) * oldHeight);
         Color newRGB;
         try {
           newRGB =
@@ -98,18 +98,28 @@ public class Downsize extends AbstractCommand {
 
   }
 
-  private int getNewColor(float x, float y, int component) {
+  private int getNewColor(double y, double x, int component) {
+
+    double xCeil = Math.ceil(x);
+    double yCeil = Math.ceil(y);
+
+    if (xCeil == x) {
+      xCeil += 1;
+    }
+
+    if (yCeil == y) {
+      yCeil += 1;
+    }
 
     Pixel A = this.originalImage.getPixelAt((int) Math.floor(x), (int) Math.floor(y));
-    Pixel B = this.originalImage.getPixelAt((int) Math.ceil(x), (int) Math.floor(y));
-    Pixel C = this.originalImage.getPixelAt((int) Math.floor(x), (int) Math.ceil(y));
-    Pixel D = this.originalImage.getPixelAt((int) Math.ceil(x), (int) Math.ceil(y));
+    Pixel B = this.originalImage.getPixelAt((int) xCeil, (int) Math.floor(y));
+    Pixel C = this.originalImage.getPixelAt((int) Math.floor(x), (int) yCeil);
+    Pixel D = this.originalImage.getPixelAt((int) xCeil, (int) yCeil);
 
     int a;
     int b;
     int c;
     int d;
-
 
     switch (component) {
       case RED:
@@ -157,9 +167,9 @@ public class Downsize extends AbstractCommand {
                 "be one of 1->RED, 2->GREEN, 3->BLUE, or 4->ALPHA.");
     }
 
-    int m = (int) ((b * (x - Math.floor(x))) + (a * (Math.ceil(x) - x)));
-    int n = (int) ((d * (x - Math.floor(x))) + (c * (Math.ceil(x) - x)));
+    int m = (int) ((b * (x - Math.floor(x))) + (a * (xCeil - x)));
+    int n = (int) ((d * (x - Math.floor(x))) + (c * (xCeil - x)));
 
-    return (int) ((n * (y - Math.floor(y))) + (m * (Math.ceil(y) - y)));
+    return (int) ((n * (y - Math.floor(y))) + (m * (yCeil - y)));
   }
 }
