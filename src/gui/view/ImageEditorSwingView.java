@@ -118,6 +118,7 @@ public class ImageEditorSwingView implements ImageEditorGUIView {
   public void refreshImages() {
     this.refreshButtons();
     this.refreshViewPort();
+    HistogramFactory.createHistogram(ImageUtil.toBufferedImage(controller.getImage(curImageName)));
   }
 
   private void refreshViewPort() {
