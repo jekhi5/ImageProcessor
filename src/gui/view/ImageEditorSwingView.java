@@ -97,7 +97,6 @@ public class ImageEditorSwingView implements ImageEditorGUIView {
 
     this.frame.setJMenuBar(new MenuBar(this.curImageName, this.controller, this));
 
-    HistogramFactory.createHistogram(ImageUtil.toBufferedImage(controller.getImage(curImageName)));
     this.refreshViewPort();
   }
 

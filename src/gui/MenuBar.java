@@ -131,7 +131,7 @@ public class MenuBar extends JMenuBar {
     adjDark.addActionListener(niml);
     adjust.add(adjDark);
 
-    JMenuItem adjResize = new JMenuItem("Resize");
+    JMenuItem adjResize = new JMenuItem("Downsize");
     adjResize.setActionCommand("resize");
     adjResize.addActionListener(rl);
     adjust.add(adjResize);

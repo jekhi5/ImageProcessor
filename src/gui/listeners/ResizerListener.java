@@ -41,8 +41,8 @@ public class ResizerListener extends SimpleMenuListener {
   @Override
   public void actionPerformed(ActionEvent e) {
     JFrame inputFrame = new JFrame("Input needed!");
-    JTextField widthField = new JTextField("Width");
-    JTextField heightField = new JTextField("Height");
+    JTextField widthField = new JTextField("       ");
+    JTextField heightField = new JTextField("       ");
 
     JPanel panel = new JPanel();
     panel.add(new JLabel("New Width:"));
@@ -58,7 +58,7 @@ public class ResizerListener extends SimpleMenuListener {
 
     if (result == JOptionPane.OK_OPTION) {
       String cmd = "resize " + widthField.getText() + " " + heightField.getText() +
-              " " + name + name;
+              " " + name + " " + name;
       controller.runCommand(cmd);
     }
 

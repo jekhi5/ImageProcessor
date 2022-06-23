@@ -14,7 +14,7 @@ import model.pixel.Pixel;
  * converts it into one of a different size.
  * {@code downsize <new-width> <new-height> <original-image-name> <new-image-name>}
  */
-public class Resize extends AbstractCommand {
+public class Downsize extends AbstractCommand {
 
   private static final int RED = 1;
   private static final int GREEN = 2;
@@ -31,7 +31,7 @@ public class Resize extends AbstractCommand {
    * @throws IllegalArgumentException if {@code in} is null
    * @throws IllegalStateException    if {@code in} runs out of inputs before collecting 4 inputs.
    */
-  public Resize(Scanner in)
+  public Downsize(Scanner in)
           throws IllegalStateException, IllegalArgumentException {
     super(in, 4);
   }
@@ -40,23 +40,30 @@ public class Resize extends AbstractCommand {
   public String apply(ImageEditorModel model) {
     checkNullModel(model);
 
+    Image originalImage;
+    try {
+      originalImage = model.getImage(args[2]);
 
-    Image originalImage = model.getImage(args[2]);
-
-    if (originalImage == null) {
-      return "Resize failed: invalid image \"" + args[2] + "\".";
+    } catch (IllegalArgumentException e) {
+      return "Downsize failed: invalid image \"" + args[2] + "\".";
     }
 
     this.originalImage = originalImage;
 
-
     BufferedImage newBufferedImage;
     try {
+      int newWidth = Integer.parseInt(args[0]);
+      int newHeight = Integer.parseInt(args[1]);
+      if (newWidth > originalImage.getWidth() || newHeight > originalImage.getHeight()) {
+        return "Downsize failed: the new width and height must be less than or equal to the " +
+                "current images size. Current width: " + originalImage.getWidth() +
+                ". Current height: " + originalImage.getHeight();
+      }
+
       newBufferedImage =
-              new BufferedImage(Integer.parseInt(args[0]), Integer.parseInt(args[1]),
-                      BufferedImage.TYPE_INT_ARGB);
+              new BufferedImage(newWidth, newHeight, BufferedImage.TYPE_INT_ARGB);
     } catch (NumberFormatException e) {
-      return "Resize failed: the new width and height of the image must both be positive " +
+      return "Downsize failed: the new width and height of the image must both be positive " +
               "integers. Given width: " + args[0] + ". Given height: " + args[1];
     }
 
@@ -66,19 +73,19 @@ public class Resize extends AbstractCommand {
     int oldWidth = originalImage.getWidth();
     int oldHeight = originalImage.getHeight();
 
-    for (int row = 0; row < newHeight; row += 1) {
-      for (int col = 0; col < newWidth; col += 1) {
+    for (int y = 0; y < newHeight; y += 1) {
+      for (int x = 0; x < newWidth; x += 1) {
 
-        float oldX = (((float) col / newWidth) * oldWidth);
-        float oldY = (((float) row / newHeight) * oldHeight);
+        float oldX = (((float) x / newWidth) * oldWidth);
+        float oldY = (((float) y / newHeight) * oldHeight);
         Color newRGB;
         try {
           newRGB =
                   new Color(this.getNewColor(oldX, oldY, RED), this.getNewColor(oldX, oldY, GREEN),
                           this.getNewColor(oldX, oldY, BLUE), this.getNewColor(oldX, oldY, ALPHA));
-          newBufferedImage.setRGB(col, row, newRGB.getRGB());
+          newBufferedImage.setRGB(x, y, newRGB.getRGB());
         } catch (IllegalArgumentException e) {
-          return "Resize failed: Failed to parse coordinates: (" + oldX + ", " + oldY + ").";
+          return "Downsize failed: Failed to parse coordinates: (" + oldX + ", " + oldY + ").";
         }
       }
     }
@@ -87,11 +94,12 @@ public class Resize extends AbstractCommand {
 
     model.addImage(args[3], newImage);
 
-    return "Resize successful!";
+    return "Downsize successful!";
 
   }
 
   private int getNewColor(float x, float y, int component) {
+
     Pixel A = this.originalImage.getPixelAt((int) Math.floor(x), (int) Math.floor(y));
     Pixel B = this.originalImage.getPixelAt((int) Math.ceil(x), (int) Math.floor(y));
     Pixel C = this.originalImage.getPixelAt((int) Math.floor(x), (int) Math.ceil(y));
@@ -149,8 +157,8 @@ public class Resize extends AbstractCommand {
                 "be one of 1->RED, 2->GREEN, 3->BLUE, or 4->ALPHA.");
     }
 
-    int m = (int) ((b * (x - Math.floor(x)) + (a * (Math.ceil(x) - x))));
-    int n = (int) ((d * (x - Math.floor(x)) + (c * (Math.ceil(x) - x))));
+    int m = (int) ((b * (x - Math.floor(x))) + (a * (Math.ceil(x) - x)));
+    int n = (int) ((d * (x - Math.floor(x))) + (c * (Math.ceil(x) - x)));
 
     return (int) ((n * (y - Math.floor(y))) + (m * (Math.ceil(y) - y)));
   }

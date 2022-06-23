@@ -11,6 +11,7 @@ import commands.Blur;
 import commands.Brighten;
 import commands.Convert;
 import commands.Darken;
+import commands.Downsize;
 import commands.Flip;
 import commands.GenericGrayscale;
 import commands.Grayscale;
@@ -18,7 +19,6 @@ import commands.Help;
 import commands.ImageEditorCommand;
 import commands.ImageEquals;
 import commands.LoadImage;
-import commands.Resize;
 import commands.SaveImage;
 import commands.Sepia;
 import commands.Sharpen;
@@ -67,7 +67,7 @@ public class ImageEditorSwingControllerImpl
     commands.put("help", s -> new Help());
     commands.put("h", s -> new Help());
     commands.put("convert", s -> new Convert(s));
-    commands.put("resize", s -> new Resize(s));
+    commands.put("resize", s -> new Downsize(s));
 
     this.view.accept(this);
   }
