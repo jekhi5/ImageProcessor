@@ -5,14 +5,14 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 import commands.ImageEditorCommand;
-import controller.ImageEditorSwingController;
-import controller.ImageEditorSwingControllerImpl;
-import gui.swingview.ImageEditorSwingView;
+import gui.controller.ImageEditorSwingController;
+import gui.controller.ImageEditorSwingControllerImpl;
+import gui.view.ImageEditorSwingView;
 import model.BasicImageEditorModel;
 import model.ImageEditorModel;
 import model.image.BetterImage;
 import model.image.Image;
-import view.ImageEditorGUIView;
+import gui.view.ImageEditorGUIView;
 
 import static org.junit.Assert.assertEquals;
 
@@ -26,53 +26,58 @@ public class ImageEditorSwingControllerImplTest {
   StringBuilder viewLog;
   ImageEditorModel mockModel;
   StringBuilder modelLog;
+  static String n = System.lineSeparator();
 
   @Before
   public void init() {
     viewLog = new StringBuilder();
+    modelLog = new StringBuilder();
     mockView = new ImageEditorGUIView() {
       @Override
       public void accept(ImageEditorSwingController controller) throws IllegalArgumentException {
-        viewLog.append("controller accepted.").append(System.lineSeparator());
+        viewLog.append("controller accepted.").append(n);
       }
 
       @Override
       public void setCurrentImage(String nameInEditor) throws IllegalArgumentException {
-        viewLog.append("set name to ").append(nameInEditor).append(System.lineSeparator());
+        viewLog.append("set name to ").append(nameInEditor).append(n);
       }
 
       @Override
       public void addImage(String nameInEditor) throws IllegalArgumentException {
-        viewLog.append("added image ").append(nameInEditor).append(System.lineSeparator());
+        viewLog.append("added image ").append(nameInEditor).append(n);
       }
 
       @Override
       public void refreshImages() {
-        viewLog.append("refreshed").append(System.lineSeparator());
+        viewLog.append("refreshed").append(n);
       }
 
       @Override
       public void renderMessage(String msg) throws IOException {
-        viewLog.append("rendered: ").append(msg).append(System.lineSeparator());
+        viewLog.append("rendered: ").append(msg).append(n);
       }
     };
 
     mockModel = new ImageEditorModel() {
+      final ImageEditorModel del = new BasicImageEditorModel();
       @Override
       public Image getImage(String name) throws IllegalArgumentException {
-        modelLog.append("got ").append(name).append(System.lineSeparator());
-        return new BetterImage(new BufferedImage(1, 1, 2));
+        modelLog.append("got ").append(name).append(n);
+        return del.getImage(name);
       }
 
       @Override
       public void addImage(String name, Image image) throws IllegalArgumentException {
-        modelLog.append("added ").append(name).append(System.lineSeparator());
+        modelLog.append("added ").append(name).append(n);
+        del.addImage(name, image);
       }
 
       @Override
       public String execute(ImageEditorCommand cmd) throws IllegalArgumentException {
-        modelLog.append("executed command").append(System.lineSeparator());
-        return "executed command";
+        String str = del.execute(cmd);
+        modelLog.append("executed command: ").append(str).append(n);
+        return str;
       }
     };
   }
@@ -91,12 +96,15 @@ public class ImageEditorSwingControllerImplTest {
   public void runCommand() {
     ImageEditorSwingController c = new ImageEditorSwingControllerImpl(new BasicImageEditorModel(), mockView);
     c.runCommand("load bungus.png b");
-    assertEquals("", viewLog.toString());
+    assertEquals("controller accepted." + n +
+            "rendered: Load failed: Invalid path: Can't read input file!" + n, viewLog.toString());
   }
 
   @Test
   public void getImage() {
-    ImageEditorModel model = new BasicImageEditorModel();
-    model.addImage("a", new BetterImage(new BufferedImage(1, 1, 2)));
+    mockModel.addImage("a", new BetterImage(new BufferedImage(1, 1, 2)));
+    Image img = new ImageEditorSwingControllerImpl(mockModel, mockView).getImage("a");
+    assertEquals(new BetterImage(new BufferedImage(1, 1, 2)), img);
+    assertEquals("added a" +n + "got a" + n, modelLog.toString());
   }
 }

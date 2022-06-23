@@ -43,7 +43,11 @@ public class ImageEditorSwingControllerImpl
    * @param view  the view
    * @throws IllegalArgumentException if either is null
    */
-  public ImageEditorSwingControllerImpl(ImageEditorModel model, ImageEditorGUIView view) {
+  public ImageEditorSwingControllerImpl(ImageEditorModel model, ImageEditorGUIView view)
+          throws IllegalArgumentException {
+    if (model == null || view == null) {
+      throw new IllegalArgumentException("nullness");
+    }
     this.model = model;
     this.view = view;
 
