@@ -1,24 +1,28 @@
 import org.junit.Before;
 import org.junit.Test;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+
+import javax.swing.*;
 
 import commands.ImageEditorCommand;
 import gui.controller.ImageEditorSwingController;
 import gui.controller.ImageEditorSwingControllerImpl;
-import gui.view.ImageEditorSwingView;
+import gui.listeners.SimpleMenuListener;
+import gui.view.ImageEditorGUIView;
 import model.BasicImageEditorModel;
 import model.ImageEditorModel;
 import model.image.BetterImage;
 import model.image.Image;
-import gui.view.ImageEditorGUIView;
 
 import static org.junit.Assert.assertEquals;
 
 /**
- * Tests for the gui controller.
- * This is the controller features implementation, so it is really the only thing we can test.
+ * Tests for the gui controller. This is the controller features implementation, so it is really the
+ * only thing we can test.
  */
 public class ImageEditorSwingControllerImplTest {
 
@@ -61,6 +65,7 @@ public class ImageEditorSwingControllerImplTest {
 
     mockModel = new ImageEditorModel() {
       final ImageEditorModel del = new BasicImageEditorModel();
+
       @Override
       public Image getImage(String name) throws IllegalArgumentException {
         modelLog.append("got ").append(name).append(n);
@@ -94,10 +99,12 @@ public class ImageEditorSwingControllerImplTest {
 
   @Test
   public void runCommand() {
-    ImageEditorSwingController c = new ImageEditorSwingControllerImpl(new BasicImageEditorModel(), mockView);
+    ImageEditorSwingController c = new ImageEditorSwingControllerImpl(mockModel, mockView);
     c.runCommand("load bungus.png b");
     assertEquals("controller accepted." + n +
             "rendered: Load failed: Invalid path: Can't read input file!" + n, viewLog.toString());
+    assertEquals("executed command: Load failed: Invalid path: Can't read input file!" + n,
+            modelLog.toString());
   }
 
   @Test
@@ -105,6 +112,25 @@ public class ImageEditorSwingControllerImplTest {
     mockModel.addImage("a", new BetterImage(new BufferedImage(1, 1, 2)));
     Image img = new ImageEditorSwingControllerImpl(mockModel, mockView).getImage("a");
     assertEquals(new BetterImage(new BufferedImage(1, 1, 2)), img);
-    assertEquals("added a" +n + "got a" + n, modelLog.toString());
+    assertEquals("added a" + n + "got a" + n, modelLog.toString());
+  }
+
+  @Test
+  public void testSML() {
+    ImageEditorSwingController c = new ImageEditorSwingControllerImpl(mockModel, mockView);
+    StringBuilder cLog = new StringBuilder();
+    ActionListener sml = new SimpleMenuListener(new ImageEditorSwingController() {
+      @Override
+      public void runCommand(String command) {
+        cLog.append(command).append(n);
+      }
+
+      @Override
+      public Image getImage(String name) throws IllegalArgumentException {
+        return null;
+      }
+    }, mockView);
+    sml.actionPerformed(new ActionEvent(new JMenuItem(), 1, "hi"));
+    assertEquals("hi" + n, cLog.toString());
   }
 }

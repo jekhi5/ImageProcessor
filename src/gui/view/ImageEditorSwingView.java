@@ -22,6 +22,7 @@ import utilities.ImageUtil;
 
 /**
  * A GUI view for the image editor, using Swing.
+ * Displays images, and collects user instructions using buttons.
  */
 public class ImageEditorSwingView implements ImageEditorGUIView {
 
@@ -33,6 +34,9 @@ public class ImageEditorSwingView implements ImageEditorGUIView {
   private ImageEditorSwingController controller;
   private String curImageName;
 
+  /**
+   * Creates a new ImageEditorSwingView.
+   */
   public ImageEditorSwingView() {
     this.frame = new JFrame("Image Editor");
     this.frame.setSize(1000, 1000);
