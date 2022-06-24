@@ -1,4 +1,4 @@
-load res/examples/blerny.ppm blerny
+load res/examples/blerny.jpg blerny
 flip vertical blerny blerny_vertical_flip
 flip horizontal blerny blerny_horizontal_flip
 gray red blerny blerny_red
@@ -9,11 +9,24 @@ gray intensity blerny blerny_intensity
 gray luma blerny blerny_luma
 brighten 100 blerny blerny_brighten_100
 darken 150 blerny blerny_darken_150
+downsize 75 45 blerny blerny_downsize_75_45
 same blerny blerny
 blur blerny blerny_blur
 sharpen blerny blerny_sharp
 generic-grayscale blerny blerny_gray
 sepia blerny blerny_sepia
+mask-command res/examples/blerner-mask.png gray red blerny blerny_red_mask
+mask-command res/examples/blerner-mask.png gray green blerny blerny_green_mask
+mask-command res/examples/blerner-mask.png gray blue blerny blerny_blue_mask
+mask-command res/examples/blerner-mask.png gray value blerny blerny_value_mask
+mask-command res/examples/blerner-mask.png gray intensity blerny blerny_intensity_mask
+mask-command res/examples/blerner-mask.png gray luma blerny blerny_luma_mask
+mask-command res/examples/blerner-mask.png brighten 100 blerny blerny_brighten_100_mask
+mask-command res/examples/blerner-mask.png darken 150 blerny blerny_darken_150_mask
+mask-command res/examples/blerner-mask.png blur blerny blerny_blur_mask
+mask-command res/examples/blerner-mask.png sharpen blerny blerny_sharp_mask
+mask-command res/examples/blerner-mask.png generic-grayscale blerny blerny_gray_mask
+mask-command res/examples/blerner-mask.png sepia blerny blerny_sepia_mask
 save blerny_vertical_flip.png blerny_vertical_flip y
 save blerny_horizontal_flip.png blerny_horizontal_flip y
 save blerny_red.png blerny_red y
@@ -28,5 +41,18 @@ save blerny_blur.png blerny_blur y
 save blerny_sharp.png blerny_sharp y
 save blerny_ggs.png blerny_gray y
 save blerny_sepia.png blerny_sepia y
+save blerny_downsize_75_45.png blerny_downsize_75_45 y
+save blerny_red_mask.png blerny_red_mask y
+save blerny_green_mask.png blerny_green_mask y
+save blerny_blue_mask.png blerny_blue_mask y
+save blerny_value_mask.png blerny_value_mask y
+save blerny_intensity_mask.png blerny_intensity_mask y
+save blerny_luma_mask.png blerny_luma_mask y
+save blerny_brighten_100_mask.png blerny_brighten_100_mask y
+save blerny_darken_150_mask.png blerny_darken_150_mask y
+save blerny_blur_mask.png blerny_blur_mask y
+save blerny_sharp_mask.png blerny_sharp_mask y
+save blerny_ggs_mask.png blerny_gray_mask y
+save blerny_sepia_mask.png blerny_sepia_mask y
 convert blerny_sepia.png blerny_sepia_jpg.jpg
 quit

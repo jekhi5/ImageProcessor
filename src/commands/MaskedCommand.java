@@ -9,7 +9,7 @@ import model.ImageEditorModel;
 /**
  * Represents a masked based command. Any command that modifies a currently loaded image (sans flip)
  * can be run with a masked command by providing the necessary mask.
- * {@code mask-command <mask-image> <command name> <...all arguments associated with that
+ * {@code mask-command <path-to-mask-image> <command name> <...all arguments associated with that
  * command...>}
  */
 public class MaskedCommand implements ImageEditorCommand {

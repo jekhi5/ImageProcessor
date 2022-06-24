@@ -8,9 +8,9 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
 import gui.controller.ImageEditorSwingController;
+import gui.listeners.FileChooserMenuListener;
 import gui.listeners.NumberInputMenuListener;
 import gui.listeners.ResizerListener;
-import gui.listeners.FileChooserMenuListener;
 import gui.listeners.SimpleMenuListener;
 import gui.view.ImageEditorGUIView;
 
@@ -235,18 +235,18 @@ public class MenuBar extends JMenuBar {
     // |
     JMenuItem transSepiaMask = new JMenuItem("Sepia");
     transSepiaMask.setActionCommand("mask-command sepia " + mutator);
-    transSepiaMask.addActionListener(al);
+    transSepiaMask.addActionListener(fcml);
     transformMaskMenu.add(transSepiaMask);
 
     // Adjust Mask Menu
     JMenu adjustMaskMenu = new JMenu("Adjust");
     JMenuItem adjBrightMask = new JMenuItem("Brighten");
-    adjBrightMask.setActionCommand("mask-command brighten");
+    adjBrightMask.setActionCommand("mask-command brighten ");
     adjBrightMask.addActionListener(fcml);
     adjustMaskMenu.add(adjBrightMask);
     // |
     JMenuItem adjDarkMask = new JMenuItem("Darken");
-    adjDarkMask.setActionCommand("mask-command darken");
+    adjDarkMask.setActionCommand("mask-command darken ");
     adjDarkMask.addActionListener(fcml);
     adjustMaskMenu.add(adjDarkMask);
 

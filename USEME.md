@@ -31,47 +31,54 @@ recommended for clarity.
 #### GUI
 
 The GUI is very simple to use.
+
 - To begin, load an image into the editor. This is done under `File -> Load`.
 - You may load multiple images this way, but you can only do operations on one image at a time.
-  - To switch the current image, select it from the sidebar.
-- Most operations that can be done using a console command can be accomplished using the menu bar at the top of the window.
-  - In order, these are:
-  - `File -> Save`: Saves an image to a given file.
-  - `Visualize`: Corresponds to `grayscale`
-    - You may select the component you wish to grayscale the image to.
-  - `Filter`: Operations using a filter
-    - You may select either `blur` or `sharpen`.
-  - `Transform`: Operations using color transformations
-    - You may select either `grayscale` (applies a luma-based grayscale), or `sepia`.
-  - `Flip`: Changes image orientation
-    - You may select either `vertical` or `horizontal`.
-  - `Adjust`: Miscellaneous image adjustments
-    - You may select `brighten` or `darken`. Each of these will prompt you for a numerical amount.
-    - You mau also select `downsize`. This will prompt you for the new dimensions of the image.
-  - `Help -> Show Commands`: Displays a list of all commands
-  - `Mask Operation`: Allows any operation to be done using an image mask, which you will be prompted for.
+    - To switch the current image, select it from the sidebar.
+- Most operations that can be done using a console command can be accomplished using the menu bar at
+  the top of the window.
+    - In order, these are:
+    - `File -> Save`: Saves an image to a given file.
+    - `Visualize`: Corresponds to `grayscale`
+        - You may select the component you wish to grayscale the image to.
+    - `Filter`: Operations using a filter
+        - You may select either `blur` or `sharpen`.
+    - `Transform`: Operations using color transformations
+        - You may select either `grayscale` (applies a luma-based grayscale), or `sepia`.
+    - `Flip`: Changes image orientation
+        - You may select either `vertical` or `horizontal`.
+    - `Adjust`: Miscellaneous image adjustments
+        - You may select `brighten` or `darken`. Each of these will prompt you for a numerical
+          amount.
+        - You mau also select `downsize`. This will prompt you for the new dimensions of the image.
+    - `Help -> Show Commands`: Displays a list of all commands
+    - `Mask Operation`: Allows any operation to be done using an image mask, which you will be
+      prompted for.
 - The main image viewport is scrollable, as is the sidebar.
-- A histogram displaying the red, green, blue, and intensity levels of each image will pop up in its own window on every change.
+- A histogram displaying the red, green, blue, and intensity levels of each image will pop up in its
+  own window on every change.
 - To exit the editor, select the 'X' at the top of the window.
 
 ### Command List
 
-| Command             | Syntax                                                 | Description                                                                                                                 |
-|:--------------------|:-------------------------------------------------------|:----------------------------------------------------------------------------------------------------------------------------|
-| `load `             | `load <path> <image-name>`                             | Loads an image from the path into the editor, under the given name                                                          |
-| `save`              | `save <path> <image-name> {yes ǀ no}`                  | Saves an image currently open in the editor to the given path. Overwrites any existing file if the final argument is `yes`. |
-| `brighten`          | `brighten <amount> <image-name> <new-name>`            | Increases the brightness of the image by the given amount in the range [0-255]                                              |
-| `darken`            | `darken <amount> <image-name> <new-name>`              | Decreases the brightness of the image by the given amount in the range [0-255]                                              |
-| `flip`              | `flip {vertical ǀ horizontal} <image-name> <new-name>` | Mirrors the image in the given dimension                                                                                    |
-| `grayscale`         | `grayscale <mode> <image-name> <new-name>`             | Grayscale the image based on the given mode. See [Grayscale](#Grayscale) for more information                               |
-| `same`              | `same <image-name> <image-name>`                       | Tells you if the two images are the same or different.                                                                      |
-| `blur`              | `blur <image-name> <new-name>`                         | Applies a Gaussian blur                                                                                                     |
-| `sharpen`           | `sharpen <image-name> <new-name>`                      | Sharpens the image                                                                                                          |
-| `generic-grayscale` | `generic-grayscale <image-name> <new-name>`            | Applies a luma grayscale to the image using a color transformation.                                                         |
-| `sepia`             | `sepia <image-name> <new-name>`                        | Applies a sepia filter to the image.                                                                                        |
-| `convert`           | `convert <image-path> <new-path>`                      | Converts an image from one type to another. DOES NOT add images to the editor.                                              |
-| `help`              | `help` or `h`                                          | Displays information about all available commands.                                                                          |
-| `quit`              | `quit` or `q` or `exit`                                | Exits the ImageEditor. All unsaved data will be lost.                                                                       |
+| Command             | Syntax                                                                 | Description                                                                                                                                                                                                                                         |
+|:--------------------|:-----------------------------------------------------------------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `load `             | `load <path> <image-name>`                                             | Loads an image from the path into the editor, under the given name                                                                                                                                                                                  |
+| `save`              | `save <path> <image-name> {yes ǀ no}`                                  | Saves an image currently open in the editor to the given path. Overwrites any existing file if the final argument is `yes`.                                                                                                                         |
+| `brighten`          | `brighten <amount> <image-name> <new-name>`                            | Increases the brightness of the image by the given amount in the range [0-255]                                                                                                                                                                      |
+| `darken`            | `darken <amount> <image-name> <new-name>`                              | Decreases the brightness of the image by the given amount in the range [0-255]                                                                                                                                                                      |
+| `flip`              | `flip {vertical ǀ horizontal} <image-name> <new-name>`                 | Mirrors the image in the given dimension                                                                                                                                                                                                            |
+| `grayscale`         | `grayscale <mode> <image-name> <new-name>`                             | Grayscale the image based on the given mode. See [Grayscale](#Grayscale) for more information                                                                                                                                                       |
+| `same`              | `same <image-name> <image-name>`                                       | Tells you if the two images are the same or different.                                                                                                                                                                                              |
+| `blur`              | `blur <image-name> <new-name>`                                         | Applies a Gaussian blur                                                                                                                                                                                                                             |
+| `sharpen`           | `sharpen <image-name> <new-name>`                                      | Sharpens the image                                                                                                                                                                                                                                  |
+| `downsize`          | `downsize <new-width> <new-height> <image-name> <new-name>`            | Resizes the image to the given new width and height. The new width and new height must be less than or equal to their current counterparts                                                                                                          |
+| `generic-grayscale` | `generic-grayscale <image-name> <new-name>`                            | Applies a luma grayscale to the image using a color transformation.                                                                                                                                                                                 |
+| `sepia`             | `sepia <image-name> <new-name>`                                        | Applies a sepia filter to the image.                                                                                                                                                                                                                |
+| `mask-command`      | `mask-command <path-to-mask> <...command with all associated args...>` | Applies the given command to the pixels in the given image whose matching coordinates in the mask are fully black pixels. Because of this mapping, the mask must be the exact same dimensions as the image it will be applied to                    |
+| `convert`           | `convert <image-path> <new-path>`                                      | Converts an image from one type to another. DOES NOT add images to the editor.                                                                                                                                                                      |
+| `help`              | `help` or `h`                                                          | Displays information about all available commands.                                                                                                                                                                                                  |
+| `quit`              | `quit` or `q` or `exit`                                                | Exits the ImageEditor. All unsaved data will be lost.                                                                                                                                                                                               |
 
 No commands *modify* the existing image in the editor. Instead, they open a new image in the editor
 with the `<new-name>`,

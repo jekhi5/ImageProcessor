@@ -58,38 +58,39 @@ public class ImageEditorTextControllerImpl implements ImageEditorTextController 
     this.commands = new HashMap<>();
 
     // Add all new commands here:
-    commands.put("same", s -> new ImageEquals(s));
+    commands.put("same", ImageEquals::new);
 
     // different misspellings of "grayscale"
-    commands.put("grayscale", s -> new Grayscale(s));
-    commands.put("greyscale", s -> new Grayscale(s));
-    commands.put("gray", s -> new Grayscale(s));
-    commands.put("grey", s -> new Grayscale(s));
+    commands.put("grayscale", Grayscale::new);
+    commands.put("greyscale", Grayscale::new);
+    commands.put("gray", Grayscale::new);
+    commands.put("grey", Grayscale::new);
 
-    commands.put("load", s -> new LoadImage(s));
-    commands.put("save", s -> new SaveImage(s));
-    commands.put("flip", s -> new Flip(s));
-    commands.put("brighten", s -> new Brighten(s));
-    commands.put("darken", s -> new Darken(s));
+    commands.put("load", LoadImage::new);
+    commands.put("save", SaveImage::new);
+    commands.put("flip", Flip::new);
+    commands.put("brighten", Brighten::new);
+    commands.put("darken", Darken::new);
 
     // Added in Assignment 5:
-    commands.put("blur", s -> new Blur(s));
+    commands.put("blur", Blur::new);
 
-    commands.put("sharpen", s -> new Sharpen(s));
+    commands.put("sharpen", Sharpen::new);
 
-    commands.put("sepia", s -> new Sepia(s));
+    commands.put("sepia", Sepia::new);
 
-    commands.put("generic-grayscale", s -> new GenericGrayscale(s));
+    commands.put("generic-grayscale", GenericGrayscale::new);
 
     commands.put("help", s -> new Help());
     commands.put("h", s -> new Help());
 
-    commands.put("convert", s -> new Convert(s));
+    commands.put("convert", Convert::new);
 
 
     // Assignment 6 extra credit:
-    commands.put("resize", s -> new Downsize(s));
+    commands.put("resize", Downsize::new);
     commands.put("mask-command", s -> new MaskedCommand(s, this.commands));
+    commands.put("downsize", Downsize::new);
   }
 
   @Override

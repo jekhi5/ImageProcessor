@@ -1,32 +1,30 @@
-//public class DownsizeTest extends AbstractCommandTest {
-//
-//
-//  private static final List<ImageEditorCommand> COMMAND_FORMS =
-//          Arrays.asList(new Downsize(new Scanner(new StringReader("100 100 blur_checkered"))),
-//                  new Downsize(new Scanner(new StringReader("checkered blur_checkered"))));
-//  private static final List<String> ORDER_OF_TYPES = List.of("blur", "blur");
-//  private static final List<ImageEditorCommand> ILLEGAL_FORMS =
-//          Arrays.asList(new Blur(new Scanner(new StringReader("NOT_AN_IMAGE whoopsies"))),
-//                  new Blur(new Scanner(new StringReader("NOT_AN_IMAGE whoopsies"))));
-//  private static final String SUCCESSFUL_MESSAGE = "Blur successful!";
-//
-//  /**
-//   * To construct a test for the downsize command.
-//   *
-//   * @param commandForms      the different forms that the command could be used in (vertical, red,
-//   *                          100, etc)
-//   * @param orderOfTypes      the order that the types of commands are listed in
-//   * @param illegalForms      examples of illegal types that are not allowed to be used with the
-//   *                          command
-//   * @param successfulMessage the message that the command returns when the operation is fully
-//   *                          successful
-//   */
-//  public DownsizeTest() {
-//    super(commandForms, orderOfTypes, illegalForms, successfulMessage);
-//  }
-//
-//  @Override
-//  protected void getNullCommand() {
-//    new Downsize(null);
-//  }
-//}
+import java.io.StringReader;
+import java.util.List;
+import java.util.Scanner;
+
+import commands.Downsize;
+import commands.ImageEditorCommand;
+
+public class DownsizeTest extends AbstractCommandTest {
+
+
+  private static final List<ImageEditorCommand> COMMAND_FORMS =
+          List.of(new Downsize(new Scanner(new StringReader("2 2 " +
+                  "checkered 2_checkered"))));
+  private static final List<String> ORDER_OF_TYPES = List.of("2");
+  private static final List<ImageEditorCommand> ILLEGAL_FORMS =
+          List.of(new Downsize(new Scanner(new StringReader("abc abc something whoopsies"))));
+  private static final String SUCCESSFUL_MESSAGE = "Downsize successful!";
+
+  /**
+   * To construct a test for the Downsize command.
+   */
+  public DownsizeTest() {
+    super(COMMAND_FORMS, ORDER_OF_TYPES, ILLEGAL_FORMS, SUCCESSFUL_MESSAGE);
+  }
+
+  @Override
+  protected void getNullCommand() {
+    new Downsize(null);
+  }
+}

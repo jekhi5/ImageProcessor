@@ -10,13 +10,16 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Scanner;
+import java.util.function.Function;
 
 import commands.AbstractCommand;
 import commands.Brighten;
 import commands.Darken;
+import commands.Downsize;
 import commands.Flip;
 import commands.Grayscale;
 import commands.ImageEditorCommand;
+import commands.MaskedCommand;
 import controller.ImageEditorTextController;
 import controller.ImageEditorTextControllerImpl;
 import model.BasicImageEditorModel;
@@ -313,6 +316,66 @@ public class ImageEditorTextControllerTest {
 
     boolean t = true;
     assertTrue(t);
+  }
+
+  @Test
+  public void testingMask() {
+    ImageEditorModel tempModel = new BasicImageEditorModel();
+    tempModel.addImage("pre-op", ImageUtil.createImageFromPath("test" + SLASH + "testRes"
+            + SLASH + "FullyRed_3x3.ppm"));
+    String pathToMask = "test" + SLASH + "testRes" + SLASH + "mask.ppm";
+    Map<String, Function<Scanner, ImageEditorCommand>> mapWithOnlyGrayscaleCommand =
+            new HashMap<>();
+    mapWithOnlyGrayscaleCommand.put("grayscale", Grayscale::new);
+
+
+    ImageEditorCommand maskCommand =
+            new MaskedCommand(new Scanner(new StringReader(pathToMask + " grayscale " +
+                    "red pre-op post-op q")), mapWithOnlyGrayscaleCommand);
+
+    tempModel.execute(maskCommand);
+
+    assertEquals("", this.log.toString());
+
+    Reader reader = new StringReader(
+            "load test" + SLASH + "testRes" + SLASH + "FullyRed_3x3.ppm pre-op mask-command " +
+                    pathToMask + " grayscale red pre-op post-op q");
+    controller = new ImageEditorTextControllerImpl(model, view, reader);
+    controller.launch();
+
+    assertEquals("Welcome to ImageEditor! For information about the supported file types or " +
+            "available commands enter \"help\" and press <enter>. Please enter a command:"
+            + NEW_LINE + "> Executed command: LoadImage"
+            + NEW_LINE + "Successfully loaded image \"pre-op\" from test/testRes/FullyRed_3x3.ppm!"
+            + NEW_LINE + "> Executed command: MaskedCommand"
+            + NEW_LINE + "Grayscale successful!"
+            + NEW_LINE + "> Thanks for using ImageEditor!"
+            + NEW_LINE, this.log.toString());
+  }
+
+  @Test
+  public void testingDownsize() {
+    ImageEditorModel tempModel = new BasicImageEditorModel();
+    tempModel.addImage("checkered", ImageUtil.createImageFromPath("test" + SLASH + "testRes"
+            + SLASH + "checkered.ppm"));
+
+
+    ImageEditorCommand downsizeCommand =
+            new Downsize(new Scanner(new StringReader(" 2 2 checkered post-op")));
+
+    tempModel.execute(downsizeCommand);
+
+    assertEquals("", this.log.toString());
+
+    Reader reader = new StringReader(loadCheckeredBottom + " downsize 2 2 checkered post-op q");
+    controller = new ImageEditorTextControllerImpl(model, view, reader);
+    controller.launch();
+
+    assertEquals(loadingCheckeredImage
+            + "> Executed command: Downsize"
+            + NEW_LINE + "Downsize successful!"
+            + NEW_LINE + "> Thanks for using ImageEditor!"
+            + NEW_LINE, this.log.toString());
   }
 
 

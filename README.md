@@ -1,11 +1,15 @@
 ## Design Changes and Justifications
 
 ### Assignment 6:
-- The `ImageEditorCommand` interface had an additional method added to allow a command to be run with a given mask.
-  - All implementing classes have also been updated to reflect this change.
-- New `ImageEditorCommands` had to be created for masking and downsizing, and were added to the controller.
+
+- The `ImageEditorCommand` interface had an additional method added to allow a command to be run
+  with a given mask.
+    - All implementing classes have also been updated to reflect this change.
+- New `ImageEditorCommands` had to be created for masking and downsizing, and were added to the
+  controller.
 
 ### Assignment 5:
+
 - The `Image` interface now has a method that saves to a file, instead of generating savable text,
     - We realized that not every image type could be saved as ASCII text.
 - Deleted `PixelIterator`

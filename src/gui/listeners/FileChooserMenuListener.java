@@ -63,10 +63,7 @@ public class FileChooserMenuListener extends SimpleMenuListener {
 
       switch (commandName) {
         case "load":
-          // To allow the user to upload the same image multiple times without overriding the one
-          // already in the editor
           String nameInEditor = this.getNameInEditor(path);
-
 
           controller.runCommand("load " + path + " " + nameInEditor);
           view.addImage(nameInEditor);
@@ -88,15 +85,7 @@ public class FileChooserMenuListener extends SimpleMenuListener {
             throw new IllegalArgumentException("Cannot get rest of command!");
           }
 
-          if (typeOfMaskCommand.equalsIgnoreCase("darken") || typeOfMaskCommand.equalsIgnoreCase(
-                  "brighten")) {
-            ActionListener niml = new NumberInputMenuListener(this.controller, this.view,
-                    this.name);
-            niml.actionPerformed(new ActionEvent(new Object(), ActionEvent.ACTION_FIRST,
-                    "mask-command " + path + " " + typeOfMaskCommand));
-          } else {
-            controller.runCommand("mask-command " + path + " " + restOfCommand);
-          }
+          this.handleCommand(typeOfMaskCommand, path, restOfCommand);
           break;
         default:
           throw new IllegalArgumentException("Unsupported File Chooser Action");
@@ -104,6 +93,17 @@ public class FileChooserMenuListener extends SimpleMenuListener {
     }
 
     this.view.refreshImages();
+  }
+
+  private void handleCommand(String typeOfMaskCommand, String path, String restOfCommand) {
+    if (typeOfMaskCommand.equalsIgnoreCase("darken") || typeOfMaskCommand.equalsIgnoreCase(
+            "brighten")) {
+      ActionListener niml = new NumberInputMenuListener(this.controller, this.view, this.name);
+      niml.actionPerformed(
+              new ActionEvent(new Object(), ActionEvent.ACTION_FIRST, typeOfMaskCommand));
+    } else {
+      controller.runCommand("mask-command " + path + " " + restOfCommand);
+    }
   }
 
 

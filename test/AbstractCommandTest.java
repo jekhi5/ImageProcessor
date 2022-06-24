@@ -59,6 +59,10 @@ public abstract class AbstractCommandTest {
   protected static final Image GENERIC_GRAYSCALE_CHECKERED =
           ImageFactory.createImage("test" + SLASH + "testRes" + SLASH +
                   "checkered_generic_grayscale.ppm");
+  protected static final Image MASK_3x4 =
+          ImageFactory.createImage("test" + SLASH + "testRes" + SLASH + "mask.ppm");
+  protected static final Image DOWNSCALE_CHECKERED = ImageFactory.createImage("test" + SLASH +
+          "testRes" + SLASH + "downscaledCheckered.ppm");
 
   // The images in the test resources folder
   protected final Map<String, Image> testResourceImages;
@@ -106,6 +110,8 @@ public abstract class AbstractCommandTest {
     this.testResourceImages.put("sharpen", SHARPEN_CHECKERED);
     this.testResourceImages.put("sepia", SEPIA_CHECKERED);
     this.testResourceImages.put("generic-grayscale", GENERIC_GRAYSCALE_CHECKERED);
+    this.testResourceImages.put("mask", MASK_3x4);
+    this.testResourceImages.put("2", DOWNSCALE_CHECKERED);
 
   }
 
