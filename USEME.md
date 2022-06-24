@@ -8,9 +8,9 @@ including functionality such as flipping, gray-scaling, brightening, and darkeni
 
 ### Setup
 
-There is one command line argument used in this program. Launch the program with no arguments to use
-input from the console,
-or use a file path to read input from a text file. The file path may not contain any spaces.
+Launch with no command line arguments to use the GUI.
+Launch with `-text` to use the interactive scripting mode.
+Launch with `-file <path>` to run the specified script.
 
 ### Usage
 
@@ -27,6 +27,32 @@ Commands can be loaded from a text file, exactly as they would be typed, provide
 separated by whitespace.
 It is not strictly necessary to end your script with a `quit` command. This is nonetheless
 recommended for clarity.
+
+#### GUI
+
+The GUI is very simple to use.
+- To begin, load an image into the editor. This is done under `File -> Load`.
+- You may load multiple images this way, but you can only do operations on one image at a time.
+  - To switch the current image, select it from the sidebar.
+- Most operations that can be done using a console command can be accomplished using the menu bar at the top of the window.
+  - In order, these are:
+  - `File -> Save`: Saves an image to a given file.
+  - `Visualize`: Corresponds to `grayscale`
+    - You may select the component you wish to grayscale the image to.
+  - `Filter`: Operations using a filter
+    - You may select either `blur` or `sharpen`.
+  - `Transform`: Operations using color transformations
+    - You may select either `grayscale` (applies a luma-based grayscale), or `sepia`.
+  - `Flip`: Changes image orientation
+    - You may select either `vertical` or `horizontal`.
+  - `Adjust`: Miscellaneous image adjustments
+    - You may select `brighten` or `darken`. Each of these will prompt you for a numerical amount.
+    - You mau also select `downsize`. This will prompt you for the new dimensions of the image.
+  - `Help -> Show Commands`: Displays a list of all commands
+  - `Mask Operation`: Allows any operation to be done using an image mask, which you will be prompted for.
+- The main image viewport is scrollable, as is the sidebar.
+- A histogram displaying the red, green, blue, and intensity levels of each image will pop up in its own window on every change.
+- To exit the editor, select the 'X' at the top of the window.
 
 ### Command List
 
@@ -143,14 +169,3 @@ the user.
 There is also the `ImageUtil` class, which contains static methods that help read and store files,
 and the `Runner` class which runs the program, including telling the controller to take either
 console or text file input.
-
-<br>
-<br>
-
-*ImageEditor belongs to Jacob Kline and Emery Jacobowitz and may not be used without permission.*
-
-<br>
-<br>
-The Ben Lerner example image is copyright of Northeastern University, 2022,
-and Professor Lerner probably retains rights to his likeness as well. 
-Our use falls under fair use, as we are not publishing this project publicly.

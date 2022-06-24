@@ -16,7 +16,7 @@ import gui.view.ImageEditorGUIView;
 /**
  * A menu listener specifically for commands like save and load which require files.
  */
-public class SaveLoadListener extends SimpleMenuListener {
+public class FileChooserMenuListener extends SimpleMenuListener {
   private final String name;
 
   /**
@@ -27,8 +27,8 @@ public class SaveLoadListener extends SimpleMenuListener {
    * @param view       the view
    * @throws IllegalArgumentException if any argument is null
    */
-  public SaveLoadListener(ImageEditorSwingController controller, String name,
-                          ImageEditorGUIView view) throws IllegalArgumentException {
+  public FileChooserMenuListener(ImageEditorSwingController controller, String name,
+                                 ImageEditorGUIView view) throws IllegalArgumentException {
     super(controller, view);
     if (name == null) {
       throw new IllegalArgumentException("Can't have null args!");

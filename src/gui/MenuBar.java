@@ -10,7 +10,7 @@ import javax.swing.JMenuItem;
 import gui.controller.ImageEditorSwingController;
 import gui.listeners.NumberInputMenuListener;
 import gui.listeners.ResizerListener;
-import gui.listeners.SaveLoadListener;
+import gui.listeners.FileChooserMenuListener;
 import gui.listeners.SimpleMenuListener;
 import gui.view.ImageEditorGUIView;
 
@@ -150,7 +150,7 @@ public class MenuBar extends JMenuBar {
     //    this.add(hgram);
 
     // Save and load
-    ActionListener fcml = new SaveLoadListener(ctrl, curImageName, view);
+    ActionListener fcml = new FileChooserMenuListener(ctrl, curImageName, view);
     JMenu file = new JMenu("File");
     file.setMnemonic(KeyEvent.VK_F);
     this.add(file, 0);
