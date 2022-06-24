@@ -9,6 +9,7 @@ production/
 /javadoc/
 /test/testOut/
 /res/examples
+/META-INF/
 *.jar
 
 ### Eclipse ###
