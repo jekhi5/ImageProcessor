@@ -4,7 +4,6 @@ import java.util.Scanner;
 
 import model.ImageEditorModel;
 import model.image.Image;
-import model.kernels.AbstractMatrixOperator;
 import model.kernels.FilterKernel;
 import model.kernels.PixelOperator;
 import utilities.ImageFactory;

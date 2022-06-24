@@ -1,11 +1,9 @@
 package commands;
 
 import java.util.Scanner;
-import java.util.function.Function;
 
 import model.ImageEditorModel;
 import model.image.Image;
-import model.pixel.Pixel;
 import model.pixel.PixelBuilder;
 import model.pixel.PixelImpl;
 import utilities.ImageFactory;

@@ -66,19 +66,8 @@ public abstract class AbstractCommand implements ImageEditorCommand {
     model.addImage(newImageName, newImg);
   }
 
-  @Override
-  public abstract String apply(ImageEditorModel model);
-
-  protected void applyToEachPixel(Image img, Function<Pixel, Pixel> func) {
-    for (int r = 0; r < img.getHeight(); r += 1) {
-      for (int c = 0; c < img.getWidth(); c += 1) {
-        this.applyToSinglePixel(r, c, img, func);
-      }
-    }
-  }
-
   protected static Image applyMaskWithKernel(Image orig, Image maskImage,
-                                          PixelOperator pixelOperator) {
+                                             PixelOperator pixelOperator) {
     Image imageCopy = orig.getCopy();
     for (int row = 0; row < orig.getHeight(); row += 1) {
       for (int col = 0; col < orig.getWidth(); col += 1) {
@@ -91,6 +80,17 @@ public abstract class AbstractCommand implements ImageEditorCommand {
     }
 
     return imageCopy;
+  }
+
+  @Override
+  public abstract String apply(ImageEditorModel model);
+
+  protected void applyToEachPixel(Image img, Function<Pixel, Pixel> func) {
+    for (int r = 0; r < img.getHeight(); r += 1) {
+      for (int c = 0; c < img.getWidth(); c += 1) {
+        this.applyToSinglePixel(r, c, img, func);
+      }
+    }
   }
 
   protected void applyToSinglePixel(int row, int col, Image img, Function<Pixel, Pixel> func) {

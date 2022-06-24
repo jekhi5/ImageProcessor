@@ -32,9 +32,9 @@ public class MaskedCommand implements ImageEditorCommand {
       throw new IllegalArgumentException("If inputs are expected, the scanner cannot be null!");
     }
 
-    String nameOfCommand = this.handleNext(in);
-
     this.pathToMask = this.handleNext(in);
+
+    String nameOfCommand = this.handleNext(in);
 
     if (availableCommands.containsKey(nameOfCommand)) {
       this.cmd = availableCommands.get(nameOfCommand).apply(in);

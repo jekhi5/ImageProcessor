@@ -1,19 +1,16 @@
 package gui;
 
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import javax.swing.event.MenuEvent;
-import javax.swing.event.MenuListener;
 
 import gui.controller.ImageEditorSwingController;
-import gui.listeners.FileChooserMenuListener;
 import gui.listeners.NumberInputMenuListener;
 import gui.listeners.ResizerListener;
+import gui.listeners.SaveLoadListener;
 import gui.listeners.SimpleMenuListener;
 import gui.view.ImageEditorGUIView;
 
@@ -153,7 +150,7 @@ public class MenuBar extends JMenuBar {
     //    this.add(hgram);
 
     // Save and load
-    ActionListener fcml = new FileChooserMenuListener(ctrl, curImageName, view);
+    ActionListener fcml = new SaveLoadListener(ctrl, curImageName, view);
     JMenu file = new JMenu("File");
     file.setMnemonic(KeyEvent.VK_F);
     this.add(file, 0);
@@ -180,7 +177,85 @@ public class MenuBar extends JMenuBar {
     helpMenu.add(help);
     this.add(helpMenu);
 
-    }
+    // Mask-Command
+    JMenu maskMenu = new JMenu("Mask Operation");
+
+
+    // Visualize Mask Menu
+    JMenu visualizeMaskMenu = new JMenu("Visualize with mask");
+    JMenuItem visRedMask = new JMenuItem("Red");
+    visRed.setActionCommand("mask-command gray red " + mutator);
+    visRed.addActionListener(fcml);
+    visualizeMaskMenu.add(visRedMask);
+    // |
+    JMenuItem visGreenMask = new JMenuItem("Green");
+    visGreen.setActionCommand("mask-command gray green " + mutator);
+    visGreen.addActionListener(fcml);
+    visualizeMaskMenu.add(visGreenMask);
+    // |
+    JMenuItem visBlueMask = new JMenuItem("Blue");
+    visBlue.setActionCommand("mask-command gray blue " + mutator);
+    visBlue.addActionListener(fcml);
+    visualizeMaskMenu.add(visBlueMask);
+    // |
+    JMenuItem visValMask = new JMenuItem("Value");
+    visVal.setActionCommand("mask-command gray value " + mutator);
+    visVal.addActionListener(fcml);
+    visualizeMaskMenu.add(visValMask);
+    // |
+    JMenuItem visIntMask = new JMenuItem("Intensity");
+    visInt.setActionCommand("mask-command gray intensity " + mutator);
+    visInt.addActionListener(fcml);
+    visualizeMaskMenu.add(visIntMask);
+    // |
+    JMenuItem visLumaMask = new JMenuItem("Luma");
+    visLuma.setActionCommand("mask-command gray luma " + mutator);
+    visLuma.addActionListener(fcml);
+    visualizeMaskMenu.add(visLumaMask);
+
+    // Filter Mask Menu
+    JMenu filterMaskMenu = new JMenu("Filter with mask");
+    JMenuItem filterBlurMask = new JMenuItem("Blur");
+    filterBlurMask.setActionCommand("mask-command blur " + mutator);
+    filterBlurMask.addActionListener(fcml);
+    filterMaskMenu.add(filterBlurMask);
+    // |
+    JMenuItem filterSharpMask = new JMenuItem("Sharpen");
+    filterSharpMask.setActionCommand("mask-command sharpen " + mutator);
+    filterSharpMask.addActionListener(fcml);
+    filterMaskMenu.add(filterSharpMask);
+
+
+    // Transform Mask Menu
+    JMenu transformMaskMenu = new JMenu("Transform with mask");
+    JMenuItem transGrayMask = new JMenuItem("Grayscale");
+    transGrayMask.setActionCommand("mask-command generic-grayscale " + mutator);
+    transGrayMask.addActionListener(fcml);
+    transformMaskMenu.add(transGrayMask);
+    // |
+    JMenuItem transSepiaMask = new JMenuItem("Sepia");
+    transSepiaMask.setActionCommand("mask-command sepia " + mutator);
+    transSepiaMask.addActionListener(al);
+    transformMaskMenu.add(transSepiaMask);
+
+    // Adjust Mask Menu
+    JMenu adjustMaskMenu = new JMenu("Adjust");
+    JMenuItem adjBrightMask = new JMenuItem("Brighten");
+    adjBrightMask.setActionCommand("mask-command brighten");
+    adjBrightMask.addActionListener(fcml);
+    adjustMaskMenu.add(adjBrightMask);
+    // |
+    JMenuItem adjDarkMask = new JMenuItem("Darken");
+    adjDarkMask.setActionCommand("mask-command darken");
+    adjDarkMask.addActionListener(fcml);
+    adjustMaskMenu.add(adjDarkMask);
+
+    maskMenu.add(visualizeMaskMenu);
+    maskMenu.add(filterMaskMenu);
+    maskMenu.add(transformMaskMenu);
+    maskMenu.add(adjustMaskMenu);
+    this.add(maskMenu);
+  }
 
 
 }
