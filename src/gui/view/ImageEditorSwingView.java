@@ -21,8 +21,8 @@ import gui.controller.ImageEditorSwingController;
 import utilities.ImageUtil;
 
 /**
- * A GUI view for the image editor, using Swing.
- * Displays images, and collects user instructions using buttons.
+ * A GUI view for the image editor, using Swing. Displays images, and collects user instructions
+ * using buttons.
  */
 public class ImageEditorSwingView implements ImageEditorGUIView {
 

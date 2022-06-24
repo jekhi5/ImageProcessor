@@ -19,6 +19,7 @@ import commands.Help;
 import commands.ImageEditorCommand;
 import commands.ImageEquals;
 import commands.LoadImage;
+import commands.MaskedCommand;
 import commands.SaveImage;
 import commands.Sepia;
 import commands.Sharpen;
@@ -72,6 +73,7 @@ public class ImageEditorSwingControllerImpl
     commands.put("h", s -> new Help());
     commands.put("convert", s -> new Convert(s));
     commands.put("resize", s -> new Downsize(s));
+    commands.put("mask-command", s -> new MaskedCommand(s, this.commands));
 
     this.view.accept(this);
   }

@@ -43,22 +43,34 @@ public class SaveLoadListener extends SimpleMenuListener {
     JFileChooser f = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
     f.setFileFilter(supportedTypes);
     int i;
-    if (e.getActionCommand().equalsIgnoreCase("load")) {
-      i = f.showOpenDialog(new JFrame());
-    } else {
+    if (e.getActionCommand().equalsIgnoreCase("save")) {
       i = f.showSaveDialog(new JFrame());
+    } else {
+      i = f.showOpenDialog(new JFrame());
     }
 
 
     if (i == JFileChooser.APPROVE_OPTION) {
       String path = f.getSelectedFile().getAbsolutePath();
-      String commandName = e.getActionCommand().toLowerCase().substring(0,
-              e.getActionCommand().indexOf(" "));
+      String commandName;
+
+      try {
+        commandName = e.getActionCommand().toLowerCase().substring(0,
+                e.getActionCommand().indexOf(" "));
+      } catch (IndexOutOfBoundsException j) {
+        commandName = e.getActionCommand().toLowerCase();
+      }
+
       switch (commandName) {
         case "load":
-          controller.runCommand("load " + path + " " + path);
-          view.addImage(path);
-          view.setCurrentImage(path);
+          // To allow the user to upload the same image multiple times without overriding the one
+          // already in the editor
+          String nameInEditor = this.getNameInEditor(path);
+
+
+          controller.runCommand("load " + path + " " + nameInEditor);
+          view.addImage(nameInEditor);
+          view.setCurrentImage(nameInEditor);
           break;
         case "save":
           controller.runCommand("save " + path + " " + name + " y");
@@ -69,8 +81,9 @@ public class SaveLoadListener extends SimpleMenuListener {
           try {
             restOfCommand =
                     e.getActionCommand().substring(e.getActionCommand().indexOf(" "));
-            typeOfMaskCommand = restOfCommand.substring(1/*The leading space*/,
-                    restOfCommand.indexOf(" "));
+            typeOfMaskCommand = restOfCommand.substring(1/*the leading space*/, restOfCommand
+                    .substring(1/*not counting the first space*/).indexOf(" ") + 1/*because
+                    we're starting one behind*/);
           } catch (IndexOutOfBoundsException j) {
             throw new IllegalArgumentException("Cannot get rest of command!");
           }
@@ -82,13 +95,27 @@ public class SaveLoadListener extends SimpleMenuListener {
             niml.actionPerformed(new ActionEvent(new Object(), ActionEvent.ACTION_FIRST,
                     "mask-command " + path + " " + typeOfMaskCommand));
           } else {
-            controller.runCommand(path + " " + restOfCommand);
+            controller.runCommand("mask-command " + path + " " + restOfCommand);
           }
-
           break;
+        default:
+          throw new IllegalArgumentException("Unsupported File Chooser Action");
       }
     }
 
     this.view.refreshImages();
+  }
+
+
+  private String getNameInEditor(String initialName) {
+    String result = initialName;
+
+    try {
+      controller.getImage(result);
+      result += "_";
+    } catch (IllegalArgumentException ignored) {
+      return result;
+    }
+    return this.getNameInEditor(result);
   }
 }

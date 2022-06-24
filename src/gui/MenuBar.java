@@ -179,38 +179,38 @@ public class MenuBar extends JMenuBar {
 
     // Mask-Command
     JMenu maskMenu = new JMenu("Mask Operation");
-
+    maskMenu.setMnemonic(KeyEvent.VK_M);
 
     // Visualize Mask Menu
     JMenu visualizeMaskMenu = new JMenu("Visualize with mask");
     JMenuItem visRedMask = new JMenuItem("Red");
-    visRed.setActionCommand("mask-command gray red " + mutator);
-    visRed.addActionListener(fcml);
+    visRedMask.setActionCommand("mask-command gray red " + mutator);
+    visRedMask.addActionListener(fcml);
     visualizeMaskMenu.add(visRedMask);
     // |
     JMenuItem visGreenMask = new JMenuItem("Green");
-    visGreen.setActionCommand("mask-command gray green " + mutator);
-    visGreen.addActionListener(fcml);
+    visGreenMask.setActionCommand("mask-command gray green " + mutator);
+    visGreenMask.addActionListener(fcml);
     visualizeMaskMenu.add(visGreenMask);
     // |
     JMenuItem visBlueMask = new JMenuItem("Blue");
-    visBlue.setActionCommand("mask-command gray blue " + mutator);
-    visBlue.addActionListener(fcml);
+    visBlueMask.setActionCommand("mask-command gray blue " + mutator);
+    visBlueMask.addActionListener(fcml);
     visualizeMaskMenu.add(visBlueMask);
     // |
     JMenuItem visValMask = new JMenuItem("Value");
-    visVal.setActionCommand("mask-command gray value " + mutator);
-    visVal.addActionListener(fcml);
+    visValMask.setActionCommand("mask-command gray value " + mutator);
+    visValMask.addActionListener(fcml);
     visualizeMaskMenu.add(visValMask);
     // |
     JMenuItem visIntMask = new JMenuItem("Intensity");
-    visInt.setActionCommand("mask-command gray intensity " + mutator);
-    visInt.addActionListener(fcml);
+    visIntMask.setActionCommand("mask-command gray intensity " + mutator);
+    visIntMask.addActionListener(fcml);
     visualizeMaskMenu.add(visIntMask);
     // |
     JMenuItem visLumaMask = new JMenuItem("Luma");
-    visLuma.setActionCommand("mask-command gray luma " + mutator);
-    visLuma.addActionListener(fcml);
+    visLumaMask.setActionCommand("mask-command gray luma " + mutator);
+    visLumaMask.addActionListener(fcml);
     visualizeMaskMenu.add(visLumaMask);
 
     // Filter Mask Menu

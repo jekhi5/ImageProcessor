@@ -97,7 +97,7 @@ public class Sharpen extends AbstractCommand {
               "original image.";
     }
 
-    model.addImage(args[2], applyMaskWithKernel(orig, maskImage, FILTER_KERNEL));
+    model.addImage(args[1], applyMaskWithKernel(orig, maskImage, FILTER_KERNEL));
 
     return "Sharpen successful!";
   }

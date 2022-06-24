@@ -1,14 +1,3 @@
-import java.io.StringReader;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
-
-import commands.AbstractCommand;
-import commands.Blur;
-import commands.Downsize;
-import commands.ImageEditorCommand;
-import model.ImageEditorModel;
-
 //public class DownsizeTest extends AbstractCommandTest {
 //
 //

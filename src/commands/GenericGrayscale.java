@@ -78,7 +78,7 @@ public class GenericGrayscale extends AbstractCommand {
               "original image.";
     }
 
-    model.addImage(args[2], applyMaskWithKernel(orig, maskImage, TRANSFORMER));
+    model.addImage(args[1], applyMaskWithKernel(orig, maskImage, TRANSFORMER));
 
     return "Generic Grayscale successful!";
   }

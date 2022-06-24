@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
-import javax.swing.*;
+import javax.swing.JMenuItem;
 
 import commands.ImageEditorCommand;
 import gui.controller.ImageEditorSwingController;
@@ -26,11 +26,11 @@ import static org.junit.Assert.assertEquals;
  */
 public class ImageEditorSwingControllerImplTest {
 
+  static String n = System.lineSeparator();
   ImageEditorGUIView mockView;
   StringBuilder viewLog;
   ImageEditorModel mockModel;
   StringBuilder modelLog;
-  static String n = System.lineSeparator();
 
   @Before
   public void init() {
