@@ -27,12 +27,12 @@ public class ImageViewPort extends JPanel {
     java.awt.Image image;
     if (toDisplay == null) {
       try {
-        File imgNotFoundImage = new File("src" + System.getProperty("file.separator") +
-                "Image_Not_Found.png");
+        File imgNotFoundImage =
+                new File("res" + System.getProperty("file.separator") + "Image_Not_Found.png");
         image = ImageIO.read(imgNotFoundImage);
       } catch (IOException e) {
         throw new RuntimeException("The \"Image_Not_Found.png\" image was not found in the " +
-                "src folder!");
+                "res folder!");
       }
     } else {
       image = toDisplay;

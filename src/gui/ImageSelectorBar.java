@@ -31,11 +31,12 @@ public class ImageSelectorBar extends JPanel {
     try {
       NOT_FOUND_IMAGE =
               ImageIO.read(new File(
-                              "src" + System.getProperty("file.separator") + "Image_Not_Found.png"))
+                              "res" + System.getProperty("file.separator") +
+                                      "Image_Not_Found.png"))
                       .getScaledInstance(BUTTON_WIDTH, BUTTON_HEIGHT, Image.SCALE_DEFAULT);
     } catch (IOException e) {
       throw new RuntimeException("The \"Image_Not_Found.png\" image was not found in the " +
-              "src folder!");
+              "res folder!");
     }
   }
 
