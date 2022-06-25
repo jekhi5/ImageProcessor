@@ -3,6 +3,7 @@ package gui.listeners;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
@@ -45,6 +46,9 @@ public class FileChooserMenuListener extends SimpleMenuListener {
     int i;
     if (e.getActionCommand().equalsIgnoreCase("save")) {
       i = f.showSaveDialog(new JFrame());
+    } else if (e.getActionCommand().equalsIgnoreCase("load")) {
+      f.setMultiSelectionEnabled(true);
+      i = f.showOpenDialog(new JFrame());
     } else {
       i = f.showOpenDialog(new JFrame());
     }
@@ -63,11 +67,18 @@ public class FileChooserMenuListener extends SimpleMenuListener {
 
       switch (commandName) {
         case "load":
-          String nameInEditor = this.getNameInEditor(path);
+          File[] files = f.getSelectedFiles();
+          for (File file : files) {
+            String curPath = file.getAbsolutePath();
+            String nameInEditor = this.getNameInEditor(curPath);
 
-          controller.runCommand("load " + path + " " + nameInEditor);
-          view.addImage(nameInEditor);
-          view.setCurrentImage(nameInEditor);
+            controller.runCommand("load " + curPath + " " + nameInEditor);
+            view.addImage(nameInEditor);
+          }
+
+          if (files.length > 0) {
+            view.setCurrentImage(files[files.length - 1].getAbsolutePath());
+          }
           break;
         case "save":
           controller.runCommand("save " + path + " " + name + " y");

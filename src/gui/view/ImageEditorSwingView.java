@@ -11,7 +11,6 @@ import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 
-import gui.HistogramFactory;
 import gui.ImageSelectorBar;
 import gui.ImageSelectorBar.ImageSelectorButton;
 import gui.ImageViewPort;
