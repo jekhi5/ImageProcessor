@@ -1,8 +1,10 @@
 package gui;
 
 import java.awt.Dimension;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.net.URISyntaxException;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -26,14 +28,28 @@ public class ImageViewPort extends JPanel {
     super();
     java.awt.Image image;
     if (toDisplay == null) {
-      try {
-        File imgNotFoundImage =
-                new File("res" + System.getProperty("file.separator") + "Image_Not_Found.png");
-        image = ImageIO.read(imgNotFoundImage);
-      } catch (IOException e) {
-        throw new RuntimeException("The \"Image_Not_Found.png\" image was not found in the " +
-                "res folder!");
-      }
+//      try {
+//        String jarPath = ImageViewPort.class
+//                .getProtectionDomain()
+//                .getCodeSource()
+//                .getLocation()
+//                .toURI()
+//                .getPath();
+//
+//        File imgNotFoundImage =
+//                new File(jarPath + System.getProperty("file" +
+//                        ".separator") +
+//                        "Image_Not_Found.png");
+//        System.out.println(imgNotFoundImage.getPath());
+//        image = ImageIO.read(imgNotFoundImage);
+        image = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB);
+//      } catch (IOException e) {
+//        throw new RuntimeException("The \"Image_Not_Found.png\" image was not found in the " +
+//                "res folder!");
+//        throw new RuntimeException(e);
+//      } catch (URISyntaxException e) {
+//        throw new RuntimeException(e);
+//      }
     } else {
       image = toDisplay;
     }

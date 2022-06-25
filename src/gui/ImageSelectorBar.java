@@ -4,8 +4,10 @@ package gui;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Image;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.Objects;
 
 import javax.imageio.ImageIO;
@@ -28,17 +30,28 @@ public class ImageSelectorBar extends JPanel {
   private static final java.awt.Image NOT_FOUND_IMAGE;
 
   static {
-    try {
-      NOT_FOUND_IMAGE =
-              ImageIO.read(new File(
-                              "res" + System.getProperty("file.separator") +
-                                      "Image_Not_Found.png"))
-                      .getScaledInstance(BUTTON_WIDTH, BUTTON_HEIGHT, Image.SCALE_DEFAULT);
-    } catch (IOException e) {
-      throw new RuntimeException("The \"Image_Not_Found.png\" image was not found in the " +
-              "res folder!");
-    }
+    NOT_FOUND_IMAGE = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB);
   }
+
+//  static {
+//    try {
+//      String jarPath = ImageSelectorBar.class
+//              .getProtectionDomain()
+//              .getCodeSource()
+//              .getLocation()
+//              .toURI()
+//              .getPath();
+
+//      NOT_FOUND_IMAGE =
+//              ImageIO.read(new File(jarPath + System.getProperty("file.separator") +
+//                      "Image_Not_Found.png"));
+//    } catch (IOException e) {
+//      throw new RuntimeException("The \"Image_Not_Found.png\" image was not found in the " +
+//              "res folder!");
+//    } catch (URISyntaxException e) {
+//      throw new RuntimeException(e);
+//    }
+//  }
 
   /**
    * To construct this JComponent with 0 images.
