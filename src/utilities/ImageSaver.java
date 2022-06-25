@@ -47,6 +47,7 @@ public class ImageSaver {
         }
         break;
       case "jpg":
+      case "jpeg":
       case "bmp":
         // basically there is a bug where ImageIO.write() doesn't work properly
         // if it is using ARGB color values (32-bit) to save to an image format

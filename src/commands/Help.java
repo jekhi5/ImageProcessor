@@ -24,7 +24,7 @@ public class Help extends AbstractCommand {
   @Override
   public String apply(ImageEditorModel model) {
     return "The following file types are supported:" + LINE_SEPARATOR +
-            "\t.ppm, .jpg, .png, and .bmp." + LINE_SEPARATOR + LINE_SEPARATOR +
+            "\t.ppm, .jpg, .jpeg, .png, and .bmp." + LINE_SEPARATOR + LINE_SEPARATOR +
 
             "The acceptable commands are as follows:" + LINE_SEPARATOR + LINE_SEPARATOR +
 

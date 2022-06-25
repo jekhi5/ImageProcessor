@@ -39,8 +39,8 @@ public class FileChooserMenuListener extends SimpleMenuListener {
 
   @Override
   public void actionPerformed(ActionEvent e) {
-    FileFilter supportedTypes = new FileNameExtensionFilter("Supported Images", "jpg", "png",
-            "bmp", "ppm");
+    FileFilter supportedTypes = new FileNameExtensionFilter("Supported Images", "jpg", "jpeg",
+            "png", "bmp", "ppm");
     JFileChooser f = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
     f.setFileFilter(supportedTypes);
     int i;
