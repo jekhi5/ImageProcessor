@@ -167,16 +167,6 @@ public class MenuBar extends JMenuBar {
     save.addActionListener(fcml);
     file.add(save);
 
-
-    // help
-    JMenu helpMenu = new JMenu("Help");
-    JMenuItem help = new JMenuItem("Show commands");
-    helpMenu.setMnemonic(KeyEvent.VK_H);
-    help.setActionCommand("help");
-    help.addActionListener(al);
-    helpMenu.add(help);
-    this.add(helpMenu);
-
     // Mask-Command
     JMenu maskMenu = new JMenu("Mask Operation");
     maskMenu.setMnemonic(KeyEvent.VK_M);
@@ -255,6 +245,15 @@ public class MenuBar extends JMenuBar {
     maskMenu.add(transformMaskMenu);
     maskMenu.add(adjustMaskMenu);
     this.add(maskMenu);
+
+    // help
+    JMenu helpMenu = new JMenu("Help");
+    JMenuItem help = new JMenuItem("Show commands");
+    helpMenu.setMnemonic(KeyEvent.VK_H);
+    help.setActionCommand("help");
+    help.addActionListener(al);
+    helpMenu.add(help);
+    this.add(helpMenu);
   }
 
 

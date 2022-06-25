@@ -1,11 +1,10 @@
 package gui.listeners;
 
-import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
 
 import javax.swing.JFrame;
+import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
 
 import commands.Help;
@@ -14,9 +13,7 @@ import gui.HistogramFactory;
 import gui.PopupDialog;
 import gui.controller.ImageEditorSwingController;
 import gui.view.ImageEditorGUIView;
-import model.BasicImageEditorModel;
-import model.image.Image;
-import model.pixel.Pixel;
+import utilities.ImageUtil;
 
 /**
  * An event listener for mouse events, specialized for one-click menu bar items. On click, sends the
@@ -43,19 +40,6 @@ public class SimpleMenuListener implements ActionListener {
     this.view = view;
   }
 
-  private static BufferedImage toBufferedImage(Image image) {
-    BufferedImage bi =
-            new BufferedImage(image.getWidth(), image.getHeight(), BufferedImage.TYPE_INT_RGB);
-    for (int r = 0; r < image.getHeight(); r++) {
-      for (int c = 0; c < image.getWidth(); c++) {
-        Pixel p = image.getPixelAt(r, c);
-        Color color = new Color(p.getRed(), p.getGreen(), p.getBlue());
-        bi.setRGB(c, r, color.getRGB());
-      }
-    }
-    return bi;
-  }
-
   @Override
   public void actionPerformed(ActionEvent e) {
     if (e.getActionCommand().contains("help")) {
@@ -65,7 +49,7 @@ public class SimpleMenuListener implements ActionListener {
 
       helpFrame.setSize(1000, 1000);
       helpFrame.setLocationRelativeTo(null);
-      helpFrame.add(textPane);
+      helpFrame.add(new JScrollPane(textPane));
       helpFrame.setVisible(true);
 
     } else if (e.getActionCommand().contains("hgram")) {
@@ -81,6 +65,6 @@ public class SimpleMenuListener implements ActionListener {
   }
 
   private void generateHistogram(String name) throws IllegalArgumentException {
-    HistogramFactory.createHistogram(toBufferedImage(controller.getImage(name)));
+    HistogramFactory.createHistogram(ImageUtil.toBufferedImage((controller.getImage(name))));
   }
 }

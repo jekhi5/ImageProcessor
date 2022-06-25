@@ -9,9 +9,9 @@ import model.ImageEditorModel;
 public class Help extends AbstractCommand {
 
   private static final String ITALICS_ON = "\033[3m";
-  private static final String ORANGE = "\033[91m";
-  private static final String GRAY = "\033[90m";
-  private static final String RESET = "\033[0m";
+  private static final String ORANGE = "\u001B[31m";
+  private static final String GRAY = "\u001b[38;5;31m";
+  private static final String RESET = "\u001B[0m";
   private static final String LINE_SEPARATOR = System.lineSeparator();
 
   /**
@@ -112,6 +112,24 @@ public class Help extends AbstractCommand {
             "given custom name. To use this command, use the following syntax:" + LINE_SEPARATOR +
             "\t" + ORANGE + "sharpen " + GRAY + "<ORIGINAL_IMAGE_NAME> <FILTERED_IMAGE_NAME> " +
             RESET + LINE_SEPARATOR + LINE_SEPARATOR +
+
+            "The \"" + ITALICS_ON + "Downsize" + RESET + "\" command refactors the image's width " +
+            "and height to the width and height that the user gives. The width and height must be" +
+            " less than or equal to the current width and height of the image (since it's " +
+            "downsizing and not upsizing. To use this command, use the following syntax:" +
+            LINE_SEPARATOR + "\t" + ORANGE + "downsize " + GRAY +
+            "<NEW_WIDTH> <NEW_HEIGHT> <ORIGINAL_IMAGE_NAME> <FILTERED_IMAGE_NAME> " + RESET +
+            LINE_SEPARATOR + LINE_SEPARATOR +
+
+            "The \"" + ITALICS_ON + "Mask" + RESET + "\" command applies the given command to the" +
+            "pixels in the given image whose matching coordinates in the mask are fully black " +
+            "pixels. Because of this mapping, the mask must be the exact same dimensions as the " +
+            "image it will be applied to. The supported operations with a mask are: Blur, " +
+            "Brighten, Darken, Generic Grayscale, Grayscale (all components), Sepia, and Sharpen." +
+            "To use this command, use the following syntax:" + LINE_SEPARATOR + "\t" + ORANGE +
+            "downsize " + GRAY +
+            "<NEW_WIDTH> <NEW_HEIGHT> <ORIGINAL_IMAGE_NAME> <FILTERED_IMAGE_NAME> " + RESET +
+            LINE_SEPARATOR + LINE_SEPARATOR +
 
             "Enjoy!!";
   }
