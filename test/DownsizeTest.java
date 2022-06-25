@@ -5,6 +5,9 @@ import java.util.Scanner;
 import commands.Downsize;
 import commands.ImageEditorCommand;
 
+/**
+ * The testing class for Downsize.
+ */
 public class DownsizeTest extends AbstractCommandTest {
 
 

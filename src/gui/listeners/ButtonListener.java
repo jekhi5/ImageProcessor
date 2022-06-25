@@ -12,6 +12,11 @@ public class ButtonListener implements ActionListener {
 
   private final ImageEditorGUIView view;
 
+  /**
+   * Constructs a button listener with the given view.
+   *
+   * @param view the view that this button will communicate with
+   */
   public ButtonListener(ImageEditorGUIView view) {
     if (view == null) {
       throw new IllegalArgumentException("Controller cannot be null.");

@@ -17,6 +17,9 @@ import utilities.ImageFactory;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 
+/**
+ * The testing class for MaskCommand.
+ */
 public class MaskedCommandTest {
 
   private static final String SLASH = System.getProperty("file.separator");
@@ -28,6 +31,9 @@ public class MaskedCommandTest {
   private final Map<String, Function<Scanner, ImageEditorCommand>>
           mapWithOnlyGrayscaleCommand;
 
+  /**
+   * Constructs a test for the Masked Command.
+   */
   public MaskedCommandTest() {
     this.mapWithOnlyGrayscaleCommand = new HashMap<>();
 

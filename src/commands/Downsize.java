@@ -25,7 +25,7 @@ public class Downsize extends AbstractCommand {
 
 
   /**
-   * Creates a new Downsizing command which takes in 4 arguments
+   * Creates a new Downsizing command which takes in 4 arguments.
    *
    * @param in the {@link java.util.Scanner}
    * @throws IllegalArgumentException if {@code in} is null
@@ -98,6 +98,14 @@ public class Downsize extends AbstractCommand {
 
   }
 
+  /**
+   * This is not a supported operation for this command, and thus an UnsupportedOperationException
+   * is thrown.
+   *
+   * @param model      the model that this image resides
+   * @param pathToMask the path in the file system to the mask that will be applied to this image
+   * @throws java.lang.UnsupportedOperationException always
+   */
   @Override
   public String applyMask(ImageEditorModel model, String pathToMask)
           throws IllegalArgumentException, UnsupportedOperationException {
@@ -117,53 +125,53 @@ public class Downsize extends AbstractCommand {
       yCeil += 1;
     }
 
-    Pixel A = this.originalImage.getPixelAt((int) Math.floor(y), (int) Math.floor(x));
-    Pixel B = this.originalImage.getPixelAt((int) xCeil, (int) Math.floor(x));
-    Pixel C = this.originalImage.getPixelAt((int) Math.floor(y), (int) yCeil);
-    Pixel D = this.originalImage.getPixelAt((int) xCeil, (int) yCeil);
+    Pixel pixelA = this.originalImage.getPixelAt((int) Math.floor(y), (int) Math.floor(x));
+    Pixel pixelB = this.originalImage.getPixelAt((int) xCeil, (int) Math.floor(x));
+    Pixel pixelC = this.originalImage.getPixelAt((int) Math.floor(y), (int) yCeil);
+    Pixel pixelD = this.originalImage.getPixelAt((int) xCeil, (int) yCeil);
 
-    int a;
-    int b;
-    int c;
-    int d;
+    int componentOfA;
+    int componentOfB;
+    int componentOfC;
+    int componentOfD;
 
     switch (component) {
       case RED:
         try {
-          a = A.getRed();
-          b = B.getRed();
-          c = C.getRed();
-          d = D.getRed();
+          componentOfA = pixelA.getRed();
+          componentOfB = pixelB.getRed();
+          componentOfC = pixelC.getRed();
+          componentOfD = pixelD.getRed();
           break;
         } catch (IllegalArgumentException e) {
           return -1;
         }
       case GREEN:
         try {
-          a = A.getGreen();
-          b = B.getGreen();
-          c = C.getGreen();
-          d = D.getGreen();
+          componentOfA = pixelA.getGreen();
+          componentOfB = pixelB.getGreen();
+          componentOfC = pixelC.getGreen();
+          componentOfD = pixelD.getGreen();
           break;
         } catch (IllegalArgumentException e) {
           return -1;
         }
       case BLUE:
         try {
-          a = A.getBlue();
-          b = B.getBlue();
-          c = C.getBlue();
-          d = D.getBlue();
+          componentOfA = pixelA.getBlue();
+          componentOfB = pixelB.getBlue();
+          componentOfC = pixelC.getBlue();
+          componentOfD = pixelD.getBlue();
           break;
         } catch (IllegalArgumentException e) {
           return -1;
         }
       case ALPHA:
         try {
-          a = A.getAlpha();
-          b = B.getAlpha();
-          c = C.getAlpha();
-          d = D.getAlpha();
+          componentOfA = pixelA.getAlpha();
+          componentOfB = pixelB.getAlpha();
+          componentOfC = pixelC.getAlpha();
+          componentOfD = pixelD.getAlpha();
           break;
         } catch (IllegalArgumentException e) {
           return -1;
@@ -173,8 +181,8 @@ public class Downsize extends AbstractCommand {
                 "be one of 1->RED, 2->GREEN, 3->BLUE, or 4->ALPHA.");
     }
 
-    int m = (int) ((b * (y - Math.floor(y))) + (a * (xCeil - y)));
-    int n = (int) ((d * (y - Math.floor(y))) + (c * (xCeil - y)));
+    int m = (int) ((componentOfB * (y - Math.floor(y))) + (componentOfA * (xCeil - y)));
+    int n = (int) ((componentOfD * (y - Math.floor(y))) + (componentOfC * (xCeil - y)));
 
     return (int) ((n * (x - Math.floor(x))) + (m * (yCeil - x)));
   }

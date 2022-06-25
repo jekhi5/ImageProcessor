@@ -54,6 +54,14 @@ public class ImageEquals extends AbstractCommand {
     return out;
   }
 
+  /**
+   * This is not a supported operation for this command, and thus an UnsupportedOperationException
+   * is thrown.
+   *
+   * @param model      the model that this image resides
+   * @param pathToMask the path in the file system to the mask that will be applied to this image
+   * @throws java.lang.UnsupportedOperationException always
+   */
   @Override
   public String applyMask(ImageEditorModel model, String pathToMask)
           throws IllegalArgumentException, UnsupportedOperationException {

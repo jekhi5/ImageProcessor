@@ -26,16 +26,11 @@ public class ImageUtilTest {
   @Before
   public void init() {
     List<List<Pixel>> grid = new ArrayList<>();
-    List<List<Pixel>> grid2 = new ArrayList<>();
     Pixel b = new PixelImpl(0, 0, 255, 255);
-    Pixel r = new PixelImpl(255, 0, 0, 255);
     grid.add(List.of(b, b, b));
     grid.add(List.of(b, b, b));
     grid.add(List.of(b, b, b));
     blue = new PPMImage(grid);
-    grid2.add(List.of(r, r, r));
-    grid2.add(List.of(r, r, r));
-    grid2.add(List.of(r, r, r));
   }
 
   @After

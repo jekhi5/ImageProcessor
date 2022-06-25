@@ -52,8 +52,8 @@ The GUI is very simple to use.
           amount.
         - You mau also select `downsize`. This will prompt you for the new dimensions of the image.
     - `Help -> Show Commands`: Displays a list of all commands
-    - `Mask Operation`: Allows any operation to be done using an image mask, which you will be
-      prompted for.
+    - `Mask Operation`: Allows any operation to be done using an image mask. When using this
+      command, you will be prompted to load the mask from the file system.
 - The main image viewport is scrollable, as is the sidebar.
 - A histogram displaying the red, green, blue, and intensity levels of each image will pop up in its
   own window on every change.
@@ -160,18 +160,38 @@ Our design follows the Model-View-Controller archetype.
 
 #### View
 
-The view is the simplest component. It is one interface, `ImageEditorView`. All the implementation
-of
-this interface does is have some way to render a message to the user. For now, that is through text.
+The view is made up of two interfaces. One being the `ImageEditorView` and the other being the
+`ImageEditorGUIView`. Together they allow the user to use the program either through a text
+based interactive scripting method or through the use of a graphical user interface.
+
+The text view is fairly simple. It operates through the console. It prompts the user for a
+command, which they must type out in full. After entering the command, the console will attempt
+to parse and execute the given command and will print a message detailing to outcome of the
+parsing (ranging from informing the user that it was unable to read the command, all the way to
+"operation successful!")
+
+The graphical user interface is much more intricate under the hood, however, it allows for the
+user to interact with the program more easily. Through the use of menu buttons, scrollable
+components, and easily understandable interactive components. With the GUI, the user can perform
+most of the same commands as the text based editor with a simple click of a button. The view
+port is where each image is displayed, and as the user adds more images to the editor, they can
+switch between images by selecting each image's corresponding button. Every operation will be
+performed on the image that is currently "focused" (IE: the image that is currently being
+displayed in the view port).
 
 #### Controller
 
-The `ImageEditorTextController` is the controller of this phase of our design, as it is exclusively
-for
-a text-based program. Its implementation allows the user to give text input either as a text file or
-through the console, and sends the appropriate commands to model. It uses the view to display
-information to
-the user.
+The `ImageEditorTextController` is the controller of the first phase of our design, as it is
+exclusively for a text-based program. Its implementation allows the user to give text input either
+as a text file or through the console, and sends the appropriate commands to model. It uses the view
+to display information to the user.
+
+The `ImageEditorSwingController` is the controller of the second phase of our design, as it is
+exclusively for a GUI-based program. Its implementation allows the user to interact with the
+program using their mouse to click the operation that they want to perform, rather than needing
+to type in each one. Each button sends the information to the controller, which uses said
+information to run a command. The information sent to the controller contains all the necessary
+parts of the requested command, which ensures that there are no parsing errors along the way.
 
 There is also the `ImageUtil` class, which contains static methods that help read and store files,
 and the `Runner` class which runs the program, including telling the controller to take either

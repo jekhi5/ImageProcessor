@@ -2,9 +2,7 @@ package gui;
 
 import java.awt.Dimension;
 import java.awt.Image;
-import java.io.File;
 import java.io.IOException;
-import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.Objects;
 
@@ -25,7 +23,7 @@ public class ImageViewPort extends JPanel {
    * @param height    the height of the view port
    * @param toDisplay the image to display in the view port
    */
-  public ImageViewPort(int width, int height, java.awt.Image toDisplay) {
+  public ImageViewPort(int width, int height, Image toDisplay) {
     super();
     Image image;
     if (toDisplay == null) {
