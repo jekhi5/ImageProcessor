@@ -5,10 +5,16 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 
+import javax.swing.JFrame;
+import javax.swing.JTextPane;
+
+import commands.Help;
+import gui.ColoredPopup;
 import gui.HistogramFactory;
 import gui.PopupDialog;
 import gui.controller.ImageEditorSwingController;
 import gui.view.ImageEditorGUIView;
+import model.BasicImageEditorModel;
 import model.image.Image;
 import model.pixel.Pixel;
 
@@ -52,7 +58,17 @@ public class SimpleMenuListener implements ActionListener {
 
   @Override
   public void actionPerformed(ActionEvent e) {
-    if (e.getActionCommand().contains("hgram")) {
+    if (e.getActionCommand().contains("help")) {
+      JFrame helpFrame = new JFrame("Help Menu");
+
+      JTextPane textPane = new ColoredPopup(new Help().apply(null));
+
+      helpFrame.setSize(1000, 1000);
+      helpFrame.setLocationRelativeTo(null);
+      helpFrame.add(textPane);
+      helpFrame.setVisible(true);
+
+    } else if (e.getActionCommand().contains("hgram")) {
       try {
         generateHistogram(e.getActionCommand().split(" ")[1]);
       } catch (IllegalArgumentException ex) {

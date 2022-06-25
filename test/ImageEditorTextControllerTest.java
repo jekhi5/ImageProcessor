@@ -267,10 +267,10 @@ public class ImageEditorTextControllerTest {
   @Test
   public void greyScale() {
     String[] spellings =
-        {"Grayscale", "GrAyScAle", "greyscale", "gREYSCALE", "grey", "GREY", "gray", "GrAY"};
+            {"Grayscale", "GrAyScAle", "greyscale", "gREYSCALE", "grey", "GREY", "gray", "GrAY"};
     String[] typesOfGreyscale =
-        {"red", "ReD", "green", "GReeN", "blue", "BlUE", "value", "VaLuE", "intensity",
-            "INtENsITy", "luma", "Luma"};
+            {"red", "ReD", "green", "GReeN", "blue", "BlUE", "value", "VaLuE", "intensity",
+                    "INtENsITy", "luma", "Luma"};
     String resultingMessageHalf2 = "Grayscale successful!";
 
     commandTesting(spellings, typesOfGreyscale, resultingMessageHalf2);
@@ -421,9 +421,9 @@ public class ImageEditorTextControllerTest {
   public void testHangingInCommand() {
 
     String[] commandString =
-        {"load", "LoAd", "save", "SaVE", "flip", "fLIp", "gray", "GrAY", "grey",
-            "GREY", "grayscale", "GRaYscALe", "greyscale", "GReYSCAle", "brighten",
-            "BRIghTEn", "darken", "DARKEn"};
+            {"load", "LoAd", "save", "SaVE", "flip", "fLIp", "gray", "GrAY", "grey",
+                    "GREY", "grayscale", "GRaYscALe", "greyscale", "GReYSCAle", "brighten",
+                    "BRIghTEn", "darken", "DARKEn"};
 
     for (String command : commandString) {
       Appendable output = new StringBuilder();
