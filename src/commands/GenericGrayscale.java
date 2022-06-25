@@ -75,7 +75,7 @@ public class GenericGrayscale extends AbstractCommand {
 
     if (orig.getWidth() != maskImage.getWidth() || orig.getHeight() != maskImage.getHeight()) {
       return "Generic Grayscale failed: the mask's width and height does not match that of the " +
-              "original image.";
+              "original image (" + orig.getWidth() + "x" + orig.getHeight() + ").";
     }
 
     model.addImage(args[1], applyMaskWithKernel(orig, maskImage, TRANSFORMER));

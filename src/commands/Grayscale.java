@@ -121,7 +121,7 @@ public class Grayscale extends AbstractCommand {
 
     if (orig.getWidth() != maskImage.getWidth() || orig.getHeight() != maskImage.getHeight()) {
       return "Grayscale failed: the mask's width and height does not match that of the " +
-              "original image.";
+              "original image (" + orig.getWidth() + "x" + orig.getHeight() + ").";
     }
 
     // make sure the first argument is a valid mode
