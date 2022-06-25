@@ -138,16 +138,14 @@ public class MenuBar extends JMenuBar {
     adjResize.addActionListener(rl);
     adjust.add(adjResize);
 
-    // Histogram
-    // this code creates a button which displays the histogram.
-    // Personally we prefer it this way, though the assignment wants it to be visible at all times.
-    //    JMenu hgram = new JMenu("Histogram");
-    //    hgram.setMnemonic(KeyEvent.VK_H);
-    //    JMenuItem hgramItem = new JMenuItem("Generate Histogram");
-    //    hgramItem.setActionCommand("hgram " + curImageName);
-    //    hgramItem.addActionListener(al);
-    //    hgram.add(hgramItem);
-    //    this.add(hgram);
+//     Histogram
+    JMenu hgram = new JMenu("Histogram");
+    hgram.setMnemonic(KeyEvent.VK_H);
+    JMenuItem hgramItem = new JMenuItem("Generate Histogram");
+    hgramItem.setActionCommand("hgram " + curImageName);
+    hgramItem.addActionListener(al);
+    hgram.add(hgramItem);
+    this.add(hgram);
 
     // Save and load
     ActionListener fcml = new FileChooserMenuListener(ctrl, curImageName, view);
