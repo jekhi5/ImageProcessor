@@ -26,4 +26,25 @@ public class BorderPixel implements LinkedPixel {
   public LinkedPixel getLeft() {
     return this;
   }
+
+  @Override
+  public void linkRight(LinkedPixel newRight) {
+    newRight.setLeft(this);
+  }
+
+  @Override
+  public void linkDown(LinkedPixel newDown) {
+    newDown.setUp(this);
+  }
+
+  // SHOULD BORDER PIXELS HOLD THESE VALUES AS FIELDS???
+  @Override
+  public void setLeft(LinkedPixel newLeft) throws IllegalStateException {
+    // Does nothing
+  }
+
+  @Override
+  public void setUp(LinkedPixel newUp) throws IllegalStateException {
+    // Does nothing
+  }
 }

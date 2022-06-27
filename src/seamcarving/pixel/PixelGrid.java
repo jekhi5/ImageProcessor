@@ -16,6 +16,6 @@ public class PixelGrid {
    * @param image the image to convert to a gridded image
    */
   public PixelGrid(Image image) {
-
+    this.topLeftPixel = null;
   }
 }
