@@ -38,35 +38,35 @@ public interface LinkedPixel {
   LinkedPixel getLeft();
 
   /**
-   * Sets this pixel's right pixel to the given {@code LinkedPixel}, and sets that pixel's left
-   * pixel to this. If this pixel is a border pixel, only sets the given pixel's left pixel to
+   * Sets this pixel's left pixel to the given {@code LinkedPixel}, and sets that pixel's right
+   * pixel to this. If this pixel is a border pixel, only sets the given pixel's right pixel to
    * this.
    *
-   * @param newRight the pixel to the right of this pixel
-   */
-  void linkRight(LinkedPixel newRight);
-
-  /**
-   * Sets this pixel's down pixel to the given {@code LinkedPixel}, and sets that pixel's up pixel
-   * to this. If this pixel is a border pixel, only sets the given pixel's up pixel to this.
-   *
-   * @param newDown the pixel to the down of this pixel
-   */
-  void linkDown(LinkedPixel newDown);
-
-  /**
-   * Sets this pixel's left pixel to the given {@code LinkedPixel}.
-   *
    * @param newLeft the pixel to the left of this pixel
-   * @throws java.lang.IllegalStateException if the right of the given pixel is not this pixel
    */
-  void setLeft(LinkedPixel newLeft) throws IllegalStateException;
+  void linkLeft(LinkedPixel newLeft);
 
   /**
-   * Sets this pixel's up pixel to the given {@code LinkedPixel}.
+   * Sets this pixel's up pixel to the given {@code LinkedPixel}, and sets that pixel's down pixel
+   * to this. If this pixel is a border pixel, only sets the given pixel's down pixel to this.
    *
    * @param newUp the pixel to the up of this pixel
-   * @throws java.lang.IllegalStateException if the down of the given pixel is not this pixel
    */
-  void setUp(LinkedPixel newUp) throws IllegalStateException;
+  void linkUp(LinkedPixel newUp);
+
+  /**
+   * Sets this pixel's right pixel to the given {@code LinkedPixel}.
+   *
+   * @param newRight the pixel to the right of this pixel
+   * @throws java.lang.IllegalStateException if the left of the given pixel is not this pixel
+   */
+  void setRight(LinkedPixel newRight) throws IllegalStateException;
+
+  /**
+   * Sets this pixel's down pixel to the given {@code LinkedPixel}.
+   *
+   * @param newDown the pixel to the down of this pixel
+   * @throws java.lang.IllegalStateException if the up of the given pixel is not this pixel
+   */
+  void setDown(LinkedPixel newDown) throws IllegalStateException;
 }

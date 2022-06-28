@@ -1,5 +1,7 @@
 package seamcarving.pixel;
 
+import model.pixel.Pixel;
+
 /**
  * An implementation of {@code LinkedPixel}.
  */
@@ -10,14 +12,17 @@ public class LinkedPixelImpl implements LinkedPixel {
   private LinkedPixel down;
   private LinkedPixel left;
 
+  private final Pixel pixelDelegate;
+
   /**
    * To construct a LinkedPixelImpl with only border pixels surrounding it
    */
-  public LinkedPixelImpl() {
+  public LinkedPixelImpl(Pixel pixelDelegate) {
     this.up = new BorderPixel();
     this.right = new BorderPixel();
     this.down = new BorderPixel();
     this.left = new BorderPixel();
+    this.pixelDelegate = pixelDelegate;
   }
 
   @Override
@@ -41,34 +46,34 @@ public class LinkedPixelImpl implements LinkedPixel {
   }
 
   @Override
-  public void linkRight(LinkedPixel newRight) {
-    this.right = newRight;
-    newRight.setLeft(this);
-  }
-
-  @Override
-  public void linkDown(LinkedPixel newDown) {
-    this.down = newDown;
-    newDown.setUp(this);
-  }
-
-  @Override
-  public void setLeft(LinkedPixel newLeft) throws IllegalStateException {
-    if (!newLeft.getRight().equals(this)) {
-      throw new IllegalStateException("The given newLeft must hold this pixel as its right " +
-              "pixel.");
-    }
-
+  public void linkLeft(LinkedPixel newLeft) {
     this.left = newLeft;
+    newLeft.setRight(this);
   }
 
   @Override
-  public void setUp(LinkedPixel newUp) throws IllegalStateException {
-    if (!newUp.getDown().equals(this)) {
-      throw new IllegalStateException("The given newUp must hold this pixel as its down " +
+  public void linkUp(LinkedPixel newUp) {
+    this.up = newUp;
+    newUp.setDown(this);
+  }
+
+  @Override
+  public void setRight(LinkedPixel newRight) throws IllegalStateException {
+    if (!newRight.getLeft().equals(this)) {
+      throw new IllegalStateException("The given newRight must hold this pixel as its left " +
               "pixel.");
     }
 
-    this.up = newUp;
+    this.right = newRight;
+  }
+
+  @Override
+  public void setDown(LinkedPixel newDown) throws IllegalStateException {
+    if (!newDown.getUp().equals(this)) {
+      throw new IllegalStateException("The given newDown must hold this pixel as its up " +
+              "pixel.");
+    }
+
+    this.down = newDown;
   }
 }
