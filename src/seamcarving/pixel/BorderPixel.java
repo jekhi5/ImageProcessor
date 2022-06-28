@@ -62,4 +62,14 @@ public class BorderPixel implements LinkedPixel {
   public void setDown(LinkedPixel newDown) throws IllegalStateException {
     // Does nothing
   }
+
+  @Override
+  public boolean isBorderPixel() {
+    return true;
+  }
+
+  @Override
+  public Pixel getPixelDelegate() {
+    return new PixelImpl(pixelDelegate);
+  }
 }

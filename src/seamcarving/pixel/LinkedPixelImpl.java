@@ -1,6 +1,7 @@
 package seamcarving.pixel;
 
 import model.pixel.Pixel;
+import model.pixel.PixelImpl;
 
 /**
  * An implementation of {@code LinkedPixel}.
@@ -76,4 +77,46 @@ public class LinkedPixelImpl implements LinkedPixel {
 
     this.down = newDown;
   }
+
+  @Override
+  public boolean isBorderPixel() {
+    return false;
+  }
+
+  @Override
+  public Pixel getPixelDelegate() {
+    return new PixelImpl(pixelDelegate);
+  }
+
+  @Override
+  public double getEnergy() {
+    double brightnessA = this.getUp().getLeft().getBrightness();
+    double brightnessB = this.getUp().getBrightness();
+    double brightnessC = this.getUp().getRight().getBrightness();
+    double brightnessD = this.getLeft().getBrightness();
+    // We are E
+    double brightnessF = this.getRight().getBrightness();
+    double brightnessG = this.getDown().getLeft().getBrightness();
+    double brightnessH = this.getDown().getBrightness();
+    double brightnessI = this.getDown().getRight().getBrightness();
+
+    double horizBrightness = (brightnessA + (2 * brightnessD) + brightnessG)
+            - (brightnessC + (2 * brightnessF) + brightnessI);
+    double vertBrightness = (brightnessA + (2 * brightnessB) + brightnessC)
+            - (brightnessG + (2 * brightnessH) + brightnessI);
+
+    double resultingEnergy = Math.sqrt(Math.pow(horizBrightness, 2)
+            + Math.pow(vertBrightness, 2));
+
+    return resultingEnergy;
+  }
+
+  @Override
+  public double getBrightness() {
+    double totalRGBValues = this.pixelDelegate.getRed() + this.pixelDelegate.getBlue()
+            + this.pixelDelegate.getGreen();
+    return (totalRGBValues / 3.0) / 255.0;
+  }
+
+
 }
