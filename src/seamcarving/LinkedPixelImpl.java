@@ -1,4 +1,4 @@
-package seamcarving.pixel;
+package seamcarving;
 
 import model.pixel.Pixel;
 import model.pixel.PixelImpl;
@@ -6,14 +6,13 @@ import model.pixel.PixelImpl;
 /**
  * An implementation of {@code LinkedPixel}.
  */
-public class LinkedPixelImpl implements LinkedPixel {
+class LinkedPixelImpl implements LinkedPixel {
 
+  private final Pixel pixelDelegate;
   private LinkedPixel up;
   private LinkedPixel right;
   private LinkedPixel down;
   private LinkedPixel left;
-
-  private final Pixel pixelDelegate;
 
   /**
    * To construct a LinkedPixelImpl with only border pixels surrounding it
@@ -37,8 +36,28 @@ public class LinkedPixelImpl implements LinkedPixel {
   }
 
   @Override
+  public void setRight(LinkedPixel newRight) throws IllegalStateException {
+    if (!newRight.getLeft().equals(this)) {
+      throw new IllegalStateException("The given newRight must hold this pixel as its left " +
+              "pixel.");
+    }
+
+    this.right = newRight;
+  }
+
+  @Override
   public LinkedPixel getDown() {
     return down;
+  }
+
+  @Override
+  public void setDown(LinkedPixel newDown) throws IllegalStateException {
+    if (!newDown.getUp().equals(this)) {
+      throw new IllegalStateException("The given newDown must hold this pixel as its up " +
+              "pixel.");
+    }
+
+    this.down = newDown;
   }
 
   @Override
@@ -56,26 +75,6 @@ public class LinkedPixelImpl implements LinkedPixel {
   public void linkUp(LinkedPixel newUp) {
     this.up = newUp;
     newUp.setDown(this);
-  }
-
-  @Override
-  public void setRight(LinkedPixel newRight) throws IllegalStateException {
-    if (!newRight.getLeft().equals(this)) {
-      throw new IllegalStateException("The given newRight must hold this pixel as its left " +
-              "pixel.");
-    }
-
-    this.right = newRight;
-  }
-
-  @Override
-  public void setDown(LinkedPixel newDown) throws IllegalStateException {
-    if (!newDown.getUp().equals(this)) {
-      throw new IllegalStateException("The given newDown must hold this pixel as its up " +
-              "pixel.");
-    }
-
-    this.down = newDown;
   }
 
   @Override

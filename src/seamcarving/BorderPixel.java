@@ -1,4 +1,4 @@
-package seamcarving.pixel;
+package seamcarving;
 
 import model.pixel.Pixel;
 import model.pixel.PixelImpl;
@@ -7,7 +7,7 @@ import model.pixel.PixelImpl;
  * Represents a {@code LinkedPixel} that is outside the actual image. All pixels on the border refer
  * to this border.
  */
-public class BorderPixel implements LinkedPixel {
+class BorderPixel implements LinkedPixel {
 
   private final Pixel pixelDelegate;
 
@@ -34,8 +34,18 @@ public class BorderPixel implements LinkedPixel {
   }
 
   @Override
+  public void setRight(LinkedPixel newRight) throws IllegalStateException {
+    // Does nothing
+  }
+
+  @Override
   public LinkedPixel getDown() {
     return this;
+  }
+
+  @Override
+  public void setDown(LinkedPixel newDown) throws IllegalStateException {
+    // Does nothing
   }
 
   @Override
@@ -54,16 +64,6 @@ public class BorderPixel implements LinkedPixel {
   }
 
   @Override
-  public void setRight(LinkedPixel newRight) throws IllegalStateException {
-    // Does nothing
-  }
-
-  @Override
-  public void setDown(LinkedPixel newDown) throws IllegalStateException {
-    // Does nothing
-  }
-
-  @Override
   public boolean isBorderPixel() {
     return true;
   }
@@ -71,5 +71,15 @@ public class BorderPixel implements LinkedPixel {
   @Override
   public Pixel getPixelDelegate() {
     return new PixelImpl(pixelDelegate);
+  }
+
+  @Override
+  public double getEnergy() {
+    return Double.MAX_VALUE;
+  }
+
+  @Override
+  public double getBrightness() {
+    return 0;
   }
 }

@@ -1,21 +1,17 @@
-package seamcarving.pixel;
+package seamcarving;
 
 import model.pixel.Pixel;
 
 /**
  * Represents a pixel that connects to all other pixels in an image.
  */
-public interface LinkedPixel {
-
-  //TODO: There is leakage in all of these methods. This needs to be addressed so that we return
-  // a copy of the requested neighbor that is not aliased. However, this data is cyclic so I'm
-  // not sure how to exactly do that...
+interface LinkedPixel {
 
   /**
    * Gets the pixel immediately above this pixel.
    *
    * @return the {@code LinkedPixel} immediately above this {@code LinkedPixel}. If this
-   *         {@code LinkedPixel} is a {@link seamcarving.pixel.BorderPixel}, returns this.
+   *         {@code LinkedPixel} is a {@link BorderPixel}, returns this.
    */
   LinkedPixel getUp();
 
@@ -23,23 +19,39 @@ public interface LinkedPixel {
    * Gets the pixel immediately to the right of this pixel.
    *
    * @return the {@code LinkedPixel} immediately to the right of this {@code LinkedPixel}. If this
-   *         {@code LinkedPixel} is a {@link seamcarving.pixel.BorderPixel}, returns this.
+   *         {@code LinkedPixel} is a {@link BorderPixel}, returns this.
    */
   LinkedPixel getRight();
+
+  /**
+   * Sets this pixel's right pixel to the given {@code LinkedPixel}.
+   *
+   * @param newRight the pixel to the right of this pixel
+   * @throws java.lang.IllegalStateException if the left of the given pixel is not this pixel
+   */
+  void setRight(LinkedPixel newRight) throws IllegalStateException;
 
   /**
    * Gets the pixel immediately below this pixel.
    *
    * @return the {@code LinkedPixel} immediately below this {@code LinkedPixel}. If this
-   *         {@code LinkedPixel} is a {@link seamcarving.pixel.BorderPixel}, returns this.
+   *         {@code LinkedPixel} is a {@link BorderPixel}, returns this.
    */
   LinkedPixel getDown();
+
+  /**
+   * Sets this pixel's down pixel to the given {@code LinkedPixel}.
+   *
+   * @param newDown the pixel to the down of this pixel
+   * @throws java.lang.IllegalStateException if the up of the given pixel is not this pixel
+   */
+  void setDown(LinkedPixel newDown) throws IllegalStateException;
 
   /**
    * Gets the pixel immediately to the left this pixel.
    *
    * @return the {@code LinkedPixel} immediately to the left this {@code LinkedPixel}. If this
-   *         {@code LinkedPixel} is a {@link seamcarving.pixel.BorderPixel}, returns this.
+   *         {@code LinkedPixel} is a {@link BorderPixel}, returns this.
    */
   LinkedPixel getLeft();
 
@@ -59,22 +71,6 @@ public interface LinkedPixel {
    * @param newUp the pixel to the up of this pixel
    */
   void linkUp(LinkedPixel newUp);
-
-  /**
-   * Sets this pixel's right pixel to the given {@code LinkedPixel}.
-   *
-   * @param newRight the pixel to the right of this pixel
-   * @throws java.lang.IllegalStateException if the left of the given pixel is not this pixel
-   */
-  void setRight(LinkedPixel newRight) throws IllegalStateException;
-
-  /**
-   * Sets this pixel's down pixel to the given {@code LinkedPixel}.
-   *
-   * @param newDown the pixel to the down of this pixel
-   * @throws java.lang.IllegalStateException if the up of the given pixel is not this pixel
-   */
-  void setDown(LinkedPixel newDown) throws IllegalStateException;
 
   /**
    * Returns whether this {@code LinkedPixel} is a {@link BorderPixel}.
@@ -107,7 +103,8 @@ public interface LinkedPixel {
    * border of black pixels
    *
    * This formula was taken from:
-   * <a href="https://course.ccs.neu.edu/cs2510a/assignment9.html#:~:text=Next%2C%20the%20horizontal,of%20black%20pixels">...</a>.
+   * <a
+   * href="https://course.ccs.neu.edu/cs2510a/assignment9.html#:~:text=Next%2C%20the%20horizontal,of%20black%20pixels">...</a>.
    *
    * @return the energy of this {@code LinkedPixel} as a double
    */
